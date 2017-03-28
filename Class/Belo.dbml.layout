@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 24, 24.125" name="Belo">
+  <DataContextMoniker Name="/BeloDataContext" />
+  <nestedChildShapes>
+    <classShape Id="efc4c2cc-7853-468e-bdbd-239f19de22dd" absoluteBounds="6.75, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BeloDataContext/emp" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d6a3f715-bb16-4a5a-aafd-66b3a23ea44f" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="74776667-ff7e-4775-87bd-5a9a591417f4" absoluteBounds="6.75, 3.75, 2, 1.193992513020834">
+      <DataClassMoniker Name="/BeloDataContext/UtilValue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9146b2eb-0a9c-4acf-8ee1-3ffac155f70e" absoluteBounds="6.765, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1a67c273-cecf-4fd3-96b1-5708dd7c4670" absoluteBounds="6.75, 5.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BeloDataContext/LangValue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="525d5234-7736-47c5-93d7-e1e209ca0e13" absoluteBounds="6.765, 6.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b7fe8e51-ff55-4a7c-92c0-1ad732b21b1d" absoluteBounds="3.75, 8.75, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/BeloDataContext/ProductStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c07931e8-6898-4ead-bca3-41ed716db644" absoluteBounds="3.765, 9.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ae5ede08-9518-41f6-a110-6bb2f0c40051" absoluteBounds="0.75, 10.625, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/BeloDataContext/Shop_Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="850f84eb-da40-4fe8-928f-c79e719b0d86" absoluteBounds="0.765, 11.085, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0e3d354f-b8ee-4f2c-8b62-61160dd03aa0" absoluteBounds="0.75, 2.875, 2, 2.347801106770834">
+      <DataClassMoniker Name="/BeloDataContext/Shop_Manufacturer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10b83264-8ec1-4064-8914-513bb5a87498" absoluteBounds="0.765, 3.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dcb890d8-da5c-4079-9416-a3bd4487028d" absoluteBounds="3.5, 1.125, 2, 5.8092268880208326">
+      <DataClassMoniker Name="/BeloDataContext/Shop_Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="53bdc633-5559-4912-ad95-4c92505e21aa" absoluteBounds="3.515, 1.585, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d172e80c-97e7-461f-85ea-4df59021a280" absoluteBounds="6.75, 8.75, 2, 2.5401025390624987">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Box" />
+      <nestedChildShapes>
+        <elementListCompartment Id="657708bb-842d-4509-b380-d819594972e4" absoluteBounds="6.765, 9.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7d9cd986-c776-420d-a042-19681850bbdc" absoluteBounds="9.75, 0.75, 2, 1.9631982421875003">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Boxtype" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4472f8d4-fbd8-4db8-889f-7e049030801e" absoluteBounds="9.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ea6a9594-1de6-4442-9c5c-caa3fc4ef15e" absoluteBounds="9.75, 3.75, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Comment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b64eab54-920f-4f10-98f3-68e4142d5177" absoluteBounds="9.765, 4.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="adfb6718-955d-4def-998e-12064a2b9a38" absoluteBounds="9.75, 7.75, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Config" />
+      <nestedChildShapes>
+        <elementListCompartment Id="25e279d0-83b7-4063-9192-3c6fc9aeb8c7" absoluteBounds="9.765, 8.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a301e472-64c5-40ea-a29d-1603f7299b0f" absoluteBounds="9.75, 10.75, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Contact" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8fafca60-17d8-4861-9a3d-573055bac64a" absoluteBounds="9.765, 11.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0969c6dd-34e0-4eef-9a98-cd66f91964e0" absoluteBounds="12.75, 0.75, 2, 5.8092268880208326">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Content" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7561b234-eb27-4a73-be24-144af109f7e5" absoluteBounds="12.765, 1.21, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1e8354b3-0fff-4cb3-afc7-17ad2be5a137" absoluteBounds="3.75, 12.75, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/BeloDataContext/tbl_CV" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e91304a-5e9e-48e6-a24f-b4601eec5892" absoluteBounds="3.765, 13.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9e686ab8-21c2-4324-b083-f7c37a888523" absoluteBounds="12.75, 7.75, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0336cf65-ae4e-4696-b01d-ad6aaae49bfe" absoluteBounds="12.765, 8.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7ff39566-8c8e-4c5c-8c1d-1e2ba29b1a75" absoluteBounds="12.75, 10.75, 2, 3.1170068359375023">
+      <DataClassMoniker Name="/BeloDataContext/tbl_DocsType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1786053d-07fd-4f7a-ac3c-e583cef4e25a" absoluteBounds="12.765, 11.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4536cac4-06e4-4fb3-afcf-f1897371c745" absoluteBounds="6.75, 14.75, 2, 4.0785139973958309">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Document" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6145df7f-2030-46f2-bd31-7ded8ca12938" absoluteBounds="6.765, 15.21, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="43dd7921-3237-4e71-868d-51029847dd06" absoluteBounds="9.75, 14.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/BeloDataContext/tbl_File" />
+      <nestedChildShapes>
+        <elementListCompartment Id="56b408bd-49e3-4e63-bbfd-6c8d236525c8" absoluteBounds="9.765, 15.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8437f4c9-54a9-4ed9-b961-bf87ab9dbab3" absoluteBounds="12.75, 14.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Log" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f5f007f8-0e42-4567-9c74-5205ab9d8f93" absoluteBounds="12.765, 15.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2b3ec088-31cf-443f-8df5-3b5e3d33999b" absoluteBounds="15.75, 0.75, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/BeloDataContext/tbl_MapModShopCat" />
+      <nestedChildShapes>
+        <elementListCompartment Id="08f4bcb3-f739-47d2-88f7-06f090d5d0e1" absoluteBounds="15.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="160c1379-6adc-4e8f-af53-6e36e355e5a5" absoluteBounds="15.75, 3.75, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Member" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1315f4f3-baa8-4a90-8051-03b554c88bbd" absoluteBounds="15.765, 4.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4a61234c-24cd-4e3e-a828-046c25211df4" absoluteBounds="15.75, 8.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Mess" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d7e66cdd-9056-44bc-8429-3b00b88fb57c" absoluteBounds="15.765, 9.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="65687dfb-effa-4c6e-8072-799ffe60fd32" absoluteBounds="15.75, 11.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/BeloDataContext/tbl_MessUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="39a1c997-8c21-4d15-83e7-b0a1175ce2bb" absoluteBounds="15.765, 12.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c395e3bc-5815-44f3-a45e-3c2a5a0d1d10" absoluteBounds="15.75, 13.75, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Mod" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8fdc20f9-404a-408c-beec-cca012e71eac" absoluteBounds="15.765, 14.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="98ca565b-7e6b-4b3f-8958-ed2c5443a439" absoluteBounds="0.75, 16.75, 2, 2.3478011067708309">
+      <DataClassMoniker Name="/BeloDataContext/tbl_ModAdmin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f311b631-4cc3-4659-a911-fed8a2fc780e" absoluteBounds="0.765, 17.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a9ef5484-5c8a-4d65-82dd-928548b77244" absoluteBounds="18.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/BeloDataContext/tbl_ModBox" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f67645ef-a18c-4b10-9fcb-653913368ba9" absoluteBounds="18.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cb45b173-21bd-4195-8319-8ba9fc7b976e" absoluteBounds="18.75, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/BeloDataContext/tbl_ModsiteUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0fadfdac-4825-4c8b-9a6a-2255c2ed09b0" absoluteBounds="18.765, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0d3388a3-77ab-4f38-a91a-dcf4d9752dd5" absoluteBounds="18.75, 4.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Modtype" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb5946cf-37f2-4f4a-8e68-c9115c450672" absoluteBounds="18.765, 5.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8e200732-d275-44e2-97ba-b877523232db" absoluteBounds="18.75, 7.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/BeloDataContext/tbl_ModUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1223f164-b98a-4131-bbfa-1b41b3a2bc82" absoluteBounds="18.765, 8.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2634f6f8-7cc4-4879-89b5-8416745bfed4" absoluteBounds="18.75, 9.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/BeloDataContext/tbl_ModUserMenu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="193cb872-fc08-468a-a0b3-4068d7063085" absoluteBounds="18.765, 10.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c8856e98-46a6-433b-b36c-74c1d92cbe6d" absoluteBounds="9.75, 18.75, 2, 4.2708154296875023">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Order" />
+      <nestedChildShapes>
+        <elementListCompartment Id="897446ee-4fc6-48d1-8d86-254bd1984fb2" absoluteBounds="9.765, 19.21, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd8d7b55-ff6f-4b23-b5e5-9ece73086b2d" absoluteBounds="18.75, 11.75, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/BeloDataContext/tbl_OrderDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b9d7165b-1d67-440c-9a7c-17f2cc744e92" absoluteBounds="18.765, 12.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fe60561e-f1ba-47da-9c0e-4b514b044508" absoluteBounds="18.75, 14.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/BeloDataContext/tbl_OrderType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d846d8c9-4ebf-41b8-a3d3-4af8d1f30232" absoluteBounds="18.765, 15.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="15b1bf8c-def3-4ec1-a7cd-29c8db9487fc" absoluteBounds="18.75, 17.75, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Other" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dd257be6-6e58-4dea-b1f2-1bd8f8f2cf06" absoluteBounds="18.765, 18.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="24b6a175-90f6-45c4-be20-59613fa5936f" absoluteBounds="3.75, 19.75, 2, 3.1170068359375023">
+      <DataClassMoniker Name="/BeloDataContext/tbl_ProductFactory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="41cbdea9-79c8-4811-8ade-637a5cdb50e7" absoluteBounds="3.765, 20.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3b8e344b-f3ab-4a89-a9df-403c2dfccb8e" absoluteBounds="12.75, 19.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cd3e5416-7007-4423-9e6c-cd8ed978b253" absoluteBounds="12.765, 20.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="13202001-0e8b-44f7-80c0-31fbb83949a0" absoluteBounds="15.75, 20.75, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/BeloDataContext/tbl_RoleUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee8c85d8-26c8-42d2-bb59-5f5c721e42ca" absoluteBounds="15.765, 21.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1ce00624-2c30-4650-8c59-5621732304e6" absoluteBounds="18.75, 20.75, 2, 3.1170068359375023">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Skin" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84f63b7d-6f5a-46ba-a416-f7e537123b9c" absoluteBounds="18.765, 21.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="85c4f31c-8a8a-45e5-8760-9b0ee8ce5860" absoluteBounds="21.75, 0.75, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Skintype" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd1e064b-647f-4984-9662-99a68a066cd4" absoluteBounds="21.765, 1.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b56e4a6a-ae28-4bb5-9c42-c834132b91e8" absoluteBounds="21.75, 5.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Tag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="97ba8312-2bdf-4da0-88d0-233afc809930" absoluteBounds="21.765, 6.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1ab2aa79-89c3-4fb5-8b6d-c83bb68ba76e" absoluteBounds="21.75, 8.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BeloDataContext/tbl_TirePosition" />
+      <nestedChildShapes>
+        <elementListCompartment Id="90489eea-aae0-4503-9026-5dc6b8c700dc" absoluteBounds="21.765, 9.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="efc7d9bd-8dc6-4a5e-a439-c47f1f1ca466" absoluteBounds="21.75, 11.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/BeloDataContext/tbl_Title" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9f49b57c-abb3-4c3f-a042-f482f6689781" absoluteBounds="21.765, 12.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0c14912e-5be5-42d9-9da8-b2392a9d1607" absoluteBounds="21.75, 14.75, 2, 4.4631168619791666">
+      <DataClassMoniker Name="/BeloDataContext/tbl_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e9ceb99-8799-49b0-bb2c-4e178c557528" absoluteBounds="21.765, 15.21, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4680ff0e-8e9f-48ca-914a-dc6e9b9d07bd" absoluteBounds="0.75, 7.25, 2, 2.5401025390624996">
+      <DataClassMoniker Name="/BeloDataContext/tblImage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="864281a9-8293-4466-be17-72ae39063f07" absoluteBounds="0.765, 7.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="07ba2292-4171-48f3-81c0-b9cdbe9746c3" absoluteBounds="21.75, 20.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/BeloDataContext/TestImport" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a918edbc-c40f-45bf-9797-ef0b0db16164" absoluteBounds="21.765, 21.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 11.65625); (3.59375 : 11.65625); (3.59375 : 6.93422688802083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BeloDataContext/Shop_Category/Shop_Category_Shop_Product" />
+      <nodes>
+        <classShapeMoniker Id="ae5ede08-9518-41f6-a110-6bb2f0c40051" />
+        <classShapeMoniker Id="dcb890d8-da5c-4079-9416-a3bd4487028d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.04890055338542); (3.5 : 4.04890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BeloDataContext/Shop_Manufacturer/Shop_Manufacturer_Shop_Product" />
+      <nodes>
+        <classShapeMoniker Id="0e3d354f-b8ee-4f2c-8b62-61160dd03aa0" />
+        <classShapeMoniker Id="dcb890d8-da5c-4079-9416-a3bd4487028d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.96875); (3.5624975 : 7.96875); (3.5624975 : 6.93422688802083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BeloDataContext/tblImage/tblImage_Shop_Product" />
+      <nodes>
+        <classShapeMoniker Id="4680ff0e-8e9f-48ca-914a-dc6e9b9d07bd" />
+        <classShapeMoniker Id="dcb890d8-da5c-4079-9416-a3bd4487028d" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

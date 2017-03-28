@@ -1,0 +1,98 @@
+.localNavBar {
+	DISPLAY: block; Z-INDEX: 1500; MARGIN: 0px 0px 0px -4px; WIDTH: 856px; POSITION: relative; HEIGHT: 25px;
+}
+#LocalNav {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; Z-INDEX: 1600; FLOAT: left; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none; BORDER-RIGHT-WIDTH: 0px
+}
+#LocalNav UL {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 0px; Z-INDEX: 1600; FLOAT: left; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none; BORDER-RIGHT-WIDTH: 0px
+}
+/* ---- CAP 1----*/
+#LocalNav A {
+	PADDING-RIGHT: 10px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 4px;  PADDING-TOP: 4px; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+#LocalNav A:hover {
+	background-color: #F1E8E6; COLOR: #fff; TEXT-DECORATION: none
+}
+/* ---- CAP 1----*/
+
+#LocalNav LI {
+ FLOAT: left; WIDTH: 95px; text-decoration:none;
+}
+#LocalNav LI {
+	WIDTH: auto;
+}
+#LocalNav LI UL {
+	FONT-WEIGHT: normal; Z-INDEX: 1600; LEFT: -999em; POSITION: absolute
+}
+#LocalNav LI UL {
+	WIDTH: auto;
+}
+#LocalNav LI UL A {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: normal; PADDING-BOTTOM: 4px; MARGIN: 0px; WIDTH: auto; PADDING-TOP: 4px; TEXT-ALIGN: left; text-decoration:none;
+}
+#LocalNav LI LI {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: auto; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+#LocalNav LI UL {
+	BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; MARGIN-LEFT: 0px; BORDER-LEFT: #ccc 0px solid; WIDTH: 170px; LINE-HEIGHT: 1em; BORDER-BOTTOM: #666 0px solid; HEIGHT: auto
+}
+#LocalNav LI LI {
+	BORDER-RIGHT: #ccc 0px solid; BORDER-TOP: #666 0px solid; BORDER-LEFT: #ccc 1px solid; WIDTH: 170px; BORDER-BOTTOM: #ccc 1px solid
+}
+
+/* DI CHUOT CAP 1*/
+#LocalNav>LI>A {
+    COLOR: #BCC2CB; text-decoration:none; 
+}
+.tbl-mod{background:#f1f3f5}
+#LocalNav LI A:hover {
+	background-color:#55616f; COLOR: #fff; text-decoration:none; 
+}
+/*END */
+/*CAP 2 3 */
+#LocalNav LI UL A {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px; text-decoration:none; color: #BCC2CB; background:#444d58;
+}
+#LocalNav LI UL A:hover {
+	DISPLAY: block; text-decoration:none;
+}
+#LocalNav LI UL UL A {
+	BACKGROUND: #fff; COLOR: #c00
+}
+#LocalNav LI UL UL {
+	MARGIN: -18px 0px 0px 144px; voice-family: inherit
+}
+HTML > BODY #LocalNav LI UL UL {
+	MARGIN-LEFT: 144px
+}
+#LocalNav LI:hover UL UL {
+	LEFT: -999em
+}
+#LocalNav LI.sfhover UL UL {
+	LEFT: -999em
+}
+#LocalNav LI:hover UL {
+	LEFT: auto
+}
+#LocalNav LI LI:hover UL {
+	LEFT: auto
+}
+#LocalNav LI.sfhover UL {
+	LEFT: auto
+}
+#LocalNav LI LI.sfhover UL {
+	LEFT: auto
+}
+#adc_menu{
+    height: 28px;
+    background: #444d58;
+}
+#LocalNav li ul{
+    background: #212d41 !important;
+}
+.tbl-mod tr td{
+    padding-top: 10px;
+    padding-bottom:5px;
+}
+#LocalNav LI A i{color: #6fa7d7}

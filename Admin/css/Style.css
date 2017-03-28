@@ -1,0 +1,471 @@
+body {
+    color:#333 !important;
+    font-family: 'Roboto Condensed', sans-serif !important
+}
+.toolBarButton a{ font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 14px !important;
+    color: #2A0844;
+    text-decoration:none;
+}
+.marquee{
+    border: #d1e0ec 1px solid;
+    width: 100%;
+     padding: 30px;
+      height: 280px
+}
+.controlbox tr td{padding:5px;}
+a:hover{
+    color:#085496;
+}
+.fullscreen{
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    position: absolute;
+    text-align: center;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.col{
+    padding:20px;
+}
+.tblUser{
+     width:100%;
+     border:0;
+}
+.rss{
+    color:#c64934 !important;
+}
+.tblUser tr{height:33px;}
+.tblUser tr td strong{
+    color:#888;
+}
+FIELDSET{margin-bottom: 6px;}
+.rss{color: #191970; text-decoration: none;}
+.rss:HOVER{color: #a52a2a; text-decoration: overline underline;	background-color: #d3d3d3;}
+.linehighlight{background-color: #A9D2E1;}
+.cursortext{cursor: Default;}
+.plainbox{background: #eeeeee;}
+.Img{cursor:pointer;}
+#---USERSLOCTREE---0-icon{width:20px;}
+.linehighlight
+{
+	background-color: #A9D2E1;
+}
+.cursortext
+{
+	cursor: Default;
+}
+.tabrunner
+{
+	display: block;
+	visibility: visible;
+}
+th, th>a{color: #0660ad !important; text-decoration:none}
+.emailinput
+{
+	background: #E1F0F5;
+	border-top: 8px #E1F0F5 solid;
+	border-bottom: 8px #E1F0F5 solid;
+	border-left: 8px #E1F0F5 solid;
+	border-right: 8px #E1F0F5 solid;
+}
+.tabbox
+{
+	background: #eeeeee;
+	border-left: 0pt gray solid;
+	border-right: 0pt gray solid;
+	border-bottom: 1pt gray solid;
+}
+FIELDSET
+{
+	margin-bottom: 6px;	
+}
+	.plainbox
+{
+	background: #eeeeee;
+}
+.Img
+{
+	cursor:pointer;
+}
+.controlbox
+{
+	background: #eeeeee;
+	/*border-left: 9px #eeeeee solid;
+	border-right: 9px #eeeeee solid;
+	border-top: 6px #eeeeee solid;
+	border-bottom: 10px #eeeeee solid;*/
+}
+
+.fieldbox
+{
+	border-left: 10px #eeeeee solid;
+	border-right: 10px #eeeeee solid;
+	border-top: 6px #eeeeee solid;
+	border-bottom: 10px #eeeeee solid;	
+	}
+.navtabbox
+	{
+		background: white;
+		border-left: 0pt gray solid;
+		border-right: 0pt gray solid;
+		border-bottom: 1pt gray solid;
+	}
+.columnbar
+{
+	background: #E1F0F5;
+	border-top: 1px white solid;
+}
+.infotab
+{
+	background: #34649C;
+}
+
+.infobox
+{
+	border-left: 1px #34649C solid; 
+	border-right: 1px #34649C solid; 
+	border-top: 1px #34649C solid; 
+	border-bottom: 1px #34649C solid;
+}
+
+TABLE#toolbar_top {
+	padding-top: 2px; padding-bottom: 2px; background-color:#F1F3F5; width: 100%;
+}
+    TABLE#toolbar_top A.toolbar_top {
+        DISPLAY: block;
+        //COLOR: #808080;
+    }
+TABLE#toolbar_top A.toolbar_top:hover {
+	 COLOR: #c64934;
+}
+TABLE#toolbar_top A.toolbar_top:active {
+	COLOR: #ff9900
+}
+
+.tblHeader
+{
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#FFE7F3F7', EndColorStr='#FFA3C9D5');
+    	TABLE-LAYOUT: fixed;
+	WIDTH: 100%;
+	HEIGHT: 20px;
+	Margin: 0px;
+}
+.tblHeader TD
+{
+
+	border-top: 1px #EEEEEE solid;
+	border-left: 1px #EEEEEE solid;
+	border-bottom: 1px #848284 solid;
+	border-right: 1px #848284 solid;
+	padding-left: 4px;
+	padding-right: 4px;
+	table-layout:fixed;
+}
+#divList
+{
+    	OVERFLOW-x: auto;
+    	OVERFLOW-y: scroll;
+}
+.List
+{
+	table-layout:fixed;
+}
+.List TD
+{
+	padding-left: 5px;
+	padding-right: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	valign: middle;
+}
+#tdSpc
+{
+	width:0px;
+}
+.GroupByBar
+{
+	border-left:1px solid white;
+	border-top:1px solid white;
+	border-bottom:1px solid #aaaaaa;
+	border-right:1px solid #aaaaaa;
+	background: #e1e1e1; 
+	cursor: hand;
+	Height: 22px;
+}
+
+#menuback
+{
+	background: #F7F7F7; 
+	border-bottom: 1px black solid; 
+	border-top: 1px gray solid; 
+}
+
+#menubar 
+{
+	position: relative; 
+	font: menu; 
+	cursor: default; 
+	background: #F7F7F7; 
+	z-index:1		
+}
+
+#menubar .root 
+{
+	border-left: 1px #F7F7F7 solid; 
+	border-right: 1px #F7F7F7 solid; 
+	border-bottom: 1px #F7F7F7 solid; 
+	border-top: 1px #F7F7F7 solid;  		
+	padding-left: 4pt; 
+	padding-right: 4pt;
+	padding-bottom: 2pt;
+	padding-top: 2pt;
+}
+#menubar .rootraised 
+{	
+	border-left: 1px #222284 solid; 
+	border-right: 1px #222284 solid; 
+	border-bottom: 1px #A9D2E1 solid;
+	border-top: 1px #A9D2E1 solid; 		
+	padding-left: 4pt; 
+	padding-right: 4pt;
+	padding-bottom: 2pt;
+	padding-top: 2pt;
+	background: #A9D2E1
+}
+#menubar .rootsunk
+{
+	border-left: 1px gray solid; 
+	border-right: 1px gray solid; 
+	border-bottom: 1px #CECFCE solid;
+	border-top: 1px #CECFCE solid;		
+	padding-left: 4pt; 
+	padding-right: 4pt;
+	padding-bottom: 2pt;
+	padding-top: 2pt;
+	background: #CECFCE;
+}
+
+	
+#menubar TABLE 
+{
+	margin: 0pt; 
+	padding: 0pt; 
+	background: #F7F7F7; 
+	border-left: 1px gray solid; 
+	border-right: 1px gray solid; 
+	border-bottom: 1px gray solid; 
+	border-top: 1px gray solid; 
+	display: none; 
+	position: absolute;
+	font-family: menu;
+}
+
+#menubar TABLE TD 
+{		
+	margin: 0pt; 
+}
+
+#menubar .highlight 
+{
+	color: black; 
+	background: #A9D2E1		
+}
+
+#menubar #break, #menubar .disabled 
+{
+	color: gray
+}
+
+#menubar .more 
+{
+	width: 10px;		
+	left: 0pt; 
+	float: right; 
+	top: -6px; 		
+	position:relative;
+}
+
+#menubar .sideicon
+{
+	width: 10px;		
+	left: 0pt; 
+	float: left; 
+	top: 0pt; 		
+	position:relative;
+}
+
+#menubar .menutext
+{
+	left: 4pt; 
+	top: 3pt; 		
+	position:relative;
+}
+
+	#menubar .left 
+{
+	margin-left: -11pt;
+}
+
+#toolbar 
+{
+	width: 100%;
+	z-index:0; padding:2px;
+	border-bottom:1px solid #ccc; background-image:url("../dhtmlx/imgs/dhxlayout_dhx_skyblue/dhxlayout_bg.gif"); 
+}
+
+.toolBarButton,
+.toolBarButtonHover,
+.toolBarButtonActiveHover,
+.toolBarButtonActive,
+.toolBarButtonActiveDisabled,
+.toolBarButtonDisabled,
+.toolBarButtonUpDisabled 
+{
+	cursor: 			Default;
+	font: 				Icon;
+	font-weight: 		normal;
+	padding:			2px 5px 2px 5px;
+	border:				0px solid #E1F0F5;
+	white-space:		nowrap;
+	vertical-align:		middle;
+	background-color:	Transparent;
+}
+
+.toolBarButton img {
+    height:16px;
+}
+#gvData_ctl02_imgDel{height:16px;}
+.toolBarButtonHover {
+	border-width:		1px;
+	border-left-color:	#222284;
+	border-right-color:	#222284;
+	border-top-color:	#222284;
+	border-bottom-color:	#222284;
+	padding:			1px 4px 1px 4px;
+	background-color:	#A9D2E1;		
+}
+
+.toolBarButtonActiveHover {
+	border-width:		1px;
+	border-left-color:	#222284;
+	border-right-color:	#222284;
+	border-top-color:	#222284;
+	border-bottom-color:	#222284;
+	padding:		2px 3px 0px 5px;
+	background-color:	#83C0D7;		
+}
+
+.toolBarButtonActive {
+	border-width:		1px;
+	border-left-color:#4D8B9F;
+	border-top-color:#4D8B9F;
+	border-right-color:	white;
+	border-bottom-color:white;
+	padding:			2px 3px 0px 5px;
+	background-color:	#dddddd;
+}
+
+.toolBarButtonUpDisabled,
+.toolBarButtonActiveDisabled,
+.toolBarButtonDisabled {
+	padding:			2px 5px 2px 5px;
+	color:				GrayText;
+	border-width: 		0px;
+}
+
+.toolBarButtonActiveDisabled {
+	border-width:		1px;
+	border-left-color:	ButtonShadow;
+	border-right-color:	ButtonHighlight;
+	border-top-color:	ButtonShadow;
+	border-bottom-color:ButtonHighlight;
+	padding:			2px 3px 0px 5px;
+}
+
+.toolBarButtonUpDisabled {
+	border-width:		1px;
+	border-left-color:	ButtonHighlight;
+	border-right-color:	ButtonShadow;
+	border-top-color:	ButtonHighlight;
+	border-bottom-color:ButtonShadow;
+}
+
+.toolBarButtonUpDisabled img,
+.toolBarButtonActiveDisabled img,
+.toolBarButtonDisabled img 
+{
+	-moz-opacity:		0.5;
+}
+
+.toolBarButtonUpDisabled .toolBarButtonDisabledContainer,
+.toolBarButtonActiveDisabled .toolBarButtonDisabledContainer,
+.toolBarButtonDisabled .toolBarButtonDisabledContainer 
+{
+	display:			block;
+	filter: alpha(opacity=35) ; 
+	width:				100%;
+	height: 100%;
+	vertical-align:		center;
+}
+
+.toolBarButtonUpDisabled .toolBarButtonDisabledContainer .toolBarButtonDisabledContainer,
+.toolBarButtonActiveDisabled .toolBarButtonDisabledContainer .toolBarButtonDisabledContainer,
+.toolBarButtonDisabled .toolBarButtonDisabledContainer .toolBarButtonDisabledContainer 
+{
+	background:			
+	chroma(color=#ffffff) chroma(color=#fefefe) chroma(color=#fdfdfd)
+	chroma(color=#fcfcfc) chroma(color=#fbfbfb) chroma(color=#fafafa)
+	chroma(color=#f9f9f9) chroma(color=#f8f8f8) chroma(color=#f7f7f7)
+	chroma(color=#f6f6f6) chroma(color=#f5f5f5) chroma(color=#f4f4f4)
+	chroma(color=#f3f3f3) 
+	mask(color=#010101)
+
+}
+.findercontexttableborder
+{
+	border-left: 1px #9CBEE7 solid; 
+	border-right: 1px #9CBEE7 solid; 
+	border-top: 1px #9CBEE7 solid; 
+	border-bottom: 1px #9CBEE7 solid;
+	background-color: #F7F7FF;
+}
+.cssPager span { background-color:#cccccc; padding-right:3px; padding-left:3px; font-size:12px; border:1px solid #FF00FF}     
+/*Style cho tooltip*/
+#dhtmltooltip {
+	BORDER-RIGHT: black 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: black 1px solid; 
+	PADDING-LEFT: 4px; FONT-SIZE: 10pt; Z-INDEX: 100; FILTER: alpha(opacity=90); 
+	LEFT: -300px; VISIBILITY: hidden; PADDING-BOTTOM: 4px; BORDER-LEFT: black 1px solid; 
+	WIDTH: 250px; PADDING-TOP: 4px; BORDER-BOTTOM: black 1px solid; FONT-FAMILY: Arial; 
+	POSITION: absolute; BACKGROUND-COLOR: lightyellow;
+}
+#dhtmlpointer {
+	Z-INDEX: 101; LEFT: -300px; VISIBILITY: hidden; POSITION: absolute;
+}
+/*Style cho DatePicker*/
+.Header { FONT-SIZE: 11px; BACKGROUND: steelblue; COLOR: #ffffff; FONT-FAMILY: tahoma; HEIGHT: 20px }
+.Button { BORDER-RIGHT: #909090 1px solid; BORDER-TOP: #909090 1px solid; FONT-SIZE: 11px; BACKGROUND: #f5f5f4; BORDER-LEFT: #909090 1px solid; CURSOR: hand; COLOR: #336699; BORDER-BOTTOM: #909090 1px solid; FONT-FAMILY: tahoma }
+.Item { FONT-SIZE: 11px; BACKGROUND: #f5f5f4; WIDTH: 25px; COLOR: #336699; FONT-FAMILY: tahoma }
+.SelectedItem { BORDER-RIGHT: #909090 1px solid; BORDER-TOP: #909090 1px solid; FONT-SIZE: 11px; BACKGROUND: #f5f5f4; BORDER-LEFT: #909090 1px solid; WIDTH: 20px; COLOR: #ff0000; BORDER-BOTTOM: #909090 1px solid; FONT-FAMILY: tahoma }
+.Container { BORDER-RIGHT: #909090 1px solid; BORDER-TOP: #909090 1px solid; FONT-SIZE: 11px; BACKGROUND: #f5f5f4; BORDER-LEFT: #909090 1px solid; COLOR: #336699; BORDER-BOTTOM: #909090 1px solid; FONT-FAMILY: tahoma }
+.checkbox { FONT-SIZE: 11px; FONT-FAMILY: Tahoma,Verdana }
+.i-form{padding:4px 10px}
+.i-form span{display:inline-block;width:100px}
+#tblpromote>tbody>tr>th{
+    background: #eee;
+}
+.selectedrow{
+    background: lightblue ;
+}
+.select2{
+    width: 100% !important;
+    
+}
+.select2-container--default .select2-selection--single{
+    height: 34px !important;
+    border-radius: 0 !important;
+}
+.grid1490330075768 .ui-grid-row, .grid1490330075768 .ui-grid-cell, .grid1490330075768 .ui-grid-cell .ui-grid-vertical-bar{
+    height: 40px;
+}

@@ -1,0 +1,111 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="Admin_AdminMasterPage" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Vé xe điện tử - Đặt vé xe online</title>
+    <asp:Literal ID="ltCss" runat="server"></asp:Literal>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/bower_components/angular-ui-grid/ui-grid.min.css"/>
+    
+    <asp:Literal ID="ltJavascript" runat="server"></asp:Literal>
+    <script type="text/javascript">
+        function menuHandler(url) {
+            document.location.href = url;
+        }
+    </script>
+    <style>
+        .navbar-nav > li:hover > ul {
+            display: block;
+        }
+
+        .navbar-nav > li:hover {
+            background: #317399;
+        }
+
+        .dropdown-menu > li > a {
+            padding: 9px 20px;
+        }
+
+        @media (min-width: 768px) {
+            .modal-dialog {
+                width: 750px;
+                margin: 30px auto;
+            }
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <form id="form1" runat="server" class="form-group">
+        <header class="main-header">
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="pull-left">
+                    <ul class="nav nav-bar">
+                        <asp:Label ID="lbMenuTop" runat="server" Text=""></asp:Label>
+                    </ul>
+                </div>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <a class="text-center" href="javascript:menuHandler('<%=urlRoot %>/Modules/Content/')"><i class="fa fa-tachometer fa-2x"></i>
+                                <br />
+                                Trang chủ</a>
+                        </li>
+                        <li>
+                            <a class="text-center" href="javascript:menuHandler('<%=urlRoot %>/Modules/Config/')"><i class="fa fa-gears fa-2x"></i>
+                                <br />
+                                Cấu hình</a>
+                        </li>
+                        <li>
+                            <a class="text-center" href="<%=URLRoot %>" target="_blank"><i class="fa fa-desktop  fa-2x"></i>
+                                <br />
+                                Website</a>
+                        </li>
+                        <li>
+                            <a href="javascript:menuHandler('<%=urlRoot %>/login.aspx?act=logout')" class="text-center"><i class="fa fa-sign-in fa-2x"></i>
+                                <br />
+                                Đăng xuất</a>
+                        </li>
+                        <li>
+                            <asp:DropDownList ID="ddlLang" CssClass="form-control select2" OnSelectedIndexChanged="ddlLang_SelectedIndexChanged" AutoPostBack="True" runat="server">
+                                <asp:ListItem Value="1">Tiếng Việt</asp:ListItem>
+                                <asp:ListItem Value="2">Tiếng Anh</asp:ListItem>
+                            </asp:DropDownList>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="content-wrapper">
+            <section class="content" ng-app="app">
+                <asp:ContentPlaceHolder ID="Main" runat="server" ></asp:ContentPlaceHolder>
+            </section>
+        </div>
+    </form>
+    <!--AngularJS-->
+    <script src="<%=urlRoot %>/Assets/app/bower_components/tinymce/tinymce.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+    <script src="<%=urlRoot %>/Assets/app/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="/Scripts/ckfinder/ckfinder.js"></script>
+    <script src="<%=urlRoot %>/js/main/app.js"></script>
+    <script src="<%=urlRoot %>/js/main/services/svNhaXe.js"></script>
+    <script src="<%=urlRoot %>/js/main/services/svQuanhuyen.js"></script>
+    <script src="<%=urlRoot %>/js/main/services/svXe.js"></script>
+    <script src="<%=urlRoot %>/js/main/services/Service.js"></script>
+    <!--EndAngularJS-->
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+    <script src="<%=urlRoot %>/Assets/admin-lte/select2/select2.full.min.js"></script>
+    <script src="/resources/js/jquery-ui.js"></script>
+    <script src="<%=urlRoot %>/js/tinymce/jquery.tinymce.min.js"></script>
+    <script src="<%=urlRoot %>/js/tinymce/tinymce.min.js"></script>
+    <script src="<%=urlRoot %>/js/site.js"></script>
+    <script src="<%=urlRoot %>/js/paging-ultil.js"></script>
+    <script src="/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="/bower_components/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/bower_components/pdfmake/build/vfs_fonts.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+</body>
+</html>

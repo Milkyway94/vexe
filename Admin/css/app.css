@@ -1,0 +1,13 @@
+﻿.pb10{
+    padding-bottom: 10px !important;
+}
+.pl0{
+    padding-left: 0;
+}
+.toolbar{
+    padding-top: 10px;
+    border-bottom: 2px solid #ddd;
+}
+table{
+    width: 100% !important;
+}

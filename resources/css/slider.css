@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+#AdLeftBottom{ float:left; width:100%;}
+#AdLeftBottom img {
+max-width:247px;
+clear:both;
+margin-bottom:15px; margin:0;
+}
+#AdLeftBottom .cate h3{
+height:31px;
+font: 18px/30px Arial;
+color:#132f54;
+text-transform:uppercase; border-bottom: 2px solid #9dddf9; padding:0 0 6px 10px;
+
+z-index:2;
+}
+#AdLeftBottom .listadv {
+border-top:0;
+
+text-align:center;
+padding:0;
+position:relative;
+z-index:1;
+}
+#AdLeftBottom a.left {
+display:inline-block;
+cursor:pointer;
+width:40px;
+height:40px;
+background: url(../images/icon/back-1.png) no-repeat;
+position:absolute;
+top:50%;
+left:-10px;
+margin-top:-15px; opacity:0.7; z-index:10;
+}
+#AdLeftBottom a.right {
+    display: inline-block;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: url(../images/icon/next-1.png) no-repeat;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    opacity: 0.7;
+    z-index: 10;
+    margin-top: -15px;
+}
+#AdLeftBottom ul,#AdLeftBottom li {
+list-style:none;
+}
+#AdLeftBottom li {  margin:0 5px !important; 
+}
+#AdLeftTop img {
+max-width:247px;
+clear:both;
+margin-bottom: 14px;
+}
+.jCrAdLeftBottom>ul>li{
+	overflow: hidden;
+	float: left;
+	width: 224px;
+}

@@ -1,0 +1,30 @@
+.tab-pane {
+	POSITION: relative;
+}
+.dynamic-tab-pane-control .tab-row .tab {
+	padding: 2px 0px 0px 0px; margin: 1px -1px 1px 2px; z-index: 1; width: 90px; height: 16px;
+	background-image: url(../skin/tab.png);  font: 11px Tahoma; 
+	overflow: hidden; display: inline; float: left; white-space: nowrap; position: relative;
+	top: 0px; cursor: pointer; text-align: center;
+}
+.dynamic-tab-pane-control .tab-row .selected {
+	padding: 2px 0px 0px 0px; margin: 1px -3px -3px 0px; z-index: 3; width: 94px! important; height: 18px! important;
+	background-image: url(../skin/tab_active.png)! important; font: 11px Tahoma; 
+	top: -2px; background-repeat: no-repeat;  
+}
+.dynamic-tab-pane-control .tab-row .tab A {
+	font: 11px Tahoma; cursor: pointer; color: #333; text-decoration: none;
+}
+.dynamic-tab-pane-control .tab-row .hover {
+	background-image: url(../skin/tab_hover.png); font: 14px Tahoma; 
+	background-repeat: no-repeat; height: 16px; width: 90px;
+}
+.dynamic-tab-pane-control .tab-page {
+	border-right: rgb(145,155,156) 1px solid; border-left: rgb(145,155,156) 1px solid;
+	border-top: rgb(145,155,156) 1px solid; border-bottom: rgb(145,155,156) 1px solid;
+	padding: 5px 5px 5px 5px; width: 97%; color: #333; position: relative; top: -2px;
+	z-index: 2; background: rgb(252,252,254); float: left;  font: 11px Tahoma;
+}
+.dynamic-tab-pane-control .tab-row {
+	z-index: 1; white-space: nowrap
+}
