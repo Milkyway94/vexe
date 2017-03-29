@@ -85,9 +85,9 @@
     </form>
     <!--AngularJS-->
     <script src="<%=urlRoot %>/Assets/app/bower_components/tinymce/tinymce.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-touch.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+    <script src="<%=urlRoot %>/js/angularjs_1.5.js"></script>
+    <script src="<%=urlRoot %>/js/ng-touch.js"></script>
+    <script src="<%=urlRoot %>/js/ng-animate.js"></script>
     <script src="<%=urlRoot %>/Assets/app/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script src="/Scripts/ckfinder/ckfinder.js"></script>
     <script src="<%=urlRoot %>/js/main/app.js"></script>
@@ -96,7 +96,7 @@
     <script src="<%=urlRoot %>/js/main/services/svXe.js"></script>
     <script src="<%=urlRoot %>/js/main/services/Service.js"></script>
     <!--EndAngularJS-->
-    <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+    <script src="<%=urlRoot %>/js/sweetalert.js"></script>
     <script src="<%=urlRoot %>/Assets/admin-lte/select2/select2.full.min.js"></script>
     <script src="/resources/js/jquery-ui.js"></script>
     <script src="<%=urlRoot %>/js/tinymce/jquery.tinymce.min.js"></script>

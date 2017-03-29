@@ -107,7 +107,7 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     //function
     function Unique(collection, keyname) {
         var output = [],
-          keys = [];
+            keys = [];
 
         angular.forEach(collection, function (item) {
             var key = item[keyname];
@@ -164,12 +164,13 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
     //Lay Chuyen Xe
     $service.Post(url + "/GetChuyenXeByUrl", { url: nurl }).success(function (data) {
         $scope.Chuyenxe = data.d;
+        $scope.TongTien = ($scope.selectedTicket.VIP * $scope.Chuyenxe.GiaVIP + $scope.selectedTicket.THUONG * $scope.Chuyenxe.GiaThuong);
         console.log($scope.Chuyenxe);
     })
     //So luong ve da chon
     $scope.selectedTicket = {
-        VIP: 0,
-        THUONG: 0
+        VIP: 1,
+        THUONG: 1
     }
 
     //Chọn phương thức thanh toán
@@ -178,33 +179,57 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
         $scope.Method = method;
     }
     //Chọn vé
-    $(".tbl-car tr td").not("#laixe").click(function () {
-        var type = $(this).attr('data-type');
-        var status = $(this).attr('data-status');
-        if (status == "true") {
-            $(this).attr('data-status', "false");
-            $scope.selectedTicket[type] = $scope.selectedTicket[type] - 1;
+    $scope.updateTicket = function () {
+        if ($scope.selectedTicket.VIP > $scope.Chuyenxe.VeVipConLai) {
+            $scope.showerror = true;
+            $scope.message = "Số vé bạn chọn đã vượt quá số vé còn lại";
+            $scope.selectedTicket.VIP = 30;
         }
-        if (status == "false") {
-            $(this).attr('data-status', "true");
-            $scope.selectedTicket[type] = $scope.selectedTicket[type] + 1;
+        else {
+            if ($scope.selectedTicket.THUONG > $scope.Chuyenxe.VeThuongConLai) {
+                $scope.showerror = true;
+                $scope.message = "Số vé bạn chọn đã vượt quá số vé còn lại";
+                $scope.selectedTicket.THUONG = 30;
+            }
+            else {
+                $scope.TongTien = ($scope.selectedTicket.VIP * $scope.Chuyenxe.GiaVIP + $scope.selectedTicket.THUONG * $scope.Chuyenxe.GiaThuong);
+            }
         }
-        $(this).find('img').toggle();
-        $scope.TongTien = ($scope.selectedTicket.VIP * $scope.Chuyenxe.GiaVIP + $scope.selectedTicket.THUONG * $scope.Chuyenxe.GiaThuong);
-        console.log($scope.TongTien);
-    })
+    }
+    //$(".tbl-car tr td").not("#laixe").click(function () {
+    //    var type = $(this).attr('data-type');
+    //    var status = $(this).attr('data-status');
+    //    if (status == "true") {
+    //        $(this).attr('data-status', "false");
+    //        $scope.selectedTicket[type] = $scope.selectedTicket[type] - 1;
+    //    }
+    //    if (status == "false") {
+    //        $(this).attr('data-status', "true");
+    //        $scope.selectedTicket[type] = $scope.selectedTicket[type] + 1;
+    //    }
+    //    $(this).find('img').toggle();
+    //    $scope.TongTien = ($scope.selectedTicket.VIP * $scope.Chuyenxe.GiaVIP + $scope.selectedTicket.THUONG * $scope.Chuyenxe.GiaThuong);
+    //    console.log($scope.TongTien);
+    //})
     $scope.loadding = false;
     //Đổi vé
     $scope.isExchage = false;
     $scope.DoiVe = function () {
         $scope.loadding = true;
         $service.Post(url + "/DoiVe", { Mave: $scope.Mavedoi, Tongtien: $scope.TongTien })
-        .success(function (data) {
-            console.log(data.d);
-            $scope.message = data.d.message;
-            $scope.showerror = true;
-            $scope.loadding = false;
-        })
+            .success(function (data) {
+                console.log(data.d);
+                $scope.message = data.d.message;
+                $scope.showerror = true;
+                
+                if (data.d.data > $scope.TongTien) {
+                    $scope.GiaTriVeCu = $scope.TongTien;
+                }
+                else {
+                    $scope.GiaTriVeCu = data.d.data;
+                }
+                $scope.loadding = false;
+            })
     }
     //Login
     $scope.Login = function () {
@@ -238,61 +263,58 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
         }
         else {
             $service.Post(url + "/ThanhToan", dataRequest)
-            .success(function (data) {
-                console.log(data.d);
-                switch (data.d.data) {
-                    case -1:
-                        $scope.showAlert = true;
-                        $scope.alertMsg = data.d.message;
-                        $scope.loadding = false;
-                        $("#LoginModal").modal({ backdrop: 'static' });
-                        break;
-                    case 0:
-                        $scope.showAlert = true;
-                        $scope.alertMsg = data.d.message;
-                        $scope.loadding = false;
-                        location.href = "/giao-dich.htm";
-                        break;
-                    case 1:
-                        $scope.showAlert = true;
-                        $scope.alertMsg = data.d.message;
-                        $scope.loadding = false;
-                        location.href = "/xac-thuc-dat-ve.htm";
-                    default:
-                        $scope.showAlert = true;
-                        $scope.alertMsg = data.d.message;
-                        $scope.loadding = false;
-                }
-            })
-               .error(function (data) {
-                   $scope.loadding = false;
-               })
+                .success(function (data) {
+                    console.log(data.d);
+                    switch (data.d.data) {
+                        case -1:
+                            $scope.showAlert = true;
+                            $scope.alertMsg = data.d.message;
+                            $scope.loadding = false;
+                            $("#LoginModal").modal({ backdrop: 'static' });
+                            break;
+                        case 0:
+                            $scope.showAlert = true;
+                            $scope.alertMsg = data.d.message;
+                            $scope.loadding = false;
+                            location.href = "/giao-dich.htm";
+                            break;
+                        case 1:
+                            $scope.showAlert = true;
+                            $scope.alertMsg = data.d.message;
+                            $scope.loadding = false;
+                            location.href = "/xac-thuc-dat-ve.htm";
+                        default:
+                            $scope.showAlert = true;
+                            $scope.alertMsg = data.d.message;
+                            $scope.loadding = false;
+                    }
+                })
+                .error(function (data) {
+                    $scope.loadding = false;
+                })
         }
     }
 }])
 app.controller("VertifyController", ['$scope', '$http', 'service', function ($scope, $http, $service) {
     var url = "/Default.aspx";
     $scope.loadding = false;
-    $service.Post(url + "/GetSessionMave", {})
-    .success(function (data) {
-        $scope.MaVe = data.d;
-    })
     $scope.Vertify = function () {
         $scope.loadding = true;
         $service.Post(url + "/VertifyTicket", { magiaodich: $scope.magiaodich })
-        .success(function (data) {
-            $scope.showerror = true;
-            $scope.message = data.d.message;
-            if (data.d.data) {
-                $scope.alertType = "success";
-                window.location.href = "/nhan-ve/" + $scope.MaVe + ".htm";
-            }
-            else {
-                $scope.alertType = "danger";
-            }
+            .success(function (data) {
+                console.log(data.d);
+                $scope.showerror = true;
+                $scope.message = data.d.message;
+                if (data.d.data) {
+                    $scope.alertType = "success";
+                    window.location.href = "/nhan-ve/" + $scope.magiaodich + ".htm";
+                }
+                else {
+                    $scope.alertType = "danger";
+                }
 
-            $scope.loadding = false;
-        })
+                $scope.loadding = false;
+            })
     }
 }])
 app.controller("TransactionController", ['$scope', '$http', 'service', function ($scope, $http, $service) {
@@ -300,19 +322,19 @@ app.controller("TransactionController", ['$scope', '$http', 'service', function 
     var url = "/Default.aspx";
     $scope.CreateTransaction = function () {
         $service.Post(url + "/CreateTransaction", { Mathe: $scope.Mathe })
-        .success(function (data) {
-            $scope.showerror = true;
-            $scope.message = data.d.message;
-            if (data.d.data) {
-                $scope.alertType = "success";
-                window.location.href = "/xac-thuc-dat-ve.htm";
-            }
-            else {
-                $scope.alertType = "danger";
-            }
+            .success(function (data) {
+                $scope.showerror = true;
+                $scope.message = data.d.message;
+                if (data.d.data) {
+                    $scope.alertType = "success";
+                    window.location.href = "/xac-thuc-dat-ve.htm";
+                }
+                else {
+                    $scope.alertType = "danger";
+                }
 
-            $scope.loadding = false;
-        })
+                $scope.loadding = false;
+            })
     }
 }])
 app.controller("CheckTicketController", ['$scope', '$http', 'service', function ($scope, $http, $service) {
@@ -334,14 +356,14 @@ app.controller("CheckTicketController", ['$scope', '$http', 'service', function 
                 $scope.sdt = '';
             }
             $service.Post(url + "/CheckTicket", { mave: $scope.mave, sdt: $scope.sdt })
-            .success(function (data) {
-                var res = JSON.parse(data.d);
-                $scope.Result = res;
-                console.log($scope.Result);
-                $scope.loadding = false;
-                $scope.showResult = true;
-                $scope.showerror = false;
-            })
+                .success(function (data) {
+                    var res = JSON.parse(data.d);
+                    $scope.Result = res;
+                    console.log($scope.Result);
+                    $scope.loadding = false;
+                    $scope.showResult = true;
+                    $scope.showerror = false;
+                })
         }
     }
 }])

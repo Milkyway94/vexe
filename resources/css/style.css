@@ -983,7 +983,9 @@ footer > .t2 {
     font-weight: bold;
     font-size: 18px;
 }
-
+.highlight {
+    font-weight: bold;
+}
 @media(max-width: 768px) {
     .tt {
         display: none;

@@ -40,8 +40,6 @@ public partial class ucontrols_CheckOut : System.Web.UI.UserControl
             //txtTel.Text = user.User_Tel;
             //email.Text = user.User_Email;
         }
-        ltrSodo.Text = LoadSodo(cx.TongVe.Value, cx.VeThuongConLai.Value, cx.VeVipConLai.Value);
-
         ltrLoginMessage.Visible = false;
         if (!IsPostBack)
         {

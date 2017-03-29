@@ -229,15 +229,36 @@
                             </tr>
                             <tr>
                                 <td>Giờ đi:</td>
-                                <td><%=cx.Giokhoihanh %> <%=cx.Ngaydi.Value.ToString("dd/MM/yyyy") %></td>
+                                <td><%=cx.Giokhoihanh.Value.ToString("HH:mm - dd/MM/yyyy") %></td>
                             </tr>
                             <tr>
                                 <td>Thời gian đi dự kiến:</td>
-                                <td><%=cx.Thoigiandukien %></td>
+                                <td><%=cx.Thoigiandukien.Value.Hours %> giờ <%=cx.Thoigiandukien.Value.Minutes %> phút </td>
                             </tr>
                             <tr>
-                                <td>Số lượng chỗ:</td>
-                                <td>{{selectedTicket.VIP}} vé VIP <b class="text-danger"><i class="fa fa-times" ng-click="removeTicket('VIP')"></i></b>{{selectedTicket.THUONG}} vé thường <b class="text-danger"><i class="fa fa-times" ng-click="removeTicket('THUONG')"></i></b></td>
+                                <td>Số vé còn lại: </td>
+                                <td>
+                                    <table class="table tbl-info">
+                                        <tr>
+                                            <td>Thường: </td>
+                                            <td class="text-right"><%=cx.VeThuongConLai %> vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vip: </td>
+                                            <td class="text-right"><%=cx.VeVipConLai %> vé</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Chọn số lượng vé:</td>
+                                <td><input type="number" min="0" ng-change="updateTicket()" max="<%=cx.VeVipConLai %>" ng-model="selectedTicket.VIP" /> vé VIP</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="number" min="0" ng-change="updateTicket()" max="<%=cx.VeThuongConLai %>" ng-model="selectedTicket.THUONG" /> vé Thường
+                                </td>
                             </tr>
                         </table>
                         <div class="chair">
@@ -251,21 +272,6 @@
                                 <img src="../../resources/img/icon/icon-dadat.png" alt="Alternate Text" />&nbsp;Ghế đã đặt
                             </div>
                         </div>
-                        <div class="pb20">
-                            <table class="tbl-car">
-                                <tr>
-                                    <td id="laixe">
-                                        <img src="../../resources/img/icon/icon-taylai.png" />
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="padding-right: 0px !important">
-                                        <span class="floor">&nbsp;</span>
-                                    </td>
-                                </tr>
-                                <asp:Literal ID="ltrSodo" runat="server" />
-                            </table>
-                        </div>
                         <form name="frmThanhToan">
                             <table class="tbl-thanhtoan table">
                                 <tr ng-hide="Method==5">
@@ -278,12 +284,6 @@
                                         <img src="../../resources/img/icon/icon-doive.png" ng-show="isExchage==true" ng-click="isExchage=!isExchage" />
                                         <img src="../../resources/img/icon/icon-uncheck-doive.png" ng-show="isExchage==false" ng-click="isExchage=!isExchage" />
                                         Đổi vé </span></td>
-                                </tr>
-                                <tr ng-show="Method==4">
-                                    <td colspan="3">
-                                        <input type="text" ng-model="Address" id="address" class="form-control" placeholder="Nhập địa chỉ nhận vé" required />
-                                        <span class="text-danger" ng-show="!Address" ng-focus="!Address">Bạn phải nhập Địa chỉ nhận hàng.</span>
-                                    </td>
                                 </tr>
                                 <tr ng-show="isExchage" ng-show="Method!=5 && Method!=6">
                                     <td colspan="2">
@@ -311,6 +311,12 @@
                                 <tr ng-show="showErrorKM" ng-show="Method!=5">
                                     <td colspan="3" style="border-top: none !important; text-align: center">
                                         <span class="text-danger"><i>Mã số không hợp lệ</i></span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="Method==4">
+                                    <td colspan="3">
+                                        <input type="text" ng-model="Address" id="address" class="form-control" placeholder="Nhập địa chỉ nhận vé" required />
+                                        <span class="text-danger" ng-show="!Address" ng-focus="!Address">Bạn phải nhập Địa chỉ nhận hàng.</span>
                                     </td>
                                 </tr>
                                 <tr ng-hide="Method==5">

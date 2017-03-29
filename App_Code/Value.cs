@@ -142,7 +142,7 @@ public enum ErrorCode
 public static class ErrorMessage
 {
     public static string Unauthorized = "Bạn chưa đăng nhập.";
-    public static string NotFound = "{0} không tồn tại.";
+    public static string NotFound = "{0} không tồn tại hoặc đã quá hạn.";
     public static string NoData = "Không có dữ liệu nào được trả về.";
     public static string Success = "{0} thành công.";
     public static string Fail = "{0} không thành công.";
@@ -150,10 +150,11 @@ public static class ErrorMessage
     public static string DataCount = "Có {0} {1} được tìm thấy.";
     public static string LoginFail = "Số điện thoại hoặc mật khẩu không đúng.";
     public static string AccountLocked = "Tài khoản của bạn đã bị khóa hoặc chưa được kích hoạt.";
-    public static string NotEqual = "Vé cũ phải có giá trị nhỏ hơn hoặc bằng giá trị vé hiện tại mới đổi được.";
+    public static string NotEqual = "Vé cũ phải có giá trị lớn hơn hoặc bằng giá trị vé hiện tại.";
     public static string NoVertification = "Bạn chưa xác thực giao dịch xe";
     public static string HaveTransaction = "Đã phát sinh giao dịch, chưa xác nhận!";
     public static string NoTransaction = "Chưa phát sinh giao dịch!";
+    public static string ExTimeOut = "Đã quá thời gian cho phép đổi vé!";
 }
 public static class AlertType
 {

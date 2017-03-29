@@ -140,11 +140,11 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-bold">Giờ xuất bến: </td>
-                                                                        <td class="text-bold">{{Selected.Gioxuatphat}}</td>
+                                                                        <td class="text-bold">{{Selected.Giokhoihanh}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-bold">Giờ tới bến: </td>
-                                                                        <td></td>
+                                                                        <td>{{Selected.Giotoi}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-bold">SĐT Lái xe: </td>
@@ -164,7 +164,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-bold">Giá niêm yết: </td>
-                                                                        <td>{{Selected.GiaThuong | currency:"":0}} đ</td>
+                                                                        <td class=text-bold">{{Selected.GiaThuong | currency:"":0}} đ</td>
                                                                     </tr>
                                                                     <tr ng-show="Selected.KhuyenMai>0">
                                                                         <td class="text-bold">Khuyến mãi: </td>

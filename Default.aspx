@@ -47,12 +47,12 @@
     <script src="<%=uRoot%>resources/plugins/select2/dist/js/select2.min.js"></script>
      <script src="<%=uRoot%>resources/js/uikit.min.js"></script>
     <script src="<%=uRoot%>resources/js/AngularJs.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.15/angular-filter.js"></script>
+    <script src="<%=uRoot%>resources/js/Main/angular-filter.js"></script>
     <script src="<%=uRoot%>resources/js/Main/app.js"></script>
     <script src="<%=uRoot%>resources/js/Main/Services/service.js"></script>
     <script src="<%=uRoot%>resources/js/Main/ngAutocomplete.js"></script>
     <script src="<%=uRoot%>resources/js/script.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+    <%--<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">--%>
 </body>
 </html>

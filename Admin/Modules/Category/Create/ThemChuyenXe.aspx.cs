@@ -68,7 +68,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
                         {
                             if (cx.DenHuyen.ToString() == ddlDenHuyen.Items[j].Value)
                             {
-                                ddlDenHuyen.Items[i].Selected = true;
+                                ddlDenHuyen.Items[j].Selected = true;
                             }
                         }
                     }
@@ -95,71 +95,80 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         CultureInfo provider = CultureInfo.InvariantCulture;
         TimeSpan tsThoiGian = new TimeSpan(int.Parse(txtThoigiandiG.Text), int.Parse(txtThoigiandiP.Text), 0);
 
-        ChuyenXe cx = new ChuyenXe
-        {
-            MaXe = int.Parse(ddlXe.SelectedValue),
-            Ngaydi = DateTime.ParseExact(txtNgaydi.Text, "dd/MM/yyyy", provider),
-            Giokhoihanh = DateTime.Parse(txtGiodi.Text),
-            Thoigiandukien = tsThoiGian,
-            Diemdi = ddlDiHuyen.SelectedItem.Text + "-" + ddlDiTinh.SelectedItem.Text,
-            Diemden = ddlDenHuyen.SelectedItem.Text + "-" + ddlDenTinh.SelectedItem.Text,
-            DiHuyen = int.Parse(ddlDiHuyen.SelectedValue),
-            DiTinh = int.Parse(ddlDiTinh.SelectedValue),
-            DenTinh = int.Parse(ddlDenTinh.SelectedValue),
-            DenHuyen = int.Parse(ddlDenHuyen.SelectedValue),
-            TongSoVeThuong = int.Parse(txtVethuong.Text),
-            TongVe = int.Parse(txtTongsove.Text),
-            TongSoVeVIP = int.Parse(txtVethuong.Text),
-            GiaThuong = double.Parse(txtGiaThuong.Text),
-            GiaVIP = double.Parse(txtGiaVip.Text),
-            LoTrinh = txtLotrinh.Text,
-            KhuyenMai = int.Parse(txtLotrinh.Text)
-        };
+            int MaXe = int.Parse(ddlXe.SelectedValue);
+        DateTime Ngaydi = DateTime.ParseExact(txtNgaydi.Text, "dd/MM/yyyy", provider);
+        DateTime Giokhoihanh = DateTime.Parse(txtGiodi.Text);
+        TimeSpan Thoigiandukien = tsThoiGian;
+        string Diemdi = ddlDiHuyen.SelectedItem.Text + "-" + ddlDiTinh.SelectedItem.Text;
+        string Diemden = ddlDenHuyen.SelectedItem.Text + "-" + ddlDenTinh.SelectedItem.Text;
+        int DiHuyen = int.Parse(ddlDiHuyen.SelectedValue);
+        int DiTinh = int.Parse(ddlDiTinh.SelectedValue);
+        int DenTinh = int.Parse(ddlDenTinh.SelectedValue);
+        int DenHuyen = int.Parse(ddlDenHuyen.SelectedValue);
+        int TongSoVeThuong = int.Parse(txtVethuong.Text);
+        int TongVe = int.Parse(txtTongsove.Text);
+        int TongSoVeVIP = int.Parse(txtVethuong.Text);
+        double GiaThuong = double.Parse(txtGiaThuong.Text);
+        double GiaVIP = double.Parse(txtGiaVip.Text);
+        string LoTrinh = txtLotrinh.Text;
+        int KhuyenMai = int.Parse(txtKhuyenMai.Text);
+
         Hashtable tbCx = new Hashtable();
-        tbCx.Add("MaXe", cx.MaXe.ToString());
-        tbCx.Add("Ngaydi", cx.Ngaydi.ToString());
-        tbCx.Add("Giokhoihanh", cx.Giokhoihanh.ToString());
-        tbCx.Add("Thoigiandukien", cx.Thoigiandukien.ToString());
-        tbCx.Add("Diemdi", cx.Diemdi);
-        tbCx.Add("Diemden", cx.Diemden);
-        tbCx.Add("TongSoVeThuong", cx.TongSoVeThuong.ToString());
-        tbCx.Add("TongVe", cx.TongVe.ToString());
-        tbCx.Add("TongSoVeVIP", cx.TongSoVeVIP.ToString());
-        tbCx.Add("GiaThuong", cx.GiaThuong.ToString());
-        tbCx.Add("GiaVIP", cx.GiaVIP.ToString());
-        tbCx.Add("VeVipConLai", cx.TongSoVeVIP.ToString());
-        tbCx.Add("VeThuongConLai", cx.TongSoVeThuong.ToString());
-        tbCx.Add("DiHuyen", cx.DiHuyen.ToString());
-        tbCx.Add("DiTinh", cx.DiTinh.ToString());
-        tbCx.Add("DenTinh", cx.DenTinh.ToString());
-        tbCx.Add("DenHuyen", cx.DenHuyen.ToString());
-        tbCx.Add("Lotrinh", cx.LoTrinh);
+        tbCx.Add("MaXe", MaXe.ToString());
+        tbCx.Add("Ngaydi", Ngaydi.ToString());
+        tbCx.Add("Giokhoihanh", Giokhoihanh.ToString());
+        tbCx.Add("Thoigiandukien", Thoigiandukien.ToString());
+        tbCx.Add("Diemdi", Diemdi);
+        tbCx.Add("Diemden", Diemden);
+        tbCx.Add("TongSoVeThuong", TongSoVeThuong.ToString());
+        tbCx.Add("TongVe", TongVe.ToString());
+        tbCx.Add("TongSoVeVIP", TongSoVeVIP.ToString());
+        tbCx.Add("GiaThuong", GiaThuong.ToString());
+        tbCx.Add("GiaVIP", GiaVIP.ToString());
+        tbCx.Add("VeVipConLai", TongSoVeVIP.ToString());
+        tbCx.Add("VeThuongConLai", TongSoVeThuong.ToString());
+        tbCx.Add("DiHuyen", DiHuyen.ToString());
+        tbCx.Add("DiTinh", DiTinh.ToString());
+        tbCx.Add("DenTinh", DenTinh.ToString());
+        tbCx.Add("DenHuyen", DenHuyen.ToString());
+        tbCx.Add("Lotrinh", LoTrinh);
+        tbCx.Add("KhuyenMai", KhuyenMai.ToString());
         try
         {
             if (string.IsNullOrEmpty(machuyenxe))
             {
-                bool _insertCx = UpdateData.Insert("ChuyenXe", tbCx);
-                if (_insertCx)
+                try
                 {
-                    string sql = "SELECT * FROM ChuyenXe ORder by MaChuyenXe DESC";
-                    DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
-                    string macx = dt.Rows[0]["Machuyenxe"].ToString();
-                    string diemden = dt.Rows[0]["DiemDen"].ToString();
-                    string diemdi = dt.Rows[0]["DiemDi"].ToString();
-                    Hashtable dbUpdateUrl = new Hashtable();
-                    dbUpdateUrl.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemden) + "-" + macx));
-                    UpdateData.Update("ChuyenXe", dbUpdateUrl, "Machuyenxe=" + macx);
-                    ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
+                    bool _insertCx = UpdateData.Insert("ChuyenXe", tbCx);
+                    if (_insertCx)
+                    {
+                        string sql = "SELECT * FROM ChuyenXe ORder by MaChuyenXe DESC";
+                        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+                        string macx = dt.Rows[0]["Machuyenxe"].ToString();
+                        string diemden = dt.Rows[0]["DiemDen"].ToString();
+                        string diemdi = dt.Rows[0]["DiemDi"].ToString();
+                        Hashtable dbUpdateUrl = new Hashtable();
+                        dbUpdateUrl.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemden) + "-" + macx));
+                        UpdateData.Update("ChuyenXe", dbUpdateUrl, "Machuyenxe=" + macx);
+                        ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
+                    }
+                    else
+                    {
+                        Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Thêm mới chuyến xe "), AlertType.ERROR);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Thêm mới chuyến xe "), AlertType.ERROR);
+
+                    ltrScript.Text = "<script>console.log('"+ex.ToString()+"')</script>";
                 }
+                
+                
             }
             else
             {
 
-                tbCx.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(cx.Diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(cx.Diemden) + "-" + machuyenxe));
+                tbCx.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(Diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(Diemden) + "-" + machuyenxe));
                 bool _updateCx = UpdateData.Update("ChuyenXe", tbCx, "MaChuyenXe=" + machuyenxe);
                 if (_updateCx)
                 {

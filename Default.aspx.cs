@@ -741,11 +741,12 @@ public partial class _Default : Page
                 str.Append(",");
             }
         }
-        str.Append("]},{\"text\": \"Quận/Huyện\",");
+        str.Append("]},{\"text\": \"Quận/Huyện/Bến xe\",");
         str.Append("\"data\": [");
         foreach (var item in distRepo.All().ToList())
         {
-            str.Append("\"" + item.TenHuyen + "\"");
+            item.TinhThanh = proRepo.Find(item.MaTinh.Value);
+            str.Append("\"" + item.TenHuyen + "-" + item.TinhThanh.TenTinh + "\"");
             if (distRepo.All().ToList().IndexOf(item) < distRepo.All().ToList().Count - 1)
             {
                 str.Append(",");
@@ -770,23 +771,50 @@ public partial class _Default : Page
         if (HttpContext.Current.Session["MemberID"] != null)
         {
             int userId = int.Parse(HttpContext.Current.Session["MemberID"].ToString());
-            string sql = "Select Order_TongTien from tbl_Order where Order_Code='" + Mave + "' and Order_Account='" + userId + "' AND Order_isComplete=0";
+            string sql = "Select UnitPrice from tbl_OrderDetail od, tbl_Order o where o.Order_ID=od.Order_ID AND od.MaVe='" + Mave + "' and o.Order_Account='" + userId + "' AND o.Order_isComplete =0 AND od.isTimeOut=0";
             var result = UpdateData.UpdateBySql(sql);
             DataRowCollection rows = result.Tables[0].Rows;
             if (rows.Count > 0)
             {
-                double tt = double.Parse(result.Tables[0].Rows[0]["TongTien"].ToString());
-                if (tt > double.Parse(Tongtien))
+                int machuyenxe = int.Parse(result.Tables[0].Rows[0]["MaChuyenXe"].ToString());
+                ChuyenXe cxx = new ChuyenXeRepository().Find(machuyenxe);
+                DateTime Giodi = cxx.Giokhoihanh.Value;
+                int timeEx=Convert.ToInt32(CMSfunc._GetConst("_ExchangeTimeout"));
+                TimeSpan timeout = new TimeSpan(timeEx, 0, 0);
+                TimeSpan timeDiff =Giodi-DateTime.Now;
+                if (timeDiff > timeout)
                 {
-                    res.data = tt;
-                    res.errcode = ErrorCode.SUCCESS;
-                    res.message = ErrorMessage.Success;
+                    double tt = double.Parse(result.Tables[0].Rows[0]["UnitPrice"].ToString());
+                    if (tt >= double.Parse(Tongtien))
+                    {
+                        Hashtable tbVe = new Hashtable();
+                        tbVe.Add("isTimeOut", "1");
+                        bool _updateVe = UpdateData.Update("tbl_OrderDetail", tbVe, "MaVe='" + Mave + "'");
+                        if (_updateVe)
+                        {
+                            res.data = tt;
+                            res.errcode = ErrorCode.SUCCESS;
+                            res.message = string.Format(ErrorMessage.Success, "Đổi vé");
+                        }
+                        else
+                        {
+                            res.data = 0;
+                            res.errcode = ErrorCode.FAIL;
+                            res.message = string.Format(ErrorMessage.Fail, "Mã vé");
+                        }
+                    }
+                    else
+                    {
+                        res.data = 0;
+                        res.errcode = ErrorCode.NOT_EQUAL;
+                        res.message = ErrorMessage.NotEqual;
+                    }
                 }
                 else
                 {
                     res.data = 0;
-                    res.errcode = ErrorCode.NOT_EQUAL;
-                    res.message = ErrorMessage.NotEqual;
+                    res.errcode = ErrorCode.FAIL;
+                    res.message = ErrorMessage.ExTimeOut;
                 }
             }
             else
@@ -825,19 +853,21 @@ public partial class _Default : Page
             tbIn.Add("Order_Code", ticketCode);
             tbIn.Add("Order_ShipAddress", diachinhanve);
             tbIn.Add("Order_TongTien", tongtien.ToString());
+            tbIn.Add("Order_TongThanhToan", (tongtien-giatridoive-khuyenmai).ToString());
             #endregion
             #region Check GiaoDich
-            string gdQuery = "SELECT * FROM GiaoDich Where TrangThaiGiaoDich=1 AND MemberID=" + int.Parse(MemberID.ToString());
-            DataTable dtGd = UpdateData.UpdateBySql(gdQuery).Tables[0];
-            if (dtGd.Rows.Count > 0)
-            {
-                tbIn.Add("Order_Status", "0");
-            }
-            else
-            {
-                tbIn.Add("Order_Status", "1");
-            }
+            //string gdQuery = "SELECT * FROM GiaoDich Where TrangThaiGiaoDich=1 AND MemberID=" + int.Parse(MemberID.ToString());
+            //DataTable dtGd = UpdateData.UpdateBySql(gdQuery).Tables[0];
+            //if (dtGd.Rows.Count > 0)
+            //{
+            //    tbIn.Add("Order_Status", "0");
+            //}
+            //else
+            //{
+            //    tbIn.Add("Order_Status", "1");
+            //}
             #endregion
+            tbIn.Add("Order_Status", "1");
             bool _insert = UpdateData.Insert("tbl_Order", tbIn);
             switch (method)
             {
@@ -860,19 +890,58 @@ public partial class _Default : Page
                     #region Thanh toan khi nhan ve
                     if (_insert)
                     {
-                        if (dtGd.Rows.Count > 0)
+                        #region Send Mail
+                        //send mail
+                        string strBody = "<html><body>\n";
+                        strBody += "<h2>Xác thực giao dịch vé xe điện tử từ website " + CMSfunc._GetConst("_Domain") + "</h1><br>\n";
+                        strBody += "Mã xác nhận của bạn là: <strong style='color: red'>" + ticketCode + "</strong><br>\n";
+                        strBody += "Vui lòng ấn vào link dưới đây để xác thực: <br>\n";
+                        strBody += "<a href=\"" + CMSfunc._GetConst("_Domain") + "/xac-thuc-thanh-toan.htm?mave=" + ticketCode + "\">Link xác nhận</a><br>\n";
+                        strBody += "<span style='text-align: right'>Cảm ơn quý khách đã đặt vé tại " + CMSfunc._GetConst("_Domain") + "! </span>\n";
+                        strBody += "</body></html>";
+
+                        string fromEmail = HttpContext.Current.Session["Member_Email"].ToString().Trim();
+                        string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
+                        string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
+
+                        string Subject = "XÁC THỰC ĐẶT VÉ XE ĐIỆN TỬ";
+                        string Host = CMSfunc._GetConst("_Hostmail");
+                        string EmailClient = CMSfunc._GetConst("_EmailClient");
+                        string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
+                        int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
+                        try
                         {
-                            SessionUtil.SetKey("OrderID", ticketCode);
-                            res.data = OrderStatus.CoGiaoDichChuaXacThuc;
-                            res.errcode = ErrorCode.TURNDATA;
-                            res.message = ErrorMessage.HaveTransaction;
+                            bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
+                            if (_isSend)
+                            {
+                                res.data = OrderStatus.CoGiaoDichChuaXacThuc;
+                                res.errcode = ErrorCode.TURNDATA;
+                                res.message = ErrorMessage.HaveTransaction;
+                            }
+                            else
+                            {
+                                res.data = OrderStatus.ChuaGiaoDich;
+                                res.errcode = ErrorCode.TURNDATA;
+                                res.message = ErrorMessage.NoTransaction;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
                             res.data = OrderStatus.ChuaGiaoDich;
-                            res.errcode = ErrorCode.TURNDATA;
-                            res.message = ErrorMessage.NoTransaction;
+                            res.message = ex.Message;
+                            res.errcode = ErrorCode.FAIL;
                         }
+                        #endregion
+                        //if (dtGd.Rows.Count > 0)
+                        //{
+                        //    res.data = OrderStatus.CoGiaoDichChuaXacThuc;
+                        //    res.errcode = ErrorCode.TURNDATA;
+                        //    res.message = ErrorMessage.HaveTransaction;
+                        //}
+                        //else
+                        //{
+
+                        //}
                     }
                     else
                     {
@@ -891,18 +960,58 @@ public partial class _Default : Page
                     #region Thanh toan khi len xe
                     if (_insert)
                     {
-                        if (dtGd.Rows.Count > 0)
+                        #region Send Mail
+                        //send mail
+                        string strBody = "<html><body>\n";
+                        strBody += "<h2>Xác thực giao dịch vé xe điện tử từ website " + CMSfunc._GetConst("_Domain") + "</h1><br>\n";
+                        strBody += "Mã xác nhận của bạn là: <strong style='color: red'>" + ticketCode + "</strong><br>\n";
+                        strBody += "Vui lòng ấn vào link dưới đây để xác thực: <br>\n";
+                        strBody += "<a href=\"" + CMSfunc._GetConst("_Domain") + "/xac-thuc-thanh-toan.htm?mave=" + ticketCode + "\">Link xác nhận</a><br>\n";
+                        strBody += "<span style='text-align: right'>Cảm ơn quý khách đã đặt vé tại " + CMSfunc._GetConst("_Domain") + "! </span>\n";
+                        strBody += "</body></html>";
+
+                        string fromEmail = HttpContext.Current.Session["Member_Email"].ToString().Trim();
+                        string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
+                        string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
+
+                        string Subject = "XÁC THỰC ĐẶT VÉ XE ĐIỆN TỬ";
+                        string Host = CMSfunc._GetConst("_Hostmail");
+                        string EmailClient = CMSfunc._GetConst("_EmailClient");
+                        string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
+                        int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
+                        try
                         {
-                            res.data = OrderStatus.CoGiaoDichChuaXacThuc;
-                            res.errcode = ErrorCode.TURNDATA;
-                            res.message = ErrorMessage.HaveTransaction;
+                            bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
+                            if (_isSend)
+                            {
+                                res.data = OrderStatus.CoGiaoDichChuaXacThuc;
+                                res.errcode = ErrorCode.TURNDATA;
+                                res.message = ErrorMessage.HaveTransaction;
+                            }
+                            else
+                            {
+                                res.data = OrderStatus.ChuaGiaoDich;
+                                res.errcode = ErrorCode.TURNDATA;
+                                res.message = ErrorMessage.NoTransaction;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
                             res.data = OrderStatus.ChuaGiaoDich;
-                            res.errcode = ErrorCode.TURNDATA;
-                            res.message = ErrorMessage.NoTransaction;
+                            res.message = ex.Message;
+                            res.errcode = ErrorCode.FAIL;
                         }
+                        #endregion
+                        //if (dtGd.Rows.Count > 0)
+                        //{
+                        //    res.data = OrderStatus.CoGiaoDichChuaXacThuc;
+                        //    res.errcode = ErrorCode.TURNDATA;
+                        //    res.message = ErrorMessage.HaveTransaction;
+                        //}
+                        //else
+                        //{
+
+                        //}
                     }
                     else
                     {
@@ -1020,157 +1129,144 @@ public partial class _Default : Page
         if (MemberId != null)
         {
             #region Trường hợp đã đăng nhập
-            string sqlGD = "SELECT * FROM GiaoDich WHERE MaGiaoDich='" + magiaodich + "' AND TrangThaiGiaoDich=1";
-            if (UpdateData.UpdateBySql(sqlGD).Tables[0].Rows.Count > 0)
+            string sqlOrder = "SELECT * FROM tbl_Order WHERE  Order_Code='" + magiaodich + "'";
+            DataSet dsOrder = UpdateData.UpdateBySql(sqlOrder);
+            DataTable dtOrder = dsOrder.Tables[0];
+            if (dtOrder.Rows.Count > 0)
             {
-                #region Trường hợp có giao dịch
-                string sqlOrder = "SELECT * FROM tbl_Order WHERE  Order_Account='" + MemberId + "' ORDER BY Order_ID DESC";
-                DataSet dsOrder = UpdateData.UpdateBySql(sqlOrder);
-                DataTable dtOrder = dsOrder.Tables[0];
-                if (dtOrder.Rows.Count > 0)
+                if (dtOrder.Rows[0]["Order_Status"].ToString() == "1")
                 {
-                    
-                    if (dtOrder.Rows[0]["Order_Status"].ToString() == "2")
+                    #region CheckOrderStatus =1
+                    int MaChuyenXe = Convert.ToInt32(dtOrder.Rows[0]["MaChuyenXe"].ToString());
+                    int NumOfVip = Convert.ToInt32(dtOrder.Rows[0]["Order_Vip"].ToString());
+                    int NumOfThuong = Convert.ToInt32(dtOrder.Rows[0]["Order_Thuong"].ToString());
+                    string query = "SELECT * FROM ChuyenXe WHERE MaChuyenXe=" + MaChuyenXe;
+                    DataTable tblChuyenXe = UpdateData.UpdateBySql(query).Tables[0];
+                    if (tblChuyenXe.Rows.Count > 0)
                     {
-                        #region CheckOrderStatus =2
-                        int MaChuyenXe = Convert.ToInt32(dtOrder.Rows[0]["MaChuyenXe"].ToString());
-                        int NumOfVip = Convert.ToInt32(dtOrder.Rows[0]["Order_Vip"].ToString());
-                        int NumOfThuong = Convert.ToInt32(dtOrder.Rows[0]["Order_Thuong"].ToString());
-                        string query = "SELECT * FROM ChuyenXe WHERE MaChuyenXe=" + MaChuyenXe;
-                        DataTable tblChuyenXe = UpdateData.UpdateBySql(query).Tables[0];
-                        if (tblChuyenXe.Rows.Count > 0)
+                        #region Update Chuyen Xe
+                        int TongSoVeThuongConLai = int.Parse(tblChuyenXe.Rows[0]["VeThuongConLai"].ToString()) - NumOfThuong;
+                        int TongSoVeVIPConLai = int.Parse(tblChuyenXe.Rows[0]["VeVIPConLai"].ToString()) - NumOfVip;
+                        Hashtable tbUpdateCX = new Hashtable();
+                        tbUpdateCX.Add("VeThuongConLai", TongSoVeThuongConLai.ToString());
+                        tbUpdateCX.Add("VeVipConLai", TongSoVeVIPConLai.ToString());
+                        bool _updateCX = UpdateData.Update("ChuyenXe", tbUpdateCX, "MaChuyenXe=" + MaChuyenXe);
+                        #endregion
+                        #region Update Order
+                        Hashtable tbOrder = new Hashtable();
+                        tbOrder.Add("Order_Status", "3");
+                        bool _updateOrder = UpdateData.Update("tbl_Order", tbOrder, "Order_Id=" + dtOrder.Rows[0]["Order_Id"]);
+                        #endregion
+                        if (_updateCX && _updateOrder)
                         {
-                            #region Update Chuyen Xe
-                            int TongSoVeThuongConLai = int.Parse(tblChuyenXe.Rows[0]["VeThuongConLai"].ToString()) - NumOfThuong;
-                            int TongSoVeVIPConLai = int.Parse(tblChuyenXe.Rows[0]["VeVIPConLai"].ToString()) - NumOfVip;
-                            Hashtable tbUpdateCX = new Hashtable();
-                            tbUpdateCX.Add("VeThuongConLai", TongSoVeThuongConLai.ToString());
-                            tbUpdateCX.Add("VeVipConLai", TongSoVeVIPConLai.ToString());
-                            bool _updateCX = UpdateData.Update("ChuyenXe", tbUpdateCX, "MaChuyenXe=" + MaChuyenXe);
-                            #endregion
-                            #region Update Order
-                            Hashtable tbOrder = new Hashtable();
-                            tbOrder.Add("Order_Status", "3");
-                            bool _updateOrder = UpdateData.Update("tbl_Order", tbOrder, "Order_Id=" + dtOrder.Rows[0]["Order_Id"]);
-                            #endregion
-                            if (_updateCX && _updateOrder)
+                            #region Insert into Order_detail
+                            bool insertOrderDetail = false;
+                            for (int i = 0; i < NumOfVip; i++)
                             {
-                                #region Insert into Order_detail
-                                bool insertOrderDetail = false;
-                                for (int i = 0; i < NumOfVip; i++)
-                                {
-                                    Hashtable tbOrderDetail = new Hashtable();
+                                Hashtable tbOrderDetail = new Hashtable();
 
-                                    tbOrderDetail.Add("Order_ID", dtOrder.Rows[0]["Order_ID"].ToString());
-                                    string orderid = int.Parse(dtOrder.Rows[0]["Order_ID"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_ID"].ToString() : dtOrder.Rows[0]["Order_ID"].ToString();
-                                    string machuyenxe = MaChuyenXe < 10 ? "0" + MaChuyenXe : MaChuyenXe.ToString();
-                                    string account = int.Parse(dtOrder.Rows[0]["Order_Account"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_Account"].ToString() : dtOrder.Rows[0]["Order_Account"].ToString();
-                                    tbOrderDetail.Add("MaVe", "V" + orderid + machuyenxe + account + (i + 1));
-                                    tbOrderDetail.Add("Type", "V");
-                                    tbOrderDetail.Add("UnitPrice", tblChuyenXe.Rows[0]["GiaVIP"].ToString());
-                                    insertOrderDetail = UpdateData.Insert("tbl_OrderDetail", tbOrderDetail);
-                                }
-                                for (int i = 0; i < NumOfThuong; i++)
-                                {
-                                    Hashtable tbOrderDetail = new Hashtable();
+                                tbOrderDetail.Add("Order_ID", dtOrder.Rows[0]["Order_ID"].ToString());
+                                string orderid = int.Parse(dtOrder.Rows[0]["Order_ID"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_ID"].ToString() : dtOrder.Rows[0]["Order_ID"].ToString();
+                                string machuyenxe = MaChuyenXe < 10 ? "0" + MaChuyenXe : MaChuyenXe.ToString();
+                                string account = int.Parse(dtOrder.Rows[0]["Order_Account"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_Account"].ToString() : dtOrder.Rows[0]["Order_Account"].ToString();
+                                tbOrderDetail.Add("MaVe", "V" + orderid + machuyenxe + account + (i + 1));
+                                tbOrderDetail.Add("Type", "V");
+                                tbOrderDetail.Add("UnitPrice", tblChuyenXe.Rows[0]["GiaVIP"].ToString());
+                                insertOrderDetail = UpdateData.Insert("tbl_OrderDetail", tbOrderDetail);
+                            }
+                            for (int i = 0; i < NumOfThuong; i++)
+                            {
+                                Hashtable tbOrderDetail = new Hashtable();
 
-                                    tbOrderDetail.Add("Order_ID", dtOrder.Rows[0]["Order_ID"].ToString());
-                                    string orderid = int.Parse(dtOrder.Rows[0]["Order_ID"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_ID"].ToString() : dtOrder.Rows[0]["Order_ID"].ToString();
-                                    string machuyenxe = MaChuyenXe < 10 ? "0" + MaChuyenXe : MaChuyenXe.ToString();
-                                    string account = int.Parse(dtOrder.Rows[0]["Order_Account"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_Account"].ToString() : dtOrder.Rows[0]["Order_Account"].ToString();
-                                    tbOrderDetail.Add("MaVe", "TH" + orderid + machuyenxe + account + (i + 1));
-                                    tbOrderDetail.Add("Type", "TH");
-                                    tbOrderDetail.Add("UnitPrice", tblChuyenXe.Rows[0]["GiaThuong"].ToString());
-                                    insertOrderDetail = UpdateData.Insert("tbl_OrderDetail", tbOrderDetail);
-                                }
-                                if (insertOrderDetail)
+                                tbOrderDetail.Add("Order_ID", dtOrder.Rows[0]["Order_ID"].ToString());
+                                string orderid = int.Parse(dtOrder.Rows[0]["Order_ID"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_ID"].ToString() : dtOrder.Rows[0]["Order_ID"].ToString();
+                                string machuyenxe = MaChuyenXe < 10 ? "0" + MaChuyenXe : MaChuyenXe.ToString();
+                                string account = int.Parse(dtOrder.Rows[0]["Order_Account"].ToString()) < 10 ? "0" + dtOrder.Rows[0]["Order_Account"].ToString() : dtOrder.Rows[0]["Order_Account"].ToString();
+                                tbOrderDetail.Add("MaVe", "TH" + orderid + machuyenxe + account + (i + 1));
+                                tbOrderDetail.Add("Type", "TH");
+                                tbOrderDetail.Add("UnitPrice", tblChuyenXe.Rows[0]["GiaThuong"].ToString());
+                                insertOrderDetail = UpdateData.Insert("tbl_OrderDetail", tbOrderDetail);
+                            }
+                            if (insertOrderDetail)
+                            {
+                                #region Send Mail
+                                string checkDetail = "SELECT * FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
+                                string sum = "SELECT Sum(UnitPrice) as TongTien FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
+                                DataRowCollection rowsDetail = UpdateData.UpdateBySql(checkDetail).Tables[0].Rows;
+                                double TongTien = double.Parse(UpdateData.UpdateBySql(sum).Tables[0].Rows[0]["TongTien"].ToString());
+                                //send mail
+                                string strBody = "<html><body>\n";
+                                strBody += "<h2>Chúc mừng bạn đã đặt vé thành công tại " + CMSfunc._GetConst("_Domain") + "</h2><br>\n";
+                                strBody += "Thông tin vé xe: <br>\n";
+                                strBody += "<table style='height: 34px; border-color: #0b6604; background-color: #167003; margin-left: auto; margin-right: auto;' border='1' width='784' cellspacing='0' cellpadding='0'><caption>&nbsp;</caption>";
+                                strBody += "<tbody>";
+                                strBody += "<tr style='height: 30px;'>";
+                                strBody += "<td style='width: 780px; height: 30px;'><strong><span style='color: #ffcc00;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TH&Ocirc;NG TIN ĐẶT V&Eacute;</span></strong></td>";
+                                strBody += "</tr>";
+                                strBody += "</tbody>";
+                                strBody += "</table>";
+                                strBody += "<table style='height: 209px; margin-left: auto; margin-right: auto; width: 776px;' border='1' cellspacing='0' cellpadding='0'>";
+                                strBody += "<tbody>";
+                                strBody += "<tr style='height: 22px;'>";
+                                strBody += "<td style='width: 772px; height: 22px;' colspan='3'><strong>1. Th&ocirc;ng tin v&eacute;</strong></td>";
+                                strBody += "</tr>";
+                                strBody += "<tr style='height: 15px;'>";
+                                strBody += "<td style='width: 86px; height: 15px;text-align: center'><strong>M&atilde; V&eacute;</strong></td>";
+                                strBody += "<td style='width: 347px; height: 15px;text-align: center'><strong>Loại&nbsp;v&eacute;</strong></td>";
+                                strBody += "<td style='width: 335px; height: 15px;text-align: center'><strong>Gi&aacute; v&eacute;</strong></td>";
+                                strBody += "</tr>";
+                                foreach (DataRow item in rowsDetail)
                                 {
-                                    #region Send Mail
-                                    string checkDetail = "SELECT * FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
-                                    string sum = "SELECT Sum(UnitPrice) as TongTien FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
-                                    DataRowCollection rowsDetail = UpdateData.UpdateBySql(checkDetail).Tables[0].Rows;
-                                    double TongTien = double.Parse(UpdateData.UpdateBySql(sum).Tables[0].Rows[0]["TongTien"].ToString());
-                                    //send mail
-                                    string strBody = "<html><body>\n";
-                                    strBody += "<h2>Chúc mừng bạn đã đặt vé thành công tại " + CMSfunc._GetConst("_Domain") + "</h2><br>\n";
-                                    strBody += "Thông tin vé xe: <br>\n";
-                                    strBody += "<table style='height: 34px; border-color: #0b6604; background-color: #167003; margin-left: auto; margin-right: auto;' border='1' width='784' cellspacing='0' cellpadding='0'><caption>&nbsp;</caption>";
-                                    strBody += "<tbody>";
-                                    strBody += "<tr style='height: 30px;'>";
-                                    strBody += "<td style='width: 780px; height: 30px;'><strong><span style='color: #ffcc00;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TH&Ocirc;NG TIN ĐẶT V&Eacute;</span></strong></td>";
-                                    strBody += "</tr>";
-                                    strBody += "</tbody>";
-                                    strBody += "</table>";
-                                    strBody += "<table style='height: 209px; margin-left: auto; margin-right: auto; width: 776px;' border='1' cellspacing='0' cellpadding='0'>";
-                                    strBody += "<tbody>";
-                                    strBody += "<tr style='height: 22px;'>";
-                                    strBody += "<td style='width: 772px; height: 22px;' colspan='3'><strong>1. Th&ocirc;ng tin v&eacute;</strong></td>";
-                                    strBody += "</tr>";
                                     strBody += "<tr style='height: 15px;'>";
-                                    strBody += "<td style='width: 86px; height: 15px;text-align: center'><strong>M&atilde; V&eacute;</strong></td>";
-                                    strBody += "<td style='width: 347px; height: 15px;text-align: center'><strong>Loại&nbsp;v&eacute;</strong></td>";
-                                    strBody += "<td style='width: 335px; height: 15px;text-align: center'><strong>Gi&aacute; v&eacute;</strong></td>";
+                                    strBody += "<td style='width: 86px; height: 15px;text-align: center'>" + item["MaVe"] + "</td>";
+                                    strBody += "<td style='width: 347px; height: 15px;text-align: center'>" + item["Type"] + "</td>";
+                                    strBody += "<td style='width: 335px; height: 15px;text-align: center'>" + item["UnitPrice"] + "</td>";
                                     strBody += "</tr>";
-                                    foreach (DataRow item in rowsDetail)
-                                    {
-                                        strBody += "<tr style='height: 15px;'>";
-                                        strBody += "<td style='width: 86px; height: 15px;text-align: center'>" + item["MaVe"] + "</td>";
-                                        strBody += "<td style='width: 347px; height: 15px;text-align: center'>" + item["Type"] + "</td>";
-                                        strBody += "<td style='width: 335px; height: 15px;text-align: center'>" + item["UnitPrice"] + "</td>";
-                                        strBody += "</tr>";
-                                    }
-                                    strBody += "<tr style='height: 15px;'>";
-                                    strBody += "<td style='width: 86px; height: 15px;'>Tổng tiền</td>";
-                                    strBody += "<td colspan=2 style='width: 347px; height: 15px; color: red; text-align:center'>" + TongTien + "</td>";
-                                    strBody += "</tr>";
-                                    strBody += "</tbody>";
-                                    strBody += "</table>";
-                                    strBody += "<span style='text-align: right'>Cảm ơn quý khách đã đặt vé tại " + CMSfunc._GetConst("_Domain") + "! </span>\n";
-                                    strBody += "</body></html>";
+                                }
+                                strBody += "<tr style='height: 15px;'>";
+                                strBody += "<td style='width: 86px; height: 15px;'>Tổng tiền</td>";
+                                strBody += "<td colspan=2 style='width: 347px; height: 15px; color: red; text-align:center'>" + TongTien + "</td>";
+                                strBody += "</tr>";
+                                strBody += "</tbody>";
+                                strBody += "</table>";
+                                strBody += "<span style='text-align: right'>Cảm ơn quý khách đã đặt vé tại " + CMSfunc._GetConst("_Domain") + "! </span>\n";
+                                strBody += "</body></html>";
 
-                                    string fromEmail = HttpContext.Current.Session["Member_Email"].ToString().Trim();
-                                    string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
-                                    string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
+                                string fromEmail = HttpContext.Current.Session["Member_Email"].ToString().Trim();
+                                string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
+                                string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
 
-                                    string Subject = "THÔNG TIN ĐẶT VÉ XE ĐIỆN TỬ TẠI " + CMSfunc._GetConst("_Domain");
-                                    string Host = CMSfunc._GetConst("_Hostmail");
-                                    string EmailClient = CMSfunc._GetConst("_EmailClient");
-                                    string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
-                                    int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
-                                    try
+                                string Subject = "THÔNG TIN ĐẶT VÉ XE ĐIỆN TỬ TẠI " + CMSfunc._GetConst("_Domain");
+                                string Host = CMSfunc._GetConst("_Hostmail");
+                                string EmailClient = CMSfunc._GetConst("_EmailClient");
+                                string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
+                                int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
+                                try
+                                {
+                                    bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
+                                    if (_isSend)
                                     {
-                                        bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
-                                        if (_isSend)
-                                        {
-                                            res.data = true;
-                                            res.message = string.Format(ErrorMessage.Success, "Hoàn tất đặt vé");
-                                            res.errcode = ErrorCode.SUCCESS;
-                                        }
-                                        else
-                                        {
-                                            res.data = false;
-                                            res.message = string.Format(ErrorMessage.Fail, "Đặt vé");
-                                            res.errcode = ErrorCode.FAIL;
-                                        }
+                                        res.data = true;
+                                        res.message = string.Format(ErrorMessage.Success, "Hoàn tất đặt vé");
+                                        res.errcode = ErrorCode.SUCCESS;
                                     }
-                                    catch (Exception ex)
+                                    else
                                     {
                                         res.data = false;
-                                        res.message = ex.Message;
+                                        res.message = string.Format(ErrorMessage.Fail, "Đặt vé");
                                         res.errcode = ErrorCode.FAIL;
                                     }
-                                    #endregion
-                                    res.data = true;
-                                    res.errcode = ErrorCode.SUCCESS;
-                                    res.message = string.Format(ErrorMessage.Success, "Xác thực đặt vé ");
                                 }
-                                else
+                                catch (Exception ex)
                                 {
                                     res.data = false;
+                                    res.message = ex.Message;
                                     res.errcode = ErrorCode.FAIL;
-                                    res.message = string.Format(ErrorMessage.Fail, "Xác thực đặt vé ");
                                 }
                                 #endregion
+                                res.data = true;
+                                res.errcode = ErrorCode.SUCCESS;
+                                res.message = string.Format(ErrorMessage.Success, "Xác thực đặt vé ");
                             }
                             else
                             {
@@ -1178,120 +1274,119 @@ public partial class _Default : Page
                                 res.errcode = ErrorCode.FAIL;
                                 res.message = string.Format(ErrorMessage.Fail, "Xác thực đặt vé ");
                             }
+                            #endregion
                         }
                         else
                         {
                             res.data = false;
-                            res.errcode = ErrorCode.NODATA;
-                            res.message = string.Format(ErrorMessage.NotFound, "Chuyến xe");
+                            res.errcode = ErrorCode.FAIL;
+                            res.message = string.Format(ErrorMessage.Fail, "Xác thực đặt vé ");
                         }
-                        #endregion
                     }
                     else
                     {
-                        #region Check Status Of Order 1 OR 3
-                        if (dtOrder.Rows[0]["Order_Status"].ToString() == "3"){
-                            #region Send Mail
-                            string checkDetail = "SELECT * FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
-                            string sum = "SELECT Sum(UnitPrice) as TongTien FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
-                            DataRowCollection rowsDetail = UpdateData.UpdateBySql(checkDetail).Tables[0].Rows;
-                            double TongTien = double.Parse(UpdateData.UpdateBySql(sum).Tables[0].Rows[0]["TongTien"].ToString());
-                            //send mail
-                            string strBody = "<html><body>\n";
-                            strBody += "<h2>Chúc mừng bạn đã đặt vé thành công tại " + CMSfunc._GetConst("_Domain") + "</h1><br>\n";
-                            strBody += "Thông tin vé xe: <br>\n";
-                            strBody += "<table style='height: 34px; border-color: #0b6604; background-color: #167003; margin-left: auto; margin-right: auto;' border='1' width='784' cellspacing='0' cellpadding='0'><caption>&nbsp;</caption>";
-                            strBody += "<tbody>";
-                            strBody += "<tr style='height: 30px;'>";
-                            strBody += "<td style='width: 780px; height: 30px;'><strong><span style='color: #ffcc00;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TH&Ocirc;NG TIN ĐẶT V&Eacute;</span></strong></td>";
-                            strBody += "</tr>";
-                            strBody += "</tbody>";
-                            strBody += "</table>";
-                            strBody += "<table style='height: 209px; margin-left: auto; margin-right: auto; width: 776px;' border='1' cellspacing='0' cellpadding='0'>";
-                            strBody += "<tbody>";
-                            strBody += "<tr style='height: 22px;'>";
-                            strBody += "<td style='width: 772px; height: 22px;' colspan='3'><strong>1. Th&ocirc;ng tin v&eacute;</strong></td>";
-                            strBody += "</tr>";
-                            strBody += "<tr style='height: 15px;'>";
-                            strBody += "<td style='width: 86px; height: 15px;'><strong>M&atilde; V&eacute;</strong></td>";
-                            strBody += "<td style='width: 347px; height: 15px;'><strong>Loại&nbsp;v&eacute;</strong></td>";
-                            strBody += "<td style='width: 335px; height: 15px;'><strong>Gi&aacute; v&eacute;</strong></td>";
-                            strBody += "</tr>";
-                            foreach (DataRow item in rowsDetail)
-                            {
-                                strBody += "<tr style='height: 15px;'>";
-                                strBody += "<td style='width: 86px; height: 15px;'>" + item["MaVe"] + "</td>";
-                                strBody += "<td style='width: 347px; height: 15px;'>" + item["Type"] + "</td>";
-                                strBody += "<td style='width: 335px; height: 15px;'>" + item["UnitPrice"] + "</td>";
-                                strBody += "</tr>";
-                            }
-                            strBody += "<tr style='height: 15px;'>";
-                            strBody += "<td style='width: 86px; height: 15px;'>Tổng tiền</td>";
-                            strBody += "<td colspan=2 style='width: 347px; height: 15px; color: red; text-align=center'>" + TongTien + "</td>";
-                            strBody += "</tr>";
-                            strBody += "</tbody>";
-                            strBody += "</table>";
-                            strBody += "<span style='text-align: right'>Cảm ơn quý khách đã đặt vé tại " + CMSfunc._GetConst("_Domain") + "! </span>\n";
-                            strBody += "</body></html>";
-
-                            string fromEmail = HttpContext.Current.Session["Member_Email"].ToString().Trim();
-                            string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
-                            string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
-
-                            string Subject = "THÔNG TIN ĐẶT VÉ XE ĐIỆN TỬ TẠI " + CMSfunc._GetConst("_Domain");
-                            string Host = CMSfunc._GetConst("_Hostmail");
-                            string EmailClient = CMSfunc._GetConst("_EmailClient");
-                            string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
-                            int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
-                            try
-                            {
-                                bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
-                                if (_isSend)
-                                {
-                                    res.data = true;
-                                    res.message = string.Format(ErrorMessage.Success, "Hoàn tất đặt vé");
-                                    res.errcode = ErrorCode.SUCCESS;
-                                }
-                                else
-                                {
-                                    res.data = false;
-                                    res.message = string.Format(ErrorMessage.Fail, "Đặt vé");
-                                    res.errcode = ErrorCode.FAIL;
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                res.data = false;
-                                res.message = ex.Message;
-                                res.errcode = ErrorCode.FAIL;
-                            }
-                            #endregion
-                        }
-                        if(dtOrder.Rows[0]["Order_Status"].ToString() == "1" || dtOrder.Rows[0]["Order_Status"].ToString() == "0")
-                        {
-                            res.data = false;
-                            res.errcode = ErrorCode.TURNDATA;
-                            res.message = ErrorMessage.NoVertification;
-                        }
-                        #endregion
+                        res.data = false;
+                        res.errcode = ErrorCode.NODATA;
+                        res.message = string.Format(ErrorMessage.NotFound, "Chuyến xe");
                     }
-                   
+                    #endregion
                 }
                 else
                 {
-                    res.data = false;
-                    res.errcode = ErrorCode.TURNDATA;
-                    res.message = ErrorMessage.NoTransaction;
+                    #region Check Status Of Order 0 OR 2
+                    if (dtOrder.Rows[0]["Order_Status"].ToString() == "2")
+                    {
+                        #region Send Mail
+                        string checkDetail = "SELECT * FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
+                        string sum = "SELECT Sum(UnitPrice) as TongTien FROM tbl_OrderDetail WHERE Order_ID=" + dtOrder.Rows[0]["Order_ID"].ToString();
+                        DataRowCollection rowsDetail = UpdateData.UpdateBySql(checkDetail).Tables[0].Rows;
+                        double TongTien = double.Parse(UpdateData.UpdateBySql(sum).Tables[0].Rows[0]["TongTien"].ToString());
+                        //send mail
+                        string strBody = "<html><body>\n";
+                        strBody += "<h2>Chúc mừng bạn đã đặt vé thành công tại " + CMSfunc._GetConst("_Domain") + "</h1><br>\n";
+                        strBody += "Thông tin vé xe: <br>\n";
+                        strBody += "<table style='height: 34px; border-color: #0b6604; background-color: #167003; margin-left: auto; margin-right: auto;' border='1' width='784' cellspacing='0' cellpadding='0'><caption>&nbsp;</caption>";
+                        strBody += "<tbody>";
+                        strBody += "<tr style='height: 30px;'>";
+                        strBody += "<td style='width: 780px; height: 30px;'><strong><span style='color: #ffcc00;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TH&Ocirc;NG TIN ĐẶT V&Eacute;</span></strong></td>";
+                        strBody += "</tr>";
+                        strBody += "</tbody>";
+                        strBody += "</table>";
+                        strBody += "<table style='height: 209px; margin-left: auto; margin-right: auto; width: 776px;' border='1' cellspacing='0' cellpadding='0'>";
+                        strBody += "<tbody>";
+                        strBody += "<tr style='height: 22px;'>";
+                        strBody += "<td style='width: 772px; height: 22px;' colspan='3'><strong>1. Th&ocirc;ng tin v&eacute;</strong></td>";
+                        strBody += "</tr>";
+                        strBody += "<tr style='height: 15px;'>";
+                        strBody += "<td style='width: 86px; height: 15px;'><strong>M&atilde; V&eacute;</strong></td>";
+                        strBody += "<td style='width: 347px; height: 15px;'><strong>Loại&nbsp;v&eacute;</strong></td>";
+                        strBody += "<td style='width: 335px; height: 15px;'><strong>Gi&aacute; v&eacute;</strong></td>";
+                        strBody += "</tr>";
+                        foreach (DataRow item in rowsDetail)
+                        {
+                            strBody += "<tr style='height: 15px;'>";
+                            strBody += "<td style='width: 86px; height: 15px;'>" + item["MaVe"] + "</td>";
+                            strBody += "<td style='width: 347px; height: 15px;'>" + item["Type"] + "</td>";
+                            strBody += "<td style='width: 335px; height: 15px;'>" + item["UnitPrice"] + "</td>";
+                            strBody += "</tr>";
+                        }
+                        strBody += "<tr style='height: 15px;'>";
+                        strBody += "<td style='width: 86px; height: 15px;'>Tổng tiền</td>";
+                        strBody += "<td colspan=2 style='width: 347px; height: 15px; color: red; text-align=center'>" + TongTien + "</td>";
+                        strBody += "</tr>";
+                        strBody += "</tbody>";
+                        strBody += "</table>";
+                        strBody += "<span style='text-align: right'>Cảm ơn quý khách đã đặt vé tại " + CMSfunc._GetConst("_Domain") + "! </span>\n";
+                        strBody += "</body></html>";
+
+                        string fromEmail = HttpContext.Current.Session["Member_Email"].ToString().Trim();
+                        string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
+                        string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
+
+                        string Subject = "THÔNG TIN ĐẶT VÉ XE ĐIỆN TỬ TẠI " + CMSfunc._GetConst("_Domain");
+                        string Host = CMSfunc._GetConst("_Hostmail");
+                        string EmailClient = CMSfunc._GetConst("_EmailClient");
+                        string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
+                        int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
+                        try
+                        {
+                            bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
+                            if (_isSend)
+                            {
+                                res.data = true;
+                                res.message = string.Format(ErrorMessage.Success, "Hoàn tất đặt vé");
+                                res.errcode = ErrorCode.SUCCESS;
+                            }
+                            else
+                            {
+                                res.data = false;
+                                res.message = string.Format(ErrorMessage.Fail, "Đặt vé");
+                                res.errcode = ErrorCode.FAIL;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            res.data = false;
+                            res.message = ex.Message;
+                            res.errcode = ErrorCode.FAIL;
+                        }
+                        #endregion
+                    }
+                    if (dtOrder.Rows[0]["Order_Status"].ToString() == "0")
+                    {
+                        res.data = false;
+                        res.errcode = ErrorCode.TURNDATA;
+                        res.message = ErrorMessage.NoVertification;
+                    }
+                    #endregion
                 }
-                #endregion
+
             }
             else
             {
-                #region Trường hợp không có giao dịch
                 res.data = false;
                 res.errcode = ErrorCode.TURNDATA;
                 res.message = ErrorMessage.NoTransaction;
-                #endregion
             }
             #endregion
         }
@@ -1316,17 +1411,17 @@ public partial class _Default : Page
         string sql = "";
         if (!string.IsNullOrEmpty(mave))
         {
-            sql = "select * from tbl_OrderDetail a, tbl_Order b, ChuyenXe c , Xe d, NhaXe e where c.Maxe=d.MaXe and e.ID=d.Nhaxe  and a.Order_ID=b.Order_ID and b.MaChuyenXe=c.MaChuyenXe and a.MaVe='" +Value._Replate(mave) + "'";
+            sql = "select * from tbl_OrderDetail a, tbl_Order b, ChuyenXe c , Xe d, NhaXe e where c.Maxe=d.MaXe and e.ID=d.Nhaxe  and a.Order_ID=b.Order_ID and b.MaChuyenXe=c.MaChuyenXe and a.MaVe='" + Value._Replate(mave) + "'";
         }
         else
         {
             if (!string.IsNullOrEmpty(sdt))
             {
-                sql = "select * from tbl_OrderDetail a, tbl_Member m, tbl_Order b, ChuyenXe c , Xe d, NhaXe e where m.Member_ID=b.Order_Account and c.Maxe=d.MaXe and e.ID=d.Nhaxe  and a.Order_ID=b.Order_ID and b.MaChuyenXe=c.MaChuyenXe and m.Member_Phone='"+Value._Replate (sdt)+ "'";
+                sql = "select * from tbl_OrderDetail a, tbl_Member m, tbl_Order b, ChuyenXe c , Xe d, NhaXe e where m.Member_ID=b.Order_Account and c.Maxe=d.MaXe and e.ID=d.Nhaxe  and a.Order_ID=b.Order_ID and b.MaChuyenXe=c.MaChuyenXe and m.Member_Phone='" + Value._Replate(sdt) + "'";
             }
         }
         DataTable res = UpdateData.UpdateBySql(sql).Tables[0];
-        
+
         return Newtonsoft.Json.JsonConvert.SerializeObject(res); ;
     }
 }

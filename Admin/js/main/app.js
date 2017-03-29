@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping', 'ui.tinymce', 'ngAnimate', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning',  'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping', 'ui.tinymce', 'ngAnimate', 'angularUtils.directives.dirPagination'])
 app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Service', function ($scope, $filter, $http, $svNhaXe, $Service) {
     $scope.allnhaxe = [];
     //$svNhaXe.GetAllNhaXe().success(function (data) {
@@ -98,9 +98,9 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
                 $scope.nhaxes.splice(index, 1);
                 $scope.nhaxes.push(data.d);
                 swal(
-                  'Thành công!',
-                  'Nhà xe bạn sửa đã được lưu lại.',
-                  'success'
+                    'Thành công!',
+                    'Nhà xe bạn sửa đã được lưu lại.',
+                    'success'
                 )
                 $("#add-modal").modal('hide');
             })
@@ -122,29 +122,29 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
             buttonsStyling: false
         }).then(function () {
             $Service.Api(
-                 "POST",
-                 "/Admin/Modules/Category/NhaXe.aspx/DeleteNhaXe",
-                 "json",
-                 { Id: $scope.selected.ID, Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet }
-             ).success(function (data) {
-                 console.log(data);
-                 var index = $scope.nhaxes.indexOf(item);
-                 $scope.nhaxes.splice(index, 1);
-                 swal(
-                   'Đã xóa!',
-                   'Nhà xe bạn chọn đã bị xóa.',
-                   'success'
-                 )
-             })
+                "POST",
+                "/Admin/Modules/Category/NhaXe.aspx/DeleteNhaXe",
+                "json",
+                { Id: $scope.selected.ID, Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet }
+            ).success(function (data) {
+                console.log(data);
+                var index = $scope.nhaxes.indexOf(item);
+                $scope.nhaxes.splice(index, 1);
+                swal(
+                    'Đã xóa!',
+                    'Nhà xe bạn chọn đã bị xóa.',
+                    'success'
+                )
+            })
 
         }, function (dismiss) {
             // dismiss can be 'cancel', 'overlay',
             // 'close', and 'timer'
             if (dismiss === 'cancel') {
                 swal(
-                  'Hủy bỏ',
-                  'Nhà xe bạn chọn chưa bị xóa',
-                  'error'
+                    'Hủy bỏ',
+                    'Nhà xe bạn chọn chưa bị xóa',
+                    'error'
                 )
             }
         })
@@ -224,14 +224,14 @@ app.controller("QuanHuyenController", ['$scope', '$http', '$filter', 'Service', 
                 var index = $scope.districts.indexOf($scope.selected);
                 $scope.districts.splice(index, 1);
                 $Service.Api("POST", "/Admin/Modules/Category/Province.aspx/GetProvinceById", "json", { matinh: res.MaTinh })
-                .success(function (data) {
-                    res.TinhThanh = data.d;
-                })
+                    .success(function (data) {
+                        res.TinhThanh = data.d;
+                    })
                 $scope.districts.push(res);
                 swal(
-                  'Thành công!',
-                  'Quận/Huyện bạn sửa đã được lưu lại.',
-                  'success'
+                    'Thành công!',
+                    'Quận/Huyện bạn sửa đã được lưu lại.',
+                    'success'
                 )
                 $("#add-modal").modal('hide');
             })
@@ -257,9 +257,9 @@ app.controller("QuanHuyenController", ['$scope', '$http', '$filter', 'Service', 
                 var index = $scope.districts.indexOf(item);
                 $scope.districts.splice(index, 1);
                 swal(
-                  'Đã xóa!',
-                  'Nhà xe bạn chọn đã bị xóa.',
-                  'success'
+                    'Đã xóa!',
+                    'Nhà xe bạn chọn đã bị xóa.',
+                    'success'
                 )
             })
 
@@ -268,9 +268,9 @@ app.controller("QuanHuyenController", ['$scope', '$http', '$filter', 'Service', 
             // 'close', and 'timer'
             if (dismiss === 'cancel') {
                 swal(
-                  'Hủy bỏ',
-                  'Nhà xe bạn chọn chưa bị xóa',
-                  'error'
+                    'Hủy bỏ',
+                    'Nhà xe bạn chọn chưa bị xóa',
+                    'error'
                 )
             }
         })
@@ -288,10 +288,10 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
         resize: false,
         height: 300,
         plugins: [
-           'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-           'searchreplace wordcount visualblocks visualchars code fullscreen',
-           'insertdatetime media nonbreaking save table contextmenu directionality',
-           'emoticons template paste textcolor colorpicker textpattern imagetools codesample'
+            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            'searchreplace wordcount visualblocks visualchars code fullscreen',
+            'insertdatetime media nonbreaking save table contextmenu directionality',
+            'emoticons template paste textcolor colorpicker textpattern imagetools codesample'
         ],
         toolbar: "undo redo styleselect bold italic print forecolor backcolor",
         toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
@@ -355,10 +355,10 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
         $scope.Mod = JSON.parse(data.d)[0];
         console.log($scope.Mod);
         $Service.Post(rootUrl + "/Execute", { sp: $scope.Mod.Onload, param: "" })
-        .success(function (data) {
-            $scope.list = JSON.parse(data.d);
-            console.log($scope.list);
-        })
+            .success(function (data) {
+                $scope.list = JSON.parse(data.d);
+                console.log($scope.list);
+            })
     })
     $Service.Post(rootUrl + "/GetBtnFromMod", { mid: mid }).success(function (data) {
         var res = JSON.parse(data.d);
@@ -380,9 +380,9 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
             if (item.FldSource) {
                 var s = item.FldSource;
                 $Service.Post(rootUrl + "/Execute", { sp: s, param: "" })
-                .success(function (data) {
-                    item.FldSource = JSON.parse(data.d);
-                })
+                    .success(function (data) {
+                        item.FldSource = JSON.parse(data.d);
+                    })
             }
             if (item.GRW == true) {
                 $scope.grvs.push(item);
@@ -416,11 +416,11 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
     function Load() {
         $scope.loadData = true;
         $Service.Post(rootUrl + "/Execute", { sp: $scope.Mod.Onload, param: "" })
-        .success(function (data) {
-            $scope.list = JSON.parse(data.d);
-            console.log($scope.list);
-            $scope.loadData = false;
-        })
+            .success(function (data) {
+                $scope.list = JSON.parse(data.d);
+                console.log($scope.list);
+                $scope.loadData = false;
+            })
     }
 
     $scope.OpenUpdateForm = function (act) {
@@ -445,10 +445,10 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
     $scope.Select = function (item) {
         $scope.selectedRow = item;
         $Service.Post(rootUrl + "/Execute", { sp: $scope.Mod.OnSelect, param: item[$scope.flds[0].FldName] })
-        .success(function (data) {
-            $scope.selected = JSON.parse(data.d)[0];
+            .success(function (data) {
+                $scope.selected = JSON.parse(data.d)[0];
 
-        })
+            })
     }
 
     $scope.Exec = function (sp) {
@@ -467,66 +467,66 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false
             })
-            .then(function () {
-                var param = {};
-                if (sp.Btn_Type == 1) {
-                    param = JSON.stringify($scope.formdata);
-                }
-                else {
-                    angular.forEach($scope.flds, function (item) {
-                        if (item.FldType == 'PK') {
-                            console.log("selected pk", $scope.selected[item.FldName]);
-                            param = "{\"" + item.FldName + "\":" + $scope.selected[item.FldName] + "}";
-                        }
-                    })
-                }
-                console.log(param);
-                $Service.Post(rootUrl + "/ExecuteScalar", { mid: mid, sp: sp.Btn_ExecuteSP, param: param, fldcount: 0 })
-                .success(function (data) {
-                    //var rs = JSON.parse(data.d);
-                    console.log(data.d);
-                    Load();
-                    $("#add-modal").modal('hide');
-                    if (sp.isConfirm == true) {
-                        swal(
-                        sp.AlertContent,
-                        '',
-                        'success'
-                    )
+                .then(function () {
+                    var param = {};
+                    if (sp.Btn_Type == 1) {
+                        param = JSON.stringify($scope.formdata);
                     }
+                    else {
+                        angular.forEach($scope.flds, function (item) {
+                            if (item.FldType == 'PK') {
+                                console.log("selected pk", $scope.selected[item.FldName]);
+                                param = "{\"" + item.FldName + "\":" + $scope.selected[item.FldName] + "}";
+                            }
+                        })
+                    }
+                    console.log(param);
+                    $Service.Post(rootUrl + "/ExecuteScalar", { mid: mid, sp: sp.Btn_ExecuteSP, param: param, fldcount: 0 })
+                        .success(function (data) {
+                            //var rs = JSON.parse(data.d);
+                            console.log(data.d);
+                            Load();
+                            $("#add-modal").modal('hide');
+                            if (sp.isConfirm == true) {
+                                swal(
+                                    sp.AlertContent,
+                                    '',
+                                    'success'
+                                )
+                            }
 
-                    $scope.formdata = {};
+                            $scope.formdata = {};
+                        })
+
+                }, function (dismiss) {
+                    // dismiss can be 'cancel', 'overlay',
+                    // 'close', and 'timer'
+                    if (dismiss === 'cancel') {
+                        swal(
+                            'Hủy bỏ',
+                            'Đã hủy',
+                            'error'
+                        )
+                    }
                 })
-
-            }, function (dismiss) {
-                // dismiss can be 'cancel', 'overlay',
-                // 'close', and 'timer'
-                if (dismiss === 'cancel') {
-                    swal(
-                      'Hủy bỏ',
-                      'Đã hủy',
-                      'error'
-                    )
-                }
-            })
         }
         else {
             var param = $scope.formdata;
             console.log(param);
             $Service.Post(rootUrl + "/ExecuteScalar", { mid: mid, sp: sp.Btn_ExecuteSP, param: JSON.stringify(param), fldcount: $scope.updates.length })
-            .success(function (data) {
-                //var rs = JSON.parse(data.d);
-                console.log(data.d);
-                Load();
-                $("#add-modal").modal('hide');
-                if (sp.AlertAfterExec == true) {
-                    swal(
-                    sp.AlertContent,
-                    '',
-                    'success'
-                )
-                }
-            })
+                .success(function (data) {
+                    //var rs = JSON.parse(data.d);
+                    console.log(data.d);
+                    Load();
+                    $("#add-modal").modal('hide');
+                    if (sp.AlertAfterExec == true) {
+                        swal(
+                            sp.AlertContent,
+                            '',
+                            'success'
+                        )
+                    }
+                })
         }
     }
 }])
@@ -577,37 +577,37 @@ app.controller("BenXeController", ['$scope', '$http', '$filter', 'svBenXe', func
         $scope.loading = true;
         if ($scope.action == "add") {
             $svQuanhuyen.AddDistrict($scope.Huyen)
-            .success(function (data) {
-                var res = data.d;
-                $svQuanhuyen.GetProvinceById(res.MaTinh).success(function (rs) {
-                    res.TinhThanh = rs.d;
+                .success(function (data) {
+                    var res = data.d;
+                    $svQuanhuyen.GetProvinceById(res.MaTinh).success(function (rs) {
+                        res.TinhThanh = rs.d;
+                    })
+                    $scope.districts.push(res);
+                    $("#add-modal").modal('hide');
+                    swal(
+                        'Thêm quận/huyện thành công!',
+                        '',
+                        'success'
+                    )
+                    $scope.Huyen = {};
                 })
-                $scope.districts.push(res);
-                $("#add-modal").modal('hide');
-                swal(
-                    'Thêm quận/huyện thành công!',
-                    '',
-                    'success'
-                )
-                $scope.Huyen = {};
-            })
         }
         if ($scope.action == "edit") {
             console.log($scope.selected);
             $scope.Huyen.MaHuyen = $scope.selected.MaHuyen;
             $svQuanhuyen.UpdateDistrict($scope.Huyen)
-            .success(function (data) {
-                console.log(data.d);
-                var index = $scope.districts.indexOf($scope.selected);
-                $scope.districts.splice(index, 1);
-                $scope.districts.push(data.d);
-                swal(
-                  'Thành công!',
-                  'Quận/Huyện bạn sửa đã được lưu lại.',
-                  'success'
-                )
-                $("#add-modal").modal('hide');
-            })
+                .success(function (data) {
+                    console.log(data.d);
+                    var index = $scope.districts.indexOf($scope.selected);
+                    $scope.districts.splice(index, 1);
+                    $scope.districts.push(data.d);
+                    swal(
+                        'Thành công!',
+                        'Quận/Huyện bạn sửa đã được lưu lại.',
+                        'success'
+                    )
+                    $("#add-modal").modal('hide');
+                })
         }
 
     }
@@ -630,9 +630,9 @@ app.controller("BenXeController", ['$scope', '$http', '$filter', 'svBenXe', func
                 var index = $scope.nhaxes.indexOf(item);
                 $scope.districts.splice(index, 1);
                 swal(
-                  'Đã xóa!',
-                  'Nhà xe bạn chọn đã bị xóa.',
-                  'success'
+                    'Đã xóa!',
+                    'Nhà xe bạn chọn đã bị xóa.',
+                    'success'
                 )
             })
 
@@ -641,9 +641,9 @@ app.controller("BenXeController", ['$scope', '$http', '$filter', 'svBenXe', func
             // 'close', and 'timer'
             if (dismiss === 'cancel') {
                 swal(
-                  'Hủy bỏ',
-                  'Nhà xe bạn chọn chưa bị xóa',
-                  'error'
+                    'Hủy bỏ',
+                    'Nhà xe bạn chọn chưa bị xóa',
+                    'error'
                 )
             }
         })
@@ -654,7 +654,142 @@ app.controller("BenXeController", ['$scope', '$http', '$filter', 'svBenXe', func
         })
     }
 }])
+app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$interval', 'uiGridConstants', 'uiGridGroupingConstants', function ($scope, $http, $Service, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
+    var today = new Date();
+    var url = "/Admin/Modules/Category/Xe.aspx";
+    var rootUrl = "/Admin/Default.aspx";
+    $scope.columns = [];
+    
+    var nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 7);
 
+    $scope.LoadXe = function (id) {
+        $Service.Post(rootUrl + "/Execute", { sp: "SP_SELECTXEBYNHAXEID", param: id })
+            .success(function (data) {
+                $scope.gridOptions.data = JSON.parse(data.d);
+                console.log($scope.gridOptions.data);
+                return true;
+            });
+    }
+
+    $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
+        if (col.filters[0].term) {
+            return 'header-filtered';
+        } else {
+            return '';
+        }
+    };
+    $scope.edit = function (row) {
+        $("#updateframe").prop("src", "Create/ThemXe.aspx?id=" + row.entity.MaXe);
+        $("#add-modal").modal({ backdrop: 'static' });
+    };
+    $scope.delete = function (row) {
+        swal({
+            title: 'Bạn có chắc chắn?',
+            text: "Xóa chuyến xe này!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có, tôi muốn!',
+            cancelButtonText: 'Không, hủy!',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false
+        }).then(function () {
+            console.log(row.entity.MaXe);
+            $Service.Post(rootUrl + "/Execute", { sp: "SP_DELXE", param: row.entity.MaXe })
+                .success(function (data) {
+                    console.log(data.d);
+                    LoadData();
+                    swal(
+                        'Đã xóa!',
+                        'Xe bạn chọn đã bị xóa khỏi hệ thống.',
+                        'success'
+                    )
+                })
+        }, function (dismiss) {
+            // dismiss can be 'cancel', 'overlay',
+            // 'close', and 'timer'
+            if (dismiss === 'cancel') {
+                swal(
+                    'Hủy bỏ',
+                    'Chuyến xe của bạn vẫn chưa bị xóa',
+                    'error'
+                )
+            }
+        })
+    };
+
+
+    $scope.gridOptions = {
+        enableFiltering: true,
+        paginationPageSizes: [10, 25, 50, 75],
+        paginationPageSize: 10,
+        columnDefs: [
+            {
+                name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
+                cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
+            },
+            { name: "Bienso", displayName: "Biển số", width: 150, enableCellEdit: false, allowCellFocus: false },
+            { name: "Tenxe", displayName: "Tên xe", width: 150, enableCellEdit: false, allowCellFocus: false },
+            { name: "Nhaxe", displayName: "Nhà xe", width: 150, enableCellEdit: false, allowCellFocus: false },
+            { name: "TongSoGhe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false },
+            { name: "Hangxe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false }
+        ],
+        enableGridMenu: true,
+        enableColumnResizing: true,
+        enableGridMenu: true,
+        fastWatch: true,
+        rowIdentity: function (row) {
+            return row.MaChuyenXe;
+        },
+        getRowIdentity: function (row) {
+            return row.MaChuyenXe;
+        },
+        exporterCsvFilename: 'chuyenxe.csv',
+        exporterPdfDefaultStyle: { fontSize: 9 },
+        exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
+        exporterPdfTableHeaderStyle: { fontSize: 10, bold: true, italics: true, color: 'red' },
+        exporterPdfHeader: { text: "Danh sách chuyến xe", style: 'headerStyle' },
+        exporterPdfFooter: function (currentPage, pageCount) {
+            return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+        },
+        exporterPdfCustomFormatter: function (docDefinition) {
+            docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+            docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+            return docDefinition;
+        },
+        exporterPdfOrientation: 'landscape',
+        exporterPdfPageSize: 'A4',
+        exporterPdfMaxGridWidth: 800,
+        exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+        onRegisterApi: function (gridApi) {
+            $scope.gridApi = gridApi;
+        }
+    };
+    $scope.toggleFiltering = function () {
+        $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+    };
+    var LoadData = function () {
+        $Service.Post(rootUrl + "/Execute", { sp: "Sp_GetAllXe", param: "" })
+            .success(function (data) {
+                $scope.gridOptions.data = JSON.parse(data.d);
+                console.log($scope.gridOptions.data);
+                return true;
+            });
+    }
+    $scope.LoadData = function () {
+        $Service.Post(rootUrl + "/Execute", { sp: "Sp_GetAllXe", param: "" })
+            .success(function (data) {
+                $scope.gridOptions.data = JSON.parse(data.d);
+                console.log($scope.gridOptions.data);
+                return true;
+            });
+    }
+    LoadData();
+}])
 app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', '$interval', 'uiGridConstants', 'uiGridGroupingConstants',
     function ($scope, $http, $Service, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
         var today = new Date();
@@ -689,22 +824,22 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
                 buttonsStyling: false
             }).then(function () {
                 $Service.Post(rootUrl + "/DELCHUYENXE", { machuyenxe: row.entity.MaChuyenXe })
-                .success(function (data) {
-                    LoadData();
-                    swal(
-                 'Đã xóa!',
-                 'Chuyến xe bạn chọn đã bị xóa khỏi hệ thống.',
-                 'success'
-               )
-                })
+                    .success(function (data) {
+                        LoadData();
+                        swal(
+                            'Đã xóa!',
+                            'Chuyến xe bạn chọn đã bị xóa khỏi hệ thống.',
+                            'success'
+                        )
+                    })
             }, function (dismiss) {
                 // dismiss can be 'cancel', 'overlay',
                 // 'close', and 'timer'
                 if (dismiss === 'cancel') {
                     swal(
-                      'Hủy bỏ',
-                      'Chuyến xe của bạn vẫn chưa bị xóa',
-                      'error'
+                        'Hủy bỏ',
+                        'Chuyến xe của bạn vẫn chưa bị xóa',
+                        'error'
                     )
                 }
             })
@@ -714,6 +849,10 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
             paginationPageSizes: [10, 25, 50, 75],
             paginationPageSize: 10,
             columnDefs: [
+                {
+                    name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
+                    cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
+                },
                 { name: 'Ngaydi', displayName: "Ngày đi", type: 'date', cellFilter: 'date:"dd-MM-yyyy"' },
                 { field: 'Giokhoihanh' },
                 { field: 'Thoigiandukien' },
@@ -721,17 +860,7 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
                 { name: 'TongSoVeThuong', displayName: "Tổng Vé Thường", type: 'number' },
                 { name: 'TongSoVeVIP', displayName: "Tổng Vé VIP", type: 'number' },
                 { name: 'VeVipConLai', displayName: "Vé VIP còn lại", type: 'number' },
-                { name: 'VeThuongConLai', displayName: "Vé thường còn lại", type: 'number' },
-                {
-                    name: 'Edit', displayName: "Sửa",
-                    width: '5%',
-                    cellTemplate: '<button class="btn btn-warning p5" type="button" ng-click="grid.appScope.edit(row)">Sửa</button>'
-                },
-                {
-                    name: 'Xóa', displayName: "Xóa",
-                    width: '5%',
-                    cellTemplate: '<button class="btn btn-danger p5" type="button" ng-click="grid.appScope.delete(row)">Xóa</button>'
-                }
+                { name: 'VeThuongConLai', displayName: "Vé thường còn lại", type: 'number' }
             ],
             enableGridMenu: true,
             enableSelectAll: true,
@@ -778,32 +907,32 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
         };
         var LoadData = function () {
             $Service.Post(rootUrl + "/SELECTALLCHUYENXE", {})
-            .success(function (data) {
-                $scope.gridOptions.data = JSON.parse(data.d);
-                console.log($scope.gridOptions.data);
-            });
+                .success(function (data) {
+                    $scope.gridOptions.data = JSON.parse(data.d);
+                    console.log($scope.gridOptions.data);
+                });
         }
         $scope.LoadData = function () {
             $Service.Post(rootUrl + "/SELECTALLCHUYENXE", {})
-            .success(function (data) {
-                $scope.gridOptions.data = JSON.parse(data.d);
-                console.log($scope.gridOptions.data);
-                return true;
-            });
+                .success(function (data) {
+                    $scope.gridOptions.data = JSON.parse(data.d);
+                    console.log($scope.gridOptions.data);
+                    return true;
+                });
         }
         LoadData();
     }])
-.filter('mapGender', function () {
-    var genderHash = {
-        1: 'male',
-        2: 'female'
-    };
+    .filter('mapGender', function () {
+        var genderHash = {
+            1: 'male',
+            2: 'female'
+        };
 
-    return function (input) {
-        if (!input) {
-            return '';
-        } else {
-            return genderHash[input];
-        }
-    };
-});
+        return function (input) {
+            if (!input) {
+                return '';
+            } else {
+                return genderHash[input];
+            }
+        };
+    });
