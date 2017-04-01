@@ -5,7 +5,7 @@
     <script type="text/javascript" src="../../js/toolBarButton.js"></script>
 	<script type="text/javascript" src="../../js/windowtracking.js"></script>
 	<script type="text/javascript" src="../../js/Common.js"></script>
-    <link rel="stylesheet" href="../../CSS/ADCStyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" />
 	<script type="text/javascript">
     function processClick(id)
     {	

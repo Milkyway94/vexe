@@ -9,9 +9,9 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     $scope.Selected = {};
     $scope.sSelected = [];
     $scope.AllResult = [];
+
     $service.Post(url + "/LayTatCaDiaDiem", {})
         .success(function (data) {
-            console.log(data.d);
             $scope.Diemdies = JSON.parse(data.d);
         })
     $scope.Diemdi = getQueryString("Diemdi");
@@ -104,6 +104,33 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     $scope.lower_price_bound = 0;
     $scope.upper_price_bound = 50;
     $scope.items = $scope.SearchResult;
+    $scope.SaveYC = function () {
+        $scope.loading = true;
+        var dataRequest = {
+            from: setNotNull($scope.YcDiemDi),
+            to: setNotNull($scope.YcDiemDen),
+            startdate: setNotNull($scope.YcNgaydi),
+            starttime: setNotNull($scope.YcGiodi),
+            more: setNotNull($scope.More),
+            sdt: setNotNull($scope.YcSdt)
+        }
+        console.log(dataRequest);
+        $service.Post(url + "/SaveYc", dataRequest)
+            .success(function (data) {
+                console.log(data.d);
+                $scope.loading = false;
+                $scope.showError = true;
+                $scope.message = data.d.message;
+            })
+    }
+    $scope.HuyYC = function () {
+        $service.Post(url + "/HuyYC", {})
+            .success(function (data) {
+                console.log(data.d);
+                alert(data.d.message);
+                window.location.reload();
+            })
+    }
     //function
     function Unique(collection, keyname) {
         var output = [],
@@ -128,7 +155,14 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
-
+    function setNotNull(str) {
+        if (str) {
+            return str;
+        }
+        else {
+            return "";
+        }
+    }
 }]);
 app.controller("HomeController", ['$scope', '$http', 'service', function ($scope, $http, $service) {
     var url = "/Default.aspx";
@@ -221,7 +255,7 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
                 console.log(data.d);
                 $scope.message = data.d.message;
                 $scope.showerror = true;
-                
+
                 if (data.d.data > $scope.TongTien) {
                     $scope.GiaTriVeCu = $scope.TongTien;
                 }
@@ -293,6 +327,23 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
                     $scope.loadding = false;
                 })
         }
+    }
+    $scope.CheckPromote = function () {
+        $scope.loaddingKM = true;
+        $service.Post(url + "/CheckPromote", { makhuyenmai: $scope.MaKhuyenMai, Tongtien: $scope.TongTien })
+            .success(function (data) {
+                if (data.d.data != null) {
+                    console.log(data.d);
+                    $scope.alertType = "success";
+                    $scope.KhuyenMai = data.d.data.ValueCast;
+                }
+                else {
+                    $scope.alertType = "danger";
+                }
+                $scope.message = data.d.message;
+                $scope.showErrorKM = true;
+                $scope.loaddingKM = false;
+            })
     }
 }])
 app.controller("VertifyController", ['$scope', '$http', 'service', function ($scope, $http, $service) {

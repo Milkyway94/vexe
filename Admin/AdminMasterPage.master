@@ -5,10 +5,11 @@
 <head runat="server">
     <title>Vé xe điện tử - Đặt vé xe online</title>
     <asp:Literal ID="ltCss" runat="server"></asp:Literal>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="css/jqueryUI.css" rel="stylesheet" />
+    <link href="css/sweetalert.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/bower_components/angular-ui-grid/ui-grid.min.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="/bower_components/textAngular/src/textAngular.css"/>
+    <link href="Assets/admin-lte/iCheck/all.css" rel="stylesheet" />
     <asp:Literal ID="ltJavascript" runat="server"></asp:Literal>
     <script type="text/javascript">
         function menuHandler(url) {
@@ -85,6 +86,7 @@
     </form>
     <!--AngularJS-->
     <script src="<%=urlRoot %>/Assets/app/bower_components/tinymce/tinymce.min.js"></script>
+    <script src="<%=urlRoot %>/Assets/app/bower_components/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
     <script src="<%=urlRoot %>/js/angularjs_1.5.js"></script>
     <script src="<%=urlRoot %>/js/ng-touch.js"></script>
     <script src="<%=urlRoot %>/js/ng-animate.js"></script>
@@ -96,6 +98,7 @@
     <script src="<%=urlRoot %>/js/main/services/svXe.js"></script>
     <script src="<%=urlRoot %>/js/main/services/Service.js"></script>
     <!--EndAngularJS-->
+    <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
     <script src="<%=urlRoot %>/js/sweetalert.js"></script>
     <script src="<%=urlRoot %>/Assets/admin-lte/select2/select2.full.min.js"></script>
     <script src="/resources/js/jquery-ui.js"></script>
@@ -107,5 +110,9 @@
     <script src="/bower_components/pdfmake/build/pdfmake.min.js"></script>
     <script src="/bower_components/pdfmake/build/vfs_fonts.js"></script>
     <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="/bower_components/icheck/icheck.min.js" type="text/javascript"></script>
+    <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/bower_components/datatables/media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+
 </body>
 </html>

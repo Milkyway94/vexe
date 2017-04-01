@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="GalleryFrm.ascx.cs" Inherits="Admin_Modules_Content_Controls_GalleryFrm" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/Scripts/ckfinder/ckfinder.js"></script>
 <table id="toolbar" cellspacing="0">

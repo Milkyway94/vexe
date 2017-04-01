@@ -71,6 +71,7 @@ public partial class ucontrols_include_LoginMember : System.Web.UI.UserControl
                 else
                 {
                     Session["MemberID"] = rows[0]["Member_ID"].ToString();
+                    Session["Member_Role"] = rows[0]["Member_Role"].ToString();
                     Session["Member_Username"] = rows[0]["Member_Username"].ToString();
                     Session["Member_Email"] = rows[0]["Member_Email"].ToString();
                     Session["Member_Avarta"] = rows[0]["Member_Avarta"].ToString();

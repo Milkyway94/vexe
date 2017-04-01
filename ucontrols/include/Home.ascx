@@ -6,19 +6,6 @@
                 <h1>Đặt vé xe điện tử với 3 bước</h1>
             </div>
         </div>
-        <style>
-            .bg-position {
-                /*  background: url("../../resources/img/icon/bg-next.png") no-repeat;
-                background-position: right 10px;*/
-                position: relative;
-            }
-
-            .tv4 {
-                position: absolute;
-                top: 15px;
-                right: -20px;
-            }
-        </style>
         <div class="row" id="r1">
             <div class="col-md-4 col-xs-12 col-sm-3 bg-position">
                 <div class="tv1">
@@ -29,7 +16,7 @@
                     <span class="b1">Bước 1</span><br />
                     <span class="b1tv">TÌM VÉ</span>
                 </div>
-                <img src="../../resources/img/icon/bg-next.png" class="tv4" />
+                <img src="../../resources/img/icon/icon-next.png" class="tv4" />
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 bg-position">
                 <div class="tv1">
@@ -40,7 +27,7 @@
                     <span class="b1">Bước 2</span>
                     <div class="b1tv">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
                 </div>
-                <img src="../../resources/img/icon/bg-next.png" class="tv4" />
+                <img src="../../resources/img/icon/icon-next.png" class="tv4" />
             </div>
             <div class="col-md-3 col-xs-12 col-sm-3 bg-position">
                 <div class="tv1">
@@ -51,7 +38,6 @@
                     <span class="b1">Bước 3</span><br />
                     <span class="b1tv">NHẬN VÉ</span>
                 </div>
-                <img src="../../resources/img/icon/bg-next.png" class="tv4-last" />
             </div>
         </div>
         <div class="row" id="r2">
@@ -65,13 +51,13 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <autocomplete ng-model="Diemdi" placeholder="Chọn điểm xuất phát" name="Diemdi" data="Diemdies"></autocomplete>
+                                <autocomplete ng-model="Diemdi" inputclass="form-control" placeholder="Chọn điểm xuất phát" name="Diemdi" data="Diemdies"></autocomplete>
                                 <%--<input type="text" id="Autocomplete" name="Diemdi" placeholder="Nhập điểm đi" class="form-control" ng-autocomplete ng-model="Diemdi" details="details2" options="options2"/>--%>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <autocomplete ng-model="Diemden" placeholder="Chọn điểm đến" name="Diemden" data="Diemdies"></autocomplete>
+                                <autocomplete ng-model="Diemden" inputclass="form-control" placeholder="Chọn điểm đến" name="Diemden" data="Diemdies"></autocomplete>
                             </div>
                         </div>
                         <div class="form-group row">

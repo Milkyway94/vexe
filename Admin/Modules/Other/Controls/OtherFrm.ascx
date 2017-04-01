@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="OtherFrm.ascx.cs" Inherits="Admin_Modules_Other_Controls_OtherFrm" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/Scripts/ckeditor/ckeditor.js"></script>
 <table id="toolbar" cellspacing="0">

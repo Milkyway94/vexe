@@ -1,5 +1,68 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Search.ascx.cs" Inherits="ucontrols_include_Search" %>
 <div ng-controller="SearchController">
+    <div class="modal fade" id="YCModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title ">Tạo yêu cầu đi xe</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="frmYcdx" ng-submit="SaveYC()">
+                        <table class="table">
+                            <tr>
+                                <td>Bạn muốn đi từ</td>
+                                <td>
+                                    <autocomplete ng-model="YcDiemDi" inputclass="txtdi" name="Diemdi" autocompleterequired="required" data="Diemdies" placeholder="Chọn điểm đi"></autocomplete>
+                                </td>
+                                <td class="tx">Đến</td>
+                                <td>
+                                    <autocomplete ng-model="YcDiemDen" inputclass="txtdi" name="Diemden" autocompleterequired="required" data="Diemdies" placeholder="Chọn điểm đến"></autocomplete>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Vào ngày</td>
+                                <td>
+                                    <input type="date" ng-model="YcNgaydi" class="txtdi" placeholder="Chọn ngày đi" required />
+                                </td>
+                                <td class="tx">Giờ đi</td>
+                                <td>
+                                    <input type="time" ng-model="YcGiodi" class="txtdi" placeholder="Chọn giờ đi" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Yêu cầu thêm</td>
+                                <td colspan="3">
+                                    <input type="text" class="txtdi" name="ycthem" ng-model="YcMore" placeholder="VD:Tôi muốn dừng ở Văn Điển" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Số điện thoại của bạn là:</td>
+                                <td colspan="3">
+                                    <input type="text" name="sdt" class="txtdi" maxlength="14" ng-model="YcSdt" placeholder="VD: 0123456789" required />
+                                </td>
+                            </tr>
+                        </table>
+                        <ul class="dsYc">
+                            <li>Yêu cầu của bạn sẽ được chuyển đến các nhà xe có thể đáp ứng được.</li>
+                            <li>Các nhà xe sẽ chủ động liên hệ với bạn theo số điện thoại <b>{{YcSdt}}</b>.</li>
+                            <li>Sau khi đồng ý với nhà xe vui lòng <b>Đăng nhập</b> lại hệ thống để <b>Hủy yêu cầu</b>.</li>
+                        </ul>
+                        <h5 class="color-green" ng-show="showError">{{message}}</h5>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-warning pull-left" type="button" ng-show="showError" onclick="$('#YCModal').modal('hide')">Đóng</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btn-yc pull-right" type="submit" ng-disabled="loading" ng-class="loading?'disabled':''"><span class="ycdx text-bold" ng-hide="loading">LƯU YÊU CẦU</span><span class="ycdx text-bold" ng-show="loading">Đang lưu <i class="fa fa-spinner fa-pulse fa-fw"></i></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="tk-top">
         <div class="s-result" ng-show="showResult">
             <div class="container">
@@ -35,8 +98,7 @@
                             <div class="col-sm-5">
                                 <div class="row ipt-search">
                                     <i class="fa fa-map-marker pre-icon-input"></i>
-                                    <autocomplete ng-model="Diemdi" name="Diemdi" autocompleterequired="required" data="Diemdies" placeholder="Chọn điểm đi"></autocomplete>
-                                    <%--<input type="text" placeholder="Chọn điểm đi" tabindex="1" id="Autocomplete" required="required" class="form-control ngaydi" name="Diemdi" ng-autocomplete ng-model="Diemdi" details="details2" options="options2" />--%>
+                                    <autocomplete ng-model="Diemdi" inputclass="form-control" name="Diemdi" autocompleterequired="required" data="Diemdies" placeholder="Chọn điểm đi"></autocomplete>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -45,7 +107,7 @@
                             <div class="col-sm-5">
                                 <div class="row ipt-search">
                                     <i class="fa fa-map-marker pre-icon-input"></i>
-                                    <autocomplete ng-model="Diemden" autocompleterequired="required" name="Diemden" data="Diemdies" placeholder="Chọn điểm đến"></autocomplete>
+                                    <autocomplete ng-model="Diemden" inputclass="form-control" autocompleterequired="required" name="Diemden" data="Diemdies" placeholder="Chọn điểm đến"></autocomplete>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +178,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-3" id="c2">
-                                            <p class="title-xe">{{item.Giokhoihanh}} <i class="fa fa-long-arrow-right"></i> {{item.Giotoi}}</p>
+                                            <p class="title-xe">{{item.Giokhoihanh}} <i class="fa fa-long-arrow-right"></i>{{item.Giotoi}}</p>
                                             <p>Thời gian: <b>{{item.Thoigiandukien}}</b></p>
                                         </div>
                                         <div class="col-sm-2" id="c3"><a class="tn-title color-black" href="#" ng-click="Detail(item)">Chi tiết</a></div>
@@ -164,7 +226,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-bold">Giá niêm yết: </td>
-                                                                        <td class=text-bold">{{Selected.GiaThuong | currency:"":0}} đ</td>
+                                                                        <td class="text-bold">{{Selected.GiaThuong | currency:"":0}} đ</td>
                                                                     </tr>
                                                                     <tr ng-show="Selected.KhuyenMai>0">
                                                                         <td class="text-bold">Khuyến mãi: </td>
@@ -195,6 +257,28 @@
                 </table>
             </div>
             <div class="col-sm-3">
+                <%if (Session["MemberID"] != null)
+                    {
+                        if (rq == new QCMS_BUSSINESS.RequestTravel() || rq==null)
+                        {%>
+                <div class="sb-right">
+                    <a class="btn btn-success btn-block btn-yc" data-toggle="modal" data-target="#YCModal">
+                        <h3 class="ycdx">Tạo yêu cầu đi xe</h3>
+                        <span class="ycdx-sm">Bạn tạo yêu cầu đi xe, các nhà
+                            <br />
+                            xe sẽ chủ động liên hệ với bạn.</span>
+                    </a>
+                </div>
+                <%}
+                    else
+                    {%>
+                <div class="sb-right">
+                    <a class="btn btn-success btn-block btn-yc" ng-click="HuyYC()">
+                        <h3 class="ycdx">Hủy yêu cầu đi xe</h3>
+                    </a>
+                </div>
+                <%}
+                    } %>
                 <asp:Literal ID="ltrAdvertisment" runat="server" />
             </div>
         </div>

@@ -1,5 +1,6 @@
 ﻿$(".datepicker").datepicker();
 $(".select2").select2();
+$(".timepicker").timepicker();
 function HideModal(modal) {
     $(modal).modal('hide');
 }
@@ -63,7 +64,6 @@ function BrowseServer(field) {
     };
     finder.popup();
 }
-document.getElementById("catimg").src = document.getElementById("txtPath").value;
 //change slug
 $(document).ready(function () {
     $(".datepicker").datepicker();

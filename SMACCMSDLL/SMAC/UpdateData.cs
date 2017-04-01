@@ -114,6 +114,10 @@ namespace SMAC
 				sqlCommand.ExecuteNonQuery();
 				result = true;
 			}
+            catch
+            {
+                result = false;
+            }
 			finally
 			{
 				sqlConnection.Close();

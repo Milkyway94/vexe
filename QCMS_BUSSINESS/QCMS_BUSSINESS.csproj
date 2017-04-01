@@ -91,11 +91,13 @@
     <Compile Include="QuanHuyen.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\RequestRepository.cs" />
     <Compile Include="Repository\MethodRepository.cs" />
     <Compile Include="Repository\MemberRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\FldRepository.cs" />
     <Compile Include="Repository\GheRepository.cs" />
+    <Compile Include="Repository\PromoteRepository.cs" />
     <Compile Include="Repository\TuyenduongRepository.cs" />
     <Compile Include="Repository\CodeRepository.cs" />
     <Compile Include="Repository\ChuyenXeRepository.cs" />
@@ -108,6 +110,9 @@
     <Compile Include="Repository\OtherRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\ModRepository.cs" />
+    <Compile Include="RequestTravel.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SoDienThoai.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
@@ -145,6 +150,9 @@
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_SELECTXEBYID_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SELECTXEBYNHAXEID_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_ViewChuyenXe_Result.cs">
@@ -208,6 +216,9 @@
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_PhuongThucThanhToan.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_PromoteCode.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_Role.cs">

@@ -17,9 +17,9 @@ namespace QCMS_BUSSINESS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Xe()
         {
+            this.ChuyenXes = new HashSet<ChuyenXe>();
             this.Ghes = new HashSet<Ghe>();
             this.SoDienThoais = new HashSet<SoDienThoai>();
-            this.ChuyenXes = new HashSet<ChuyenXe>();
         }
     
         public int MaXe { get; set; }
@@ -35,14 +35,15 @@ namespace QCMS_BUSSINESS
         public Nullable<bool> Daxoa { get; set; }
         public Nullable<int> TongSoGhe { get; set; }
         public Nullable<int> Hangxe { get; set; }
+        public string Avartar { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChuyenXe> ChuyenXes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ghe> Ghes { get; set; }
         public virtual NhaXe NhaXe1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoDienThoai> SoDienThoais { get; set; }
         public virtual Hangxe Hangxe1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChuyenXe> ChuyenXes { get; set; }
     }
 }

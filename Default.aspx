@@ -41,11 +41,12 @@
         <div id="OperationCell" runat="server"></div>
     </section>
     <uc:footer runat="server" ID="Footer" />
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="<%=uRoot%>resources/js/jquery-2.2.4.min.js"></script>
     <script src="<%=uRoot%>resources/js/bootstrap.min.js"></script>
     <script src="<%=uRoot%>resources/plugins/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="<%=uRoot%>resources/plugins/select2/dist/js/select2.min.js"></script>
      <script src="<%=uRoot%>resources/js/uikit.min.js"></script>
+    <script src="<%=uRoot%>bower_components/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
     <script src="<%=uRoot%>resources/js/AngularJs.js"></script>
     <script src="<%=uRoot%>resources/js/Main/angular-filter.js"></script>
     <script src="<%=uRoot%>resources/js/Main/app.js"></script>

@@ -14,6 +14,12 @@ namespace QCMS_BUSSINESS
     
     public partial class tbl_Member
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_Member()
+        {
+            this.tbl_Order = new HashSet<tbl_Order>();
+        }
+    
         public int Member_ID { get; set; }
         public string Member_Username { get; set; }
         public string Member_Email { get; set; }
@@ -30,5 +36,10 @@ namespace QCMS_BUSSINESS
         public Nullable<System.DateTime> Member_Date { get; set; }
         public string Member_Avarta { get; set; }
         public Nullable<long> Member_Vola { get; set; }
+        public Nullable<int> Member_Role { get; set; }
+        public Nullable<int> NhaXe { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Order> tbl_Order { get; set; }
     }
 }

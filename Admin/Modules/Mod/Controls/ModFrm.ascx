@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ModFrm.ascx.cs" Inherits="Admin_Modules_Mod_Controls_ModFrm" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/Scripts/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/Scripts/ckfinder/ckfinder.js"></script>

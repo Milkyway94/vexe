@@ -16,7 +16,7 @@
                     <input type="text" class="form-control" ng-model="SearchKey" placeholder="Nhập từ khóa tìm kiếm" />
                 </div>
             </div>
-            <table class="table table-bordered table-stripped table-condensed" id="ungtuyen">
+            <table class="table table-bordered table-stripped table-hover" id="ungtuyen">
                 <thead>
                     <tr>
                         <th>STT</th>

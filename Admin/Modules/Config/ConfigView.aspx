@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
     <head id="Head1" runat="server">
         <title>Untitled Page</title>
-        <link rel="stylesheet" href="../../CSS/ADCStyle.css" type="text/css" />    
+        <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" />    
     </head>
     <body style="background-color:White; overflow: hidden;" leftmargin="0" topmargin="0">
         <form id="form1" runat="server">

@@ -111,6 +111,10 @@ public partial class _Default : Page
                 _objControl = LoadControl("ucontrols/include/About.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
+            case "RequestTravel":
+                _objControl = LoadControl("ucontrols/include/RequestTravel.ascx");
+                OperationCell.Controls.Add(_objControl);
+                break;
             case "giao-dich":
                 _objControl = LoadControl("ucontrols/include/Transaction.ascx");
                 OperationCell.Controls.Add(_objControl);
@@ -699,7 +703,7 @@ public partial class _Default : Page
     {
         List<ChuyenXeViewModel> lstCx = new List<ChuyenXeViewModel>();
         ChuyenXeRepository cxRepo = new ChuyenXeRepository();
-        var td = cxRepo.SearchFor(o => (o.Diemdi.Contains(Diemdi) || Diemdi.Contains(o.Diemdi)) && (o.Diemden.Contains(Diemden) || Diemden.Contains(o.Diemden)) && o.TrangThai != 0);
+        var td = cxRepo.SearchFor(o => (o.Diemdi.Contains(Diemdi) || Diemdi.Contains(o.Diemdi)) && (o.Diemden.Contains(Diemden) || Diemden.Contains(o.Diemden)) && o.TrangThai != 0&& o.Giokhoihanh>DateTime.Now);
         foreach (var item in td)
         {
             ChuyenXeViewModel cx = new ChuyenXeViewModel(item);
@@ -1423,6 +1427,85 @@ public partial class _Default : Page
         DataTable res = UpdateData.UpdateBySql(sql).Tables[0];
 
         return Newtonsoft.Json.JsonConvert.SerializeObject(res); ;
+    }
+    [WebMethod]
+    public static Result<tbl_PromoteCode> CheckPromote(string makhuyenmai, double Tongtien)
+    {
+        Result<tbl_PromoteCode> res = new Result<tbl_PromoteCode>();
+        tbl_PromoteCode pro = new PromoteRepository().SearchFor(o => o.Code == makhuyenmai).SingleOrDefault();
+        if (pro != null)
+        {
+            if(Tongtien > pro.FromValue && Tongtien < pro.ToValue)
+            {
+                res.data = pro;
+                res.errcode = ErrorCode.SUCCESS;
+                res.message = string.Format(ErrorMessage.CanApply, "Mã này");
+            }
+            else
+            {
+                res.data = null;
+                res.errcode = ErrorCode.NOT_EQUAL;
+                res.message = string.Format(ErrorMessage.OutOfBound, "Giá trị của mã", "khuyến mãi");
+            }
+        }
+        else
+        {
+            res.data = null;
+            res.errcode = ErrorCode.NODATA;
+            res.message = string.Format(ErrorMessage.NotFound, "Mã khuyến mãi");
+        }
+        return res;
+    }
+    [WebMethod]
+    public static Result<bool> SaveYc(string from, string to, string startdate, string starttime, string more, string sdt)
+    {
+        Result<bool> res= new Result<bool>();
+        Hashtable tbRequest = new Hashtable();
+        tbRequest.Add("[From]", from);
+        tbRequest.Add("[To]", to);
+        tbRequest.Add("StartDate", startdate);
+        tbRequest.Add("starttime", starttime);
+        tbRequest.Add("more", more);
+        tbRequest.Add("sdt", sdt);
+        tbRequest.Add("isCancel", "0");
+        tbRequest.Add("CreateDate", DateTime.Now.ToString());
+        tbRequest.Add("Createby", SessionUtil.GetValue("MemberID"));
+        bool _insert = UpdateData.Insert("RequestTravel", tbRequest);
+        if (_insert)
+        {
+            res.data = true;
+            res.errcode = ErrorCode.SUCCESS;
+            res.message = "Yêu cầu của quý khách đã được lưu lại, vui lòng đợi phía nhà xe liên hệ lại.";
+        }
+        else
+        {
+            res.data = true;
+            res.errcode = ErrorCode.SUCCESS;
+            res.message = "Xin lỗi, có lỗi trong quá trình thực hiện. Quý khách vui lòng tải lại trang và thực hiện lại";
+        }
+        return res;
+    }
+    [WebMethod]
+    public static Result<bool> HuyYC()
+    {
+        Result<bool> res = new Result<bool>();
+        string MemID = HttpContext.Current.Session["MemberID"].ToString();
+        Hashtable tbIn = new Hashtable();
+        tbIn.Add("isCancel", "1");
+        bool b = UpdateData.Update("RequestTravel", tbIn, "");
+        if (b)
+        {
+            res.data = true;
+            res.errcode = ErrorCode.SUCCESS;
+            res.message = "Hủy yêu cầu thành công";
+        }
+        else
+        {
+            res.data = false;
+            res.errcode = ErrorCode.FAIL;
+            res.message = "Hủy yêu không thành công, xin thử lại.";
+        }
+        return res;
     }
 }
 

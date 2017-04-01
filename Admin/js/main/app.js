@@ -728,30 +728,29 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
         paginationPageSize: 10,
         columnDefs: [
             {
-                name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
+                name: 'E', enableFiltering: false, enableSorting: false, width: 50, enableCellEdit: false, allowCellFocus: false,
                 cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
             },
             { name: "Bienso", displayName: "Biển số", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "Tenxe", displayName: "Tên xe", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "Nhaxe", displayName: "Nhà xe", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "TongSoGhe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false },
-            { name: "Hangxe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false }
+            { name: "Hangxe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false },
+            { name: "Daxoa", displayName: "Trạng thái", width: 120, enableCellEdit: false, allowCellFocus: false }
         ],
         enableGridMenu: true,
         enableColumnResizing: true,
-        enableGridMenu: true,
-        fastWatch: true,
         rowIdentity: function (row) {
             return row.MaChuyenXe;
         },
         getRowIdentity: function (row) {
             return row.MaChuyenXe;
         },
-        exporterCsvFilename: 'chuyenxe.csv',
+        exporterCsvFilename: 'xe.csv',
         exporterPdfDefaultStyle: { fontSize: 9 },
         exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
         exporterPdfTableHeaderStyle: { fontSize: 10, bold: true, italics: true, color: 'red' },
-        exporterPdfHeader: { text: "Danh sách chuyến xe", style: 'headerStyle' },
+        exporterPdfHeader: { text: "Danh sách xe", style: 'headerStyle' },
         exporterPdfFooter: function (currentPage, pageCount) {
             return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
         },
@@ -797,6 +796,39 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
         var rootUrl = "/Admin/Default.aspx";
         var nextWeek = new Date();
         nextWeek.setDate(nextWeek.getDate() + 7);
+        $scope.ExportData = function () {
+            console.log("Export");
+            var blob = new Blob([document.getElementById('grid1').innerHTML], {
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+            });
+            saveAs(blob, "Report.xls");
+        };
+
+        $scope.items = [{
+            name: "John Smith",
+            email: "j.smith@example.com",
+            dob: "1985-10-10"
+        }, {
+            name: "Jane Smith",
+            email: "jane.smith@example.com",
+            dob: "1988-12-22"
+        }, {
+            name: "Jan Smith",
+            email: "jan.smith@example.com",
+            dob: "2010-01-02"
+        }, {
+            name: "Jake Smith",
+            email: "jake.smith@exmaple.com",
+            dob: "2009-03-21"
+        }, {
+            name: "Josh Smith",
+            email: "josh@example.com",
+            dob: "2011-12-12"
+        }, {
+            name: "Jessie Smith",
+            email: "jess@example.com",
+            dob: "2004-10-12"
+        }]
         $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
             if (col.filters[0].term) {
                 return 'header-filtered';
@@ -873,6 +905,7 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
             getRowIdentity: function (row) {
                 return row.MaChuyenXe;
             },
+            exporterOlderExcelCompatibility: true,
             exporterCsvFilename: 'chuyenxe.csv',
             exporterPdfDefaultStyle: { fontSize: 9 },
             exporterPdfTableStyle: { margin: [30, 30, 30, 30] },

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SiteAccess.ascx.cs" Inherits="Administrator_Modules_Member_Controls_SiteAccess" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <script type="text/javascript" src="<%=sRootAppPath %>js/TreeView.js"></script>
 <script type="text/javascript" src="<%=sRootAppPath %>js/toolBarButton.js"></script>
 

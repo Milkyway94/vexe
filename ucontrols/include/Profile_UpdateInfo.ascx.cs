@@ -60,6 +60,9 @@ public partial class ucontrols_include_Profile_History : System.Web.UI.UserContr
                 bool _update = UpdateData.Update("tbl_Member", tbMem, "Member_ID=" + memberid.ToString());
                 if (_update)
                 {
+                    SessionUtil.SetKey("Member_Name", txtName.Text);
+                    SessionUtil.SetKey("Member_Email", txtEmail.Text);
+                    SessionUtil.SetKey("Member_Phone", txtSdt.Text);
                     dvinfo.Visible = true;
                     Value.ShowMessage(ltrError, string.Format(ErrorMessage.Success, "Cập nhật"), AlertType.SUCCESS);
                 }

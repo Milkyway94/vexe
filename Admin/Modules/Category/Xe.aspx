@@ -5,19 +5,19 @@
             <h3 class="text-center"><b>QUẢN LÝ XE</b></h3>
         </div>
         <div class="box-body">
-                <div class="col-sm-3" id="left-bar">
+                <div class="col-sm-2" id="left-bar">
                     <h3>Danh sách nhà xe</h3>
                     <ul class="dsNhaXe">
                         <%foreach (var item in this.lstNhaXe)
                             {%>
-                            <li ng-click="LoadXe(<%=item.ID %>)"><a href="#"><%=item.Tennhaxe %></a></li>
+                            <li><a ng-click="LoadXe(<%=item.ID %>)" href="javascript:void(0)"><%=item.Tennhaxe %></a></li>
                           <%  } %>
                        
                     </ul>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-10">
                     <div class="form-group">
-                <button class="btn btn-flat btn-success btn-sm" id="btnadd" onclick="$('#add-modal').modal({backdrop: 'static'});$('#updateframe').prop('src', 'Create/ThemChuyenXe.aspx')" type="button"><i class="fa fa-plus"></i>Thêm mới</button>
+                <button class="btn btn-flat btn-success btn-sm" id="btnadd" onclick="$('#add-modal').modal({backdrop: 'static'});$('#updateframe').prop('src', 'Create/ThemXe.aspx')" type="button"><i class="fa fa-plus"></i>Thêm mới</button>
             </div>
             <div class="table-responsive">
                 <div class="text-center" ng-show="loadData">
@@ -31,7 +31,7 @@
                     <div class="modal-content">
                         <a class="pull-right" style="padding: 5px;" onclick="$('#add-modal').modal('hide');"><i class="glyphicon glyphicon-remove"></i></a>&nbsp;&nbsp;
                         <a class="pull-right" style="padding: 5px;" onclick="$('#modalCT').toggleClass('fullscreen');"><i class="glyphicon glyphicon-fullscreen"></i></a>&nbsp;&nbsp;
-                        <iframe id="updateframe" src="Create/ThemChuyenXe.aspx" style="width: 100%; height: 580px; border: none; border-radius: 4px" allowfullscreen></iframe>
+                        <iframe id="updateframe" style="width: 100%; height: 560px; border: none; border-radius: 4px" allowfullscreen></iframe>
                     </div>
                     <!-- /.modal-content -->
                 </div>

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListModtype.ascx.cs" Inherits="Adadmin_Modules_Mess_Controls_ToUser" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css">
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css">
 <script type="text/javascript" language="javascript">
 function window.onload(){			
 	doCheckItem();

@@ -4,7 +4,7 @@
     <title>Untitled Page</title>
     <script type="text/javascript" src="../../JS/toolBarButton.js"></script>
 	<script type="text/javascript" src="../../JS/windowtracking.js"></script>
-    <link rel="stylesheet" href="../../CSS/ADCStyle.css" type="text/css" /> 
+    <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" /> 
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../../js/Common.js"></script>
 </head>

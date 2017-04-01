@@ -4,7 +4,7 @@
     <title>Untitled Page</title>
     <script type="text/javascript" src="../../JS/toolBarButton.js"></script>
 	<script type="text/javascript" src="../../JS/windowtracking.js"></script>
-    <link rel="stylesheet" href="../../CSS/ADCStyle.css" type="text/css" /> 
+    <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" /> 
     <script type="text/javascript" src="../../js/Common.js"></script>
 </head>
 <body style="background-color:White; overflow: hidden;" leftmargin="0" topmargin="0">

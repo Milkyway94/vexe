@@ -5,67 +5,69 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="93e001791fb34db6b5fce3fe988ceb98" Name="Diagram1">
-        <EntityTypeShape EntityType="lggvn_vexedtModel.Code" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.Diadiem" Width="1.5" PointX="20.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.DiemDon" Width="1.5" PointX="5.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.Ghe" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.LangValue" Width="1.5" PointX="12.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.ModFLD" Width="1.5" PointX="10" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.NhaXe" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.QuanHuyen" Width="1.5" PointX="18" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.SoDienThoai" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Box" Width="1.5" PointX="8.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Boxtype" Width="1.5" PointX="5.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Comment" Width="1.5" PointX="15.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Config" Width="1.5" PointX="7.75" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Contact" Width="1.5" PointX="9.75" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Content" Width="1.5" PointX="13" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Department" Width="1.5" PointX="0.75" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_File" Width="1.5" PointX="15.25" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Log" Width="1.5" PointX="2.75" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Mess" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Mod" Width="1.5" PointX="10.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Modtype" Width="1.5" PointX="8.5" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_ModUserMenu" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Other" Width="1.5" PointX="17.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Role" Width="1.5" PointX="17.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_RoleUser" Width="1.5" PointX="15.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Skin" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Skintype" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Tag" Width="1.5" PointX="17.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Title" Width="1.5" PointX="17.75" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_User" Width="1.5" PointX="13" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tblImage" Width="1.5" PointX="6.75" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.TinhThanh" Width="1.5" PointX="15.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.TuyenDuong" Width="1.5" PointX="11.75" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.Xe" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.Hangxe" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.ModBtn" Width="1.5" PointX="13.75" PointY="18.875" IsExpanded="true" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_Diadiem_QuanHuyen" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_Ghe_Xe" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_Xe_NhaXe" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_QuanHuyen_TinhThanh" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_SoDienThoai_Xe" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Comment_tbl_Content" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Content_tbl_Mod" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_File_tbl_Content" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Mod_tbl_Modtype" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_RoleUser_tbl_User" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Skin_tbl_Skintype" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.FK__Xe__Hangxe__1D7B6025" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.tbl_MessUser" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.tbl_ModBox" ManuallyRouted="false" />
-        <AssociationConnector Association="lggvn_vexedtModel.tbl_ModsiteUser" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.ChuyenXe" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.Code" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.Diadiem" Width="1.5" PointX="17.25" PointY="1.125" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.DiemDon" Width="1.5" PointX="9.75" PointY="0.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.Ghe" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.LangValue" Width="1.5" PointX="12.75" PointY="13.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.ModFLD" Width="1.5" PointX="10" PointY="10.625" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.NhaXe" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.QuanHuyen" Width="1.5" PointX="15" PointY="1" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.SoDienThoai" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Box" Width="1.5" PointX="5.5" PointY="15" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Boxtype" Width="1.5" PointX="0.75" PointY="14.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Comment" Width="1.5" PointX="2.75" PointY="14.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Config" Width="1.5" PointX="14.75" PointY="3.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Contact" Width="1.5" PointX="14.75" PointY="13.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Content" Width="1.5" PointX="10" PointY="15.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Department" Width="1.5" PointX="16.75" PointY="3.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_File" Width="1.5" PointX="12.25" PointY="17.625" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Log" Width="1.5" PointX="16.75" PointY="15" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Mess" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Mod" Width="1.5" PointX="7.75" PointY="15.25" />
         <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_ModAdmin" Width="1.5" PointX="7.75" PointY="4.625" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Modtype" Width="1.5" PointX="5.5" PointY="18.75" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_ModUserMenu" Width="1.5" PointX="14.75" PointY="6.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Order" Width="1.5" PointX="17.75" PointY="6.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_OrderDetail" Width="1.5" PointX="18.75" PointY="3.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Other" Width="1.5" PointX="18.75" PointY="13.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Role" Width="1.5" PointX="18.75" PointY="16.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_RoleUser" Width="1.5" PointX="12.25" PointY="5.5" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Skin" Width="1.5" PointX="15" PointY="9.25" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Skintype" Width="1.5" PointX="12.75" PointY="9.125" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Tag" Width="1.5" PointX="19.75" PointY="0.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Title" Width="1.5" PointX="19.75" PointY="6.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_User" Width="1.5" PointX="10" PointY="3.625" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tblImage" Width="1.5" PointX="19.75" PointY="9.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.TinhThanh" Width="1.5" PointX="12.75" PointY="1.125" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.TuyenDuong" Width="1.5" PointX="18.75" PointY="19.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.GiaoDich" Width="1.5" PointX="0.75" PointY="20.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.Hangxe" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.ModBtn" Width="1.5" PointX="2.75" PointY="20.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_PhuongThucThanhToan" Width="1.5" PointX="20.75" PointY="3.875" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_PromoteCode" Width="1.5" PointX="20.75" PointY="13.875" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_Diadiem_QuanHuyen" />
         <AssociationConnector Association="lggvn_vexedtModel.FK_ModFLD_tbl_ModAdmin" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_QuanHuyen_TinhThanh" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Content_tbl_Mod" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_File_tbl_Content" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Mod_tbl_Modtype" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_RoleUser_tbl_User" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_tbl_Skin_tbl_Skintype" />
+        <AssociationConnector Association="lggvn_vexedtModel.tbl_MessUser" />
+        <AssociationConnector Association="lggvn_vexedtModel.tbl_ModBox" />
+        <AssociationConnector Association="lggvn_vexedtModel.tbl_ModsiteUser" />
         <AssociationConnector Association="lggvn_vexedtModel.tbl_ModUser" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_PhuongThucThanhToan" Width="1.5" PointX="20.375" PointY="3.75" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.GiaoDich" Width="1.5" PointX="20.375" PointY="6.75" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Order" Width="1.5" PointX="0.75" PointY="20.75" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_OrderDetail" Width="1.5" PointX="2.75" PointY="20.75" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Member" Width="1.5" PointX="17.375" PointY="3.75" />
-        <EntityTypeShape EntityType="lggvn_vexedtModel.ChuyenXe" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.Xe" Width="1.5" PointX="3" PointY="3" />
         <AssociationConnector Association="lggvn_vexedtModel.FK_ChuyenXe_Xe1" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_Ghe_Xe" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_Xe_NhaXe" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK_SoDienThoai_Xe" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK__Xe__Hangxe__1D7B6025" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.RequestTravel" Width="1.5" PointX="5.375" PointY="21.75" />
+        <EntityTypeShape EntityType="lggvn_vexedtModel.tbl_Member" Width="1.5" PointX="15.5" PointY="18.625" />
+        <AssociationConnector Association="lggvn_vexedtModel.FK__tbl_Order__Order__269AB60B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

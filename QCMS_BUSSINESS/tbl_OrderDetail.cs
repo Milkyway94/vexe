@@ -18,5 +18,6 @@ namespace QCMS_BUSSINESS
         public string MaVe { get; set; }
         public Nullable<double> UnitPrice { get; set; }
         public string Type { get; set; }
+        public Nullable<int> isTimeOut { get; set; }
     }
 }

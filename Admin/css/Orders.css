@@ -1,0 +1,132 @@
+﻿/* Styles go here */
+.table-header {
+    background-color: lightskyblue;
+}
+
+.navbar-metro {
+    background: #26344b;
+}
+
+#exportable {
+    padding-top: 20px;
+}
+
+.table-info tr td:nth-child(odd) {
+    text-align: right;
+}
+
+.navbar-nav > li:hover > ul {
+    display: block;
+}
+.dropdown-menu > li > a:hover {
+    background-color: #212d41;
+        color: #b2c0d8;
+}
+#ctl00_ddlLang{
+    background:#eef1f5;
+}
+.navbar-nav > li:hover {
+    background: #232f44;
+}
+.navbar-nav > .notifications-menu > .dropdown-menu, .navbar-nav > .messages-menu > .dropdown-menu, .navbar-nav > .tasks-menu > .dropdown-menu{
+    background:#1c2637;
+}
+.fa-2x {
+    font-size: 1.33333333em;
+}   
+.dropdown-menu > li > a {
+    padding: 9px 20px;
+    color:#b2c0d8;
+    border-bottom: 1px solid #b2c0d8;
+}
+.navbar-metro .navbar-nav>li>a,.navbar-metro .navbar-nav>li>a:focus, .navbar-metro .navbar-nav>li>a:hover{
+    color:#b2c0d8 !important;
+}
+.navbar-metro .dropdown-menu{
+    padding:0;
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 750px;
+        margin: 30px auto;
+    }
+}
+
+.modal-header {
+    background: #4caf50;
+}
+
+.modal-title {
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+}
+
+.suggess {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.o-content {
+    color: orangered;
+    font-weight: 600;
+}
+
+.admin-title {
+    font-weight: bold;
+    color: #00a65a;
+}
+
+.w80 {
+    width: 80%;
+    float: left;
+}
+
+.w20 {
+    width: 20%;
+    float: left;
+}
+
+#exportPDF h3 {
+    color: #4caf50;
+    font-weight: bold;
+    margin: 0;
+    font-size: 18px;
+}
+/* Important part */
+#modal-dialog {
+    overflow-y: initial !important;
+}
+
+#modal-body {
+    height: 420px;
+    overflow-y: auto;
+}
+
+.myModal h2.modal-title {
+    font-weight: bold;
+}
+
+#exportPDF > tbody > tr > td {
+    border-top: 0;
+}
+
+#exportPDF table {
+    margin-bottom: 0;
+}
+
+.loader {
+    background: url(https://order.mediamart.vn/Content/css/images/ajax-loader.gif) no-repeat scroll center center;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    /* display: none; */
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+#exportData {
+    position: relative;
+}

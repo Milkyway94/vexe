@@ -10,10 +10,11 @@ app.directive('autocomplete', function () {
             suggestions: '=data',
             onType: '=onType',
             onSelect: '=onSelect',
-            autocompleteRequired: '=',
+            autocompleteRequired: '@',
             noAutoSort: '=noAutoSort',
             name: '@',
-            placeholder:'@'
+            placeholder: '@',
+            inputclass: '@',
         },
         controller: ['$scope', function ($scope) {
             // the index of the suggestions that's currently selected
@@ -257,11 +258,11 @@ app.directive('autocomplete', function () {
         template: '\
         <div class="autocomplete {{ attrs.class }}" id="{{ attrs.id }}">\
           <input\
-            class="form-control"\
+            class="{{inputclass}}"\
             type="text"\
+            ng-focus="completing=true"\
             ng-model="searchParam"\
             placeholder="{{ placeholder }}"\
-            class="{{ attrs.inputclass }}"\
             tabindex="{{ attrs.tabindex }}"\
             id="{{ attrs.inputid }}"\
             name="{{name}}"\
@@ -319,7 +320,7 @@ app.filter('highlight', ['$sce', function ($sce) {
                   searchParam.split(/\ /).join(' |') + '|' +
                   searchParam.split(/\ /).join('|') +
                 ')',
-                exp = new RegExp(words, 'gi');
+                exp = new RegExp(words, 'ui');
             if (words.length) {
                 input = input.replace(exp, "<span class=\"highlight\">$1</span>");
             }

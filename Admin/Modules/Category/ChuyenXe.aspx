@@ -21,7 +21,7 @@
                     <div class="modal-content">
                         <a class="pull-right" style="padding: 5px;" onclick="$('#add-modal').modal('hide');"><i class="glyphicon glyphicon-remove"></i></a>&nbsp;&nbsp;
                         <a class="pull-right" style="padding: 5px;" onclick="$('#modalCT').toggleClass('fullscreen');"><i class="glyphicon glyphicon-fullscreen"></i></a>&nbsp;&nbsp;
-                        <iframe id="updateframe" src="Create/ThemChuyenXe.aspx" style="width: 100%; height: 580px; border: none; border-radius: 4px" allowfullscreen></iframe>
+                        <iframe id="updateframe" style="width: 100%; height: 580px; border: none; border-radius: 4px" allowfullscreen></iframe>
                     </div>
                     <!-- /.modal-content -->
                 </div>

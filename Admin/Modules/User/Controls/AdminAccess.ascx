@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="AdminAccess.ascx.cs" Inherits="Administrator_Modules_User_Controls_RightAccess" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <script type="text/javascript" src="<%=sRootAppPath %>js/TreeView.js"></script>
 
 <table id="toolbar" cellspacing="0">

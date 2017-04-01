@@ -22,7 +22,25 @@ public partial class ucontrols_subcontrol_Header : System.Web.UI.UserControl
         StringBuilder str = new StringBuilder();
         foreach (var item in repo.GetModByBoxCode("MenuTop"))
         {
-            str.Append("<li><a href=\"/"+item.Mod_Url+".htm\">"+item.Mod_Name+"</a></li>");
+            str.Append("<li><a href=\"/"+item.Mod_Url+ ".htm\">" + item.Mod_Name+"</a></li>");
+        }
+        return str.ToString();
+    }
+    public string LoadNhaXeMenu()
+    {
+        StringBuilder str = new StringBuilder();
+        foreach (var item in repo.GetModByBoxCode("MenuNhaXe"))
+        {
+            str.Append("<li><a href=\"/" + item.Mod_Url + ".htm\"><i class=\"fa fa-star\"></i>" + item.Mod_Name + "</a></li>");
+        }
+        return str.ToString();
+    }
+    public string LoadKhachMenu()
+    {
+        StringBuilder str = new StringBuilder();
+        foreach (var item in repo.GetModByBoxCode("MenuKhach"))
+        {
+            str.Append("<li><a href=\"/" + item.Mod_Url + ".htm\"><i class=\"fa fa-star\"></i>" + item.Mod_Name + "</a></li>");
         }
         return str.ToString();
     }

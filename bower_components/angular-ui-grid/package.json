@@ -1,10 +1,18 @@
 {
   "name": "angular-ui-grid",
   "description": "A data grid for Angular",
-  "main": "index.js",
+  "main": [
+    "./less",
+    "./ui-grid.css",
+    "./ui-grid.eot",
+    "./ui-grid.js",
+    "./ui-grid.svg",
+    "./ui-grid.ttf",
+    "./ui-grid.woff"
+  ],
   "ignore": [],
   "dependencies": {
-    "angular": ">=1.4.0 1.5.x"
+    "angular": ">=1.2.16 1.4.x"
   },
   "repository": {
     "type": "git",
@@ -27,16 +35,5 @@
     "data grid"
   ],
   "license": "MIT",
-  "version": "4.0.2",
-  "files": [
-    "less",
-    "ui-grid.css",
-    "ui-grid.eot",
-    "ui-grid.js",
-    "ui-grid.min.css",
-    "ui-grid.min.js",
-    "ui-grid.svg",
-    "ui-grid.ttf",
-    "ui-grid.woff"
-  ]
+  "version": "3.0.7"
 }

@@ -39,5 +39,8 @@ namespace QCMS_BUSSINESS
         public Nullable<double> Order_Giatrivedoi { get; set; }
         public Nullable<int> Order_CheckOutMethod { get; set; }
         public string Order_ShipAddress { get; set; }
+        public Nullable<double> Order_TongThanhToan { get; set; }
+    
+        public virtual tbl_Member tbl_Member { get; set; }
     }
 }

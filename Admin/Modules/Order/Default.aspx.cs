@@ -20,97 +20,140 @@ using System.Drawing;
 using System.Web.UI.WebControls;
 using SMAC;
 using System.Runtime.InteropServices;
+using QCMS_BUSSINESS;
+using System.Runtime.Serialization.Json;
+using System.Web.Script.Serialization;
+using QCMS_BUSSINESS.Repositories;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 public partial class Admin_Modules_Order_Default : System.Web.UI.Page
 {
+    private static OrderRepository orderRepo = new OrderRepository();
+    private static NhaxeRepository nhaxeRepo = new NhaxeRepository();
     protected string cs = ConfigurationManager.ConnectionStrings["vexedtEntities"].ConnectionString;
     GridView GridView1 = new GridView();
     protected void Page_Load(object sender, EventArgs e)
     {
+
     }
-    public string GetStatus(string Status)
+    //Test NhaXe
+    [WebMethod]
+    public static List<NhaXe> GetAllNhaXe()
     {
-        string str = "";
-        ////UtilValue u = new UtilValue();
-        //string sql = "SELECT * FROM UtilValue WHERE [Key]='OrderStatus'";
-        //System.Data.DataTable ds = UpdateData.UpdateBySql(sql).Tables[0];
-        //DataRowCollection rows = ds.Rows;
-        //if (rows.Count > 0)
-        //{
-        //    u.Key = rows[0]["Key"].ToString();
-        //    u.Value = rows[0]["Value"].ToString();
-        //}
-        //string jsonString = u.Value;
-        //JObject root = JObject.Parse(jsonString);
-        //JArray items = (JArray)root["items"];
-        //JObject item;
-        //JToken jtoken;
-        //for (int i = 0; i < items.Count; i++) //loop through rows
-        //{
-        //    item = (JObject)items[i];
-        //    jtoken = item.First;
-        //    while (jtoken != null)//loop through columns
-        //    {
-        //        if (((JProperty)jtoken).Name.ToString() == "key" && ((JProperty)jtoken).Value.ToString() == Status)
-        //        {
-        //            jtoken = jtoken.Next;
-        //            str = ((JProperty)jtoken).Value.ToString();
-        //            break;
-        //        }
-        //        jtoken = jtoken.Next;
-        //    }
-        //}
-        return str;
+        return nhaxeRepo.All().ToList();
     }
-    //protected List<tbl_Order> LoadOrderList()
+    [WebMethod]
+    public static string getOrderByDate(DateTime startDate, DateTime endDate)
+    {
+        string sql = "";
+        //DateTime startDate, DateTime endDate
+        sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "');";
+        //sql = "select * from tbl_Order where Order_ID in (select o.Order_ID from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "'));";
+        DataTable ds = UpdateData.UpdateBySql(sql).Tables[0];
+       
+        return JsonConvert.SerializeObject(ds);
+    }
+    //Order Detail
+    [WebMethod]
+    public static string getOrderDetailByOID(int oid)
+    {
+        string sql = "select * From tbl_Orderdetail where Order_ID = " + oid;
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        return JsonConvert.SerializeObject(dt);
+    }
+    [WebMethod]
+    public static string getAllOrderDetail()
+    {
+        string sql = "select * from tbl_OrderDetail";
+        DataTable ds = UpdateData.UpdateBySql(sql).Tables[0];
+        DataRowCollection rows = ds.Rows;
+        StringBuilder str = new StringBuilder();
+        if (rows.Count > 0)
+        {
+            str.Append("[");
+            for (int i = 0; i < rows.Count; i++)
+            {
+                str.Append("{");
+                str.Append("\"Order_ID\":\"" + rows[i]["Order_ID"] + "\",\"MaVe\":\"" + rows[i]["Mave"] + "\",\"UnitPrice\":\"" + rows[i]["unitPrice"] + "\",\"Type\":\"" + rows[i]["Type"] + "\",\"isTimeOut\":\"" + rows[i]["isTimeOut"] + "\"");
+                str.Append("}");
+                if (i < rows.Count - 1)
+                {
+                    str.Append(",");
+                }
+            }
+            str.Append("]");
+        }
+        return str.ToString();
+    }
+    //public static string getMemberByOID()
     //{
-        //List<tbl_Order> lst = new List<tbl_Order>();
-        //string sql;
-        //if (string.IsNullOrEmpty(txtordersearch.Text))
-        //{
-        //    sql = "select * from tbl_Order where Order_Status>0 order by Order_CreatedDate DESC";
-        //}
-        //else
-        //{
-        //    sql = "SELECT * FROM tbl_Order WHERE Order_Status>0 AND Order_Ten like N'%" + txtordersearch.Text + "%' OR Order_Code LIKE '%" + txtordersearch.Text + "%' ";
-        //    sql += "ORDER BY Order_CreatedDate DESC";
-        //}
-        //System.Data.DataTable ds = UpdateData.UpdateBySql(sql).Tables[0];
-        //DataRowCollection rows = ds.Rows;
-        //if (rows.Count > 0)
-        //{
-        //    for (int i = 0; i < rows.Count; i++)
-        //    {
-        //        tbl_Order order = new tbl_Order();
-        //        order.Order_ID = int.Parse(rows[i]["Order_ID"].ToString());
-        //        order.Order_Ten = rows[i]["Order_Ten"].ToString();
-        //        order.Order_Tel = rows[i]["Order_Tel"].ToString();
-        //        order.Order_Status = int.Parse(rows[i]["Order_Status"].ToString());
-        //        order.Order_isComplete = rows[i]["Order_isComplete"].ToString() == "True";
-        //        order.Order_isRead = rows[i]["Order_isRead"].ToString() == "True";
-        //        order.Order_Email = rows[i]["Order_Email"].ToString();
-        //        order.Order_Tongtien = double.Parse(rows[i]["Order_Tongtien"].ToString());
-        //        order.Order_Type = rows[i]["Order_Type"] != null ? int.Parse(rows[i]["Order_Type"].ToString()) : -1;
-        //        order.Order_Content = rows[i]["Order_Content"].ToString();
-        //        order.Order_CreatedDate = DateTime.Parse(rows[i]["Order_CreatedDate"].ToString());
-        //        order.Order_File = rows[i]["Order_File"].ToString();
-        //        order.Order_Code = rows[i]["Order_Code"].ToString();
-        //        lst.Add(order);
-        //    }
-        //}
-       // return lst;
-   // }
+        
+    //}
+    //Order
+    [WebMethod]
+    public static List<tbl_Order> getAllOrder()
+    {
+        var rs= orderRepo.All().ToList();
+        foreach (var item in rs)
+        {
+            item.tbl_Member = new tbl_Member(); 
+        }
+        return rs;
+    }
+    //Get  all order by sql
+    [WebMethod]
+    public static string getAllOrderBySql()
+    {
+        string sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe = cx.MaChuyenXe and cx.MaXe = x.MaXe and x.Nhaxe = nx.ID";
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        return JsonConvert.SerializeObject(dt);
+    }
+    [WebMethod]
+    public static string getNhaxeByMacx(int macx)
+    {
+        string sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe = cx.MaChuyenXe and cx.MaXe = x.MaXe and x.Nhaxe = nx.ID";
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        return JsonConvert.SerializeObject(dt);
+
+    }
+    [WebMethod]
+    public static string getMemberByOrderAcc(int accId)
+    {
+        string sql = "SELECT * FROM tbl_Member WHERE Member_ID=" + accId;
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        return JsonConvert.SerializeObject(dt);
+    }
+    [WebMethod]
+    public static string getTotal()
+    {
+        var rs = orderRepo.All().ToList();
+        double Total = 0;
+        foreach (var item in rs)
+        {
+            Total += double.Parse(item.Order_TongThanhToan.ToString());
+        }
+        return Total.ToString();
+    }
+    [WebMethod]
+    public static string getTongTien()
+    {
+        string sql = "select Sum(Order_TongTien) as TongTien from tbl_Order;";
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        return JsonConvert.SerializeObject(dt);
+    }
+    [WebMethod]
+    public static tbl_Order DeleteOrderByID(int oid)
+    {
+        var od = orderRepo.Find(oid);
+        var res = orderRepo.Remove(od);
+        orderRepo.Save();
+        return res;
+    }
     public void ResponseWrite(string msg)
     {
         HttpContext.Current.Response.Write(msg);
     }
-
-
-    protected void btnOrderSearch_Click(object sender, EventArgs e)
-    {
-       // LoadOrderList();
-    }
-
     protected global::System.Web.UI.WebControls.Label lblmsg;
     private void Export(DateTime d1, DateTime d2, string searchkey)
     {
@@ -172,26 +215,5 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
         //{
         //    throw (ex);
         //}
-    }
-    protected void btnExport_Click(object sender, EventArgs e)
-    {
-        DateTime d1, d2;
-        if (string.IsNullOrEmpty(txtd1.Text))
-        {
-            d1 = new DateTime(1953, 01, 01);
-        }
-        else
-        {
-            d1 = DateTime.Parse(txtd1.Text);
-        }
-        if (string.IsNullOrEmpty(txtd2.Text))
-        {
-            d2 = new DateTime(2100, 12, 31);
-        }
-        else
-        {
-           d2= DateTime.Parse(txtd2.Text);
-        }
-        Export(d1, d2, txtordersearch.Text);
     }
 }

@@ -96,7 +96,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         TimeSpan tsThoiGian = new TimeSpan(int.Parse(txtThoigiandiG.Text), int.Parse(txtThoigiandiP.Text), 0);
 
             int MaXe = int.Parse(ddlXe.SelectedValue);
-        DateTime Ngaydi = DateTime.ParseExact(txtNgaydi.Text, "dd/MM/yyyy", provider);
+        DateTime Ngaydi = DateTime.ParseExact(txtNgaydi.Text, "MM/dd/yyyy", provider);
         DateTime Giokhoihanh = DateTime.Parse(txtGiodi.Text);
         TimeSpan Thoigiandukien = tsThoiGian;
         string Diemdi = ddlDiHuyen.SelectedItem.Text + "-" + ddlDiTinh.SelectedItem.Text;

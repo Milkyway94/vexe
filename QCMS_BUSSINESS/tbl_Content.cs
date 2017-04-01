@@ -17,7 +17,6 @@ namespace QCMS_BUSSINESS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_Content()
         {
-            this.tbl_Comment = new HashSet<tbl_Comment>();
             this.tbl_File = new HashSet<tbl_File>();
         }
     
@@ -47,8 +46,6 @@ namespace QCMS_BUSSINESS
         public Nullable<int> Content_Pos { get; set; }
         public Nullable<int> lang { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Comment> tbl_Comment { get; set; }
         public virtual tbl_Mod tbl_Mod { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_File> tbl_File { get; set; }

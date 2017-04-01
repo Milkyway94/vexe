@@ -27,8 +27,15 @@
                                         <asp:Label Text="" ID="lberror_sdt" runat="server" />
                                     </p>
                                 </div>
+                                 <div class="form-group">
+                                    <label for="code">Bạn là? <span class="color">*</span></label>
+                                     <asp:DropDownList CssClass="form-control" ID="ddlRole" runat="server">
+                                         <asp:ListItem Value="1" Text="Hành khách" />
+                                         <asp:ListItem Value="2" Text="Nhà xe" />
+                                     </asp:DropDownList>
+                                </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="code">Số Điện Thoại <span class="color">*</span></label>
+                                    <label for="code">Số Điện Thoại <span class="color">*</span></label>
                                     <asp:TextBox runat="server" TextMode="Phone" required MaxLength="20" CssClass="form-control" ID="phone" placeholder="VD : 0123456789 Dùng để xác nhận khi lên xe"></asp:TextBox>
                                 </div>
                                 <div class="uk-alert-danger" uk-alert runat="server" id="dverror_email">
@@ -39,7 +46,7 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="code">Email <span class="color">*</span></label>
+                                    <label for="code">Email <span class="color">*</span></label>
                                     <asp:TextBox runat="server" required CssClass="form-control" TextMode="Email" ID="email" placeholder="VD : abc@gmail.com Dùng để nhận mã vé xe điện tử"></asp:TextBox>
                                 </div>
                                 <div class="uk-alert-danger" uk-alert runat="server" id="dverror_pass">
@@ -50,7 +57,7 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="code">Mật khẩu <span class="color">*</span></label>
+                                    <label  for="code">Mật khẩu <span class="color">*</span></label>
                                     <asp:TextBox runat="server" required TextMode="Password" MaxLength="32" CssClass="form-control" ID="password" placeholder="Nhập mật khẩu"></asp:TextBox>
                                 </div>
                                 <div class="uk-alert-danger" uk-alert runat="server" id="dverror_verpass">
@@ -61,7 +68,7 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-3" for="code">Nhập lại mật khẩu <span class="color">*</span></label>
+                                    <label for="code">Nhập lại mật khẩu <span class="color">*</span></label>
                                     <asp:TextBox runat="server" required CssClass="form-control" TextMode="Password" MaxLength="32" ID="repassword" placeholder="Nhập lại mật khẩu"></asp:TextBox>
                                 </div>
                                 <div class="form-group">

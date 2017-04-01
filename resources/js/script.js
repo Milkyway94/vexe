@@ -1,4 +1,5 @@
 ﻿$(".select2").select2();
+$(".timepicker").timepicker();
 $(".datepicker").datepicker({
     closeText: "Đóng",
     prevText: "Trước",

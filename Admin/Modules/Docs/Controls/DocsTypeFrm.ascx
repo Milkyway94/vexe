@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="DocsTypeFrm.ascx.cs" Inherits="DocsTypeFrm" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" />
 <link href="../../../css/StyleSheet.css" rel="stylesheet" />
 <script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>

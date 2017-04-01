@@ -27,10 +27,20 @@
                             <a class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="fa fa-bars"></span>
                             </a>
+                            <%if (Session["Member_Role"].ToString() == "1")
+                                { %>
                             <ul class="dropdown-menu dr-menu">
-                                <li><a href="/thong-tin-tai-khoan.htm"><i class="fa fa-user"></i>&nbsp;Xem hồ sơ</a></li>
+                                <%=LoadKhachMenu() %>
                                 <li><a href="/login.htm?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
                             </ul>
+                            <%}
+    else
+    { %>
+                            <ul class="dropdown-menu dr-menu">
+                                <%=LoadNhaXeMenu() %>
+                                <li><a href="/login.htm?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
+                            </ul>
+                            <%} %>
                         </div>
                     </li>
                     <%}

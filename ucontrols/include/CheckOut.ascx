@@ -304,13 +304,16 @@
                                 <tr ng-show="Method!=5">
                                     <td>Bạn có mã giảm giá?</td>
                                     <td>
-                                        <input type="text" class="form-control" name="name" style="width: 125px" value="" placeholder="VD:NHT25091995" />
+                                        <input type="text" class="form-control" name="name" ng-model="MaKhuyenMai" style="width: 125px" value="" placeholder="VD:NHT25091995" />
                                     </td>
-                                    <td><a ng-click="CheckPromote()" class="btn btn-success">Kiểm tra</a></td>
+                                    <td><button class="btn btn-success" ng-disabled="loaddingKM" ng-click="CheckPromote()"><span ng-hide="loaddingKM">Áp dụng</span><span ng-show="loaddingKM">Đang kiểm tra...<i class="fa fa-spinner fa-pulse fa-fw"></i></span></button></td>
                                 </tr>
                                 <tr ng-show="showErrorKM" ng-show="Method!=5">
-                                    <td colspan="3" style="border-top: none !important; text-align: center">
-                                        <span class="text-danger"><i>Mã số không hợp lệ</i></span>
+                                    <td colspan="3">
+                                        <div class="uk-alert-{{alertType}}" ng-show="showErrorKM" uk-alert>
+                                            <p>{{message}}</p>
+                                        </div>
+                                        <span class="text-primary">Số tiền khuyến mãi: <b class="text-danger">{{KhuyenMai | currency:"":0}}</b> vnđ <a ng-click="KhuyenMai=0" ng-show="KhuyenMai!=0" class="text-danger">(Bỏ áp dụng &times;)</a></span>
                                     </td>
                                 </tr>
                                 <tr ng-show="Method==4">

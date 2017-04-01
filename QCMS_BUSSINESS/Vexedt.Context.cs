@@ -27,6 +27,7 @@ namespace QCMS_BUSSINESS
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ChuyenXe> ChuyenXes { get; set; }
         public virtual DbSet<Code> Codes { get; set; }
         public virtual DbSet<Diadiem> Diadiems { get; set; }
         public virtual DbSet<DiemDon> DiemDons { get; set; }
@@ -47,8 +48,11 @@ namespace QCMS_BUSSINESS
         public virtual DbSet<tbl_Log> tbl_Log { get; set; }
         public virtual DbSet<tbl_Mess> tbl_Mess { get; set; }
         public virtual DbSet<tbl_Mod> tbl_Mod { get; set; }
+        public virtual DbSet<tbl_ModAdmin> tbl_ModAdmin { get; set; }
         public virtual DbSet<tbl_Modtype> tbl_Modtype { get; set; }
         public virtual DbSet<tbl_ModUserMenu> tbl_ModUserMenu { get; set; }
+        public virtual DbSet<tbl_Order> tbl_Order { get; set; }
+        public virtual DbSet<tbl_OrderDetail> tbl_OrderDetail { get; set; }
         public virtual DbSet<tbl_Other> tbl_Other { get; set; }
         public virtual DbSet<tbl_Role> tbl_Role { get; set; }
         public virtual DbSet<tbl_RoleUser> tbl_RoleUser { get; set; }
@@ -60,16 +64,14 @@ namespace QCMS_BUSSINESS
         public virtual DbSet<tblImage> tblImages { get; set; }
         public virtual DbSet<TinhThanh> TinhThanhs { get; set; }
         public virtual DbSet<TuyenDuong> TuyenDuongs { get; set; }
-        public virtual DbSet<Xe> Xes { get; set; }
+        public virtual DbSet<GiaoDich> GiaoDiches { get; set; }
         public virtual DbSet<Hangxe> Hangxes { get; set; }
         public virtual DbSet<ModBtn> ModBtns { get; set; }
-        public virtual DbSet<tbl_ModAdmin> tbl_ModAdmin { get; set; }
         public virtual DbSet<tbl_PhuongThucThanhToan> tbl_PhuongThucThanhToan { get; set; }
-        public virtual DbSet<GiaoDich> GiaoDiches { get; set; }
-        public virtual DbSet<tbl_Order> tbl_Order { get; set; }
-        public virtual DbSet<tbl_OrderDetail> tbl_OrderDetail { get; set; }
+        public virtual DbSet<tbl_PromoteCode> tbl_PromoteCode { get; set; }
+        public virtual DbSet<Xe> Xes { get; set; }
+        public virtual DbSet<RequestTravel> RequestTravels { get; set; }
         public virtual DbSet<tbl_Member> tbl_Member { get; set; }
-        public virtual DbSet<ChuyenXe> ChuyenXes { get; set; }
     
         public virtual int Content_search(string pagesize, string gotopage, string fields, string where_text, string order_text)
         {
@@ -105,45 +107,13 @@ namespace QCMS_BUSSINESS
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DELHANGXE", idParameter);
         }
     
-        public virtual int SP_DELXE(Nullable<int> maxe, string bienso, string tenxe, Nullable<int> nhaxe, string gioithieungan, string gioithieuchitiet, Nullable<bool> daxoa, Nullable<int> tongSoGhe, Nullable<int> hangxe)
+        public virtual int SP_DELXE(Nullable<int> maxe)
         {
             var maxeParameter = maxe.HasValue ?
                 new ObjectParameter("Maxe", maxe) :
                 new ObjectParameter("Maxe", typeof(int));
     
-            var biensoParameter = bienso != null ?
-                new ObjectParameter("Bienso", bienso) :
-                new ObjectParameter("Bienso", typeof(string));
-    
-            var tenxeParameter = tenxe != null ?
-                new ObjectParameter("Tenxe", tenxe) :
-                new ObjectParameter("Tenxe", typeof(string));
-    
-            var nhaxeParameter = nhaxe.HasValue ?
-                new ObjectParameter("Nhaxe", nhaxe) :
-                new ObjectParameter("Nhaxe", typeof(int));
-    
-            var gioithieunganParameter = gioithieungan != null ?
-                new ObjectParameter("Gioithieungan", gioithieungan) :
-                new ObjectParameter("Gioithieungan", typeof(string));
-    
-            var gioithieuchitietParameter = gioithieuchitiet != null ?
-                new ObjectParameter("Gioithieuchitiet", gioithieuchitiet) :
-                new ObjectParameter("Gioithieuchitiet", typeof(string));
-    
-            var daxoaParameter = daxoa.HasValue ?
-                new ObjectParameter("Daxoa", daxoa) :
-                new ObjectParameter("Daxoa", typeof(bool));
-    
-            var tongSoGheParameter = tongSoGhe.HasValue ?
-                new ObjectParameter("TongSoGhe", tongSoGhe) :
-                new ObjectParameter("TongSoGhe", typeof(int));
-    
-            var hangxeParameter = hangxe.HasValue ?
-                new ObjectParameter("Hangxe", hangxe) :
-                new ObjectParameter("Hangxe", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DELXE", maxeParameter, biensoParameter, tenxeParameter, nhaxeParameter, gioithieunganParameter, gioithieuchitietParameter, daxoaParameter, tongSoGheParameter, hangxeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DELXE", maxeParameter);
         }
     
         public virtual ObjectResult<SP_GETALLHANGXE_Result> SP_GETALLHANGXE()
@@ -178,12 +148,8 @@ namespace QCMS_BUSSINESS
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTHANGXE", nameParameter, descParameter, statusParameter);
         }
     
-        public virtual int SP_INSERTXE(Nullable<int> maxe, string bienso, string tenxe, Nullable<int> nhaxe, string gioithieungan, string gioithieuchitiet, Nullable<bool> daxoa, Nullable<int> tongSoGhe, Nullable<int> hangxe)
+        public virtual int SP_INSERTXE(string bienso, string tenxe, Nullable<int> nhaxe, string gioithieungan, string gioithieuchitiet, Nullable<bool> daxoa, Nullable<int> tongSoGhe, Nullable<int> hangxe)
         {
-            var maxeParameter = maxe.HasValue ?
-                new ObjectParameter("Maxe", maxe) :
-                new ObjectParameter("Maxe", typeof(int));
-    
             var biensoParameter = bienso != null ?
                 new ObjectParameter("Bienso", bienso) :
                 new ObjectParameter("Bienso", typeof(string));
@@ -216,7 +182,7 @@ namespace QCMS_BUSSINESS
                 new ObjectParameter("Hangxe", hangxe) :
                 new ObjectParameter("Hangxe", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTXE", maxeParameter, biensoParameter, tenxeParameter, nhaxeParameter, gioithieunganParameter, gioithieuchitietParameter, daxoaParameter, tongSoGheParameter, hangxeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTXE", biensoParameter, tenxeParameter, nhaxeParameter, gioithieunganParameter, gioithieuchitietParameter, daxoaParameter, tongSoGheParameter, hangxeParameter);
         }
     
         public virtual ObjectResult<SP_SELECTALLHANGXE_Result> SP_SELECTALLHANGXE()
@@ -448,6 +414,15 @@ namespace QCMS_BUSSINESS
         public virtual ObjectResult<SP_CCB_Tinh_Result> SP_CCB_Tinh()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CCB_Tinh_Result>("SP_CCB_Tinh");
+        }
+    
+        public virtual ObjectResult<SP_SELECTXEBYNHAXEID_Result> SP_SELECTXEBYNHAXEID(Nullable<int> maxe)
+        {
+            var maxeParameter = maxe.HasValue ?
+                new ObjectParameter("Maxe", maxe) :
+                new ObjectParameter("Maxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTXEBYNHAXEID_Result>("SP_SELECTXEBYNHAXEID", maxeParameter);
         }
     }
 }

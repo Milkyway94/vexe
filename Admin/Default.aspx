@@ -37,47 +37,21 @@
         <div id="tblMain">
             <div class="col-md-12 col">
                 <div class="text">
-                    <marquee class="marquee" scrollamount="2" scrolldelay="1" direction="up">
-		                <b>Công ty CP Giải pháp và công nghệ GoSMAC Việt Nam</b>, tên giao dịch tiếng anh là GoSMAC Solutions And Technology là đơn vị hoạt động chuyên nghiệp trong lĩnh vực Tích hợp Hệ thống, Phát triển phần mềm và Dịch vụ Công nghệ Thông tin.
-		                <br/>
-		                <strong>Mục tiêu của GoSMAC</strong> là hỗ trợ các đơn vị kinh tế, xã hội tham gia 
-		                hoạt động tuyên truyền, quảng bá, kinh doanh trên mạng internet toàn cầu đạt 
-		                hiệu quả cao nhất với mức chi phí thấp nhất.
-		                <br/>
-		                <p><strong>Các giải pháp</strong>
-                            <li>GoSMAC.Trading: Core giao dịch trực tuyến cho cty chứng khoán</li>
-                            <li>GoSMAC.Portal: Cổng thông tin điện tử</li>
-                            <li>GoSMAC.Web : Website thương mại</li></p>
-                        <p><strong>Các dịch vụ</strong>
-                            <li>Tư vấn thiết kế phần mềm lõi, website thương mại</li>
-                            <li>Social Marketing</li>
-                            <li>Lập trình Core</li>
-                            <li>Phát triển ứng dụng thiết bị thông minh</li></p>
-		                <strong>GoSMAC xin cam kết</strong> luôn đi đầu về tích hợp hệ thống, Công nghệ mới nhất, Hỗ trợ lâu dài, Chi phí tối thiếu
-		                <br>
-                        <p><strong>Danh sách khách hàng:</strong> Cty CP CK Châu Á Thái Bình Dương (APEC), Cty CP DataCloud, Cty CP An Phát Sài gòn, MarukoVietNam Group, Cty Fitech, Cty CP may Bắc Giang – xí nghiệp may Lạng Giạng
-Cục Thuế Hà Nội</p>
-		                <p>>Mọi chi tiết xin liên hệ với chúng tôi :</p>
-		                Số điện thoại : 091-5251-505
-		                <p>email : support@Gosmac.vn</p>
-		                <HR color="#f7f8f9" SIZE="1">
-		                Hệ thống này được lập trình bởi : GoSMAC Team<br/>
-		                Thiết kế giao diện : GoSMAC TT Team</marquee>
-                </div>
-                <div style="padding: 5px;">
-                    <table cellspacing="0" cellpadding="3" width="100%" border="0">
-                        <tr>
-                            <td><a href="tel:0982112395" class="as"><i class="fa fa-question-circle-o fa-lg"></i>Bạn muốn hỗ trợ?</a></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="version">
-                    <p class="text">
-                        ©2016 GoMAC Software Solutions<br/>
-                        <a class="as" style="color: Green;" href="http://www.Gosmac.vn" target="_blank">http://www.Gosmac.vn</a>
-                    </p>
+                    <div class="text-center" style="min-height: 350px;">
+                        <h1>Hệ thống quản trị Website <a href="http://gosmac.vn"><b class="text-danger">SMACCMS</b></a> Cho <a href="http://Vexedientu.vn">Vexedientu.vn</a></h1>
+                    </div>
+                    <div style="padding: 5px;">
+                        <a href="tel:0988945306" class="as"><i class="fa fa-question-circle-o fa-lg"></i>Bạn muốn hỗ trợ?</a>
+                    </div>
+                    <div class="version">
+                        <p class="text">
+                            ©2016 GoMAC Software Solutions<br />
+                            Website: <a class="as" style="color: Green;" href="http://www.Gosmac.vn" target="_blank">http://www.Gosmac.vn</a><br />
+                            Email: info@gosmac.vn<br />
+                            HotLine: <a href="tel:0988945306" class="as"><i class="fa fa-phone fa-lg"></i>0988945306</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </asp:Content>

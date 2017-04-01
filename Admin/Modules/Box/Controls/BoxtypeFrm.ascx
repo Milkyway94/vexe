@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="BoxtypeFrm.ascx.cs" Inherits="Admin_Modules_Box_Controls_BoxtypeFrm" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css">
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css">
 
 <table id=toolbar cellspacing="0">
 <tr> 

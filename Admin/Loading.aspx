@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>Loading......</title>
-    <link rel=stylesheet href="CSS/ADCStyle.css" type="text/css">
+    <link rel=stylesheet href="CSS/Style.css" type="text/css">
 </head>
 <body background="Themes/body_fill3.gif">
     <form id="form1" runat="server">

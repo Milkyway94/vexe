@@ -32,7 +32,5 @@ namespace QCMS_BUSSINESS
         public Nullable<int> ServiceRating { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> RatingAverage { get; set; }
-    
-        public virtual tbl_Content tbl_Content { get; set; }
     }
 }

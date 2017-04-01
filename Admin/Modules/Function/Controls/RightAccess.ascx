@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="RightAccess.ascx.cs" Inherits="Admin_Modules_Function_Controls_RightAccess" %>
-<link rel="stylesheet" href="<%=sRootAppPath %>css/ADCStyle.css" type="text/css" />
+<link rel="stylesheet" href="<%=sRootAppPath %>css/Style.css" type="text/css" />
 <script language="javascript" type="text/javascript">
 function window.onload(){			
 	doCheckItem();
