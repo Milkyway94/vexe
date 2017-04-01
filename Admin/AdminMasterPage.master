@@ -7,80 +7,68 @@
     <asp:Literal ID="ltCss" runat="server"></asp:Literal>
     <link href="css/jqueryUI.css" rel="stylesheet" />
     <link href="css/sweetalert.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/bower_components/angular-ui-grid/ui-grid.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/bower_components/textAngular/src/textAngular.css"/>
-    <link href="Assets/admin-lte/iCheck/all.css" rel="stylesheet" />
     <asp:Literal ID="ltJavascript" runat="server"></asp:Literal>
+    <script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
     <script type="text/javascript">
         function menuHandler(url) {
             document.location.href = url;
         }
     </script>
-    <style>
-        .navbar-nav > li:hover > ul {
-            display: block;
-        }
-
-        .navbar-nav > li:hover {
-            background: #317399;
-        }
-
-        .dropdown-menu > li > a {
-            padding: 9px 20px;
-        }
-
-        @media (min-width: 768px) {
-            .modal-dialog {
-                width: 750px;
-                margin: 30px auto;
-            }
-        }
-    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <form id="form1" runat="server" class="form-group">
         <header class="main-header">
-            <nav class="navbar navbar-static-top" role="navigation">
-                <div class="pull-left">
-                    <ul class="nav nav-bar">
-                        <asp:Label ID="lbMenuTop" runat="server" Text=""></asp:Label>
-                    </ul>
-                </div>
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav pull-right">
-                        <li>
-                            <a class="text-center" href="javascript:menuHandler('<%=urlRoot %>/Modules/Content/')"><i class="fa fa-tachometer fa-2x"></i>
-                                <br />
-                                Trang chủ</a>
-                        </li>
-                        <li>
-                            <a class="text-center" href="javascript:menuHandler('<%=urlRoot %>/Modules/Config/')"><i class="fa fa-gears fa-2x"></i>
-                                <br />
-                                Cấu hình</a>
-                        </li>
-                        <li>
-                            <a class="text-center" href="<%=URLRoot %>" target="_blank"><i class="fa fa-desktop  fa-2x"></i>
-                                <br />
-                                Website</a>
-                        </li>
-                        <li>
-                            <a href="javascript:menuHandler('<%=urlRoot %>/login.aspx?act=logout')" class="text-center"><i class="fa fa-sign-in fa-2x"></i>
-                                <br />
-                                Đăng xuất</a>
-                        </li>
-                        <li>
-                            <asp:DropDownList ID="ddlLang" CssClass="form-control select2" OnSelectedIndexChanged="ddlLang_SelectedIndexChanged" AutoPostBack="True" runat="server">
-                                <asp:ListItem Value="1">Tiếng Việt</asp:ListItem>
-                                <asp:ListItem Value="2">Tiếng Anh</asp:ListItem>
-                            </asp:DropDownList>
-                        </li>
-                    </ul>
+            <nav class="navbar navbar-inverse navbar-metro">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand hidden-lg" href="#">GoSMAC</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <asp:Label ID="lbMenuTop" runat="server" Text=""></asp:Label>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="text-center" href="javascript:menuHandler('<%=urlRoot %>/Modules/Content/')"><i class="fa fa-tachometer fa-2x"></i>
+                                    <br />
+                                    Trang chủ</a>
+                            </li>
+                            <li>
+                                <a class="text-center" href="javascript:menuHandler('<%=urlRoot %>/Modules/Config/')"><i class="fa fa-gears fa-2x"></i>
+                                    <br />
+                                    Cấu hình</a>
+                            </li>
+                            <li>
+                                <a class="text-center" href="<%=URLRoot %>" target="_blank"><i class="fa fa-desktop  fa-2x"></i>
+                                    <br />
+                                    Website</a>
+                            </li>
+                            <li>
+                                <a href="javascript:menuHandler('<%=urlRoot %>/login.aspx?act=logout')" class="text-center"><i class="fa fa-sign-in fa-2x"></i>
+                                    <br />
+                                    Đăng xuất</a>
+                            </li>
+                            <li>
+                                <asp:DropDownList ID="ddlLang" CssClass="form-control" OnSelectedIndexChanged="ddlLang_SelectedIndexChanged" AutoPostBack="True" runat="server">
+                                    <asp:ListItem Value="1">Tiếng Việt</asp:ListItem>
+                                    <asp:ListItem Value="2">Tiếng Anh</asp:ListItem>
+                                </asp:DropDownList>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </header>
         <div class="content-wrapper">
             <section class="content" ng-app="app">
-                <asp:ContentPlaceHolder ID="Main" runat="server" ></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="Main" runat="server"></asp:ContentPlaceHolder>
             </section>
         </div>
     </form>
@@ -88,6 +76,7 @@
     <script src="<%=urlRoot %>/Assets/app/bower_components/tinymce/tinymce.min.js"></script>
     <script src="<%=urlRoot %>/Assets/app/bower_components/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
     <script src="<%=urlRoot %>/js/angularjs_1.5.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     <script src="<%=urlRoot %>/js/ng-touch.js"></script>
     <script src="<%=urlRoot %>/js/ng-animate.js"></script>
     <script src="<%=urlRoot %>/Assets/app/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
@@ -110,9 +99,5 @@
     <script src="/bower_components/pdfmake/build/pdfmake.min.js"></script>
     <script src="/bower_components/pdfmake/build/vfs_fonts.js"></script>
     <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
-    <script src="/bower_components/icheck/icheck.min.js" type="text/javascript"></script>
-    <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="/bower_components/datatables/media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-
 </body>
 </html>

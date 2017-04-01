@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-sm-9 profile-main">
-            <h1 class="heading-title">Thông tin tài khoản</h1>
+            <h1 class="heading-title">Cập nhật Thông tin tài khoản</h1>
             <asp:Literal Text="" ID="ltrError" runat="server" />
             <div class="dvinfo" id="dvinfo" runat="server">
                 <div class="row">

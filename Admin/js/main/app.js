@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngTouch', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning',  'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping', 'ui.tinymce', 'ngAnimate', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('app', ['ngTouch','ui.bootstrap', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping', 'ui.tinymce', 'ngAnimate', 'angularUtils.directives.dirPagination'])
 app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Service', function ($scope, $filter, $http, $svNhaXe, $Service) {
     $scope.allnhaxe = [];
     //$svNhaXe.GetAllNhaXe().success(function (data) {
@@ -659,7 +659,7 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
     var url = "/Admin/Modules/Category/Xe.aspx";
     var rootUrl = "/Admin/Default.aspx";
     $scope.columns = [];
-    
+
     var nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
 
@@ -796,39 +796,6 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
         var rootUrl = "/Admin/Default.aspx";
         var nextWeek = new Date();
         nextWeek.setDate(nextWeek.getDate() + 7);
-        $scope.ExportData = function () {
-            console.log("Export");
-            var blob = new Blob([document.getElementById('grid1').innerHTML], {
-                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-            });
-            saveAs(blob, "Report.xls");
-        };
-
-        $scope.items = [{
-            name: "John Smith",
-            email: "j.smith@example.com",
-            dob: "1985-10-10"
-        }, {
-            name: "Jane Smith",
-            email: "jane.smith@example.com",
-            dob: "1988-12-22"
-        }, {
-            name: "Jan Smith",
-            email: "jan.smith@example.com",
-            dob: "2010-01-02"
-        }, {
-            name: "Jake Smith",
-            email: "jake.smith@exmaple.com",
-            dob: "2009-03-21"
-        }, {
-            name: "Josh Smith",
-            email: "josh@example.com",
-            dob: "2011-12-12"
-        }, {
-            name: "Jessie Smith",
-            email: "jess@example.com",
-            dob: "2004-10-12"
-        }]
         $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
             if (col.filters[0].term) {
                 return 'header-filtered';
@@ -955,17 +922,129 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
         }
         LoadData();
     }])
-    .filter('mapGender', function () {
-        var genderHash = {
-            1: 'male',
-            2: 'female'
-        };
+app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', function ($scope, $filter, $http, $Service) {
+    //Export Excel
+    $scope.exportData = function () {
+        var blob = new Blob([document.getElementById('exportData').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        saveAs(blob, "BaoCao" + datetime + ".xls");
+    };
+    $scope.exportPDF = function () {
+        var blob = new Blob([document.getElementById('exportPDF').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        //var date = new Date().toJSON().slice(0, 10);
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        console.log(datetime)
+        saveAs(blob, "Baocaochitiet" + datetime + ".xls");
+    };
+    //Get all tbl_Order
+    $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getAllOrderBySql", "json", {}).success(function (data) {
+        $scope.orders = JSON.parse(data.d);
+        angular.forEach($scope.orders, function (item) {
+            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
+                item.tbl_Member = JSON.parse(data.d);
+            })
+        })
+        //$scope.Tongtien += $scope.orders.Order_Tongtien;
+        $scope.TongTienThanhToan = getTotal($scope.orders);
+        console.log($scope.TongTien);
 
-        return function (input) {
-            if (!input) {
-                return '';
-            } else {
-                return genderHash[input];
-            }
-        };
-    });
+
+    })
+    $scope.loading = false;
+    $scope.loader = true;
+    $scope.nodata = false;
+    $scope.Loc = function (o) {
+        if ($scope.startDate != null && $scope.endDate != null) {
+            $scope.loading = true;
+            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderByDate", "json", { startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
+                $scope.orders = JSON.parse(data.d);
+                angular.forEach($scope.orders, function (item) {
+                    $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
+                        item.tbl_Member = JSON.parse(data.d);
+                    })
+                })
+                $scope.forDate = "Từ ngày " + $scope.startDate + " Đến ngày" + $scope.endDate + "";
+                $scope.loading = false;
+                $scope.totalItems = $scope.orders.length;
+                //-	Báo cáo doanh thu theo khoảng thời gian
+                $scope.TongTienThanhToan = getTotal($scope.orders);
+            })
+        }
+        else {
+            alert("Bạn chưa nhập khoảng thời gian tìm kiếm");
+        }
+    }
+    $scope.view = function (o) {
+        console.log(o.tbl_Member.Member_Phone);
+        var index = $scope.orders.indexOf(o.Order_ID);
+        //console.log(o.Order_ID);
+        $("#myModal").modal({ backdrop: false });
+        $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderDetailByOID", "json", { oid: o.Order_ID }).success(function (data) {
+            //console.log('success' + data.d);
+            $scope.orderDetail = JSON.parse(data.d);
+
+        })
+        //var index = $scope.orders.indexOf(o) + 1;
+        $scope.HoTen = o.Order_Account == null ? o.Order_Ten : o.tbl_Member[0].Member_Name;
+        $scope.DiaChi = o.Order_ShipAddress;
+        $scope.NgayTao = o.Order_CreatedDate;
+        $scope.NhaXe = o.Tennhaxe;
+        $scope.TongTien = o.Order_Tongtien;
+        $scope.Phone = o.Order_Account == null ? o.Sodienthoai : o.tbl_Member[0].Member_Phone;
+        $scope.MaDonHang = o.Order_Code;
+    }
+    $scope.Delete = function (o) {
+        if (confirm('Are you sure?')) {
+            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/DeleteOrderByID", "json", { oid: o.Order_ID })
+                .success(function (data) {
+                    console.log(data.d);
+                })
+        }
+    };
+    //Tổng doanh thu từ ngày -> đến ngày
+    var getTotal = function (o) {
+        var total = 0;
+        console.log(o);
+        angular.forEach(o, function (item) {
+            total += item.Order_TongThanhToan;
+        })
+        return total;
+    }
+    //Phân trang
+    $scope.viewby = 10;
+    //$scope.totalItems = 2;
+    $scope.currentPage = 4;
+    $scope.itemsPerPage = $scope.viewby;
+    $scope.maxSize = 5; //Number of pager buttons to show
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.pageChanged = function () {
+        console.log('Page changed to: ' + $scope.currentPage);
+    };
+    $scope.setItemsPerPage = function (num) {
+        $scope.itemsPerPage = num;
+        $scope.currentPage = 1; //reset to first paghe
+    }
+}])
+.filter('mapGender', function () {
+    var genderHash = {
+        1: 'male',
+        2: 'female'
+    };
+
+    return function (input) {
+        if (!input) {
+            return '';
+        } else {
+            return genderHash[input];
+        }
+    };
+});

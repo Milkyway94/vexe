@@ -29,9 +29,9 @@
             </div>
             <div class="form-group">
                 <label>Chọn ngày đi</label>
-                <div class="input-group bootstrap-timepicker timepicker">
-                    <asp:TextBox runat="server" ID="txtNgaydi" CssClass="form-control datepicker" placeholder="Chọn ngày đi" required></asp:TextBox>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <div class="input-group bootstrap-timepicker">
+                    <asp:TextBox runat="server" ID="txtNgaydi" ClientIDMode="Static" TextMode="Date" CssClass="form-control" placeholder="Chọn ngày đi" required></asp:TextBox>
+                    <span class="input-group-addon" onclick="$('#txtNgaydi').focus().click()"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
                 <asp:RequiredFieldValidator ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtNgaydi" runat="server" />
             </div>

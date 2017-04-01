@@ -109,14 +109,11 @@ public partial class Admin_AdminMasterPage : System.Web.UI.MasterPage
         StringBuilder str = new StringBuilder();
         str.Append("<link href=\"" + uRoot + "resources/css/bootstrap.min.css \" rel =\"stylesheet\" />");
         str.Append("<link href=\"" + uRoot + "resources/css/font-awesome.min.css \" rel =\"stylesheet\" />");
-        str.Append("<link href=\"" + urlRoot + "/Assets/admin-lte/css/AdminLTE.css \" rel =\"stylesheet\" />");
-        str.Append("<link href=\"" + urlRoot + "/Assets/admin-lte/css/skins/_all-skins.min.css \" rel =\"stylesheet\" />");
-        str.Append("<link href=\"" + urlRoot + "/Assets/admin-lte/css/skins/skin-blue.css\" rel =\"stylesheet\" />");
         str.Append("<link href=\"" + urlRoot + "/Assets/admin-lte/select2/select2.min.css\" rel =\"stylesheet\" />");
-        str.Append("<link href=\"" + urlRoot + "/Assets/admin-lte/css/skins/skin-blue.css\" type =\"text/css\" rel=\"stylesheet\" />");
         str.Append("<link rel=\"stylesheet\" href=\"" + URLCss + "/Style.css\" type=\"text/css\" />");
         str.Append("<link rel=\"stylesheet\" href=\"" + URLCss + "/MenuTop.css\" type=\"text/css\" />");
         str.Append("<link rel=\"stylesheet\" href=\"" + URLJ_dhtmlx + "/skins/layout_dhx_skyblue.css\" type=\"text/css\" />");
+        str.Append("<link rel=\"stylesheet\" href=\"" + URLCss + "/Orders.css\" type=\"text/css\" />");
         ltCss.Text = str.ToString();
     }
     public void LoadJs()
@@ -124,7 +121,7 @@ public partial class Admin_AdminMasterPage : System.Web.UI.MasterPage
         StringBuilder str = new StringBuilder();
         str.Append("<script src = \"" + uRoot + "resources/js/jquery-2.2.4.min.js\"></script>");
         str.Append("<script src = \"" + uRoot + "resources/js/bootstrap.min.js\"></script>");
-        str.Append("<script src = \"" + urlRoot + "/Assets/admin-lte/js/app.min.js\"></script>");
+        //str.Append("<script src = \"" + urlRoot + "/Assets/admin-lte/js/app.min.js\"></script>");
         str.Append("<script type=\"text/javascript\"  src=\"" + URLJs + "/tooltip.js\"></script>");
         str.Append("<script type=\"text/javascript\"  src=\"" + URLJs + "/toolBarButton.js\"></script>");
         str.Append("<script type=\"text/javascript\"  src=\"" + URLJ_dhtmlx + "/common.js\"></script>");

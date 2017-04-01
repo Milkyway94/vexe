@@ -3504,14 +3504,10 @@ table.text-center th {
 
 .modal-header {
     border-bottom-color: #f4f4f4;
-    background: #3c8dbc;
 }
-.modal-header h2 {
-    color: white;
-}
+
 .modal-footer {
     border-top-color: #f4f4f4;
-    background: #3c8dbc;
 }
 
 .modal-primary .modal-header,

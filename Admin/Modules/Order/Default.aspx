@@ -62,7 +62,7 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="6" class="text-right"><b>Tổng doanh thu {{ forDate }}</b></td>
-                                    <td colspan="2" class="text-left">{{ TongTien | number }} đ</td>
+                                    <td colspan="2" class="text-left">{{ TongTienThanhToan | number }} đ</td>
                                 </tr>
                             </tfoot>
                         </table>

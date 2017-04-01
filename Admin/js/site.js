@@ -1,6 +1,5 @@
 ﻿$(".datepicker").datepicker();
 $(".select2").select2();
-$(".timepicker").timepicker();
 function HideModal(modal) {
     $(modal).modal('hide');
 }
@@ -76,10 +75,10 @@ $(document).ready(function () {
         $(".act span").text(x);
         $(".prev span").text(y);
     });
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass: 'iradio_flat-green'
-    });
+    //$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    //    checkboxClass: 'icheckbox_flat-green',
+    //    radioClass: 'iradio_flat-green'
+    //});
 });
 function ChangeToSlug() {
     // Chuyển hết sang chữ thường

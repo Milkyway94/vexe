@@ -34,7 +34,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
                 txtGiodi.Text = cx.Giokhoihanh.Value.ToString("hh:mm:ss");
                 txtKhuyenMai.Text = cx.KhuyenMai.ToString();
                 txtLotrinh.Text = cx.LoTrinh;
-                txtNgaydi.Text = cx.Ngaydi.Value.ToString("dd/MM/yyyy");
+                txtNgaydi.Text = cx.Ngaydi.Value.ToString("yyyy-MM-dd");
                 txtThoigiandiG.Text = cx.Thoigiandukien.Value.ToString("hh");
                 txtThoigiandiP.Text = cx.Thoigiandukien.Value.ToString("mm");
                 txtTongsove.Text = cx.TongVe.ToString();
@@ -94,9 +94,8 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         string machuyenxe = Request.QueryString["id"];
         CultureInfo provider = CultureInfo.InvariantCulture;
         TimeSpan tsThoiGian = new TimeSpan(int.Parse(txtThoigiandiG.Text), int.Parse(txtThoigiandiP.Text), 0);
-
-            int MaXe = int.Parse(ddlXe.SelectedValue);
-        DateTime Ngaydi = DateTime.ParseExact(txtNgaydi.Text, "MM/dd/yyyy", provider);
+        DateTime Ngaydi = new DateTime();
+        int MaXe = int.Parse(ddlXe.SelectedValue);
         DateTime Giokhoihanh = DateTime.Parse(txtGiodi.Text);
         TimeSpan Thoigiandukien = tsThoiGian;
         string Diemdi = ddlDiHuyen.SelectedItem.Text + "-" + ddlDiTinh.SelectedItem.Text;
@@ -115,7 +114,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
 
         Hashtable tbCx = new Hashtable();
         tbCx.Add("MaXe", MaXe.ToString());
-        tbCx.Add("Ngaydi", Ngaydi.ToString());
+        tbCx.Add("Ngaydi", txtNgaydi.Text);
         tbCx.Add("Giokhoihanh", Giokhoihanh.ToString());
         tbCx.Add("Thoigiandukien", Thoigiandukien.ToString());
         tbCx.Add("Diemdi", Diemdi);

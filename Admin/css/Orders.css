@@ -1,20 +1,40 @@
 ﻿/* Styles go here */
 .table-header {
-    background-color: lightskyblue;
+    background-color: #007000;
 }
 
 .navbar-metro {
     background: #26344b;
 }
-
+th, th>a{
+    color:#ffc809 !important;
+    text-align:center;
+    border-bottom:0;
+    border-bottom-width:0;
+}
+.text-bold{
+    font-weight:bold;
+    color:#ed1c24;
+}
+.text-current{
+    color:#007000;
+}
 #exportable {
     padding-top: 20px;
 }
-
+#exportable tr td:last-child,#exportable tr td:first-child{
+    text-align:center;
+}
+#exportable tfoot>tr>td{
+    font-size:18px;
+}
 .table-info tr td:nth-child(odd) {
     text-align: right;
 }
-
+#ctl00_lbMenuTop .nav{
+    float:none !important;
+    margin:0 auto;
+}
 .navbar-nav > li:hover > ul {
     display: block;
 }
@@ -24,6 +44,8 @@
 }
 #ctl00_ddlLang{
     background:#eef1f5;
+    height: 26px;
+        font-size: 10px;
 }
 .navbar-nav > li:hover {
     background: #232f44;
@@ -33,7 +55,13 @@
 }
 .fa-2x {
     font-size: 1.33333333em;
-}   
+} 
+@media (max-width:768px){
+    .navbar-metro .nav{
+        width:50%;
+        float:left;
+    }
+}  
 .dropdown-menu > li > a {
     padding: 9px 20px;
     color:#b2c0d8;

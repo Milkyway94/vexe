@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/AdminMasterPage.master" CodeFile="ChuyenXe.aspx.cs" Inherits="Admin_Modules_Category_CX" %>
 
 <asp:Content ContentPlaceHolderID="main" runat="server">
-    <div class="box box-primary box-solid" id="ChuyenXeController" ng-controller="ChuyenXeController">
+    <div class="container box-solid" id="ChuyenXeController" ng-controller="ChuyenXeController">
         <div class="box-header with-border">
             <h3 class="text-center"><b>QUẢN LÝ CHUYẾN XE</b></h3>
         </div>
