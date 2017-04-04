@@ -21,6 +21,7 @@ namespace QCMS_BUSSINESS
             this.tbl_Mess = new HashSet<tbl_Mess>();
             this.tbl_Mod = new HashSet<tbl_Mod>();
             this.tbl_ModAdmin = new HashSet<tbl_ModAdmin>();
+            this.NhaXes = new HashSet<NhaXe>();
         }
     
         public int User_ID { get; set; }
@@ -51,5 +52,7 @@ namespace QCMS_BUSSINESS
         public virtual ICollection<tbl_Mod> tbl_Mod { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ModAdmin> tbl_ModAdmin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhaXe> NhaXes { get; set; }
     }
 }

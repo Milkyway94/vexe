@@ -1,21 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/AdminMasterPage.master" CodeFile="Xe.aspx.cs" Inherits="Admin_Modules_Category_Xe" %>
 <asp:content contentplaceholderid="main" runat="server">
-    <div class="box box-primary box-solid" id="QLXeController" ng-controller="QLXeController">
+    <div class="box box-primary container box-solid" id="QLXeController" ng-controller="QLXeController">
         <div class="box-header with-border">
             <h3 class="text-center"><b>QUẢN LÝ XE</b></h3>
         </div>
         <div class="box-body">
-                <div class="col-sm-2" id="left-bar">
-                    <h3>Danh sách nhà xe</h3>
-                    <ul class="dsNhaXe">
-                        <%foreach (var item in this.lstNhaXe)
-                            {%>
-                            <li><a ng-click="LoadXe(<%=item.ID %>)" href="javascript:void(0)"><%=item.Tennhaxe %></a></li>
-                          <%  } %>
-                       
-                    </ul>
-                </div>
-                <div class="col-sm-10">
+                <div class="col-sm-12">
                     <div class="form-group">
                 <button class="btn btn-flat btn-success btn-sm" id="btnadd" onclick="$('#add-modal').modal({backdrop: 'static'});$('#updateframe').prop('src', 'Create/ThemXe.aspx')" type="button"><i class="fa fa-plus"></i>Thêm mới</button>
             </div>

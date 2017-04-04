@@ -1,15 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ModList.aspx.cs" Inherits="Admin_Modules_Mod_ModList" %>
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head id="Head1" runat="server">
-    <title>Untitled Page</title>
-    <script type="text/javascript" src="../../js/toolBarButton.js"></script>
-	<script type="text/javascript" src="../../js/windowtracking.js"></script>
-	<script type="text/javascript" src="../../js/Common.js"></script>
-    <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" />
-</head>
-<body style="background-color:White; overflow: hidden;" leftmargin="0" topmargin="0">
-    <form id="form1" runat="server">
-    <%--<asp:ScriptManager ID="ScriptManager1" runat="server" />--%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/ChildPage.master" CodeFile="ModList.aspx.cs" Inherits="Admin_Modules_Mod_ModList" %>
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+</asp:Content>
+<asp:Content ID="Content" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div id="winVP" style="position: relative; height: 92%;">
         <table id="toolbar" cellspacing="0" style="display:block" border=0>
 		    <tr>
@@ -31,14 +25,14 @@
 		    </tr>
 	    </table>
 	    <div style="width: 100%; height: 99%; overflow-y:auto; overflow-x:hidden;">
-        <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>        
         <asp:UpdateProgress ID="UpdateProgress1" runat="server">
             <ProgressTemplate> 
-                <img alt="" src="skin/loading.gif" />
+                <img src="../../../img/loading.gif" />
            </ProgressTemplate>
-        </asp:UpdateProgress>  --%>
-        <asp:GridView ID="gvData" runat="server" Width="100%" CellPadding="3" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" GridLines="Horizontal" PagerSettings-Mode="NumericFirstLast"
+        </asp:UpdateProgress>  
+        <asp:GridView ID="gvData" runat="server" CssClass="table" Width="100%" CellPadding="3" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" GridLines="Horizontal" PagerSettings-Mode="NumericFirstLast"
             AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" EmptyDataText="Chưa có dữ liệu." OnRowCommand="gvData_RowCommand" OnRowDataBound="gvData_RowDataBound" ShowFooter="True" OnPageIndexChanging="gvData_PageIndexChanging" OnSorting="gvData_Sorting" PageSize="50" OnRowCreated="gvData_RowCreated">
             <Columns>                
                 <asp:TemplateField HeaderText="Check">
@@ -112,6 +106,4 @@
         </asp:UpdatePanel>
         </div>
     </div>
-</form>
-</body>
-</html>
+</asp:Content>

@@ -16,7 +16,7 @@
                     <span class="b1">Bước 1</span><br />
                     <span class="b1tv">TÌM VÉ</span>
                 </div>
-                <img src="../../resources/img/icon/icon-next.png" class="tv4" />
+                <img src="../../resources/img/icon/bg-next.png" class="tv4" />
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 bg-position">
                 <div class="tv1">
@@ -27,7 +27,7 @@
                     <span class="b1">Bước 2</span>
                     <div class="b1tv">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
                 </div>
-                <img src="../../resources/img/icon/icon-next.png" class="tv4" />
+                <img src="../../resources/img/icon/bg-next.png" class="tv4" />
             </div>
             <div class="col-md-3 col-xs-12 col-sm-3 bg-position">
                 <div class="tv1">

@@ -127,7 +127,13 @@ public partial class Admin_Modules_User_UserList : DefaultAdmin
             if (cbItem.Checked)
             {
                 int id = Convert.ToInt32(gvData.DataKeys[item.RowIndex].Value.ToString());
-                UpdateData.Delete("tbl_User", "User_ID=" + id);
+                if(UpdateData.Delete("tbl_ModsiteUser", "User_ID=" + id))
+                {
+                    if(UpdateData.Delete("tbl_ModUser", "UserID=" + id))
+                    {
+                        UpdateData.Delete("tbl_User", "User_ID=" + id);
+                    }
+                }
             }
         }
         BindData();

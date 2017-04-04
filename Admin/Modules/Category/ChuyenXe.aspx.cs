@@ -13,7 +13,7 @@ public partial class Admin_Modules_Category_CX : System.Web.UI.Page
     public static XeRepository xeRepo = new XeRepository();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+       
     }
     
 }

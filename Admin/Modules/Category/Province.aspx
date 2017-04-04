@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/AdminMasterPage.master" CodeFile="Province.aspx.cs" Inherits="Admin_Modules_Category_Province" %>
 
 <asp:Content ContentPlaceHolderID="main" runat="server" >
-    <div class="box box-primary box-solid" ng-controller="ChuyenXeController">
+    <div class="box box-primary container box-solid" ng-controller="ChuyenXeController">
         <div class="box-header with-border">
             <h3 class="text-center"><b>QUẢN LÝ TỈNH THÀNH PHỐ</b></h3>
         </div>

@@ -34,7 +34,7 @@ public partial class Box_Tree : DefaultAdmin
             bool isUse = Convert.ToBoolean(rows[i]["Boxtype_Status"]);
             if (!isUse)
             {
-                sLocked = "&nbsp;<img border=0 src=\"" + tp + "Tree/button_security.gif\">";
+                //sLocked = "&nbsp;<img border=0 src='" + tp + "Tree/button_security.gif'>";
             }
             sb.Append("var cate" + sID + " = new ADCTreeItem(\"" + Title + sLocked + " \", 1, " + sID + ",'" + tp + "Tree/objFolder.gif', false);");
             sb.Append("tree.add(cate" + sID + ");");

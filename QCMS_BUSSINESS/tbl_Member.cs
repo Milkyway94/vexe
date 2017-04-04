@@ -18,6 +18,7 @@ namespace QCMS_BUSSINESS
         public tbl_Member()
         {
             this.tbl_Order = new HashSet<tbl_Order>();
+            this.tbl_Order1 = new HashSet<tbl_Order>();
         }
     
         public int Member_ID { get; set; }
@@ -41,5 +42,7 @@ namespace QCMS_BUSSINESS
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Order> tbl_Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Order> tbl_Order1 { get; set; }
     }
 }

@@ -105,8 +105,7 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
     [WebMethod]
     public static string getAllOrderBySql()
     {
-        string sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe = cx.MaChuyenXe and cx.MaXe = x.MaXe and x.Nhaxe = nx.ID";
-        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        DataTable dt = UpdateData.ExecStore("SP_GetOrderByNhaxe", SessionUtil.GetValue("UserID")).Tables[0];
         return JsonConvert.SerializeObject(dt);
     }
     [WebMethod]

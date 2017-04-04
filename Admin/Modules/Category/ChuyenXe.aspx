@@ -5,7 +5,7 @@
         <div class="box-header with-border">
             <h3 class="text-center"><b>QUẢN LÝ CHUYẾN XE</b></h3>
         </div>
-        <div class="box-body">
+        <div class="box-body" id="body" runat="server">
             <div class="form-group">
                 <button class="btn btn-flat btn-success btn-sm" id="btnadd" onclick="$('#add-modal').modal({backdrop: 'static'});$('#updateframe').prop('src', 'Create/ThemChuyenXe.aspx')" type="button"><i class="fa fa-plus"></i>Thêm mới</button>
             </div>

@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Data;
 using System.ComponentModel;
 using System.IO;
+using SMAC;
 
 public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
 {
@@ -76,9 +77,9 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
     }
     
     [WebMethod]
-    public static List<NhaXe> GetAllNhaXe()
+    public static string GetAllNhaXe()
     {
-        return nhaxeRepo.All().ToList();
+        return JsonConvert.SerializeObject(UpdateData.ExecStore("SP_GetAllNhaXe", SessionUtil.GetValue("UserID")).Tables[0]);
     }
     [WebMethod]
     public static NhaXe CreateNhaXe(string Tennhaxe, int Soluongxe, string Trusochinh, string Nguoidaidien, string Sodienthoai, string Gioithieungan, string Gioithieuchitiet)

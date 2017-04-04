@@ -34,7 +34,7 @@ namespace QCMS_BUSSINESS.Repositories
             if (boxes != null)
             {
 
-                var mods= boxes.tbl_Mod;
+                var mods= boxes.tbl_Mod.OrderBy(o=>o.Mod_Pos);
                 if (mods != null)
                 {
                     return mods.ToList();

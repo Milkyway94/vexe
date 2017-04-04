@@ -551,3 +551,16 @@ TABLE#toolbar_top A.toolbar_top:active {
     padding: 0 !important;
     margin: 0 !important;
 }
+.ui-grid-pager-panel{
+    position: relative !important;
+}
+#grid1{
+    height: 418px !important;
+}
+.table th, .table th a {
+    background: #007000;
+    color: #ffc809 !important
+}
+.table td{
+    padding: 3px !important;
+}

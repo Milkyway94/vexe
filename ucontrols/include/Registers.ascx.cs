@@ -39,7 +39,6 @@ public partial class ucontrols_include_Document : System.Web.UI.UserControl
             tbIn.Add("Member_Status", "1");
             tbIn.Add("Member_Phone", phone.Text);
             tbIn.Add("Member_Email", email.Text);
-            tbIn.Add("Member_Role", ddlRole.SelectedValue);
             tbIn.Add("Member_Password", ApplicationUtil.PasswordEncrypt(CMSfunc._Replate(password.Text)));
             var res = UpdateData.Insert("tbl_Member", tbIn);
             if (res)

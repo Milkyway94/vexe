@@ -26,30 +26,9 @@ public partial class Admin_Modules_Member_MemberList : DefaultAdmin
     }
     protected void btntoExcel_Click(object sender, EventArgs e)
     {
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=Member.xls");
-        Response.ContentType = "application/ms-excel";
-        Response.ContentEncoding = System.Text.Encoding.Unicode;
-        Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
-        //Response.ContentType = "application/vnd.ms-excel";
-        Response.BufferOutput = true;
-        //Response.ContentEncoding = System.Text.Encoding.UTF8;
-        //Response.Charset = "UTF-8";
-        EnableViewState = false;
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        HtmlTextWriter htw = new HtmlTextWriter(sw);
-        gvMember.AllowPaging = false;
-        gvMember.DataBind();
-
-        //Change the Header Row back to white color 
-        gvMember.HeaderRow.Style.Add("background-color", "#ccc");
-        gvMember.HeaderRow.Style.Add("Font", "Times New Roman");
-        gvMember.HeaderRow.Font.Name = "Times New Roman";
-        gvMember.HeaderRow.Font.Size = 12;
-
-        gvMember.RenderControl(htw);
-        Response.Write(sw.ToString());
-        Response.End();
+        string sql = "SELECT * FROM tbl_Member";
+        DataSet dsData = UpdateData.UpdateBySql(sql);
+        SMAC.ExportData.ExportToExcel(gvMember, "member.xls");
     }
     public override void VerifyRenderingInServerForm(Control control)
     {

@@ -23,6 +23,9 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
         {
             this.loadDepartment();
             this.LoadRole();
+            string sql = "Select ID as id, TenNhaXe as text from Nhaxe";
+            DataTable dtNX = UpdateData.UpdateBySql(sql).Tables[0];
+            Value.BindToDropdown(ddlNhaXe, dtNX);
             if (act == "add")
             {
                 for (int i = 0; i < ddlPb.Items.Count; i++)
@@ -36,7 +39,7 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
                         dllRole.Items[i].Selected = true;
                 }
             }
-            if (act == "edit")      
+            if (act == "edit")
             {
                 txtUser.Enabled = false;
                 ViewEdit(id);
@@ -77,7 +80,7 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
             txtEmail.Text = rows[0]["User_Email"].ToString();
             txtOrder.Text = rows[0]["User_Pos"].ToString();
             txtImg.Text = rows[0]["User_Img"].ToString();
-            cbIsUse.Checked = (Convert.ToBoolean(rows[0]["User_Status"]) == true) ? true : false; 
+            cbIsUse.Checked = (Convert.ToBoolean(rows[0]["User_Status"]) == true) ? true : false;
             for (int i = 0; i < ddlPb.Items.Count; i++)
             {
                 if (ddlPb.Items[i].Value == rows[0]["pb_ID"].ToString())
@@ -88,9 +91,19 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
                 if (dllRole.Items[i].Value == rows[0]["User_Role"].ToString())
                     dllRole.Items[i].Selected = true;
             }
+            for (int i = 0; i < ddlNhaXe.Items.Count; i++)
+            {
+                string sqlnx = "SELECT * FROM User_Nhaxe where UserID=" + rows[0]["User_ID"];
+                DataTable dtnx = UpdateData.UpdateBySql(sqlnx).Tables[0];
+                if (dtnx.Rows.Count > 0)
+                {
+                    if (dllRole.Items[i].Value == dtnx.Rows[0]["NhaxeID"].ToString())
+                        dllRole.Items[i].Selected = true;
+                }
+            }
             bool sex = Convert.ToBoolean(rows[0]["User_Sex"]);
             rbSex.Items[0].Selected = (sex == true) ? true : false;
-            rbSex.Items[1].Selected = (sex == false) ? true : false;            
+            rbSex.Items[1].Selected = (sex == false) ? true : false;
         }
     }
     protected void lbtUpdate_Click(object sender, EventArgs e)
@@ -107,9 +120,9 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
         string pass = ApplicationUtil.PasswordEncrypt(txtPass.Text);
         string user = txtUser.Text;
 
-        tbIn.Add("User_Email", txtEmail.Text);        
+        tbIn.Add("User_Email", txtEmail.Text);
         tbIn.Add("pb_ID", ddlPb.SelectedValue);
-        tbIn.Add("User_Name", txtName.Text);        
+        tbIn.Add("User_Name", txtName.Text);
         tbIn.Add("User_Tel", txtTel.Text);
         tbIn.Add("User_Mobile", txtMobile.Text);
         tbIn.Add("User_Address", txtAddress.Text);
@@ -127,7 +140,22 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
                 tbIn.Add("User_Pass", pass.ToString());
                 bool _insert = UpdateData.Insert("tbl_User", tbIn);
                 if (_insert)
-                    FunctionDB.AddLog(Session["DepartID"].ToString(), Session["Username"].ToString(), "Thêm ", "Thành viên: " + user);
+                {
+                    Hashtable tbNXUser = new Hashtable();
+                    tbNXUser.Add("NhaxeId", ddlNhaXe.SelectedValue);
+                    string sql = "SELECT * FROM tbl_User WHERE UserName='" + user + "'";
+                    DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+                    if (dt.Rows.Count > 0)
+                    {
+                        tbNXUser.Add("UserID", dt.Rows[0]["User_ID"].ToString());
+                    }
+                    
+                    bool _InsertNXUser = UpdateData.Insert("User_Nhaxe", tbNXUser);
+                    if (_InsertNXUser)
+                    {
+                        FunctionDB.AddLog(Session["DepartID"].ToString(), Session["Username"].ToString(), "Thêm ", "Thành viên: " + user);
+                    }
+                }
             }
             else
             {
@@ -139,7 +167,19 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
             if (txtPass.Text != string.Empty)
                 tbIn.Add("User_Pass", pass.ToString());
             bool _update = UpdateData.Update("tbl_User", tbIn, "User_ID=" + id);
-            FunctionDB.AddLog(Session["DepartID"].ToString(), Session["Username"].ToString(), "Sửa", "Thành viên: " + user);
+            if (_update)
+            {
+                Hashtable tbNXUser = new Hashtable();
+                tbNXUser.Add("NhaxeId", ddlNhaXe.SelectedValue);
+                string sql = "SELECT * FROM tbl_User WHERE UserName='" + user + "'";
+                DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+
+                bool _updateNXUser = UpdateData.Update("User_Nhaxe", tbNXUser, "UserID="+ dt.Rows[0]["User_ID"].ToString());
+                if (_updateNXUser)
+                {
+                    FunctionDB.AddLog(Session["DepartID"].ToString(), Session["Username"].ToString(), "Sửa", "Thành viên: " + user);
+                }
+            }
         }
         Response.Write(sScript);
     }

@@ -23,10 +23,18 @@
             <div class="form-group">
                 <asp:Literal Text="" ID="ltrError" runat="server" />
             </div>
-            <div class="form-group">
-                <label>Chọn xe</label>
-                <asp:DropDownList runat="server" ID="ddlXe" CssClass="form-control select2"></asp:DropDownList>
-            </div>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="form-group">
+                        <label>Chọn nhà xe</label>
+                        <asp:DropDownList runat="server" ID="ddlNhaxe" OnSelectedIndexChanged="ddlNhaxe_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control select2"></asp:DropDownList>
+                    </div>
+                    <div class="form-group">
+                        <label>Chọn xe</label>
+                        <asp:DropDownList runat="server" ID="ddlXe" CssClass="form-control select2"></asp:DropDownList>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <div class="form-group">
                 <label>Chọn ngày đi</label>
                 <div class="input-group bootstrap-timepicker">
@@ -38,7 +46,7 @@
             <div class="form-group">
                 <label>Chọn giờ đi</label>
                 <div class="input-group bootstrap-timepicker timepicker">
-                    <asp:TextBox runat="server" ID="txtGiodi" ClientIDMode="Static" CssClass="form-control input-small" placeholder="Chọn giờ đi" required></asp:TextBox>
+                    <asp:TextBox runat="server" TextMode="Time" ID="txtGiodi" ClientIDMode="Static" CssClass="form-control input-small" placeholder="Chọn giờ đi" required></asp:TextBox>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                 </div>
                 <asp:RequiredFieldValidator ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtGiodi" runat="server" />
@@ -67,70 +75,79 @@
                 </div>
 
             </div>
-            <div class="form-group">
-                <label>Chọn điểm đi</label>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-xs-6">
-                        <div class="input-group">
-                            <asp:DropDownList runat="server" ID="ddlDiTinh" AutoPostBack="true" OnSelectedIndexChanged="ddlDiTinh_SelectedIndexChanged" ClientIDMode="Static" CssClass="form-control select2"></asp:DropDownList>
-                            <span class="input-group-addon">Tỉnh</span>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="form-group">
+                        <label>Chọn điểm đi</label>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                <div class="input-group">
+                                    <asp:DropDownList runat="server" ID="ddlDiTinh" AutoPostBack="true" OnSelectedIndexChanged="ddlDiTinh_SelectedIndexChanged" ClientIDMode="Static" CssClass="form-control select2"></asp:DropDownList>
+                                    <span class="input-group-addon">Tỉnh</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                <div class="input-group">
+                                    <asp:DropDownList runat="server" ID="ddlDiHuyen" CssClass="form-control select2"></asp:DropDownList>
+                                    <span class="input-group-addon">Huyện</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-xs-6">
-                        <div class="input-group">
-                            <asp:DropDownList runat="server" ID="ddlDiHuyen" CssClass="form-control select2"></asp:DropDownList>
-                            <span class="input-group-addon">Huyện</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Chọn điểm đến</label>
-                <div class="row">
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="form-group">
+                        <label>Chọn điểm đến</label>
+                        <div class="row">
 
-                    <div class="col-sm-6 col-md-6 col-xs-6">
-                        <div class="input-group">
-                            <asp:DropDownList runat="server" ID="ddlDenTinh" AutoPostBack="true" OnSelectedIndexChanged="ddlDenTinh_SelectedIndexChanged" ClientIDMode="Static" CssClass="form-control select2"></asp:DropDownList>
-                            <span class="input-group-addon">Tỉnh</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-xs-6">
-                        <div class="input-group">
-                            <asp:DropDownList runat="server" ID="ddlDenHuyen" CssClass="form-control select2"></asp:DropDownList>
-                            <span class="input-group-addon">Huyện</span>
-                        </div>
-                    </div>
+                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                <div class="input-group">
+                                    <asp:DropDownList runat="server" ID="ddlDenTinh" AutoPostBack="true" OnSelectedIndexChanged="ddlDenTinh_SelectedIndexChanged" ClientIDMode="Static" CssClass="form-control select2"></asp:DropDownList>
+                                    <span class="input-group-addon">Tỉnh</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                <div class="input-group">
+                                    <asp:DropDownList runat="server" ID="ddlDenHuyen" CssClass="form-control select2"></asp:DropDownList>
+                                    <span class="input-group-addon">Huyện</span>
+                                </div>
+                            </div>
 
-                </div>
-                <div class="form-group">
-                    <label>Tổng số vé</label>
-                    <asp:TextBox runat="server" ID="txtTongsove" TextMode="Number" CssClass="form-control" placeholder="Nhập tổng số vé" required></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Số vé thường</label>
-                    <asp:TextBox runat="server" ID="txtVethuong" TextMode="Number" CssClass="form-control" placeholder="Nhập số vé thường" required></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Số vé VIP</label>
-                    <asp:TextBox runat="server" ID="txtVeVip" TextMode="Number" CssClass="form-control" placeholder="Nhập số vé Vip" required></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Giá vé VIP</label>
-                    <asp:TextBox runat="server" ID="txtGiaVip" TextMode="Number" CssClass="form-control" placeholder="Nhập giá vé Vip" required></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Giá vé Thường</label>
-                    <asp:TextBox runat="server" ID="txtGiaThuong" TextMode="Number" CssClass="form-control" placeholder="Nhập giá vé thường" required></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Khuyến Mãi(%)</label>
-                    <asp:TextBox runat="server" ID="txtKhuyenMai" TextMode="Number" CssClass="form-control" placeholder="Nhập giá khuyến mãi"></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Lộ trình chuyến</label>
-                    <asp:TextBox runat="server" ID="txtLotrinh" CssClass="form-control" placeholder="Nhập giá lộ trình" required></asp:TextBox>
-                </div>
-            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tổng số vé</label>
+                            <asp:TextBox runat="server" ID="txtTongsove" TextMode="Number" CssClass="form-control" placeholder="Nhập tổng số vé" required></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>Số vé thường</label>
+                            <asp:TextBox runat="server" ID="txtVethuong" TextMode="Number" CssClass="form-control" placeholder="Nhập số vé thường" required></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>Số vé VIP</label>
+                            <asp:TextBox runat="server" ID="txtVeVip" TextMode="Number" CssClass="form-control" placeholder="Nhập số vé Vip" required></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá vé VIP</label>
+                            <asp:TextBox runat="server" ID="txtGiaVip" TextMode="Number" CssClass="form-control" placeholder="Nhập giá vé Vip" required></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá vé Thường</label>
+                            <asp:TextBox runat="server" ID="txtGiaThuong" TextMode="Number" CssClass="form-control" placeholder="Nhập giá vé thường" required></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>Khuyến Mãi(%)</label>
+                            <asp:TextBox runat="server" ID="txtKhuyenMai" TextMode="Number" CssClass="form-control" placeholder="Nhập giá khuyến mãi"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>Lộ trình chuyến</label>
+                            <asp:TextBox runat="server" ID="txtLotrinh" CssClass="form-control" placeholder="Nhập giá lộ trình" required></asp:TextBox>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
         </div>
         <div class="modal-footer">
             <div class="form-group">
@@ -150,7 +167,10 @@
     <script src="/resources/js/jquery-ui.js"></script>
     <script src="../../../Assets/app/bower_components/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
     <script src="../../../js/site.js"></script>
-     <script src="/resources/js/script.js"></script>
+    <script src="/resources/js/script.js"></script>
+    <script> 
+        function pageLoad() { $(".select2").select2(); }
+    </script>
     <asp:Literal Text="" ID="ltrScript" runat="server" />
 </body>
 </html>

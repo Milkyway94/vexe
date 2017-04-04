@@ -5,6 +5,7 @@
     <script type="text/javascript" src="../../js/toolBarButton.js"></script>
 	<script type="text/javascript" src="../../js/windowtracking.js"></script>
 	<script type="text/javascript" src="../../js/Common.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" /> 
     <script type="text/javascript">
     function processClick(id)
@@ -35,7 +36,7 @@
 			    </td>
 		    </tr>
 	    </table>
-	    <div style="width: 100%; height: 99%; overflow-y:auto; overflow-x:hidden;">
+	    <div style="overflow-y:auto; overflow-x:hidden;">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>        
         <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -43,7 +44,7 @@
                 <img alt="" src="skin/loading.gif" />
            </ProgressTemplate>
         </asp:UpdateProgress>  
-        <asp:GridView ID="gvData" runat="server" Width="100%" CellPadding="3" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" GridLines="Horizontal" PagerSettings-Mode="NumericFirstLast"
+        <asp:GridView ID="gvData" runat="server" CellPadding="3" CssClass="table" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" GridLines="Horizontal" PagerSettings-Mode="NumericFirstLast"
             AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" EmptyDataText="Chưa có dữ liệu." OnRowCommand="gvData_RowCommand" OnRowDataBound="gvData_RowDataBound" ShowFooter="True" OnPageIndexChanging="gvData_PageIndexChanging" OnSorting="gvData_Sorting" PageSize="50" OnRowCreated="gvData_RowCreated">
             <Columns>                
                 <asp:TemplateField HeaderText="Check">
@@ -66,14 +67,14 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Tình trạng">
                     <HeaderStyle HorizontalAlign="Center" />
-                    <ItemStyle HorizontalAlign="Center" Width="70px" />
+                    <ItemStyle HorizontalAlign="Center" />
                     <ItemTemplate>
                         <asp:ImageButton ID="imgUse" CommandName="isUse" runat="server" CommandArgument='<%# Eval("Other_ID") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Option">
                     <HeaderStyle HorizontalAlign="Center" />
-                    <ItemStyle HorizontalAlign="Center" Width="60px" />
+                    <ItemStyle HorizontalAlign="Center"/>
                     <ItemTemplate>
                         <asp:Image ID="imgEdit" CssClass="Img" runat="server" ImageUrl="../../Themes/edit.gif" />
                         &nbsp;&nbsp;&nbsp;

@@ -116,43 +116,91 @@
     <Compile Include="SoDienThoai.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_CCB_Huyen_FROM_Tinh1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_CCB_Huyen_FROM_Tinh_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_CCB_NHAXE_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_CCB_Tinh1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_CCB_Tinh_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_CCB_XE1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_CCB_XE_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GETALLHANGXE1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GETALLHANGXE_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_GETALLNHAXE1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_GETALLNHAXE_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GETALLTINH1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GETALLTINH_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sp_GetAllXe1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sp_GetAllXe_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetOrderByNhaxe_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SELECTALLHANGXE1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_SELECTALLHANGXE_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_SELECTCHUYENXEBYID1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_SELECTCHUYENXEBYID_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SELECTHANGXEBYID1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_SELECTHANGXEBYID_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_SELECTTINHBYID1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_SELECTTINHBYID_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_SELECTXEBYID1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_SELECTXEBYID_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_SELECTXEBYNHAXEID1_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_SELECTXEBYNHAXEID_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ViewChuyenXe1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_ViewChuyenXe_Result.cs">

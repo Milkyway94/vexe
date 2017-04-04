@@ -27,8 +27,8 @@ namespace QCMS_BUSSINESS
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ChuyenXe> ChuyenXes { get; set; }
         public virtual DbSet<Code> Codes { get; set; }
+        public virtual DbSet<ChuyenXe> ChuyenXes { get; set; }
         public virtual DbSet<Diadiem> Diadiems { get; set; }
         public virtual DbSet<DiemDon> DiemDons { get; set; }
         public virtual DbSet<Ghe> Ghes { get; set; }
@@ -46,6 +46,7 @@ namespace QCMS_BUSSINESS
         public virtual DbSet<tbl_Department> tbl_Department { get; set; }
         public virtual DbSet<tbl_File> tbl_File { get; set; }
         public virtual DbSet<tbl_Log> tbl_Log { get; set; }
+        public virtual DbSet<tbl_Member> tbl_Member { get; set; }
         public virtual DbSet<tbl_Mess> tbl_Mess { get; set; }
         public virtual DbSet<tbl_Mod> tbl_Mod { get; set; }
         public virtual DbSet<tbl_ModAdmin> tbl_ModAdmin { get; set; }
@@ -64,14 +65,13 @@ namespace QCMS_BUSSINESS
         public virtual DbSet<tblImage> tblImages { get; set; }
         public virtual DbSet<TinhThanh> TinhThanhs { get; set; }
         public virtual DbSet<TuyenDuong> TuyenDuongs { get; set; }
+        public virtual DbSet<Xe> Xes { get; set; }
         public virtual DbSet<GiaoDich> GiaoDiches { get; set; }
         public virtual DbSet<Hangxe> Hangxes { get; set; }
         public virtual DbSet<ModBtn> ModBtns { get; set; }
-        public virtual DbSet<tbl_PhuongThucThanhToan> tbl_PhuongThucThanhToan { get; set; }
-        public virtual DbSet<tbl_PromoteCode> tbl_PromoteCode { get; set; }
-        public virtual DbSet<Xe> Xes { get; set; }
         public virtual DbSet<RequestTravel> RequestTravels { get; set; }
-        public virtual DbSet<tbl_Member> tbl_Member { get; set; }
+        public virtual DbSet<tbl_PromoteCode> tbl_PromoteCode { get; set; }
+        public virtual DbSet<tbl_PhuongThucThanhToan> tbl_PhuongThucThanhToan { get; set; }
     
         public virtual int Content_search(string pagesize, string gotopage, string fields, string where_text, string order_text)
         {
@@ -423,6 +423,388 @@ namespace QCMS_BUSSINESS
                 new ObjectParameter("Maxe", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTXEBYNHAXEID_Result>("SP_SELECTXEBYNHAXEID", maxeParameter);
+        }
+    
+        public virtual int DELHANGXE1(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DELHANGXE1", idParameter);
+        }
+    
+        public virtual ObjectResult<SP_CCB_Huyen_FROM_Tinh1_Result> SP_CCB_Huyen_FROM_Tinh1(Nullable<int> matinh)
+        {
+            var matinhParameter = matinh.HasValue ?
+                new ObjectParameter("matinh", matinh) :
+                new ObjectParameter("matinh", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CCB_Huyen_FROM_Tinh1_Result>("SP_CCB_Huyen_FROM_Tinh1", matinhParameter);
+        }
+    
+        public virtual ObjectResult<SP_CCB_NHAXE_Result> SP_CCB_NHAXE(Nullable<int> sessionID)
+        {
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CCB_NHAXE_Result>("SP_CCB_NHAXE", sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_CCB_Tinh1_Result> SP_CCB_Tinh1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CCB_Tinh1_Result>("SP_CCB_Tinh1");
+        }
+    
+        public virtual ObjectResult<SP_CCB_XE1_Result> SP_CCB_XE1(Nullable<int> sessionID)
+        {
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CCB_XE1_Result>("SP_CCB_XE1", sessionIDParameter);
+        }
+    
+        public virtual int SP_DELTINH1(Nullable<int> maTinh)
+        {
+            var maTinhParameter = maTinh.HasValue ?
+                new ObjectParameter("MaTinh", maTinh) :
+                new ObjectParameter("MaTinh", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DELTINH1", maTinhParameter);
+        }
+    
+        public virtual int SP_DELXE1(Nullable<int> maxe)
+        {
+            var maxeParameter = maxe.HasValue ?
+                new ObjectParameter("Maxe", maxe) :
+                new ObjectParameter("Maxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DELXE1", maxeParameter);
+        }
+    
+        public virtual ObjectResult<SP_GETALLHANGXE1_Result> SP_GETALLHANGXE1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GETALLHANGXE1_Result>("SP_GETALLHANGXE1");
+        }
+    
+        public virtual ObjectResult<SP_GETALLNHAXE1_Result> SP_GETALLNHAXE1(Nullable<int> sessionId)
+        {
+            var sessionIdParameter = sessionId.HasValue ?
+                new ObjectParameter("sessionId", sessionId) :
+                new ObjectParameter("sessionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GETALLNHAXE1_Result>("SP_GETALLNHAXE1", sessionIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GETALLTINH1_Result> SP_GETALLTINH1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GETALLTINH1_Result>("SP_GETALLTINH1");
+        }
+    
+        public virtual ObjectResult<Sp_GetAllXe1_Result> Sp_GetAllXe1(Nullable<int> sessionId)
+        {
+            var sessionIdParameter = sessionId.HasValue ?
+                new ObjectParameter("sessionId", sessionId) :
+                new ObjectParameter("sessionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetAllXe1_Result>("Sp_GetAllXe1", sessionIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetOrderByNhaxe_Result> SP_GetOrderByNhaxe(Nullable<int> sessionId)
+        {
+            var sessionIdParameter = sessionId.HasValue ?
+                new ObjectParameter("sessionId", sessionId) :
+                new ObjectParameter("sessionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetOrderByNhaxe_Result>("SP_GetOrderByNhaxe", sessionIdParameter);
+        }
+    
+        public virtual int SP_INSERTCHUYENXE1(Nullable<int> machuyenxe, Nullable<System.DateTime> ngaydi, string giokhoihanh, string thoigiandukien, Nullable<int> maXe, string mota, string chitiet, Nullable<int> tuyenDuong, string diemdi, string diemden, Nullable<int> trangThai, Nullable<double> giaVIP, Nullable<double> giaThuong, Nullable<int> tongVe, Nullable<int> veThuongConLai, string sDT, Nullable<int> khuyenMai, string loTrinh, Nullable<int> tongSoVeVIP, Nullable<int> tongSoVeThuong, Nullable<int> veVipConLai)
+        {
+            var machuyenxeParameter = machuyenxe.HasValue ?
+                new ObjectParameter("Machuyenxe", machuyenxe) :
+                new ObjectParameter("Machuyenxe", typeof(int));
+    
+            var ngaydiParameter = ngaydi.HasValue ?
+                new ObjectParameter("Ngaydi", ngaydi) :
+                new ObjectParameter("Ngaydi", typeof(System.DateTime));
+    
+            var giokhoihanhParameter = giokhoihanh != null ?
+                new ObjectParameter("Giokhoihanh", giokhoihanh) :
+                new ObjectParameter("Giokhoihanh", typeof(string));
+    
+            var thoigiandukienParameter = thoigiandukien != null ?
+                new ObjectParameter("Thoigiandukien", thoigiandukien) :
+                new ObjectParameter("Thoigiandukien", typeof(string));
+    
+            var maXeParameter = maXe.HasValue ?
+                new ObjectParameter("MaXe", maXe) :
+                new ObjectParameter("MaXe", typeof(int));
+    
+            var motaParameter = mota != null ?
+                new ObjectParameter("Mota", mota) :
+                new ObjectParameter("Mota", typeof(string));
+    
+            var chitietParameter = chitiet != null ?
+                new ObjectParameter("Chitiet", chitiet) :
+                new ObjectParameter("Chitiet", typeof(string));
+    
+            var tuyenDuongParameter = tuyenDuong.HasValue ?
+                new ObjectParameter("TuyenDuong", tuyenDuong) :
+                new ObjectParameter("TuyenDuong", typeof(int));
+    
+            var diemdiParameter = diemdi != null ?
+                new ObjectParameter("Diemdi", diemdi) :
+                new ObjectParameter("Diemdi", typeof(string));
+    
+            var diemdenParameter = diemden != null ?
+                new ObjectParameter("Diemden", diemden) :
+                new ObjectParameter("Diemden", typeof(string));
+    
+            var trangThaiParameter = trangThai.HasValue ?
+                new ObjectParameter("TrangThai", trangThai) :
+                new ObjectParameter("TrangThai", typeof(int));
+    
+            var giaVIPParameter = giaVIP.HasValue ?
+                new ObjectParameter("GiaVIP", giaVIP) :
+                new ObjectParameter("GiaVIP", typeof(double));
+    
+            var giaThuongParameter = giaThuong.HasValue ?
+                new ObjectParameter("GiaThuong", giaThuong) :
+                new ObjectParameter("GiaThuong", typeof(double));
+    
+            var tongVeParameter = tongVe.HasValue ?
+                new ObjectParameter("TongVe", tongVe) :
+                new ObjectParameter("TongVe", typeof(int));
+    
+            var veThuongConLaiParameter = veThuongConLai.HasValue ?
+                new ObjectParameter("VeThuongConLai", veThuongConLai) :
+                new ObjectParameter("VeThuongConLai", typeof(int));
+    
+            var sDTParameter = sDT != null ?
+                new ObjectParameter("SDT", sDT) :
+                new ObjectParameter("SDT", typeof(string));
+    
+            var khuyenMaiParameter = khuyenMai.HasValue ?
+                new ObjectParameter("KhuyenMai", khuyenMai) :
+                new ObjectParameter("KhuyenMai", typeof(int));
+    
+            var loTrinhParameter = loTrinh != null ?
+                new ObjectParameter("LoTrinh", loTrinh) :
+                new ObjectParameter("LoTrinh", typeof(string));
+    
+            var tongSoVeVIPParameter = tongSoVeVIP.HasValue ?
+                new ObjectParameter("TongSoVeVIP", tongSoVeVIP) :
+                new ObjectParameter("TongSoVeVIP", typeof(int));
+    
+            var tongSoVeThuongParameter = tongSoVeThuong.HasValue ?
+                new ObjectParameter("TongSoVeThuong", tongSoVeThuong) :
+                new ObjectParameter("TongSoVeThuong", typeof(int));
+    
+            var veVipConLaiParameter = veVipConLai.HasValue ?
+                new ObjectParameter("VeVipConLai", veVipConLai) :
+                new ObjectParameter("VeVipConLai", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTCHUYENXE1", machuyenxeParameter, ngaydiParameter, giokhoihanhParameter, thoigiandukienParameter, maXeParameter, motaParameter, chitietParameter, tuyenDuongParameter, diemdiParameter, diemdenParameter, trangThaiParameter, giaVIPParameter, giaThuongParameter, tongVeParameter, veThuongConLaiParameter, sDTParameter, khuyenMaiParameter, loTrinhParameter, tongSoVeVIPParameter, tongSoVeThuongParameter, veVipConLaiParameter);
+        }
+    
+        public virtual int SP_INSERTHANGXE1(string name, string desc, Nullable<bool> status)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descParameter = desc != null ?
+                new ObjectParameter("Desc", desc) :
+                new ObjectParameter("Desc", typeof(string));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTHANGXE1", nameParameter, descParameter, statusParameter);
+        }
+    
+        public virtual int SP_INSERTTINH1(string tenTinh)
+        {
+            var tenTinhParameter = tenTinh != null ?
+                new ObjectParameter("TenTinh", tenTinh) :
+                new ObjectParameter("TenTinh", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTTINH1", tenTinhParameter);
+        }
+    
+        public virtual int SP_INSERTXE1(string bienso, string tenxe, Nullable<int> nhaxe, string gioithieungan, string gioithieuchitiet, Nullable<bool> daxoa, Nullable<int> tongSoGhe, Nullable<int> hangxe)
+        {
+            var biensoParameter = bienso != null ?
+                new ObjectParameter("Bienso", bienso) :
+                new ObjectParameter("Bienso", typeof(string));
+    
+            var tenxeParameter = tenxe != null ?
+                new ObjectParameter("Tenxe", tenxe) :
+                new ObjectParameter("Tenxe", typeof(string));
+    
+            var nhaxeParameter = nhaxe.HasValue ?
+                new ObjectParameter("Nhaxe", nhaxe) :
+                new ObjectParameter("Nhaxe", typeof(int));
+    
+            var gioithieunganParameter = gioithieungan != null ?
+                new ObjectParameter("Gioithieungan", gioithieungan) :
+                new ObjectParameter("Gioithieungan", typeof(string));
+    
+            var gioithieuchitietParameter = gioithieuchitiet != null ?
+                new ObjectParameter("Gioithieuchitiet", gioithieuchitiet) :
+                new ObjectParameter("Gioithieuchitiet", typeof(string));
+    
+            var daxoaParameter = daxoa.HasValue ?
+                new ObjectParameter("Daxoa", daxoa) :
+                new ObjectParameter("Daxoa", typeof(bool));
+    
+            var tongSoGheParameter = tongSoGhe.HasValue ?
+                new ObjectParameter("TongSoGhe", tongSoGhe) :
+                new ObjectParameter("TongSoGhe", typeof(int));
+    
+            var hangxeParameter = hangxe.HasValue ?
+                new ObjectParameter("Hangxe", hangxe) :
+                new ObjectParameter("Hangxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERTXE1", biensoParameter, tenxeParameter, nhaxeParameter, gioithieunganParameter, gioithieuchitietParameter, daxoaParameter, tongSoGheParameter, hangxeParameter);
+        }
+    
+        public virtual ObjectResult<SP_SELECTALLHANGXE1_Result> SP_SELECTALLHANGXE1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTALLHANGXE1_Result>("SP_SELECTALLHANGXE1");
+        }
+    
+        public virtual ObjectResult<SP_SELECTCHUYENXEBYID1_Result> SP_SELECTCHUYENXEBYID1(Nullable<int> maChuyenXe)
+        {
+            var maChuyenXeParameter = maChuyenXe.HasValue ?
+                new ObjectParameter("MaChuyenXe", maChuyenXe) :
+                new ObjectParameter("MaChuyenXe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTCHUYENXEBYID1_Result>("SP_SELECTCHUYENXEBYID1", maChuyenXeParameter);
+        }
+    
+        public virtual ObjectResult<SP_SELECTHANGXEBYID1_Result> SP_SELECTHANGXEBYID1(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTHANGXEBYID1_Result>("SP_SELECTHANGXEBYID1", iDParameter);
+        }
+    
+        public virtual ObjectResult<SP_SELECTTINHBYID1_Result> SP_SELECTTINHBYID1(Nullable<int> maTinh)
+        {
+            var maTinhParameter = maTinh.HasValue ?
+                new ObjectParameter("MaTinh", maTinh) :
+                new ObjectParameter("MaTinh", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTTINHBYID1_Result>("SP_SELECTTINHBYID1", maTinhParameter);
+        }
+    
+        public virtual ObjectResult<SP_SELECTXEBYID1_Result> SP_SELECTXEBYID1(Nullable<int> maxe)
+        {
+            var maxeParameter = maxe.HasValue ?
+                new ObjectParameter("Maxe", maxe) :
+                new ObjectParameter("Maxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTXEBYID1_Result>("SP_SELECTXEBYID1", maxeParameter);
+        }
+    
+        public virtual ObjectResult<SP_SELECTXEBYNHAXEID1_Result> SP_SELECTXEBYNHAXEID1(Nullable<int> maxe)
+        {
+            var maxeParameter = maxe.HasValue ?
+                new ObjectParameter("Maxe", maxe) :
+                new ObjectParameter("Maxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SELECTXEBYNHAXEID1_Result>("SP_SELECTXEBYNHAXEID1", maxeParameter);
+        }
+    
+        public virtual int SP_UPDATEHANGXE(Nullable<int> iD, string name, string desc, Nullable<int> status)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descParameter = desc != null ?
+                new ObjectParameter("Desc", desc) :
+                new ObjectParameter("Desc", typeof(string));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATEHANGXE", iDParameter, nameParameter, descParameter, statusParameter);
+        }
+    
+        public virtual int SP_UPDATETINH1(Nullable<int> maTinh, string tenTinh)
+        {
+            var maTinhParameter = maTinh.HasValue ?
+                new ObjectParameter("MaTinh", maTinh) :
+                new ObjectParameter("MaTinh", typeof(int));
+    
+            var tenTinhParameter = tenTinh != null ?
+                new ObjectParameter("TenTinh", tenTinh) :
+                new ObjectParameter("TenTinh", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATETINH1", maTinhParameter, tenTinhParameter);
+        }
+    
+        public virtual int SP_UPDATEXE1(Nullable<int> maxe, string bienso, string tenxe, Nullable<int> nhaxe, string gioithieungan, string gioithieuchitiet, Nullable<bool> daxoa, Nullable<int> tongSoGhe, Nullable<int> hangxe)
+        {
+            var maxeParameter = maxe.HasValue ?
+                new ObjectParameter("Maxe", maxe) :
+                new ObjectParameter("Maxe", typeof(int));
+    
+            var biensoParameter = bienso != null ?
+                new ObjectParameter("Bienso", bienso) :
+                new ObjectParameter("Bienso", typeof(string));
+    
+            var tenxeParameter = tenxe != null ?
+                new ObjectParameter("Tenxe", tenxe) :
+                new ObjectParameter("Tenxe", typeof(string));
+    
+            var nhaxeParameter = nhaxe.HasValue ?
+                new ObjectParameter("Nhaxe", nhaxe) :
+                new ObjectParameter("Nhaxe", typeof(int));
+    
+            var gioithieunganParameter = gioithieungan != null ?
+                new ObjectParameter("Gioithieungan", gioithieungan) :
+                new ObjectParameter("Gioithieungan", typeof(string));
+    
+            var gioithieuchitietParameter = gioithieuchitiet != null ?
+                new ObjectParameter("Gioithieuchitiet", gioithieuchitiet) :
+                new ObjectParameter("Gioithieuchitiet", typeof(string));
+    
+            var daxoaParameter = daxoa.HasValue ?
+                new ObjectParameter("Daxoa", daxoa) :
+                new ObjectParameter("Daxoa", typeof(bool));
+    
+            var tongSoGheParameter = tongSoGhe.HasValue ?
+                new ObjectParameter("TongSoGhe", tongSoGhe) :
+                new ObjectParameter("TongSoGhe", typeof(int));
+    
+            var hangxeParameter = hangxe.HasValue ?
+                new ObjectParameter("Hangxe", hangxe) :
+                new ObjectParameter("Hangxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATEXE1", maxeParameter, biensoParameter, tenxeParameter, nhaxeParameter, gioithieunganParameter, gioithieuchitietParameter, daxoaParameter, tongSoGheParameter, hangxeParameter);
+        }
+    
+        public virtual ObjectResult<SP_ViewChuyenXe1_Result> SP_ViewChuyenXe1(Nullable<int> sessionId)
+        {
+            var sessionIdParameter = sessionId.HasValue ?
+                new ObjectParameter("sessionId", sessionId) :
+                new ObjectParameter("sessionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ViewChuyenXe1_Result>("SP_ViewChuyenXe1", sessionIdParameter);
         }
     }
 }

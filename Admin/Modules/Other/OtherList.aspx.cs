@@ -52,7 +52,7 @@ public partial class Admin_Modules_Other_OtherList : DefaultAdmin
             DataRowView drv = (DataRowView)e.Row.DataItem;
             HyperLink hplName = (HyperLink)e.Row.FindControl("hplName");
             hplName.Text = drv["Other_Name"].ToString();
-            hplName.Attributes.Add("onclick", "javascript:processClick('" + drv["Other_ID"] + "')");
+            hplName.Attributes.Add("href", "javascript:processClick('" + drv["Other_ID"] + "')");
             //============================================
             HyperLink hplMod = (HyperLink)e.Row.FindControl("hplMod");
             hplMod.Text = drv["Other_Mod"].ToString();

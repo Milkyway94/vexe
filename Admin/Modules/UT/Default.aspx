@@ -1,39 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Admin/AdminMasterPage.master" CodeFile="Default.aspx.cs" Inherits="Admin_Modules_TD_Default" %>
-
-<asp:Content ContentPlaceHolderID="main" runat="server">
-    <h1 class="text-center"><b>DANH SÁCH ỨNG VIÊN</b></h1>
-    <div class="container">
-    <table class="table tbl-bordered table-condensed" id="ungtuyen">
-        <thead style="height: 44px !important">
-            <tr>
-                <th>STT</th>
-                <th>Họ tên ứng viên</th>
-                <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Email</th>
-                <th>Ngày nộp CV</th>
-                <th>Vị trí ứng tuyển</th>
-                <th>File CV</th>
-                <th>Duyệt</th>
-            </tr>
-        </thead>
-        <tbody>
-            <asp:Literal ID="ltrTD" Text="" runat="server" />
-        </tbody>
-    </table>
+﻿<%@ Page Language="C#" MasterPageFile="~/Admin/AdminMasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Admin_Modules_Content_Default" %>
+<asp:Content ID="Content" ContentPlaceHolderID="Main" Runat="Server">
+        <div id="winVP" class="container table-responsive">
+            <asp:Button ID="btntoExcel" CssClass="btn btn-success" runat="server" Text="Export to Excel" onclick="btntoExcel_Click" />
+	        <div style="width: 100%; height: 99%; overflow-y:auto; overflow-x:hidden;">
+                <asp:GridView ID="gvMember" runat="server" Width="100%" CssClass="table table-hover table-stripped datatable" HeaderStyle-BackColor="#007000" >
+                </asp:GridView>
+            </div>
         </div>
-    <script type="text/javascript">
-        $("#btnApprove").click(function () {
-            id = CV_ID.val();
-            $.ajax({
-                type: "POST",
-                url: "Default.aspx?act=approve",
-                data: {id:id},
-                success: function (response) {
-                alert("");
-                window.location.reload();
-                }
-            });
-        });
-    </script>
 </asp:Content>

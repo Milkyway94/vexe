@@ -23,9 +23,11 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
             string machuyenxe = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(machuyenxe))
             {
-                DataTable dtXe = UpdateData.ExecStore("SP_CCB_XE", "").Tables[0];
+                DataTable dtXe = UpdateData.ExecStore("SP_CCB_XE", SessionUtil.GetValue("UserID")).Tables[0];
+                DataTable dtNhaXe = UpdateData.ExecStore("SP_CCB_NHAXE", SessionUtil.GetValue("UserID")).Tables[0];
                 DataTable dtTinh = UpdateData.ExecStore("SP_CCB_Tinh", "").Tables[0];
                 Value.BindToDropdown(ddlXe, dtXe);
+                Value.BindToDropdown(ddlNhaxe, dtNhaXe);
                 Value.BindToDropdown(ddlDenTinh, dtTinh);
                 Value.BindToDropdown(ddlDiTinh, dtTinh);
                 ChuyenXe cx = new ChuyenXeRepository().Find(int.Parse(machuyenxe));
@@ -57,6 +59,13 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
                     }
 
                 }
+                for (int i = 0; i < ddlXe.Items.Count; i++)
+                {
+                    if (cx.MaXe.ToString() == ddlXe.Items[i].Value)
+                    {
+                        ddlXe.Items[i].Selected = true;
+                    }
+                }
                 for (int i = 0; i < ddlDenTinh.Items.Count; i++)
                 {
                     if (cx.DenTinh.ToString() == ddlDenTinh.Items[i].Value)
@@ -77,10 +86,12 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
             }
             else
             {
-                DataTable dtXe = UpdateData.ExecStore("SP_CCB_XE", "").Tables[0];
+                DataTable dtXe = UpdateData.ExecStore("SP_CCB_XE", SessionUtil.GetValue("UserID")).Tables[0];
                 DataTable dtTinh = UpdateData.ExecStore("SP_CCB_Tinh", "").Tables[0];
+                DataTable dtNhaXe = UpdateData.ExecStore("SP_CCB_NHAXE", SessionUtil.GetValue("UserID")).Tables[0];
                 Value.BindToDropdown(ddlXe, dtXe);
                 Value.BindToDropdown(ddlDenTinh, dtTinh);
+                Value.BindToDropdown(ddlNhaxe, dtNhaXe);
                 Value.BindToDropdown(ddlDiTinh, dtTinh);
                 DataTable dtDiHuyen = UpdateData.ExecStore("SP_CCB_Huyen_FROM_Tinh", ddlDiTinh.SelectedValue).Tables[0];
                 Value.BindToDropdown(ddlDiHuyen, dtDiHuyen);
@@ -94,9 +105,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         string machuyenxe = Request.QueryString["id"];
         CultureInfo provider = CultureInfo.InvariantCulture;
         TimeSpan tsThoiGian = new TimeSpan(int.Parse(txtThoigiandiG.Text), int.Parse(txtThoigiandiP.Text), 0);
-        DateTime Ngaydi = new DateTime();
         int MaXe = int.Parse(ddlXe.SelectedValue);
-        DateTime Giokhoihanh = DateTime.Parse(txtGiodi.Text);
         TimeSpan Thoigiandukien = tsThoiGian;
         string Diemdi = ddlDiHuyen.SelectedItem.Text + "-" + ddlDiTinh.SelectedItem.Text;
         string Diemden = ddlDenHuyen.SelectedItem.Text + "-" + ddlDenTinh.SelectedItem.Text;
@@ -115,7 +124,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         Hashtable tbCx = new Hashtable();
         tbCx.Add("MaXe", MaXe.ToString());
         tbCx.Add("Ngaydi", txtNgaydi.Text);
-        tbCx.Add("Giokhoihanh", Giokhoihanh.ToString());
+        tbCx.Add("Giokhoihanh", txtGiodi.Text);
         tbCx.Add("Thoigiandukien", Thoigiandukien.ToString());
         tbCx.Add("Diemdi", Diemdi);
         tbCx.Add("Diemden", Diemden);
@@ -132,78 +141,65 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         tbCx.Add("DenHuyen", DenHuyen.ToString());
         tbCx.Add("Lotrinh", LoTrinh);
         tbCx.Add("KhuyenMai", KhuyenMai.ToString());
-        try
-        {
-            if (string.IsNullOrEmpty(machuyenxe))
-            {
-                try
-                {
-                    bool _insertCx = UpdateData.Insert("ChuyenXe", tbCx);
-                    if (_insertCx)
-                    {
-                        string sql = "SELECT * FROM ChuyenXe ORder by MaChuyenXe DESC";
-                        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
-                        string macx = dt.Rows[0]["Machuyenxe"].ToString();
-                        string diemden = dt.Rows[0]["DiemDen"].ToString();
-                        string diemdi = dt.Rows[0]["DiemDi"].ToString();
-                        Hashtable dbUpdateUrl = new Hashtable();
-                        dbUpdateUrl.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemden) + "-" + macx));
-                        UpdateData.Update("ChuyenXe", dbUpdateUrl, "Machuyenxe=" + macx);
-                        ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
-                    }
-                    else
-                    {
-                        Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Thêm mới chuyến xe "), AlertType.ERROR);
-                    }
-                }
-                catch (Exception ex)
-                {
+        tbCx.Add("Trangthai", "1");
 
-                    ltrScript.Text = "<script>console.log('"+ex.ToString()+"')</script>";
-                }
-                
-                
+        if (string.IsNullOrEmpty(machuyenxe))
+        {
+
+            bool _insertCx = UpdateData.Insert("ChuyenXe", tbCx);
+            if (_insertCx)
+            {
+                string sql = "SELECT * FROM ChuyenXe ORder by MaChuyenXe DESC";
+                DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+                string macx = dt.Rows[0]["Machuyenxe"].ToString();
+                string diemden = dt.Rows[0]["DiemDen"].ToString();
+                string diemdi = dt.Rows[0]["DiemDi"].ToString();
+                Hashtable dbUpdateUrl = new Hashtable();
+                dbUpdateUrl.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(diemden) + "-" + macx));
+                UpdateData.Update("ChuyenXe", dbUpdateUrl, "Machuyenxe=" + macx);
+                ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
             }
             else
             {
-
-                tbCx.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(Diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(Diemden) + "-" + machuyenxe));
-                bool _updateCx = UpdateData.Update("ChuyenXe", tbCx, "MaChuyenXe=" + machuyenxe);
-                if (_updateCx)
-                {
-                    ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
-                }
-                else
-                {
-                    Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Sửa chuyến xe "), AlertType.ERROR);
-                }
+                Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Thêm mới chuyến xe "), AlertType.ERROR);
             }
         }
-        catch (Exception)
+        else
         {
 
-            Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Thêm mới chuyến xe "), AlertType.ERROR);
+            tbCx.Add("url", Value.CreateSlug(CMSfunc.VietnameseConvert.ChuyenTVKhongDau(Diemdi) + "-" + CMSfunc.VietnameseConvert.ChuyenTVKhongDau(Diemden) + "-" + machuyenxe));
+            bool _updateCx = UpdateData.Update("ChuyenXe", tbCx, "MaChuyenXe=" + machuyenxe);
+            if (_updateCx)
+            {
+                ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
+            }
+            else
+            {
+                Value.ShowMessage(ltrError, string.Format(ErrorMessage.Fail, "Sửa chuyến xe "), AlertType.ERROR);
+            }
         }
     }
     protected void ddlDiTinh_SelectedIndexChanged(object sender, EventArgs e)
     {
         var dtDiHuyen = UpdateData.ExecStore("SP_CCB_Huyen_FROM_Tinh", ddlDiTinh.SelectedValue).Tables[0];
-        ddlDiHuyen.Items.Clear();
         Value.BindToDropdown(ddlDiHuyen, dtDiHuyen);
-        ddlDiHuyen.Focus();
     }
 
     protected void ddlDenTinh_SelectedIndexChanged(object sender, EventArgs e)
     {
         var dtDenHuyen = UpdateData.ExecStore("SP_CCB_Huyen_FROM_Tinh", ddlDenTinh.SelectedValue).Tables[0];
-        ddlDenHuyen.Items.Clear();
         Value.BindToDropdown(ddlDenHuyen, dtDenHuyen);
-        ddlDenHuyen.Focus();
     }
     [WebMethod]
     public static string GetHuyenByTinh(string matinh)
     {
         var obj = UpdateData.ExecStore("SP_CCB_Huyen_FROM_Tinh", matinh.ToString()).Tables[0];
         return JsonConvert.SerializeObject(obj);
+    }
+
+    protected void ddlNhaxe_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DataTable dtx = UpdateData.UpdateBySql("SELECT Maxe as id, Tenxe as text FROM Xe WHERE Nhaxe=" + ddlNhaxe.SelectedValue).Tables[0];
+        Value.BindToDropdown(ddlXe, dtx);
     }
 }

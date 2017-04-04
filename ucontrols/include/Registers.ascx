@@ -27,13 +27,6 @@
                                         <asp:Label Text="" ID="lberror_sdt" runat="server" />
                                     </p>
                                 </div>
-                                 <div class="form-group">
-                                    <label for="code">Bạn là? <span class="color">*</span></label>
-                                     <asp:DropDownList CssClass="form-control" ID="ddlRole" runat="server">
-                                         <asp:ListItem Value="1" Text="Hành khách" />
-                                         <asp:ListItem Value="2" Text="Nhà xe" />
-                                     </asp:DropDownList>
-                                </div>
                                 <div class="form-group">
                                     <label for="code">Số Điện Thoại <span class="color">*</span></label>
                                     <asp:TextBox runat="server" TextMode="Phone" required MaxLength="20" CssClass="form-control" ID="phone" placeholder="VD : 0123456789 Dùng để xác nhận khi lên xe"></asp:TextBox>

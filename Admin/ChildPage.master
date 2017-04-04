@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ChildPage.master.cs" Inherits="Admin_ChildPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <script type="text/javascript" src="/Admin/js/toolBarButton.js"></script>
+	<script type="text/javascript" src="/Admin/js/windowtracking.js"></script>
+	<script type="text/javascript" src="/Admin/js/Common.js"></script>
+    <link rel="stylesheet" href="/Admin/CSS/Style.css" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using SMAC;
 using System.Text;
 using System.Web.Services;
@@ -16,9 +8,6 @@ using QCMS_BUSSINESS;
 using QCMS_BUSSINESS.Repositories;
 using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Schema;
-using System.Reflection;
-using Newtonsoft.Json.Linq;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -72,7 +61,7 @@ public partial class Administrator_Default : System.Web.UI.Page
     [WebMethod]
     public static string SELECTALLCHUYENXE()
     {
-        var obj = SMAC.UpdateData.ExecStore("SP_ViewChuyenXe", "").Tables[0];
+        var obj = SMAC.UpdateData.ExecStore("SP_ViewChuyenXe", SessionUtil.GetValue("UserID")).Tables[0];
         return JsonConvert.SerializeObject(obj);
     }
     [WebMethod]
@@ -235,5 +224,9 @@ public partial class Administrator_Default : System.Web.UI.Page
         var res = UpdateData.UpdateBySql(sql).Tables[0];
         return JsonConvert.SerializeObject(res);
     }
-
+    [WebMethod]
+    public static string GetAllXe()
+    {
+        return JsonConvert.SerializeObject(UpdateData.ExecStore("SP_GetAllXe", SessionUtil.GetValue("UserID")).Tables[0]);
+    }
 }

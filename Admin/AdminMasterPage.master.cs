@@ -59,7 +59,8 @@ public partial class Admin_AdminMasterPage : System.Web.UI.MasterPage
         DataRowCollection rows = dataSet.Tables[0].Rows;
         for (int i = 0; i < rows.Count; i++)
         {
-            string text = " AND tbl_ModAdmin.ModAdmin_ID IN (SELECT ModAdmin_ID FROM tbl_ModUser WHERE UserID='" + UserID + "')";
+            //string text = " AND tbl_ModAdmin.ModAdmin_ID IN (SELECT ModAdmin_ID FROM tbl_ModUser WHERE UserID='" + UserID + "')";
+            string text = "";
             string text2 = rows[i]["ModAdmin_ID"].ToString();
             if (db.HasChildren(text2, text))
             {

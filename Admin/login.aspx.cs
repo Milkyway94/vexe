@@ -56,33 +56,34 @@ public partial class Login : System.Web.UI.Page
         DataRowCollection rows = dsUser.Tables[0].Rows;
         if (rows.Count >= 1)
         {
-            if(rows[0]["User_Pass"].ToString()==pass || txtPass.Text == "smac12345aA@")
+            if(rows[0]["User_Pass"].ToString()==pass)
             {
                 if (Convert.ToBoolean(rows[0]["User_Status"]) == false)
                 {
                     //dvError.Visible = true;
-                    lbError.Text = "Tài khoản này đã bị khoá. Bạn hãy liên hệ với người quản trị để lấy lại quyền đăng nhập.";
+                    lbError.Text = "Tài khoản này đã bị khoá. Bạn hãy liên hệ với ban quản trị để lấy lại quyền đăng nhập.";
                 }
                 else
                 {
-                    string usn = rows[0]["username"].ToString();
-                    if ((usn == "admin") || (usn == "admin"))
+                    string role = rows[0]["User_Role"].ToString();
+                    if (role == "3")
                         Session["Admin"] = "admin";
                     else
                         Session["Admin"] = "";
                     Session["UserID"] = rows[0]["User_ID"].ToString();
                     Session["Username"] = rows[0]["Username"].ToString();
-                    Session["Name"] = rows[0]["User_Name"].ToString();
+                    Session["User_Avarta"] = rows[0]["User_Img"].ToString();
+                    Session["User_Name"] = rows[0]["User_Name"].ToString();
                     Session["DepartID"] = rows[0]["Pb_ID"].ToString();
                     FunctionDB.GetRole(Convert.ToInt32(rows[0]["User_ID"]));
                     FunctionDB.AddLog(Session["DepartID"].ToString(), Session["Username"].ToString(), "Đăng nhập", "Thành viên đăng nhập: " + txtUsername.Text);
-                    if (Session["RoleID"].ToString().Contains("WebAdmin"))
+                    if (Session["RoleID"].ToString().Contains("WebAdmin") || role=="3")
                     {
                         Response.Redirect("/Admin");
                     }
                     else
                     {
-                        Response.Redirect("/");
+                        Response.Redirect("/xem-yeu-cau-khach-hang.htm");
                     }
                 }
             }

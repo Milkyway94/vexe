@@ -42,5 +42,6 @@ namespace QCMS_BUSSINESS
         public Nullable<double> Order_TongThanhToan { get; set; }
     
         public virtual tbl_Member tbl_Member { get; set; }
+        public virtual tbl_Member tbl_Member1 { get; set; }
     }
 }

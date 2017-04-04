@@ -634,7 +634,7 @@ p.credit {
     color: #007000;
     text-transform: uppercase;
     font-size: 24px;
-    font-weight: bold;
+    margin-top: 30px
 }
 
 .carousel-control > span {
@@ -693,6 +693,7 @@ p.credit {
 .thanhtoan > h3 {
     font-size: 14px;
     font-weight: bold;
+    padding-top: 15px;
 }
 
 .thanhtoan > .col-sm-3 {
@@ -769,19 +770,20 @@ footer > .t2 {
 }
 
 .menu-title > span, .menu-title > ul {
-    margin-top: 15px;
+    margin-top: 0px;
 }
 
 .menu-title {
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
     .menu-title h2 {
-        color: white;
+        color: #cdcdcd;
     }
 
     .menu-title > ul > li {
         list-style: none;
+        margin-bottom: 10px;
     }
 
         .menu-title > ul > li > a {
@@ -790,7 +792,7 @@ footer > .t2 {
         }
 
 .ftmenutitle {
-    padding-left: 40px !important;
+    padding-left: 30px !important;
 }
 
 .btn-muave {
@@ -801,8 +803,8 @@ footer > .t2 {
 }
 
 .t2-content {
-    padding-bottom: 40px;
-    padding-top: 40px;
+    padding-bottom: 0px;
+    padding-top: 20px;
 }
 
 .copyright {
@@ -822,7 +824,6 @@ footer > .t2 {
     border: 1px solid #ddd;
     padding: 25px;
 }
-
 .xe-title {
     font-size: 24px;
     color: black;
@@ -1100,13 +1101,15 @@ footer > .t2 {
     font-style: italic;
     font-size: 16px;
 }
+.top-right ul li:first-child a {
+    text-decoration: none !important;
+}
 
 @media(max-width: 768px) {
     #YCModal .modal-dialog {
         width: 800px;
     }
-
-    .tt {
+    .tv4, .tt {
         display: none;
     }
 

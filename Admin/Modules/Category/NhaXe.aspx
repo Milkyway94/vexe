@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NhaXe.aspx.cs" MasterPageFile="~/Admin/AdminMasterPage.master" Inherits="Admin_Modules_Category_NhaXe" %>
 
 <asp:Content ContentPlaceHolderID="main" runat="server">
-    <div class="box box-primary box-solid" ng-controller="NhaXeController">
+    <div class="box box-primary container box-solid" ng-controller="NhaXeController">
         <div class="box-header with-border">
             <h3 class="text-center"><b>QUẢN LÝ NHÀ XE</b></h3>
         </div>
@@ -11,14 +11,13 @@
                 <button class="btn btn-flat btn-default btn-sm" type="button" ng-click="OpenDetail()"><i class="fa fa-eye"></i>Xem chi tiết</button>
                 <button class="btn btn-flat btn-warning btn-sm" type="button" ng-click="OpenUpdateForm('edit')"><i class="fa fa-edit"></i>Sửa</button>
                 <button class="btn btn-flat btn-danger btn-sm" type="button" ng-click="Delete(selected)"><i class="fa fa-trash"></i>Xóa</button>
-                <button class="btn btn-success btn-flat btn-sm" type="button" ng-click="ExportToExcel()"><i class="fa fa-table"></i>Xuất ra excel </button>
                 <div class="pull-right">
                     <input type="text" class="form-control" ng-model="SearchKey" placeholder="Nhập từ khóa tìm kiếm" />
                 </div>
             </div>
             <table class="table table-bordered table-stripped table-hover" id="ungtuyen">
                 <thead>
-                    <tr>
+                    <tr class="table-header">
                         <th>STT</th>
                         <th>Tên nhà xe</th>
                         <th>Số điện thoại</th>

@@ -88,6 +88,35 @@
 	</tr>
     <tr> 		                      			
 		<td>Vai trò</td>
-		<td><asp:DropDownList ID="dllRole" runat="server"></asp:DropDownList>  </td>
+		<td><asp:DropDownList ID="dllRole" runat="server" ClientIDMode="Static"></asp:DropDownList>  </td>
 	</tr>
+    <tr id="nx">
+        <td>Nhà xe</td>
+        <td>
+            <asp:DropDownList ID="ddlNhaXe" runat="server">
+
+            </asp:DropDownList>
+        </td>
+    </tr>
 </table>
+<script>
+                    $(document).ready(function () {
+                        var role = $("#dllRole").val();
+                        if (role == 7) {
+                            $("#nx").show();
+                        }
+                        else {
+                            $("#nx").hide();
+                        }
+                        $("#dllRole").change(function () {
+                            var r = $("#dllRole").val();
+                            if (r == 7) {
+                                $("#nx").show();
+                            }
+                            else {
+                                $("#nx").hide();
+                            }
+                        })
+                    })
+                    
+</script>

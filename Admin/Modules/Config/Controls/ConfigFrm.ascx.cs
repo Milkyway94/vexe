@@ -41,9 +41,7 @@ public partial class Admin_Modules_Config_Controls_ConfigFrm : System.Web.UI.Use
     protected void lbtUpdate_Click(object sender, EventArgs e)
     {
         string sScritp = "<script>";
-        sScritp += "var a = opener.parent.dhxLayout.cells(\"a\");";
-        sScritp += "a.attachURL(\"ConfigList.aspx\");";
-        sScritp += "window.close();";
+        sScritp += "parent.HideModal('#add-modal'); parent.window.location.reload();";
         sScritp += "</script>";
 
         Hashtable tbIn = new Hashtable();

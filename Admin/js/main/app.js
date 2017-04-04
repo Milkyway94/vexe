@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngTouch','ui.bootstrap', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping', 'ui.tinymce', 'ngAnimate', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('app', ['ngTouch', 'ui.bootstrap', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.pagination', 'ui.grid.grouping', 'ui.tinymce', 'ngAnimate', 'angularUtils.directives.dirPagination'])
 app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Service', function ($scope, $filter, $http, $svNhaXe, $Service) {
     $scope.allnhaxe = [];
     //$svNhaXe.GetAllNhaXe().success(function (data) {
@@ -9,8 +9,8 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
     //})
     $Service.Api("POST", "/Admin/Modules/Category/NhaXe.aspx/GetAllNhaXe", "json", {}).success(function (data) {
         console.log(data);
-        $scope.nhaxes = data.d;
-        $scope.allnhaxe = $scope.nhaxes;
+        $scope.nhaxes = JSON.parse(data.d);
+        $scope.allnhaxe = JSON.parse(data.d);
         console.log($scope.nhaxes);
     })
     $scope.action = "";
@@ -662,16 +662,6 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
 
     var nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
-
-    $scope.LoadXe = function (id) {
-        $Service.Post(rootUrl + "/Execute", { sp: "SP_SELECTXEBYNHAXEID", param: id })
-            .success(function (data) {
-                $scope.gridOptions.data = JSON.parse(data.d);
-                console.log($scope.gridOptions.data);
-                return true;
-            });
-    }
-
     $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
         if (col.filters[0].term) {
             return 'header-filtered';
@@ -731,9 +721,9 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
                 name: 'E', enableFiltering: false, enableSorting: false, width: 50, enableCellEdit: false, allowCellFocus: false,
                 cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
             },
+            { name: "Nhaxe", displayName: "Nhà xe", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "Bienso", displayName: "Biển số", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "Tenxe", displayName: "Tên xe", width: 150, enableCellEdit: false, allowCellFocus: false },
-            { name: "Nhaxe", displayName: "Nhà xe", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "TongSoGhe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "Hangxe", displayName: "Tổng số ghế", width: 150, enableCellEdit: false, allowCellFocus: false },
             { name: "Daxoa", displayName: "Trạng thái", width: 120, enableCellEdit: false, allowCellFocus: false }
@@ -746,6 +736,7 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
         getRowIdentity: function (row) {
             return row.MaChuyenXe;
         },
+        exporterOlderExcelCompatibility: true,
         exporterCsvFilename: 'xe.csv',
         exporterPdfDefaultStyle: { fontSize: 9 },
         exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
@@ -772,7 +763,7 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
     };
     var LoadData = function () {
-        $Service.Post(rootUrl + "/Execute", { sp: "Sp_GetAllXe", param: "" })
+        $Service.Post(rootUrl + "/GetAllXe", {})
             .success(function (data) {
                 $scope.gridOptions.data = JSON.parse(data.d);
                 console.log($scope.gridOptions.data);
@@ -780,7 +771,7 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
             });
     }
     $scope.LoadData = function () {
-        $Service.Post(rootUrl + "/Execute", { sp: "Sp_GetAllXe", param: "" })
+        $Service.Post(rootUrl + "/GetAllXe", {})
             .success(function (data) {
                 $scope.gridOptions.data = JSON.parse(data.d);
                 console.log($scope.gridOptions.data);
@@ -843,19 +834,21 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
                 }
             })
         };
+
         $scope.gridOptions = {
             enableFiltering: true,
-            paginationPageSizes: [10, 25, 50, 75],
-            paginationPageSize: 10,
+            paginationPageSizes: [25, 50, 75],
+            paginationPageSize: 25,
             columnDefs: [
                 {
                     name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
                     cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
                 },
-                { name: 'Ngaydi', displayName: "Ngày đi", type: 'date', cellFilter: 'date:"dd-MM-yyyy"' },
+                { name: 'Tennhaxe', displayName: "Nhà xe", type: 'text' },
+                { name: 'Tenxe', displayName: "Tên xe", type: 'text' },
+                { name: 'Ngaydi', displayName: "Ngày đi", type: 'date'},
                 { field: 'Giokhoihanh' },
                 { field: 'Thoigiandukien' },
-                { name: 'Tenxe', displayName: "Tên xe", type: 'text' },
                 { name: 'TongSoVeThuong', displayName: "Tổng Vé Thường", type: 'number' },
                 { name: 'TongSoVeVIP', displayName: "Tổng Vé VIP", type: 'number' },
                 { name: 'VeVipConLai', displayName: "Vé VIP còn lại", type: 'number' },
@@ -865,7 +858,6 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
             enableSelectAll: true,
             enableColumnResizing: true,
             enableGridMenu: true,
-            fastWatch: true,
             rowIdentity: function (row) {
                 return row.MaChuyenXe;
             },
@@ -888,17 +880,10 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
             },
             exporterPdfOrientation: 'landscape',
             exporterPdfPageSize: 'A4',
-            exporterPdfMaxGridWidth: 800,
+            exporterPdfMaxGridWidth: 600,
             exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
             onRegisterApi: function (gridApi) {
                 $scope.gridApi = gridApi;
-                gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-                    console.log('edited row id:', rowEntity.MaChuyenXe, ' Column:' + colDef.name, ' newValue:', newValue, ' oldValue:', oldValue);
-                    $scope.$apply();
-                });
-                gridApi.rowSelectionChanged == function (rowEntity) {
-                    console.log("selected", rowEntity);
-                }
             }
         };
         $scope.toggleFiltering = function () {

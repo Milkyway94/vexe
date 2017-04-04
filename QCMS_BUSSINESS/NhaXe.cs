@@ -18,6 +18,7 @@ namespace QCMS_BUSSINESS
         public NhaXe()
         {
             this.Xes = new HashSet<Xe>();
+            this.tbl_User = new HashSet<tbl_User>();
         }
     
         public int ID { get; set; }
@@ -31,5 +32,7 @@ namespace QCMS_BUSSINESS
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Xe> Xes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_User> tbl_User { get; set; }
     }
 }

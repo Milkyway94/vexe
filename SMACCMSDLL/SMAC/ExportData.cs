@@ -38,76 +38,30 @@ namespace SMAC
             Response.End();
         }
 
-        //public static void ExportToExcel(string fileName, DateTime d1, DateTime d2, string serchkey)
-        //{
-        //    Microsoft.Office.Interop.Excel.Application oXL;
-        //    Microsoft.Office.Interop.Excel._Workbook oWB;
-        //    Microsoft.Office.Interop.Excel._Worksheet oSheet;
-        //    object misvalue = System.Reflection.Missing.Value;
-        //    try
-        //    {
-        //        List<OrderList> orders = OrderControls.GetOrderAndDetailByTime(d1, d2, serchkey);
-        //        //Start Excel and get Application object.
-        //        oXL = new Microsoft.Office.Interop.Excel.Application();
-        //        oXL.Visible = true;
+        public static void ExportToExcel(GridView gvMember, string filename)
+        {
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename="+filename+".xls");
+            Response.ContentType = "application/ms-excel";
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+            //Response.ContentType = "application/vnd.ms-excel";
+            Response.BufferOutput = true;
+                //Response.ContentEncoding = System.Text.Encoding.UTF8;
+                //Response.Charset = "UTF-8";
+            System.IO.StringWriter sw = new System.IO.StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
 
-        //        //Get a new workbook.
-        //        oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(""));
-        //        oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+            //Change the Header Row back to white color 
+            gvMember.HeaderRow.Style.Add("background-color", "#ccc");
+            gvMember.HeaderRow.Style.Add("Font", "Times New Roman");
+            gvMember.HeaderRow.Font.Name = "Times New Roman";
+            gvMember.HeaderRow.Font.Size = 12;
 
-        //        //Add table headers going cell by cell.
-        //        var range = oSheet.Range[oSheet.Cells[1, 1], oSheet.Cells[4, 2]];
-        //        range.Merge(true);
-        //        range.Font.Bold = true;
-        //        range.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
-        //        range.HorizontalAlignment = HorizontalAlign.Center;
-        //        range.Merge(true);
-        //        oSheet.Cells[2, 1] = "DANH SÁCH ĐƠN HÀNG";
-
-        //        oSheet.Cells[3, 1] = "Từ ngày " + d1.ToString("dd/MM/yyyy") + " Đến ngày " + d2.ToString("dd/MM/yyyy");
-        //        oSheet.Cells[5, 1] = "Hàng hóa";
-        //        oSheet.Cells[5, 2] = "Giá";
-        //        oSheet.Cells[5, 3] = "Số lượng";
-        //        oSheet.Cells[5, 4] = "Thành tiền";
-        //        int k = 6;
-        //        for (int i = 0; i < orders.Count; i++)
-        //        {
-        //            var dtcount = orders[i].OrderDetail.Count;
-        //            oSheet.Cells[k, 1] = "KH " + orders[i].Name + " - Địa chỉ: " + orders[i].Address + " - SĐT: " + orders[i].Name;
-        //            oSheet.Range["A" + k, "D" + k].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow);
-        //            for (int j = 0; j < dtcount; j++)
-        //            {
-        //                k++;
-        //                oSheet.Cells[k, 1] = ProductControl.GetProductByID(orders[i].OrderDetail[j].Product_ID).Name;
-        //                oSheet.Cells[k, 2] = orders[i].OrderDetail[j].UnitPrice;
-        //                oSheet.Cells[k, 3] = orders[i].OrderDetail[j].Quantity;
-        //                oSheet.Cells[k, 4] = orders[i].OrderDetail[j].UnitPrice * orders[i].OrderDetail[j].Quantity;
-        //            }
-        //            k++;
-        //            oSheet.Cells[k, 1] = "Tổng tiền";
-        //            oSheet.Cells[k, 2] = orders[i].Total;
-        //            oSheet.Range["A" + k, "D" + k].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Green);
-        //            k++;
-        //        }
-        //        k++;
-        //        oSheet.Cells[k, 1] = "Tổng cộng tất cả: ";
-        //        oSheet.Cells[k, 2] = orders.Sum(o => o.Total);
-        //        oSheet.Range["A" + k, "D" + k].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
-        //        oSheet.Range["A1", "D" + k].Borders.Color = System.Drawing.Color.Black;
-        //        oSheet.Columns.AutoFit();
-        //        oXL.UserControl = false;
-        //        oXL.Visible = false;
-        //        //oWB.SaveCopyAs(fileName);
-        //        oWB.SaveAs(fileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
-        //            false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
-        //            Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-        //        oWB.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+            gvMember.RenderControl(htw);
+            Response.Write(sw.ToString());
+            Response.End();
+        }
         //public static void ExportToPDF(DataTable dt, string filename)
         //{
         //    GridView GridView1 = new GridView();

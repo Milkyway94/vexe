@@ -1,72 +1,42 @@
-﻿using SMAC;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.Linq;
-using System.Text;
+using System.Configuration;
+using System.Collections;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using SMAC;
+using QCMS_BUSSINESS;
 
-public partial class Admin_Modules_TD_Default : System.Web.UI.Page
+public partial class Admin_Modules_Content_Default : DefaultAdmin
 {
+    public string tp = "../../Themes/";
+    public int TopicID;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request["act"] == "approve")
+        string nx = "SELECT * FROM tbl_ModAdmin WHERE ModAdmin_ID=" + 35;
+        DataTable dtx = UpdateData.UpdateBySql(nx).Tables[0];
+        if (dtx.Rows.Count > 0)
         {
-            int id = int.Parse(Request["id"]);
-            string sql = "update tbl_CV set CV_Status=2 where CV_ID="+id;
-            UpdateData.UpdateBySql(sql);
+            DataSet dsData = UpdateData.ExecStore(dtx.Rows[0]["OnLoad"].ToString(), "");
+            Session["dsData"] = dsData;
+            gvMember.DataSource = dsData.Tables[0];
+            gvMember.DataBind();
         }
-        if (Request["act"] == "dispass")
-        {
-            int id = int.Parse(Request["id"]);
-            string sql = "update tbl_CV set CV_Status=0 where CV_ID=" + id;
-            UpdateData.UpdateBySql(sql);
-        }
-        ltrTD.Text = LoadTDList();
     }
-    protected string LoadTDList()
+    protected void btntoExcel_Click(object sender, EventArgs e)
     {
-        string sql;
-        StringBuilder str = new StringBuilder();
-        sql = "select * from tbl_CV where CV_Status!=0 ORDER BY CV_ApplyDate DESC";
-        DataTable ds = UpdateData.UpdateBySql(sql).Tables[0];
-        DataRowCollection rows = ds.Rows;
-        if (rows.Count > 0)
-        {
-            for (int i = 0; i < rows.Count; i++)
-            {
-                str.Append("<tr>");
-                int j = i + 1;
-                str.Append("<td>" + j + "</td>");
-                str.Append("<td>" + rows[i]["CV_Name"] + "</td>");
-                str.Append("<td> " + rows[i]["CV_Phone"] + "</td>");
-                str.Append("<td>" + rows[i]["CV_Address"] + "</td>");
-                str.Append("<td>" + rows[i]["CV_Email"] + "</td>");
-                str.Append("<td>" + DateTime.Parse(rows[i]["CV_ApplyDate"].ToString()).ToShortDateString() + "</td>");
-                str.Append("<td>"+ rows[i]["CV_Pos"] + "</td>");
-                str.Append("<td><a href=\""+ ResolveUrl("~/"+rows[i]["CV_File"])+ "\"><i class=\"fa fa-download\"></i>Download</a></td>");
-                if (rows[i]["CV_Status"].ToString() != "2")
-                {
-                    str.Append("<td><a id=\"lApprove\" href=\"?act=approve&id=" + rows[i]["CV_ID"] + "\" class=\"btn btn-success\"><i class=\"fa fa-check\"></i></a>&nbsp;<a id=\"lDispass\" runat=\"server\" class=\"btn btn-danger\" href=\"?act=dispass&id=" + rows[i]["CV_ID"] + "\"><i class=\"fa fa-times\"></i></a></td>");
-                }
-                else
-                {
-                    str.Append("<td><a id=\"lDispass\" runat=\"server\" class=\"btn btn-danger\" href=\"?act=dispass&id=" + rows[i]["CV_ID"] + "\"><i class=\"fa fa-times\"></i></a></td>");
-                }
-                str.Append("</tr>");
-            }
-        }
-        return str.ToString();
+        string sql = "SELECT * FROM tbl_Member";
+        DataSet dsData = UpdateData.UpdateBySql(sql);
+        SMAC.ExportData.ExportToExcel(gvMember, "member.xls");
     }
-    public void btnApprove_Click(object sender, EventArgs e)
+    public override void VerifyRenderingInServerForm(Control control)
     {
-        Response.Write("bca");
-    }
-
-    protected void btnSearch_Click(object sender, EventArgs e)
-    {
-        LoadTDList();
+        /*Tell the compiler that the control is rendered
+         * explicitly by overriding the VerifyRenderingInServerForm event.*/
     }
 }

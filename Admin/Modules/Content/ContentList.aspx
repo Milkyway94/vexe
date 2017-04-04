@@ -5,7 +5,8 @@
     <script type="text/javascript" src="../../JS/toolBarButton.js"></script>
 	<script type="text/javascript" src="../../JS/windowtracking.js"></script>
     <link rel="stylesheet" href="../../CSS/Style.css" type="text/css" /> 
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">    
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
     <script type="text/javascript">	
 	function PopupWin(url,w,h)
     {
@@ -71,7 +72,7 @@
 		    </tr>
 	    </table>
 	    <div style="width: 100%; height: 99%; overflow-y:auto; overflow-x:hidden;">
-        <asp:GridView ID="gvData" runat="server" Width="100%" CellPadding="3" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" GridLines="Horizontal" PagerSettings-Mode="NumericFirstLast"
+        <asp:GridView ID="gvData" runat="server" CssClass="table table-stripped table-hover" GridLines="Horizontal" PagerSettings-Mode="NumericFirstLast"
             AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" EmptyDataText="Chưa có dữ liệu." OnRowCommand="gvData_RowCommand" OnRowDataBound="gvData_RowDataBound" ShowFooter="True" OnPageIndexChanging="gvData_PageIndexChanging" OnSorting="gvData_Sorting" PageSize="50" OnRowCreated="gvData_RowCreated">
             <Columns>                
                 <asp:TemplateField HeaderText="Check">

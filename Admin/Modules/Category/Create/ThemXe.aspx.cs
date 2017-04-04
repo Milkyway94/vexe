@@ -15,6 +15,7 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
 {
+    public string maxe;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -22,7 +23,7 @@ public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
             Value.BindToDropdown(ddlNhaxe, NhaXe());
             Value.BindToDropdown(ddlHangXe, HangXe());
         }
-        string maxe = Request.QueryString["id"];
+        maxe = Request.QueryString["id"];
         if (!string.IsNullOrEmpty(maxe))
         {
             Xe xe = new XeRepository().Find(int.Parse(maxe));
@@ -53,7 +54,6 @@ public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        string maxe = Request.QueryString["id"];
         Hashtable tbXe = new Hashtable();
         tbXe.Add("Bienso", txtBienSo.Text);
         tbXe.Add("TenXe", txtTenXe.Text);
@@ -66,7 +66,7 @@ public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
         tbXe.Add("Avartar", txtAvartar.Text);
         if (string.IsNullOrEmpty(maxe))
         {
-            tbXe.Add("NgayTao", DateTime.Now.ToString());
+           tbXe.Add("NgayTao", DateTime.Now.ToString("MM/dd/yyyy"));
             tbXe.Add("Nguoitao", Session["UserName"].ToString());
             bool _insertXe = UpdateData.Insert("Xe", tbXe);
             if (_insertXe)
@@ -80,7 +80,7 @@ public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
         }
         else
         {
-            bool _updateXe = UpdateData.Update("Xe", tbXe, "Maxe="+int.Parse(maxe));
+            bool _updateXe = UpdateData.Update("Xe", tbXe, "Maxe="+maxe);
             if (_updateXe)
             {
                 ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
@@ -93,8 +93,12 @@ public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
     }
     protected DataTable NhaXe()
     {
-        string sql = "SELECT ID as id, Tennhaxe as text FROM NHAXE";
-        return UpdateData.UpdateBySql(sql).Tables[0];
+        if (SessionUtil.GetValue("UserID") != "")
+        {
+            return UpdateData.ExecStore("SP_CCB_NHAXE", SessionUtil.GetValue("UserID")).Tables[0];
+        }
+        else
+            return new DataTable();
     }
     protected DataTable HangXe()
     {

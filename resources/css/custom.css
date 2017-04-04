@@ -76,7 +76,7 @@
 
 .nav-pills > li.active > a, .nav-pills > li > a:hover, .nav-pills > li.active > a:hover {
     background: #007000 !important;
-    color: white;
+    color: #FFD700;
 }
 
 .nav-pills > li > a {
@@ -90,6 +90,10 @@
 
 .nav-pills {
     border-bottom: 1px solid #777779;
+}
+.content-popular ul li.active a {
+    background: #007000 !important;
+    color: #FFD700 !important;
 }
 
 .select2-container {
@@ -568,4 +572,7 @@ ul.uk-pagination li.uk-active span {
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow b{
     margin-top:5px;
+}
+p {
+    margin: 0 0 10px !important;
 }

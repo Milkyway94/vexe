@@ -12,11 +12,11 @@
             pattern: "2U",
             cells: [{
                 id: "a",
-                text: "Vị trí hình ảnh",
+                text: "Vị trí",
                 width: 250
                 }, {
                 id: "b",
-                text: "Danh sách hình ảnh"
+                text: "Danh sách"
             }]
             };
           dhxLayout = new dhtmlXLayoutObject(dhxLayoutData);

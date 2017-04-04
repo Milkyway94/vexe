@@ -123,6 +123,10 @@ public partial class _Default : Page
                 _objControl = LoadControl("ucontrols/include/Profile_History.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
+            case "Checkin":
+                _objControl = LoadControl("ucontrols/include/Checkin.ascx");
+                OperationCell.Controls.Add(_objControl);
+                break;
             case "Profile_Vola":
                 _objControl = LoadControl("ucontrols/include/Profile_Vola.ascx");
                 OperationCell.Controls.Add(_objControl);
@@ -703,7 +707,7 @@ public partial class _Default : Page
     {
         List<ChuyenXeViewModel> lstCx = new List<ChuyenXeViewModel>();
         ChuyenXeRepository cxRepo = new ChuyenXeRepository();
-        var td = cxRepo.SearchFor(o => (o.Diemdi.Contains(Diemdi) || Diemdi.Contains(o.Diemdi)) && (o.Diemden.Contains(Diemden) || Diemden.Contains(o.Diemden)) && o.TrangThai != 0&& o.Giokhoihanh>DateTime.Now);
+        var td = cxRepo.SearchFor(o => (o.Diemdi.Contains(Diemdi) || Diemdi.Contains(o.Diemdi)) && (o.Diemden.Contains(Diemden) || Diemden.Contains(o.Diemden)) && o.TrangThai != 0&& o.Ngaydi>DateTime.Now);
         foreach (var item in td)
         {
             ChuyenXeViewModel cx = new ChuyenXeViewModel(item);
