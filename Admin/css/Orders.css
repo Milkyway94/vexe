@@ -6,7 +6,7 @@
 .navbar-metro {
     background: #26344b;
 }
-th, th>a{
+.table-header th{
     color:#ffc809 !important;
     text-align:center;
     border-bottom:0;
@@ -15,9 +15,12 @@ th, th>a{
 .text-bold{
     font-weight:bold;
     color:#ed1c24;
+        font-size: 18px;
 }
 .text-current{
     color:#007000;
+        font-size: 18px;
+        font-weight:bold;
 }
 #exportable {
     padding-top: 20px;
@@ -113,10 +116,11 @@ th, th>a{
 .w20 {
     width: 20%;
     float: left;
+    margin-right:5px;
 }
 
 #exportPDF h3 {
-    color: #4caf50;
+    color: #007000;
     font-weight: bold;
     margin: 0;
     font-size: 18px;
@@ -127,7 +131,7 @@ th, th>a{
 }
 
 #modal-body {
-    height: 420px;
+    max-height: 420px;
     overflow-y: auto;
 }
 
@@ -157,4 +161,54 @@ th, th>a{
 
 #exportData {
     position: relative;
+}
+/*This class displays the UP arrow*/
+/*.arrow-up {
+     width: 0;
+     height: 0;
+     border-left: 5px solid transparent;
+     border-right: 5px solid transparent;
+     border-bottom: 10px solid gold;
+     display:inline-block;
+         margin-left: 5px;
+}*/
+
+/*This class displays the DOWN arrow*/
+.arrow-down,.arrow-up {
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+        width: 32px;
+    font-size: 14px;
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+ /*    width: 0;
+     height: 0;
+     border-left: 5px solid transparent;
+     border-right: 5px solid transparent;
+     border-top: 10px solid gold;
+     display:inline-block;
+         margin-left: 5px;*/
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+        background-color: #007000;
+    border-color: #007000;
+}
+.arrow-up:before{
+        content: "\f162";
+            content: "\f160";
+}
+.arrow-down:before{
+        content: "\f163";
+        content: "\f161";
+}  
+.table-header th{
+    cursor:pointer;
+}
+.fa-current{
+        color: #007000;
+}
+.w50{
+    width:50%;
 }

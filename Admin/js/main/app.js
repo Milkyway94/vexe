@@ -933,21 +933,21 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
         angular.forEach($scope.orders, function (item) {
             $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
                 item.tbl_Member = JSON.parse(data.d);
+                $scope.Order_Name = item.Order_Account == null ? item.Order_Ten : item.tbl_Member[0].Member_Name;
+                $scope.Mail = item.Order_Account == null ? item.Order_Email : item.tbl_Member[0].Member_Email
+                console.log($scope.Order_Name);
             })
         })
         //$scope.Tongtien += $scope.orders.Order_Tongtien;
         $scope.TongTienThanhToan = getTotal($scope.orders);
-        console.log($scope.TongTien);
-
-
+        console.log($scope.TongTienThanhToan);
     })
     $scope.loading = false;
-    $scope.loader = true;
     $scope.nodata = false;
     $scope.Loc = function (o) {
-        if ($scope.startDate != null && $scope.endDate != null) {
+        if ($scope.startDate != null && $scope.endDate != null && $scope.tenNhaXe != null) {
             $scope.loading = true;
-            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderByDate", "json", { startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
+            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderByDate", "json", { tenNhaXe: $scope.tenNhaXe, startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
                 $scope.orders = JSON.parse(data.d);
                 angular.forEach($scope.orders, function (item) {
                     $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
@@ -962,17 +962,17 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
             })
         }
         else {
-            alert("Bạn chưa nhập khoảng thời gian tìm kiếm");
+            alert("Bạn chưa nhập đủ thông tin tìm kiếm");
         }
     }
     $scope.view = function (o) {
-        console.log(o.tbl_Member.Member_Phone);
+        console.log(o.Order_ID);
         var index = $scope.orders.indexOf(o.Order_ID);
         //console.log(o.Order_ID);
         $("#myModal").modal({ backdrop: false });
         $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderDetailByOID", "json", { oid: o.Order_ID }).success(function (data) {
-            //console.log('success' + data.d);
             $scope.orderDetail = JSON.parse(data.d);
+            console.log($scope.orderDetail);
 
         })
         //var index = $scope.orders.indexOf(o) + 1;
@@ -1001,13 +1001,118 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
         })
         return total;
     }
+    // Sort Data
+    $scope.sortColumn = "Order_CreatedDate";
+    $scope.reverseSort = false;
+    $scope.sortData = function (column) {
+        $scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false;
+        $scope.sortColumn = column;
+    }
+    $scope.getSortClass = function (column) {
+        if ($scope.sortColumn == column) {
+            return $scope.reverseSort
+              ? 'arrow-down'
+              : 'arrow-up';
+        }
+        return;
+    }
     //Phân trang
     $scope.viewby = 10;
     //$scope.totalItems = 2;
     $scope.currentPage = 4;
     $scope.itemsPerPage = $scope.viewby;
     $scope.maxSize = 5; //Number of pager buttons to show
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.pageChanged = function () {
+        console.log('Page changed to: ' + $scope.currentPage);
+    };
+    $scope.setItemsPerPage = function (num) {
+        $scope.itemsPerPage = num;
+        $scope.currentPage = 1; //reset to first paghe
+    }
+}])
+app.controller("VeXeController", ['$scope', '$http', '$filter', 'Service', function ($scope, $filter, $http, $Service) {
+    // Export Data
+    $scope.exportData = function () {
+        var blob = new Blob([document.getElementById('exportData').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        //var date = new Date().toJSON().slice(0, 10);
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        console.log(datetime)
+        saveAs(blob, "Thongke" + datetime + ".xls");
+    };
+    $scope.exportPDF = function () {
+        var blob = new Blob([document.getElementById('exportPDF').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        //var date = new Date().toJSON().slice(0, 10);
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        console.log(datetime)
+        saveAs(blob, "Vexe" + datetime + ".xls");
+    };
+    // Danh sach ve
+    $Service.Api("POST", "/Admin/Modules/Order/Vexe.aspx/getAllVeXe", "json", {}).success(function (data) {
+        $scope.lstOrder = JSON.parse(data.d);
+        angular.forEach($scope.lstOrder, function (item) {
+            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
+                item.tbl_Member = JSON.parse(data.d);
+            })
+        })
+        console.log($scope.lstOrder);
+        $scope.totalItems = $scope.lstOrder.length;
+    })
+    // Lấy vé theo ngày
+    $scope.Search = function (o) {
+        if ($scope.startDate != null && $scope.endDate != null) {
+            $scope.loading = true;
+            $Service.Api("POST", "/Admin/Modules/Order/Vexe.aspx/getVeByNgay", "json", { startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
+                $scope.lstOrder = JSON.parse(data.d);
+                console.log(data.d);
+                angular.forEach($scope.orders, function (item) {
+                    $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
+                        item.tbl_Member = JSON.parse(data.d);
+                    })
+                })
+                $scope.loading = false;
+            })
+        }
+        else {
+            alert("Bạn chưa nhập đủ thông tin tìm kiếm");
+        }
+    }
 
+    // In Vé
+    $scope.view = function (o) {
+        $("#myModal").modal({ backdrop: false });
+        $Service.Api("POST", "/Admin/Modules/Order/Vexe.aspx/getTicketByMave", "json", { mave: o.MaVe }).success(function (data) {
+            $scope.od = JSON.parse(data.d);
+            $scope.CodeTicket = $scope.od[0].MaVe;
+            $scope.TicketType = $scope.od[0].Type;
+            $scope.Price = $scope.od[0].UnitPrice;
+            console.log($scope.od[0].UnitPrice);
+        })
+        $scope.Diemdi = o.Diemdi;
+        $scope.Diemden = o.Diemden;
+        $scope.HoTen = o.Order_Account == null ? o.Order_Ten : o.tbl_Member[0].Member_Name;
+        $scope.DiaChi = o.Order_ShipAddress;
+        $scope.NgayTao = o.Order_CreatedDate;
+        $scope.NhaXe = o.Tennhaxe;
+        $scope.NgayDi = o.Ngaydi;
+        $scope.TongTien = o.Order_Tongtien;
+        $scope.Phone = o.Order_Account == null ? o.Sodienthoai : o.tbl_Member[0].Member_Phone;
+        $scope.MaDonHang = o.Order_Code;
+    }
+    //Phân trang
+    $scope.viewby = 5;
+    // $scope.totalItems = 10;
+    $scope.currentPage = 4;
+    $scope.itemsPerPage = $scope.viewby;
+    $scope.maxSize = 5; //Number of pager buttons to show
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
     };

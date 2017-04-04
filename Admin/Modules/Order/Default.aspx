@@ -11,6 +11,9 @@
                 <div class="row">
                     <div class="col-sm-6" style="padding-bottom: 0px; padding-left: 15px;">
                         <div class="w20">
+                            <input type="text" class="form-control input-sm" placeholder="Lọc theo Nhà Xe" ng-model="tenNhaXe" required />
+                        </div>
+                        <div class="w20">
                             <input type="datetime" class="form-control input-sm datepicker" placeholder="Lọc Từ ngày" ng-model="startDate" required />
                         </div>
                         <div class="w20">
@@ -33,36 +36,38 @@
                             <thead>
                                 <tr class="table-header">
                                     <th>STT</th>
-                                    <th>Tên khách hàng</th>
-                                    <th>Mã đặt vé</th>
-                                    <th>Email</th>
-                                    <th>Địa chỉ</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Tổng thanh toán</th>
+                                    <th ng-click="sortData('Order_Name')"><i class="fa fa-address-card-o"></i>&nbsp;Tên khách hàng<div ng-class="getSortClass('Order_Name')"></div></th>
+                                    <th ng-click="sortData('Order_Code')"><i class="fa fa-ticket"></i>&nbsp;Mã đặt vé<div ng-class="getSortClass('Order_Code')"></div></th>
+                                    <th ng-click="sortData('Tennhaxe')"><i class="fa fa-car"></i>&nbsp;Nhà xe<div ng-class="getSortClass('Tennhaxe')"></div></th>
+                                    <th ng-click="sortData('Mail')"><i class="fa fa-envelope-o"></i>&nbsp;Email<div ng-class="getSortClass('Mail')"></div></th>
+                                    <th ng-click="sortData('Order_ShipAddress')"><i class="fa fa-map-marker"></i>&nbsp;Địa chỉ<div ng-class="getSortClass('Order_ShipAddress')"></div></th>
+                                    <th ng-click="sortData('Order_CreatedDate')"><i class="fa fa-calendar-o"></i>&nbsp;Ngày đặt<div ng-class="getSortClass('Order_CreatedDate')"></div></th>
+                                    <th ng-click="sortData('Order_TongThanhToan')"><i class="fa fa-money"></i>&nbsp;Tổng thanh toán(VNĐ)<div ng-class="getSortClass('Order_TongThanhToan')"></div></th>
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <%--<tr class="loader" ng-show="loader"></tr>--%>
-                                <tr ng-repeat="o in orders.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter : SearchKey">
+                                <tr ng-repeat="o in orders.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | filter : SearchKey | orderBy:sortColumn:reverseSort">
                                     <td>{{ orders.indexOf(o)+1 }}</td>
-                                    <td>{{o.Order_Account==null?o.Order_Ten:o.tbl_Member[0].Member_Name}}</td>
+                                    <td>{{Order_Name}}</td>
                                     <td>{{o.Order_Code}}</td>
-                                    <td>{{o.Order_Account==null?o.Order_Email:o.tbl_Member[0].Member_Email}}</td>
+                                    <td>{{o.Tennhaxe}}</td>
+                                    <td>{{Mail}}</td>
                                     <td>{{o.Order_ShipAddress}}</td>
                                     <td>{{ o.Order_CreatedDate | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-                                    <td>{{o.Order_TongThanhToan | number}} đ</td>
+                                    <td>{{o.Order_TongThanhToan | number}}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning btn-flat btn-sm" ng-click="view(o)"><i class="fa fa-eye"></i></button>
-                                        &nbsp;
-                                        <button type="button" class="btn btn-danger btn-flat btn-sm" ng-click="Delete(o)"><i class="fa fa-trash"></i></button>
+                                      <%--  &nbsp;
+                                        <button type="button" class="btn btn-danger btn-flat btn-sm" ng-click="Delete(o)"><i class="fa fa-trash"></i></button>--%>
                                     </td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="6" class="text-right"><b>Tổng doanh thu {{ forDate }}</b></td>
-                                    <td colspan="2" class="text-left">{{ TongTienThanhToan | number }} đ</td>
+                                    <td colspan="7" class="text-right text-current"><b>Tổng doanh thu {{ forDate }}</b></td>
+                                    <td colspan="2" class="text-left text-bold">{{ TongTienThanhToan | number }} đ</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -79,8 +84,10 @@
                             <option value="50">50</option>
                         </select>
                         Dòng--%>
-                        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+                        <div class="pull-right">
+                        <pagination  total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
                         <%--<pre>Trang: {{currentPage}} / {{numPages}}</pre>--%>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -102,6 +109,31 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td colspan="2">
+                                    <b>Order: #{{ MaDonHang }}</b><br />
+                                    Order Date: {{ NgayTao | date:'dd-MM-yyyy'}}
+                                    Nhà xe: {{ NhaXe }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="table tbl-phuongthuc">
+                                        <tr>
+                                            <td class="w50">
+                                                <b>Thông tin khách hàng</b><br />
+                                                {{ HoTen }}<br />
+                                                {{ DiaChi }}<br />
+                                                SĐT: {{ Phone }}
+                                            </td>
+                                            <td class="w50">
+                                                <b>Phương thức thanh toán</b><br />
+                                                Thanh toán bằng tiền mặt khi nhận hàng
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <%--<tr>
                                 <td>
                                     <table class="table table-info table-bordered">
                                         <tr>
@@ -121,14 +153,13 @@
                                             <td>{{ NgayTao | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                                             <td><b>Nhà xe</b></td>
                                             <td>{{ NhaXe }}</td>
-                                        </tr>
-                                        <tr>
+                                        </tr><tr>
                                             <td colspan="3"><b>Tổng tiền</b></td>
                                             <td>{{ TongTien | number}} đ</td>
                                         </tr>
                                     </table>
                                 </td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td colspan="2">
                                     <h3 class="text-center">DANH SÁCH VÉ</h3>
@@ -153,6 +184,12 @@
                                                 <td>{{ od.Type=="V"?"VIP":"Thường" }}</td>
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="text-right text-current" colspan="3">Tổng số tiền</td>
+                                                <td class="text-bold">{{ TongTien | number}} đ</td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </td>
                             </tr>

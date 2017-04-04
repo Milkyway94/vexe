@@ -15,10 +15,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
-using System.IO;
-using System.Drawing;
 using System.Web.UI.WebControls;
-using SMAC;
 using System.Runtime.InteropServices;
 using QCMS_BUSSINESS;
 using System.Runtime.Serialization.Json;
@@ -32,7 +29,6 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
     private static OrderRepository orderRepo = new OrderRepository();
     private static NhaxeRepository nhaxeRepo = new NhaxeRepository();
     protected string cs = ConfigurationManager.ConnectionStrings["vexedtEntities"].ConnectionString;
-    GridView GridView1 = new GridView();
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -44,11 +40,11 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
         return nhaxeRepo.All().ToList();
     }
     [WebMethod]
-    public static string getOrderByDate(DateTime startDate, DateTime endDate)
+    public static string getOrderByDate(string tenNhaXe,DateTime startDate, DateTime endDate)
     {
         string sql = "";
         //DateTime startDate, DateTime endDate
-        sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "');";
+        sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and nx.Tennhaxe like N'%"+ tenNhaXe + "%' and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "');";
         //sql = "select * from tbl_Order where Order_ID in (select o.Order_ID from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "'));";
         DataTable ds = UpdateData.UpdateBySql(sql).Tables[0];
        
@@ -105,6 +101,8 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
     [WebMethod]
     public static string getAllOrderBySql()
     {
+        //string sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe = cx.MaChuyenXe and cx.MaXe = x.MaXe and x.Nhaxe = nx.ID";
+        //DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
         DataTable dt = UpdateData.ExecStore("SP_GetOrderByNhaxe", SessionUtil.GetValue("UserID")).Tables[0];
         return JsonConvert.SerializeObject(dt);
     }
