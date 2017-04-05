@@ -19,6 +19,9 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
     $scope.OpenUpdateForm = function (act) {
         switch (act) {
             case "add":
+                $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp: "SP_GETALLTINH", param: "" }).success(function (data) {
+                    $scope.Tinhs = JSON.parse(data.d);
+                })
                 $scope.Tennhaxe = "";
                 $scope.Soluongxe = "";
                 $scope.Trusochinh = "";
@@ -29,6 +32,9 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
                 $scope.action = "add";
                 break;
             case "edit":
+                $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp: "SP_GETALLTINH", param: "" }).success(function (data) {
+                    $scope.Tinhs = JSON.parse(data.d);
+                })
                 $("#add-modal").modal({ backdrop: false });
                 $scope.Tennhaxe = $scope.selected.Tennhaxe;
                 $scope.Soluongxe = $scope.selected.Soluongxe;
@@ -186,6 +192,7 @@ app.controller("QuanHuyenController", ['$scope', '$http', '$filter', 'Service', 
                 break;
             case "edit":
                 $("#add-modal").modal({ backdrop: false });
+                $(".select2").select2();
                 $scope.Huyen = $scope.selected;
                 $scope.action = "edit";
                 break;
@@ -219,7 +226,7 @@ app.controller("QuanHuyenController", ['$scope', '$http', '$filter', 'Service', 
             console.log($scope.selected);
             $scope.Huyen.MaHuyen = $scope.selected.MaHuyen;
             console.log("ma huyen", $scope.Huyen);
-            $Service.Api("POST", "/Admin/Modules/Category/District.aspx/UpdateDistrict", "json", { MaHuyen: $scope.Huyen.MaHuyen, TenHuyen: $scope.Huyen.TenHuyen, MaTinh: $scope.Huyen.MaTinh }).success(function (data) {
+            $Service.Api("POST", "/Admin/Modules/Category/District.aspx/UpdateDistrict", "json", { MaHuyen: $scope.Huyen.MaHuyen, TenHuyen: $scope.Huyen.TenHuyen, MaTinh: $scope.Huyen.MaTinh, GiaShip: $scope.Huyen.GiaShip }).success(function (data) {
                 var res = data.d;
                 var index = $scope.districts.indexOf($scope.selected);
                 $scope.districts.splice(index, 1);
@@ -276,10 +283,13 @@ app.controller("QuanHuyenController", ['$scope', '$http', '$filter', 'Service', 
         })
     }
     $scope.ExportToExcel = function () {
-        $Service.Api("POST", "/Admin/Modules/Category/District.aspx/CreateDistrict", "json", JSON.stringify($scope.nhaxes)).success(function (data) {
-            console.log(data);
-        })
-    }
+        var blob = new Blob([document.getElementById('exportData').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        saveAs(blob, "Danhmucquanhuyen .xls");
+    };
 }])
 app.controller("XeController", ['$scope', '$http', '$filter', 'Service', function ($scope, $filter, $http, $Service) {
     var url = "/Admin/Modules/Category/Vehicle.aspx";
@@ -780,8 +790,7 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
     }
     LoadData();
 }])
-app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', '$interval', 'uiGridConstants', 'uiGridGroupingConstants',
-    function ($scope, $http, $Service, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
+app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', '$interval', 'uiGridConstants', 'uiGridGroupingConstants',function ($scope, $http, $Service, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
         var today = new Date();
         var url = "/Admin/Modules/Category/Vehicle.aspx";
         var rootUrl = "/Admin/Default.aspx";
@@ -980,8 +989,11 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
         $scope.DiaChi = o.Order_ShipAddress;
         $scope.NgayTao = o.Order_CreatedDate;
         $scope.NhaXe = o.Tennhaxe;
-        $scope.TongTien = o.Order_Tongtien;
+        $scope.TongTien = o.Order_Tongtien ? o.Order_Tongtien:0 ;
+        $scope.GiamGia = o.Order_KhuyenMai ? o.Order_KhuyenMai: 0;
+        $scope.PhiVanChuyen = o.Order_ShipValue ? o.Order_ShipValue:0;
         $scope.Phone = o.Order_Account == null ? o.Sodienthoai : o.tbl_Member[0].Member_Phone;
+        $scope.TongThanhToan = o.Order_TongThanhToan ? o.Order_TongThanhToan:0;
         $scope.MaDonHang = o.Order_Code;
     }
     $scope.Delete = function (o) {

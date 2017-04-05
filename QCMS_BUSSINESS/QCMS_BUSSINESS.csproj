@@ -161,6 +161,9 @@
     <Compile Include="Sp_GetAllXe_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_GETCHUYENXEFROMDITINH_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_GetOrderByNhaxe_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
@@ -198,6 +201,9 @@
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_SELECTXEBYNHAXEID_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_TUYENNOIBAT_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_ViewChuyenXe1_Result.cs">

@@ -50,8 +50,10 @@
                                 <span ng-show="Tennhaxe.$touched && Tennhaxe.$invalid" class="alert alert-danger">Bạn phải nhập tên nhà xe.</span>
                             </div>
                             <div class="form-group">
-                                <label>Trụ sở chính</label>
-                                <input type="text" ng-model="Trusochinh" class="form-control" />
+                                <label>Địa chỉ trụ sở chính</label>
+                                <select ng-model="Trusochinh" class="form-control select2">
+                                    <option ng-repeat="tinh in Tinhs" ng-value="tinh.TenTinh">{{tinh.TenTinh}}</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Số điện thoại (*)</label>

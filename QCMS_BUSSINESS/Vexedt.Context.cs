@@ -806,5 +806,19 @@ namespace QCMS_BUSSINESS
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ViewChuyenXe1_Result>("SP_ViewChuyenXe1", sessionIdParameter);
         }
+    
+        public virtual ObjectResult<SP_GETCHUYENXEFROMDITINH_Result> SP_GETCHUYENXEFROMDITINH(Nullable<int> matinh)
+        {
+            var matinhParameter = matinh.HasValue ?
+                new ObjectParameter("matinh", matinh) :
+                new ObjectParameter("matinh", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GETCHUYENXEFROMDITINH_Result>("SP_GETCHUYENXEFROMDITINH", matinhParameter);
+        }
+    
+        public virtual ObjectResult<SP_TUYENNOIBAT_Result> SP_TUYENNOIBAT()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TUYENNOIBAT_Result>("SP_TUYENNOIBAT");
+        }
     }
 }

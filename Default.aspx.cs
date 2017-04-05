@@ -856,7 +856,7 @@ public partial class _Default : Page
             tbIn.Add("Order_Promote", khuyenmai.ToString());
             tbIn.Add("Order_Giatrivedoi", giatridoive.ToString());
             tbIn.Add("Order_Account", HttpContext.Current.Session["MemberID"].ToString());
-            tbIn.Add("Order_CreatedDate", DateTime.Now.ToString());
+            tbIn.Add("Order_CreatedDate", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
             tbIn.Add("MaChuyenXe", machuyenxe.ToString());
             tbIn.Add("Order_Code", ticketCode);
             tbIn.Add("Order_ShipAddress", diachinhanve);
@@ -1244,7 +1244,7 @@ public partial class _Default : Page
                                 string toEmail = HttpContext.Current.Session["Member_Email"].ToString();
                                 string Name = HttpContext.Current.Session["Member_Name"].ToString().Trim();
 
-                                string Subject = "THÔNG TIN ĐẶT VÉ XE ĐIỆN TỬ TẠI " + CMSfunc._GetConst("_Domain");
+                                string Subject = "THÔNG TIN ĐẶT VÉ XE ĐIỆN TỬ TẠI " + CMSfunc._GetConst("_Domain"); 
                                 string Host = CMSfunc._GetConst("_Hostmail");
                                 string EmailClient = CMSfunc._GetConst("_EmailClient");
                                 string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");

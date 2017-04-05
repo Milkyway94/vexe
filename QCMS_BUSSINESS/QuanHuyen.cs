@@ -23,6 +23,7 @@ namespace QCMS_BUSSINESS
         public int MaHuyen { get; set; }
         public string TenHuyen { get; set; }
         public Nullable<int> MaTinh { get; set; }
+        public Nullable<double> GiaShip { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Diadiem> Diadiems { get; set; }

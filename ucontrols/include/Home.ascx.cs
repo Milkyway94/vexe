@@ -21,10 +21,11 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
     {
         string status = Request["status"] == null ? "" : Request["status"];
         ltrbanner.Text = LoadSlider(status);
+        ltrPioriryFrom.Text = LoadPiorityFrom();
         CMSfunc.checkURL();
         if (IsPostBack)
         {
-            
+
         }
     }
     protected string LoadSlider(string status)
@@ -58,7 +59,74 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
         StringBuilder str = new StringBuilder("");
         foreach (var item in prorepo.All())
         {
-            str.Append("<option value='"+item.MaTinh+"'>"+item.TenTinh+"</option>");
+            str.Append("<option value='" + item.MaTinh + "'>" + item.TenTinh + "</option>");
+        }
+        return str.ToString();
+    }
+    protected string LoadPiorityFrom()
+    {
+        StringBuilder strFr = new StringBuilder();
+
+
+        DataTable dtfrom = UpdateData.ExecStore("SP_TUYENNOIBAT", "").Tables[0];
+        DataRowCollection rows = dtfrom.Rows;
+        if (rows.Count > 0)
+        {
+            strFr.Append("<ul class=\"nav nav-pills\">");
+            for (int i = 0; i < rows.Count; i++)
+            {
+                string active = i == 0 ? "active" : "";
+                strFr.Append("<li class=\"" + active + "\"><a data-toggle=\"pill\" href=\"#0\">" + rows[0]["TenTinh"] + "</a></li>");
+            }
+            strFr.Append("</ul>");
+            strFr.Append("<div class=\"tab-content\">");
+            for (int i = 0; i < rows.Count; i++)
+            {
+                string active = i == 0 ? "active" : "";
+                strFr.Append("<div id=\"0\" class=\"tab-pane fade in " + active + "\">");
+                strFr.Append("<div class=\"row\">");
+                DataTable stChuyenxe = UpdateData.ExecStore("SP_GETCHUYENXEFROMDITINH", rows[i]["MaTinh"].ToString()).Tables[0];
+                DataRowCollection rowcx = stChuyenxe.Rows;
+                if (rowcx.Count > 0)
+                {
+                    for (int j = 0; j < rowcx.Count; j++)
+                    {
+                        strFr.Append("<div class=\"col-sm-6 popular\">");
+                        strFr.Append("  <div class=\"col-sm-5 name\">");
+                        strFr.Append("      <span class=\"diemdi\">" + rowcx[i]["TinhDi"] + "</span>");
+                        strFr.Append("      <span class=\"fa fa-long-arrow-right muiten\"></span>");
+                        strFr.Append("      <span class=\"diemden\">" + rowcx[i]["TinhDen"] + "</span>");
+                        strFr.Append("  </div>");
+                        strFr.Append("  <div class=\"col-sm-4 name\">");
+                        strFr.Append("      <span class=\"gia\">" + double.Parse(rowcx[i]["Gia"].ToString()).ToString("N0") + " đ/vé</span>");
+                        strFr.Append("  </div>");
+                        strFr.Append("  <div class=\"col-sm-3 btn-area\">");
+                        strFr.Append("      <a href = \"/tim-ve-xe.htm?Diemdi="+ rowcx[i]["TinhDi"] + "&Diemden="+ rowcx[i]["TinhDen"] + "&Giodi=\" class=\"btn btn-flat btn-datve\">Đặt vé</a>");
+                        strFr.Append("  </div>");
+                        strFr.Append("</div>");
+                        
+                    }
+                }
+               strFr.Append("</div>");
+                strFr.Append("</div>");
+                strFr.Append("</div>");
+            }
+        }
+
+        return strFr.ToString();
+    }
+    protected string LoadPopularTravel()
+    {
+        StringBuilder str = new StringBuilder();
+        DataTable dtfrom = UpdateData.ExecStore("SP_TUYENNOIBAT", "").Tables[0];
+        DataRowCollection rows = dtfrom.Rows;
+        if (rows.Count > 0)
+        {
+            str.Append("<li class=\"active\"><a data-toggle=\"pill\" href=\"#0\">" + rows[0]["TenTinh"] + "</a></li>");
+            for (int i = 1; i < rows.Count; i++)
+            {
+                str.Append("<li><a data-toggle=\"pill\" href=\"#" + i + "\">" + rows[0]["TenTinh"] + "</a></li>");
+            }
         }
         return str.ToString();
     }

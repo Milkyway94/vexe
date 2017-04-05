@@ -118,347 +118,7 @@
 <div class="popular">
     <div class="container content-popular">
         <h1>Các tuyến xe phổ biến</h1>
-        <ul class="nav nav-pills">
-            <li class="active"><a data-toggle="pill" href="#home">Hà Nội</a></li>
-            <li><a data-toggle="pill" href="#menu1">TP. Hồ Chí Minh</a></li>
-            <li><a data-toggle="pill" href="#menu2">Đà Nẵng</a></li>
-            <li><a data-toggle="pill" href="#menu3">Hải Phòng</a></li>
-            <li><a data-toggle="pill" href="#menu3">Nha Trang</a></li>
-        </ul>
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <div class="row">
-                    <asp:Literal Text="" ID="PopularTravel" runat="server" />
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="menu1" class="tab-pane fade">
-                <div class="row">
-                    <asp:Literal Text="" ID="Literal1" runat="server" />
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="menu2" class="tab-pane fade">
-                <div class="row">
-                    <asp:Literal Text="" ID="Literal2" runat="server" />
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="menu3" class="tab-pane fade">
-                <div class="row">
-                    <asp:Literal Text="" ID="Literal3" runat="server" />
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 popular">
-                        <div class="col-sm-5 name">
-                            <span class="diemdi">Hà Nội</span>
-                            <span class="fa fa-long-arrow-right muiten"></span>
-                            <span class="diemden">TP.Hồ Chí Minh</span>
-                        </div>
-                        <div class="col-sm-4 name">
-                            <span class="gia">269,000 đ/vé</span>
-                        </div>
-                        <div class="col-sm-3 btn-area">
-                            <a href="#" class="btn btn-flat btn-datve">Đặt vé</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <asp:Literal Text="" ID="ltrPioriryFrom" runat="server" />
     </div>
     <div class="container content-thanhtoan">
         <div class="thanhtoan">
@@ -483,7 +143,7 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>
@@ -495,13 +155,7 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-           <li class="xe">
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>
@@ -513,7 +167,7 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>
@@ -525,7 +179,13 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
+            <li class="xe">
+                <a href="#">
+                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
+                    <span class="tenxe">Hà Nội</span>
+                </a>
+            </li>
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>

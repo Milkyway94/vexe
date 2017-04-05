@@ -189,6 +189,18 @@
                                                 <td class="text-right text-current" colspan="3">Tổng số tiền</td>
                                                 <td class="text-bold">{{ TongTien | number}} đ</td>
                                             </tr>
+                                             <tr>
+                                                <td class="text-right text-current" colspan="3">Giảm giá</td>
+                                                <td class="text-bold">{{ GiamGia | number}} đ</td>
+                                            </tr>
+                                             <tr>
+                                                <td class="text-right text-current" colspan="3">Phí vận chuyển</td>
+                                                <td class="text-bold">{{ PhiVanChuyen | number}} đ</td>
+                                            </tr>
+                                             <tr>
+                                                <td class="text-right text-current" colspan="3">Tổng thanh toán</td>
+                                                <td class="text-bold">{{ TongThanhToan | number}} đ</td>
+                                            </tr>
                                         </tfoot>
                                     </table>
                                 </td>

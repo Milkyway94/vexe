@@ -26,23 +26,25 @@ public partial class Admin_Modules_Category_District : System.Web.UI.Page
         return res;
     }
     [WebMethod]
-    public static QuanHuyen CreateDistrict(string TenHuyen, int MaTinh)
+    public static QuanHuyen CreateDistrict(string TenHuyen, int MaTinh, double GiaShip)
     {
         var rs= distRepo.Add(new QuanHuyen{
                 TenHuyen=TenHuyen,
-                MaTinh=MaTinh
+                MaTinh=MaTinh,
+                GiaShip=GiaShip
         });
         distRepo.Save();
         return rs;
     }
     [WebMethod]
-    public static QuanHuyen UpdateDistrict(int MaHuyen, string TenHuyen, int MaTinh)
+    public static QuanHuyen UpdateDistrict(int MaHuyen, string TenHuyen, int MaTinh, double GiaShip)
     {
         var dist = distRepo.Find(MaHuyen);
         if (dist != null)
         {
             dist.TenHuyen = TenHuyen;
             dist.MaTinh = MaTinh;
+            dist.GiaShip = GiaShip;
         }
         distRepo.Save();
         return dist;

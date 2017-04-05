@@ -123,6 +123,7 @@
           <Property Name="MaHuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenHuyen" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="MaTinh" Type="int" />
+          <Property Name="GiaShip" Type="float" />
         </EntityType>
         <EntityType Name="SoDienThoai">
           <Key>
@@ -1023,6 +1024,9 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
         <Function Name="Sp_GetAllXe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="sessionId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_GETCHUYENXEFROMDITINH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
+          <Parameter Name="matinh" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_GetOrderByNhaxe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="sessionId" Type="int" Mode="In" />
         </Function>
@@ -1083,6 +1087,7 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
         <Function Name="SP_SELECTXEBYNHAXEID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="Maxe" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_TUYENNOIBAT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt" />
         <Function Name="SP_UPDATEHANGXE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="Name" Type="nvarchar" Mode="In" />
@@ -1491,34 +1496,34 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
             <End Role="tbl_User" EntitySet="tbl_User" />
           </AssociationSet>
           <FunctionImport Name="DELHANGXE1">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_CCB_Huyen_FROM_Tinh1" ReturnType="Collection(lggvn_vexedtModel.SP_CCB_Huyen_FROM_Tinh1_Result)">
-            <Parameter Name="matinh" Mode="In" Type="Int32" />
+          <Parameter Name="matinh" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_CCB_NHAXE" ReturnType="Collection(lggvn_vexedtModel.SP_CCB_NHAXE_Result)">
-            <Parameter Name="sessionID" Mode="In" Type="Int32" />
+          <Parameter Name="sessionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_CCB_Tinh1" ReturnType="Collection(lggvn_vexedtModel.SP_CCB_Tinh1_Result)" />
           <FunctionImport Name="SP_CCB_XE1" ReturnType="Collection(lggvn_vexedtModel.SP_CCB_XE1_Result)">
-            <Parameter Name="sessionID" Mode="In" Type="Int32" />
+          <Parameter Name="sessionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_DELTINH1">
-            <Parameter Name="MaTinh" Mode="In" Type="Int32" />
+          <Parameter Name="MaTinh" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_DELXE1">
-            <Parameter Name="Maxe" Mode="In" Type="Int32" />
+          <Parameter Name="Maxe" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GETALLHANGXE1" ReturnType="Collection(lggvn_vexedtModel.SP_GETALLHANGXE1_Result)" />
           <FunctionImport Name="SP_GETALLNHAXE1" ReturnType="Collection(lggvn_vexedtModel.SP_GETALLNHAXE1_Result)">
-            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+          <Parameter Name="sessionId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GETALLTINH1" ReturnType="Collection(lggvn_vexedtModel.SP_GETALLTINH1_Result)" />
           <FunctionImport Name="Sp_GetAllXe1" ReturnType="Collection(lggvn_vexedtModel.Sp_GetAllXe1_Result)">
-            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+          <Parameter Name="sessionId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetOrderByNhaxe" ReturnType="Collection(lggvn_vexedtModel.SP_GetOrderByNhaxe_Result)">
-            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+          <Parameter Name="sessionId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERTCHUYENXE1">
             <Parameter Name="Machuyenxe" Mode="In" Type="Int32" />
@@ -1549,7 +1554,7 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
             <Parameter Name="Status" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERTTINH1">
-            <Parameter Name="TenTinh" Mode="In" Type="String" />
+          <Parameter Name="TenTinh" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERTXE1">
             <Parameter Name="Bienso" Mode="In" Type="String" />
@@ -1563,19 +1568,19 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           </FunctionImport>
           <FunctionImport Name="SP_SELECTALLHANGXE1" ReturnType="Collection(lggvn_vexedtModel.SP_SELECTALLHANGXE1_Result)" />
           <FunctionImport Name="SP_SELECTCHUYENXEBYID1" ReturnType="Collection(lggvn_vexedtModel.SP_SELECTCHUYENXEBYID1_Result)">
-            <Parameter Name="MaChuyenXe" Mode="In" Type="Int32" />
+          <Parameter Name="MaChuyenXe" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_SELECTHANGXEBYID1" ReturnType="Collection(lggvn_vexedtModel.SP_SELECTHANGXEBYID1_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_SELECTTINHBYID1" ReturnType="Collection(lggvn_vexedtModel.SP_SELECTTINHBYID1_Result)">
-            <Parameter Name="MaTinh" Mode="In" Type="Int32" />
+          <Parameter Name="MaTinh" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_SELECTXEBYID1" ReturnType="Collection(lggvn_vexedtModel.SP_SELECTXEBYID1_Result)">
-            <Parameter Name="Maxe" Mode="In" Type="Int32" />
+          <Parameter Name="Maxe" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_SELECTXEBYNHAXEID1" ReturnType="Collection(lggvn_vexedtModel.SP_SELECTXEBYNHAXEID1_Result)">
-            <Parameter Name="Maxe" Mode="In" Type="Int32" />
+          <Parameter Name="Maxe" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_UPDATEHANGXE">
             <Parameter Name="ID" Mode="In" Type="Int32" />
@@ -1599,8 +1604,12 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
             <Parameter Name="Hangxe" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_ViewChuyenXe1" ReturnType="Collection(lggvn_vexedtModel.SP_ViewChuyenXe1_Result)">
-            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+          <Parameter Name="sessionId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_GETCHUYENXEFROMDITINH" ReturnType="Collection(lggvn_vexedtModel.SP_GETCHUYENXEFROMDITINH_Result)">
+            <Parameter Name="matinh" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_TUYENNOIBAT" ReturnType="Collection(lggvn_vexedtModel.SP_TUYENNOIBAT_Result)" />
           </EntityContainer>
         <ComplexType Name="SP_GETALLHANGXE_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1856,6 +1865,7 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Name="MaTinh" Type="Int32" />
           <NavigationProperty Name="Diadiems" Relationship="lggvn_vexedtModel.FK_Diadiem_QuanHuyen" FromRole="QuanHuyen" ToRole="Diadiem" />
           <NavigationProperty Name="TinhThanh" Relationship="lggvn_vexedtModel.FK_QuanHuyen_TinhThanh" FromRole="QuanHuyen" ToRole="TinhThanh" />
+          <Property Name="GiaShip" Type="Double" />
         </EntityType>
         <EntityType Name="SoDienThoai">
           <Key>
@@ -2808,6 +2818,17 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Type="Int32" Name="VeVipConLai" Nullable="true" />
           <Property Type="Time" Name="Thoigiandukien" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="SP_GETCHUYENXEFROMDITINH_Result">
+          <Property Type="Double" Name="Gia" Nullable="true" />
+          <Property Type="String" Name="TinhDi" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TinhDen" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SoLuot" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_TUYENNOIBAT_Result">
+          <Property Type="Int32" Name="MaTinh" Nullable="false" />
+          <Property Type="String" Name="TenTinh" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SoChuyen" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2937,6 +2958,7 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <EntitySetMapping Name="QuanHuyens">
             <EntityTypeMapping TypeName="lggvn_vexedtModel.QuanHuyen">
               <MappingFragment StoreEntitySet="QuanHuyen">
+                <ScalarProperty Name="GiaShip" ColumnName="GiaShip" />
                 <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
                 <ScalarProperty Name="TenHuyen" ColumnName="TenHuyen" />
                 <ScalarProperty Name="MaHuyen" ColumnName="MaHuyen" />
@@ -3806,6 +3828,25 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
                 <ScalarProperty Name="VeThuongConLai" ColumnName="VeThuongConLai" />
                 <ScalarProperty Name="VeVipConLai" ColumnName="VeVipConLai" />
                 <ScalarProperty Name="Thoigiandukien" ColumnName="Thoigiandukien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GETCHUYENXEFROMDITINH" FunctionName="lggvn_vexedtModel.Store.SP_GETCHUYENXEFROMDITINH">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="lggvn_vexedtModel.SP_GETCHUYENXEFROMDITINH_Result">
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhDi" ColumnName="TinhDi" />
+                <ScalarProperty Name="TinhDen" ColumnName="TinhDen" />
+                <ScalarProperty Name="SoLuot" ColumnName="SoLuot" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_TUYENNOIBAT" FunctionName="lggvn_vexedtModel.Store.SP_TUYENNOIBAT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="lggvn_vexedtModel.SP_TUYENNOIBAT_Result">
+                <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
+                <ScalarProperty Name="TenTinh" ColumnName="TenTinh" />
+                <ScalarProperty Name="SoChuyen" ColumnName="SoChuyen" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

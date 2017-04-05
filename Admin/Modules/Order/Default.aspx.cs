@@ -40,7 +40,7 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
         return nhaxeRepo.All().ToList();
     }
     [WebMethod]
-    public static string getOrderByDate(string tenNhaXe,DateTime startDate, DateTime endDate)
+    public static string getOrderByDate(string tenNhaXe, string startDate, string endDate)
     {
         string sql = "";
         //DateTime startDate, DateTime endDate

@@ -11,7 +11,7 @@
                 <ul class="header-right">
 
                     <li>
-                        <i class="fa fa-phone"></i>&nbsp;<a href="javascript:void(0)"><asp:Label ID="lbSDT" runat="server"></asp:Label></a>
+                        <i class="fa fa-phone"></i>&nbsp;<a href="javascript:void(0)" id="link-phone"><asp:Label ID="lbSDT" runat="server"></asp:Label></a>
                         &nbsp;
                     </li>
                     <%if (Session["MemberID"] != null)
