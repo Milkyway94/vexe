@@ -1,13 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="News.ascx.cs" Inherits="ucontrols_include_News" %>
 <div class="content">
     <div class="container container-fluid">
+        <ul class="uk-breadcrumb hi-padding">
+            <asp:Literal ID="lbNavigation" runat="server"></asp:Literal>
+        </ul>
         <div class="row">
             <!-- main content -->
             <div class="main-content col-md-9 col-lg-9 col-sm-12 col-xs-12">
                 <div class="fw">
-                    <ul class="uk-breadcrumb hi-padding">
-                        <asp:Literal ID="lbNavigation" runat="server"></asp:Literal>
-                    </ul>
                     <div class="fw news">
                         <asp:Literal ID="ltrListContent" runat="server"></asp:Literal>
                         <h3><span>Tin tức</span></h3>
@@ -23,7 +23,7 @@
                                 <asp:Literal ID="ltrtdn" runat="server"></asp:Literal>
 
                             </div>
-                            <div class="col-md-4 col-xs-12 sidebar lst-tdn">
+                            <div class="col-md-4 col-xs-12 sidebar lst-tdn <%=display %>">
                                 <h3><span>Tin đọc nhiều nhất</span></h3>
                                 <ul class="lstSidebar">
                                     <asp:Literal ID="ltrHotNew" runat="server"></asp:Literal>
@@ -49,7 +49,7 @@
                             <li><a href="#"><span uk-pagination-next></span></a></li>
                         </ul>
                     </div>--%>
-                    <div class="lstRelated fw" style="margin-top:30px">
+                    <div class="lstRelated fw" style="margin-top: 30px">
                         <ul class="fw lstSidebar">
                             <asp:Literal ID="ltrListRelated" runat="server"></asp:Literal>
                         </ul>
@@ -62,11 +62,11 @@
                 <div class="sidebar fw">
                     <h3><span>Về công ty</span></h3>
                     <ul class="lstSidebar">
-                        <li><a href="/ve-cong-ty/gioi-thieu.htm">Giới thiệu</a></li>
-                        <li><a href="/ve-cong-ty/news.htm">Tin tức</a></li>
+                        <li><a href="/ve-cong-ty.htm">Giới thiệu</a></li>
+                        <li><a href="/tin-tuc.htm">Tin tức</a></li>
                         <li><a href="/ve-cong-ty/bao-chi-viet.htm">Báo chí viết</a></li>
-                        <li><a href="/ve-cong-ty/huong-dan.htm">Hướng dẫn</a></li>
-                        <li><a href="/ve-cong-ty/tuyen-dung.htm">Tuyển dụng</a></li>
+                        <li><a href="/huong-dan.htm">Hướng dẫn</a></li>
+                        <li><a href="/tuyen-dung.htm">Tuyển dụng</a></li>
                     </ul>
                 </div>
             </div>

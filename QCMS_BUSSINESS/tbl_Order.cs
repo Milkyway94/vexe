@@ -40,6 +40,9 @@ namespace QCMS_BUSSINESS
         public Nullable<int> Order_CheckOutMethod { get; set; }
         public string Order_ShipAddress { get; set; }
         public Nullable<double> Order_TongThanhToan { get; set; }
+        public Nullable<double> Order_ShipValue { get; set; }
+        public string Order_ProvinceAddress { get; set; }
+        public string Order_DistrictAddress { get; set; }
     
         public virtual tbl_Member tbl_Member { get; set; }
         public virtual tbl_Member tbl_Member1 { get; set; }

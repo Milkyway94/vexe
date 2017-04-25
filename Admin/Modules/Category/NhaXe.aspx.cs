@@ -82,8 +82,9 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
         return JsonConvert.SerializeObject(UpdateData.ExecStore("SP_GetAllNhaXe", SessionUtil.GetValue("UserID")).Tables[0]);
     }
     [WebMethod]
-    public static NhaXe CreateNhaXe(string Tennhaxe, int Soluongxe, string Trusochinh, string Nguoidaidien, string Sodienthoai, string Gioithieungan, string Gioithieuchitiet)
+    public static NhaXe CreateNhaXe(string Tennhaxe, string Anh, int Soluongxe, string Trusochinh, string Nguoidaidien, string Sodienthoai, string Gioithieungan, string Gioithieuchitiet, int Tinh)
     {
+        vexedtEntities context = new vexedtEntities();
         var nx = nhaxeRepo.Add(new NhaXe
         {
             Tennhaxe = Tennhaxe,
@@ -92,7 +93,9 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
             Soluongxe = Soluongxe,
             Nguoidaidien = Nguoidaidien,
             Gioithieuchitiet = Gioithieuchitiet,
-            Gioithieungan = Gioithieungan
+            Gioithieungan = Gioithieungan,
+            Anh= Anh,
+            Tinh=Tinh
         });
         nhaxeRepo.Save();
         return nx;
@@ -106,9 +109,10 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
         return res;
     }
     [WebMethod]
-    public static NhaXe UpdateNhaXe(int Id, string Tennhaxe, int Soluongxe, string Trusochinh, string Nguoidaidien, string Sodienthoai, string Gioithieungan, string Gioithieuchitiet)
+    public static NhaXe UpdateNhaXe(int Id, string Tennhaxe, string Anh, int Soluongxe, string Trusochinh, string Nguoidaidien, string Sodienthoai, string Gioithieungan, string Gioithieuchitiet, int Tinh)
     {
         var nx = nhaxeRepo.Find(Id);
+        vexedtEntities context = new vexedtEntities();
         if (nx != null)
         {
             nx.Tennhaxe = Tennhaxe;
@@ -118,6 +122,8 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
             nx.Nguoidaidien = Nguoidaidien;
             nx.Gioithieuchitiet = Gioithieuchitiet;
             nx.Gioithieungan = Gioithieungan;
+            nx.Anh = Anh;
+            nx.Tinh = Tinh;
         }
         nhaxeRepo.Save();
         return nx;

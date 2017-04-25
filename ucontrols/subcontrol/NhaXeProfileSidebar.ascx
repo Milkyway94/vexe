@@ -6,7 +6,7 @@
             <li><i class="fa fa-user" aria-hidden="true"></i><a href="/xem-yeu-cau-khach-hang.htm">Xem yêu cầu khách hàng</a></li>
             <li><i class="fa fa-user" aria-hidden="true"></i><a href="/diem-danh-khach-hang.htm">Điểm danh khách hàng</a></li>
             <li><i class="fa fa-file"></i><a href="/xem-bao-cao-khach-hang.htm">Xem báo cáo khách hàng</a></li>
-            <li><i class="fa fa-sign-out" aria-hidden="true"></i><a href="/login.htm?act=logout">Đăng xuất</a></li>
+            <li><i class="fa fa-sign-out" aria-hidden="true"></i><a href="/admin/login.aspx?act=logout">Đăng xuất</a></li>
         </ul>
     </div>
 </div>

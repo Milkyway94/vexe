@@ -59,6 +59,7 @@ function BrowseServer(field) {
     var finder = new CKFinder();
     finder.selectActionFunction = function (fileUrl) {
         document.getElementById(field).value = fileUrl;
+        $(field).prop("ng-value", fileUrl);
         document.getElementById("catimg").src = fileUrl;
     };
     finder.popup();

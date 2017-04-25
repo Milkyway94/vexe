@@ -7,6 +7,13 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
     //    $scope.allnhaxe = $scope.nhaxes;
     //    console.log($scope.nhaxes);
     //})
+    $(".selecte2").select2();
+    $scope.tinymceOptions = {
+        plugins: 'link image code',
+        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
+        file_browser_callback: openKCFinder,
+        file_browser_callback_types: 'file image media'
+    };
     $Service.Api("POST", "/Admin/Modules/Category/NhaXe.aspx/GetAllNhaXe", "json", {}).success(function (data) {
         console.log(data);
         $scope.nhaxes = JSON.parse(data.d);
@@ -43,6 +50,7 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
                 $scope.Nguoidaidien = $scope.selected.Nguoidaidien;
                 $scope.Gioithieungan = $scope.selected.Gioithieungan;
                 $scope.Gioithieuchitiet = $scope.selected.Gioithieuchitiet;
+                $scope.Anh = $scope.selected.Anh;
                 $scope.action = "edit";
                 break;
             default:
@@ -59,12 +67,12 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
     $scope.Save = function () {
         $scope.loading = true;
         if ($scope.action == "add") {
-            console.log($scope.Gioithieungan);
+            console.log($scope.Anh);
             $Service.Api(
                 "POST",
                 "/Admin/Modules/Category/NhaXe.aspx/CreateNhaXe",
                 "json",
-                { Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet }
+                { Tennhaxe: $scope.Tennhaxe, Anh: $scope.Anh, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet, Tinh: $scope.Tinh }
             ).success(function (data) {
                 var rs = data.d;
                 $scope.nhaxes.push({
@@ -92,12 +100,12 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
             })
         }
         if ($scope.action == "edit") {
-            console.log($scope.selected.ID);
+            console.log($scope.Anh);
             $Service.Api(
                 "POST",
                 "/Admin/Modules/Category/NhaXe.aspx/UpdateNhaXe",
                 "json",
-                { Id: $scope.selected.ID, Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet }
+                { Id: $scope.selected.ID, Anh: $scope.Anh, Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet, Tinh: $scope.Tinh }
             ).success(function (data) {
                 console.log(data.d);
                 var index = $scope.nhaxes.indexOf($scope.selected);
@@ -437,10 +445,12 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
         switch (act) {
             case "add":
                 $("#add-modal").modal({ backdrop: false });
+                $scope.updateFormTitle = "Thêm mới "+$scope.Mod.ModAdmin_Name;
                 $scope.formdata = {};
                 $scope.action = "add";
                 break;
             case "edit":
+                $scope.updateFormTitle = "Cập nhật thông tin " + $scope.Mod.ModAdmin_Name;
                 $("#add-modal").modal({ backdrop: false });
                 $scope.formdata = $scope.selected;
                 console.log($scope.formdata);
@@ -944,12 +954,10 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
                 item.tbl_Member = JSON.parse(data.d);
                 $scope.Order_Name = item.Order_Account == null ? item.Order_Ten : item.tbl_Member[0].Member_Name;
                 $scope.Mail = item.Order_Account == null ? item.Order_Email : item.tbl_Member[0].Member_Email
-                console.log($scope.Order_Name);
             })
         })
         //$scope.Tongtien += $scope.orders.Order_Tongtien;
         $scope.TongTienThanhToan = getTotal($scope.orders);
-        console.log($scope.TongTienThanhToan);
     })
     $scope.loading = false;
     $scope.nodata = false;
@@ -1007,7 +1015,6 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
     //Tổng doanh thu từ ngày -> đến ngày
     var getTotal = function (o) {
         var total = 0;
-        console.log(o);
         angular.forEach(o, function (item) {
             total += item.Order_TongThanhToan;
         })
@@ -1025,6 +1032,142 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
             return $scope.reverseSort
               ? 'arrow-down'
               : 'arrow-up';
+        }
+        return;
+    }
+    //Phân trang
+    $scope.viewby = 10;
+    //$scope.totalItems = 2;
+    $scope.currentPage = 4;
+    $scope.itemsPerPage = $scope.viewby;
+    $scope.maxSize = 5; //Number of pager buttons to show
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+    $scope.pageChanged = function () {
+        console.log('Page changed to: ' + $scope.currentPage);
+    };
+    $scope.setItemsPerPage = function (num) {
+        $scope.itemsPerPage = num;
+        $scope.currentPage = 1; //reset to first paghe
+    }
+}])
+app.controller("CommentController", ['$scope', '$http', '$filter', 'Service', function ($scope, $filter, $http, $Service) {
+    //Export Excel
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    $scope.exportData = function () {
+        var blob = new Blob([document.getElementById('exportData').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        saveAs(blob, "BaoCao" + datetime + ".xls");
+    };
+    $scope.exportPDF = function () {
+        var blob = new Blob([document.getElementById('exportPDF').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        //var date = new Date().toJSON().slice(0, 10);
+        var currentDate = new Date();
+        var datetime = currentDate.getDate() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getFullYear();
+        console.log(datetime)
+        saveAs(blob, "Baocaochitiet" + datetime + ".xls");
+    };
+    //Get all
+    function LoadData() {
+        $Service.Api("POST", "/Admin/Modules/Content/CommentList.aspx/getAllCommentList", "json", { nhaxe: getParameterByName("nx", window.location.href) }).success(function (data) {
+            $scope.orders = JSON.parse(data.d);
+            console.log($scope.orders);
+            $scope.fields = Object.keys($scope.orders[0]);
+        })
+    }
+    $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp:"SP_GETNHAXEBYID", param: getParameterByName("nx", window.location.href) }).success(function (data) {
+        $scope.Nhaxe = JSON.parse(data.d);
+        console.log($scope.Nhaxe);
+    })
+    LoadData();
+    $scope.loading = false;
+    $scope.nodata = false;
+    $scope.Loc = function (o) {
+        if ($scope.startDate != null && $scope.endDate != null && $scope.tenNhaXe != null) {
+            $scope.loading = true;
+            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderByDate", "json", { tenNhaXe: $scope.tenNhaXe, startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
+                $scope.orders = JSON.parse(data.d);
+                angular.forEach($scope.orders, function (item) {
+                    $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
+                        item.tbl_Member = JSON.parse(data.d);
+                    })
+                })
+                $scope.forDate = "Từ ngày " + $scope.startDate + " Đến ngày" + $scope.endDate + "";
+                $scope.loading = false;
+                $scope.totalItems = $scope.orders.length;
+                //-	Báo cáo doanh thu theo khoảng thời gian
+                $scope.TongTienThanhToan = getTotal($scope.orders);
+            })
+        }
+        else {
+            alert("Bạn chưa nhập đủ thông tin tìm kiếm");
+        }
+    }
+    $scope.view = function (o) {
+        console.log(o.Order_ID);
+        var index = $scope.orders.indexOf(o.Order_ID);
+        //console.log(o.Order_ID);
+        $("#myModal").modal({ backdrop: false });
+        $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderDetailByOID", "json", { oid: o.Order_ID }).success(function (data) {
+            $scope.orderDetail = JSON.parse(data.d);
+            console.log($scope.orderDetail);
+
+        })
+        //var index = $scope.orders.indexOf(o) + 1;
+        $scope.HoTen = o.Order_Account == null ? o.Order_Ten : o.tbl_Member[0].Member_Name;
+        $scope.DiaChi = o.Order_ShipAddress;
+        $scope.NgayTao = o.Order_CreatedDate;
+        $scope.NhaXe = o.Tennhaxe;
+        $scope.TongTien = o.Order_Tongtien ? o.Order_Tongtien : 0;
+        $scope.GiamGia = o.Order_KhuyenMai ? o.Order_KhuyenMai : 0;
+        $scope.PhiVanChuyen = o.Order_ShipValue ? o.Order_ShipValue : 0;
+        $scope.Phone = o.Order_Account == null ? o.Sodienthoai : o.tbl_Member[0].Member_Phone;
+        $scope.TongThanhToan = o.Order_TongThanhToan ? o.Order_TongThanhToan : 0;
+        $scope.MaDonHang = o.Order_Code;
+    }
+    $scope.Approve = function (o) {
+        if (confirm('Bạn có chắc chắn muốn thay đổi nội dung này?')) {
+            $Service.Api("POST", "/Admin/Modules/Content/CommentList.aspx/ApproveComment", "json", { cmtID: o['Mã'] })
+                .success(function (data) {
+                    LoadData();
+                })
+        }
+    };
+    //Tổng doanh thu từ ngày -> đến ngày
+    var getTotal = function (o) {
+        var total = 0;
+        console.log(o);
+        angular.forEach(o, function (item) {
+            total += item.Order_TongThanhToan;
+        })
+        return total;
+    }
+    // Sort Data
+    $scope.sortColumn = "'Ngày bình luận'";
+    $scope.reverseSort = false;
+    $scope.sortData = function (column) {
+        $scope.reverseSort = ($scope.sortColumn == column) ? !$scope.reverseSort : false;
+        $scope.sortColumn = column;
+    }
+    $scope.getSortClass = function (column) {
+        if ($scope.sortColumn == column) {
+            return $scope.reverseSort
+                ? 'arrow-down'
+                : 'arrow-up';
         }
         return;
     }

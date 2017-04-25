@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Header.ascx.cs" Inherits="ucontrols_subcontrol_Header" %>
 <header>
-    <div class="top-menu">
-        <div class="container">
+    <div class="container">
+        <div class="top-menu">
             <div class="pull-left hidden-xs">
                 <ul>
                     <asp:Literal ID="MenuTopItem" runat="server" />
@@ -14,6 +14,7 @@
                         <i class="fa fa-phone"></i>&nbsp;<a href="javascript:void(0)" id="link-phone"><asp:Label ID="lbSDT" runat="server"></asp:Label></a>
                         &nbsp;
                     </li>
+                    <li><i>|</i></li>
                     <%if (Session["MemberID"] != null)
                         {%>
                     <li>
@@ -39,6 +40,7 @@
                     <li>
                         <a onclick="Login()" class="color-white">Đăng nhập</a>
                     </li>
+                    <li><i>|</i></li>
                     <li>
                         <a href="/dang-ki.htm" class="color-white">Đăng ký</a>
                     </li>
@@ -59,7 +61,7 @@
                             </a>
                             <ul class="dropdown-menu dr-menu">
                                 <%=LoadNhaXeMenu() %>
-                                <li><a href="/login.htm?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
+                                <li><a href="Admin/login.aspx?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
                             </ul>
                         </div>
                     </li>

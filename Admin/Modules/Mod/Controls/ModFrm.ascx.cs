@@ -105,7 +105,7 @@ public partial class Admin_Modules_Mod_Controls_ModFrm : System.Web.UI.UserContr
         txtName.Text = rows[0]["Mod_Name"].ToString();
         txtCode.Text = rows[0]["Mod_Code"].ToString();
         txtURL.Text = rows[0]["Mod_URL"].ToString();
-        CKTeaser.Text = rows[0]["Mod_Content"].ToString();
+        CKContent.Text = rows[0]["Mod_Content"].ToString();
         txtTitle.Text = rows[0]["Mod_Title"].ToString();
         txtKey.Text = rows[0]["Mod_Key"].ToString();
         txtDes.Text = rows[0]["Mod_Des"].ToString();
@@ -160,7 +160,7 @@ public partial class Admin_Modules_Mod_Controls_ModFrm : System.Web.UI.UserContr
         tbIn.Add("Mod_Des", txtDes.Text);
         tbIn.Add("Mod_Title", txtTitle.Text);
         tbIn.Add("Mod_Key", txtKey.Text);
-        tbIn.Add("Mod_Content", CKTeaser.Text);
+        tbIn.Add("Mod_Content", CKContent.Text);
         tbIn.Add("Mod_Level", level.ToString());
         tbIn.Add("Mod_Pos", txtPos.Text);
         tbIn.Add("Mod_Status", isUse);

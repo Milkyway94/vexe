@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using QCMS_BUSSINESS.Repositories;
 using QCMS_BUSSINESS;
+using System.Linq;
 
 public partial class ucontrols_include_Home : System.Web.UI.UserControl
 {
@@ -22,6 +23,7 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
     {
         string status = Request["status"] == null ? "" : Request["status"];
         ltrbanner.Text = LoadSlider(status);
+        ltrListRequest.Text = LoadRequestTravel();
         CMSfunc.checkURL();
         if (IsPostBack)
         {
@@ -60,6 +62,32 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
         foreach (var item in prorepo.All())
         {
             str.Append("<option value='"+item.MaTinh+"'>"+item.TenTinh+"</option>");
+        }
+        return str.ToString();
+    }
+    protected string LoadRequestTravel()
+    {
+        StringBuilder str = new StringBuilder();
+        int memID = int.Parse(SessionUtil.GetValue("UserID"));
+        string sql = "SELECT Diemdi, Diemden FROM tbl_User m join User_NhaXe un on m.User_ID=un.UserID join Nhaxe nx on nx.ID=un.NhaxeId join Xe xe on xe.Nhaxe=nx.ID join ChuyenXe cx on cx.MaXe=xe.MaXe WHERE m.User_ID="+memID;
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        DataRowCollection rows = dt.Rows;
+        foreach (DataRow item in rows)
+        {
+            string diemdi = item["Diemdi"].ToString();
+            string diemden = item["Diemden"].ToString();
+            var rq = new RequestRepository().SearchFor(o => o.From.Contains(diemdi) || diemdi.Contains(o.From) && diemden.Contains(o.To) || o.To.Contains(diemden)).ToList();
+            var i = 1;
+            foreach (var item2 in rq)
+            {
+
+                str.Append("<td>" +i+ "</td>");
+                str.Append("<td>" + item2.Sdt + "</td>");
+                str.Append("<td>" + item2.StartDate.Value.ToString("dd/MM/yyyy") + "</td>");
+                str.Append("<td>" + item2.StartTime.Value.ToString("hh:mm") + "</td>");
+                str.Append("<td>" + item2.More + "</td>");
+                i++;
+            }
         }
         return str.ToString();
     }

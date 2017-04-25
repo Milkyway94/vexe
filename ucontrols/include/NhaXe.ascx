@@ -4,7 +4,7 @@
         <ul class="uk-breadcrumb hi-padding">
             <asp:Literal ID="lbnav" runat="server" Text=""></asp:Literal>
         </ul>
-        <div class="dsnhaxe fw">
+        <div class="dsnhaxe fw" runat="server" id="lst">
             <div class="fw">
                 <div class="fl">
                     <h3>Danh sách các nhà xe</h3>
@@ -14,7 +14,6 @@
                     <div class="uk-margin">
                         <select class="uk-select">
                             <option>Nhà xe tại Hà Nội</option>
-                            <option>Option 02</option>
                         </select>
                     </div>
 
@@ -22,55 +21,13 @@
             </div>
             <div class="fw lstNhaXe">
                 <ul class="uk-grid-small uk-child-width-1-2 uk-child-width-1-4@s uk-text-center" uk-grid>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
-                    <li>
-                        <img src="../../resources/img/Nhaxe1.png" alt="Nhà xe Thuận Tiến" />
-                        <h4>Nhà xe Thuận Tiến</h4>
-                    </li>
+                   <%=lstNhaxe() %>
                 </ul>
             </div>
+        </div>
+        <div runat="server" id="detail">
+            <h1 class="text-center title ">Nhà xe <%=nx.Tennhaxe %></h1>
+            <p class="text-bold"><%=nx.Gioithieungan %></p>
+            <p><%=nx.Gioithieuchitiet %></p>
         </div>
 </div>

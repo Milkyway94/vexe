@@ -9,6 +9,7 @@ public partial class ucontrols_include_News : System.Web.UI.UserControl
     protected int p, o;
     protected static string m;
     protected int pageSize = 5;
+    public string display = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         string u = string.IsNullOrEmpty(Request["url"]) ? "Home" : Request["url"].ToString();
@@ -20,7 +21,7 @@ public partial class ucontrols_include_News : System.Web.UI.UserControl
         ltrtdn.Text = LoadTdn();
         if (m != "")
         {
-            ltrCss.Text = "<style>.tindocnhieu{display:none}</style>";
+            ltrCss.Text = "<style>.lst-tdn{display:none}</style>";
             ltrContent.Text = LoadNewsDetail();
             ltrListRelated.Text = LoadListRelated();
             lbNavigation.Text = "<a href=\"/\"><i class=\"fa fa-home fa-lg\"></i></a> " + "<a href=\"/" + u + ".htm \">" + ModControl.GetName_From_Code(u) + "</a>";
@@ -91,6 +92,11 @@ public partial class ucontrols_include_News : System.Web.UI.UserControl
             {
                 str.Append("<span class=\"pull-right\">" + pages.pagelink((int)rows.Count / 5 + 1, currentPage, "?") + "</span>");
             }
+        }
+        else
+        {
+            display = "displaynone";
+            return "<b class='text-danger'>Không có tin nào được đăng trong mục này.</b>";
         }
         return str.ToString();
     }

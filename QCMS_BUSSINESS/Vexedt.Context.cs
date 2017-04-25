@@ -820,5 +820,36 @@ namespace QCMS_BUSSINESS
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_TUYENNOIBAT_Result>("SP_TUYENNOIBAT");
         }
+    
+        public virtual ObjectResult<GetCmtOfNhaxe_Result> GetCmtOfNhaxe(Nullable<int> nhaxe)
+        {
+            var nhaxeParameter = nhaxe.HasValue ?
+                new ObjectParameter("nhaxe", nhaxe) :
+                new ObjectParameter("nhaxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCmtOfNhaxe_Result>("GetCmtOfNhaxe", nhaxeParameter);
+        }
+    
+        public virtual ObjectResult<SP_CHECKINTICKET_Result> SP_CHECKINTICKET(Nullable<int> sessionId, string mave)
+        {
+            var sessionIdParameter = sessionId.HasValue ?
+                new ObjectParameter("sessionId", sessionId) :
+                new ObjectParameter("sessionId", typeof(int));
+    
+            var maveParameter = mave != null ?
+                new ObjectParameter("mave", mave) :
+                new ObjectParameter("mave", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CHECKINTICKET_Result>("SP_CHECKINTICKET", sessionIdParameter, maveParameter);
+        }
+    
+        public virtual ObjectResult<SP_GETNHAXEBYID_Result> SP_GETNHAXEBYID(Nullable<int> nhaxe)
+        {
+            var nhaxeParameter = nhaxe.HasValue ?
+                new ObjectParameter("nhaxe", nhaxe) :
+                new ObjectParameter("nhaxe", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GETNHAXEBYID_Result>("SP_GETNHAXEBYID", nhaxeParameter);
+        }
     }
 }

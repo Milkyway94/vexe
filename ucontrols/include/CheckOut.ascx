@@ -252,16 +252,19 @@
                             </tr>
                             <tr>
                                 <td>Chọn số lượng vé:</td>
-                                <td><input type="number" min="0" ng-change="updateTicket()" max="<%=cx.VeVipConLai %>" ng-model="selectedTicket.VIP" /> vé VIP</td>
+                                <td>
+                                    <input type="number" min="0" ng-change="updateTicket()" max="<%=cx.VeVipConLai %>" ng-model="selectedTicket.VIP" />
+                                    vé VIP</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="number" min="0" ng-change="updateTicket()" max="<%=cx.VeThuongConLai %>" ng-model="selectedTicket.THUONG" /> vé Thường
+                                    <input type="number" min="0" ng-change="updateTicket()" max="<%=cx.VeThuongConLai %>" ng-model="selectedTicket.THUONG" />
+                                    vé Thường
                                 </td>
                             </tr>
                         </table>
-                        <div class="chair">
+                        <%--<div class="chair">
                             <div class="item-chair">
                                 <img src="../../resources/img/icon/icon-ghevip.png" alt="Alternate Text" />&nbsp;Ghế VIP:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b><%=cx.GiaVIP.HasValue?cx.GiaVIP.Value.ToString("N0")+" VNĐ":"Hết" %></b>&nbsp;
                             </div>
@@ -271,12 +274,12 @@
                             <div class="item-chair">
                                 <img src="../../resources/img/icon/icon-dadat.png" alt="Alternate Text" />&nbsp;Ghế đã đặt
                             </div>
-                        </div>
+                        </div>--%>
                         <form name="frmThanhToan">
                             <table class="tbl-thanhtoan table">
                                 <tr ng-hide="Method==5">
                                     <td>
-                                        <b>Tổng thanh toán</b>
+                                        <b>Tổng tiền</b>
                                     </td>
                                     <td>{{TongTien | currency:"":0}} VNĐ</td>
                                     <td><span class="doive" ng-hide="Method==6">
@@ -306,7 +309,8 @@
                                     <td>
                                         <input type="text" class="form-control" name="name" ng-model="MaKhuyenMai" style="width: 125px" value="" placeholder="VD:NHT25091995" />
                                     </td>
-                                    <td><button class="btn btn-success" ng-disabled="loaddingKM" ng-click="CheckPromote()"><span ng-hide="loaddingKM">Áp dụng</span><span ng-show="loaddingKM">Đang kiểm tra...<i class="fa fa-spinner fa-pulse fa-fw"></i></span></button></td>
+                                    <td>
+                                        <button class="btn btn-success" ng-disabled="loaddingKM" ng-click="CheckPromote()"><span ng-hide="loaddingKM">Áp dụng</span><span ng-show="loaddingKM">Đang kiểm tra...<i class="fa fa-spinner fa-pulse fa-fw"></i></span></button></td>
                                 </tr>
                                 <tr ng-show="showErrorKM" ng-show="Method!=5">
                                     <td colspan="3">
@@ -318,12 +322,25 @@
                                 </tr>
                                 <tr ng-show="Method==4">
                                     <td colspan="3">
-                                        <input type="text" ng-model="Address" id="address" class="form-control" placeholder="Nhập địa chỉ nhận vé" required />
-                                        <span class="text-danger" ng-show="!Address" ng-focus="!Address">Bạn phải nhập Địa chỉ nhận hàng.</span>
+                                        <fieldset>
+                                            <legend>Địa chỉ nhận vé</legend>
+                                            <div class="form-group row">
+                                                <select ng-model="Province" id="province" ng-change="SelectDistrict()" data-placeholder="Chọn tỉnh" ng-options="option.text for option in Tinhs track by option.id" class="form-control select2">
+                                                    <option style="display: none" value="">select a type</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group row">
+                                                <select ng-model="District" id="district" class="form-control select2" ng-options="option.text for option in Huyens track by option.id" data-placeholder="Chọn huyện">
+                                                    <option style="display: none" value="">select a type</option>
+                                                </select>
+                                            </div>
+                                            <textarea ng-model="Address" id="address" class="form-control" placeholder="Nhập địa chỉ chính xác (Số nhà, thôn tổ, phường xã)" required></textarea>
+                                        </fieldset>
+                                        <span class="text-danger" ng-show="!Address || !District || !Province" ng-focus="!Address">Bạn phải chọn và nhập đầy đủ Địa chỉ nhận hàng.</span>
                                     </td>
                                 </tr>
                                 <tr ng-hide="Method==5">
-                                    <td><b>TỔNG TIỀN</b></td>
+                                    <td><b>TỔNG THANH TOÁN</b></td>
                                     <td colspan="2"><b class="text-danger">{{(TongTien-KhuyenMai-GiaTriVeCu)|currency:"":0}} VNĐ</b></td>
                                 </tr>
                             </table>
@@ -398,29 +415,31 @@
                         <span class="glyphicon glyphicon-lock"></span>ĐĂNG NHẬP HỆ THỐNG
                     </div>
                     <div class="modal-body">
-                        <form role="form" runat="server">
-                            <asp:Literal Text="" ID="ltrLoginMessage" runat="server" />
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span>Email hoặc số điện thoại</label>
-                                <asp:TextBox ID="txtUsername" CssClass="form-control" runat="server" placeholder="Nhập email hoặc số điện thoại" />
+                        <form role="form">
+                            <div ng-if="loadding" class="uk-alert-warning" uk-alert>
+                                <a class="uk-alert-close" uk-close></a>
+                                <p>
+                                    <span class="uk-margin-small-right" uk-icon="icon: ban">{{loginMsg}}</span>
+                                </p>
                             </div>
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-lock"></span>Mật khẩu</label>
-                                <asp:TextBox ID="txtPassword" TextMode="Password" CssClass="form-control" runat="server" placeholder="Nhập mật khẩu của bạn" />
-                            </div>
-
-                            <div class="form-group">
-                                <asp:CheckBox Text=" Nhớ tài khoản" ID="Remember" runat="server" />
-                            </div>
-                            <div class="form-group">
-                                <asp:Button Text="Đăng nhập" ID="btnLogin" OnClick="btnLogin_Click" CssClass="btn btn-success btn-block" runat="server" />
-                            </div>
-                        </form>
                     </div>
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span>Email hoặc số điện thoại</label>
+                        <input id="txtUsername" type="text" ng-model="login.username" class="form-control" placeholder="Nhập email hoặc số điện thoại" />
+                    </div>
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-lock"></span>Mật khẩu</label>
+                        <input id="txtPassword" ng-model="login.password" type="Password" class="form-control" placeholder="Nhập mật khẩu của bạn" />
+                    </div>
+                    <div class="form-group">
+                        <button id="btnLogin" ng-click="doLogin()" ng-disabled="loadding" class="btn btn-success btn-block"><i class="fa fa-key"></i>Đăng nhập <i class="fa fa-spinner" ng-show="loadding"></i></button>
+                    </div>
+                    </form>
                 </div>
-
             </div>
+
         </div>
     </div>
+</div>
 </div>
 

@@ -564,3 +564,6 @@ TABLE#toolbar_top A.toolbar_top:active {
 .table td{
     padding: 3px !important;
 }
+#ungtuyen td{
+    vertical-align: middle !important;
+}

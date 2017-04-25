@@ -17,7 +17,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
         <div class="modal-header">
-            <h2 class="modal-title text-bold">Thêm mới CHUYẾN XE</h2>
+            <h2 class="modal-title text-bold"><asp:Label runat="server" ID="lbTitle"></asp:Label></h2>
         </div>
         <div class="modal-body">
             <div class="form-group">
@@ -26,7 +26,7 @@
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="form-group">
-                        <label>Chọn nhà xe</label>
+                        <label runat="server" id="lbNhaxe">Chọn nhà xe</label>
                         <asp:DropDownList runat="server" ID="ddlNhaxe" OnSelectedIndexChanged="ddlNhaxe_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control select2"></asp:DropDownList>
                     </div>
                     <div class="form-group">

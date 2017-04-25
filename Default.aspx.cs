@@ -14,6 +14,7 @@ using QCMS_BUSSINESS;
 using QCMS_BUSSINESS.Repositories;
 using QCMS_BUSSINESS.Model;
 using System.Linq;
+using Newtonsoft.Json;
 
 public partial class _Default : Page
 {
@@ -30,11 +31,11 @@ public partial class _Default : Page
         string lang = Request.QueryString["lang"];
         if (!String.IsNullOrEmpty(lang) && lang != "1")
         {
-            Session["vlang"] = lang;
+            HttpContext.Current.Session["vlang"] = lang;
         }
-        if (Session["vlang"] == null || lang == "1")
+        if (HttpContext.Current.Session["vlang"] == null || lang == "1")
         {
-            Session["vlang"] = "1";
+            HttpContext.Current.Session["vlang"] = "1";
         }
         url = String.IsNullOrEmpty(Request.QueryString["url"]) ? "Home" : Request["url"].ToString();
         nUrl = String.IsNullOrEmpty(Request["nUrl"]) ? "" : Request["nUrl"].ToString();
@@ -90,7 +91,7 @@ public partial class _Default : Page
                 alert += "alert('" + SendSuccess + "!');\n";
                 alert += "document.location='" + url1 + "';";
                 alert += "</script>\n";
-                //Session["UserID"] = new List<tbl_User>();
+                //HttpContext.Current.Session["UserID"] = new List<tbl_User>();
                 Response.Write(alert);
             }
         }
@@ -109,6 +110,10 @@ public partial class _Default : Page
                 break;
             case "About":
                 _objControl = LoadControl("ucontrols/include/About.ascx");
+                OperationCell.Controls.Add(_objControl);
+                break;
+            case "Contact":
+                _objControl = LoadControl("ucontrols/include/Contact.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
             case "RequestTravel":
@@ -180,10 +185,6 @@ public partial class _Default : Page
                 _objControl = LoadControl("ucontrols/include/News.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
-            case "Contact":
-                _objControl = LoadControl("ucontrols/include/Contact.ascx");
-                OperationCell.Controls.Add(_objControl);
-                break;
             case "Document":
                 _objControl = LoadControl("ucontrols/include/Document.ascx");
                 OperationCell.Controls.Add(_objControl);
@@ -222,7 +223,7 @@ public partial class _Default : Page
     }
     public string LinkIcon()
     {
-        string sql = "select * from tbl_Other where Other_Mod='social' and Other_Status=1 and lang=" + Session["vlang"];
+        string sql = "select * from tbl_Other where Other_Mod='social' and Other_Status=1 and lang=" + HttpContext.Current.Session["vlang"];
         DataSet ds = UpdateData.UpdateBySql(sql);
         DataRowCollection rows = ds.Tables[0].Rows;
         StringBuilder str = new StringBuilder();
@@ -291,7 +292,7 @@ public partial class _Default : Page
     }
     protected string GetUsernameByID()
     {
-        int o = int.Parse(Session["UserID"].ToString());
+        int o = int.Parse(HttpContext.Current.Session["UserID"].ToString());
         string sql = "select * from tbl_User where User_ID=" + o;
         DataSet ds = UpdateData.UpdateBySql(sql);
         DataRowCollection rows = ds.Tables[0].Rows;
@@ -341,7 +342,7 @@ public partial class _Default : Page
 
     protected string CheckOut(int p)
     {
-        string sql = "SELECT Mod_Name,Mod_Parent, Mod_ID,Mod_Code, Mod_Img FROM tbl_Mod WHERE Mod_ID=1275 and lang=" + Session["vlang"] + " AND Mod_Status=1";
+        string sql = "SELECT Mod_Name,Mod_Parent, Mod_ID,Mod_Code, Mod_Img FROM tbl_Mod WHERE Mod_ID=1275 and lang=" + HttpContext.Current.Session["vlang"] + " AND Mod_Status=1";
         DataSet ds = UpdateData.UpdateBySql(sql);
         DataRowCollection rows = ds.Tables[0].Rows;
         StringBuilder str = new StringBuilder();
@@ -356,9 +357,9 @@ public partial class _Default : Page
     {
         int p;
         string n, c, sql;
-        sql = "SELECT Mod_ID,Mod_Name,Mod_Code FROM tbl_Mod WHERE lang=" + Session["vlang"] + " AND Mod_Status=1";
+        sql = "SELECT Mod_ID,Mod_Name,Mod_Code FROM tbl_Mod WHERE lang=" + HttpContext.Current.Session["vlang"] + " AND Mod_Status=1";
         sql += " AND Mod_ID in (SELECT Mod_ID FROM tbl_ModBox WHERE ";
-        sql += " Box_ID in(SELECT Box_ID FROM tbl_Box WHERE Box_Code='Minitop' AND lang=" + Session["vlang"] + "))";
+        sql += " Box_ID in(SELECT Box_ID FROM tbl_Box WHERE Box_Code='Minitop' AND lang=" + HttpContext.Current.Session["vlang"] + "))";
         sql += " ORDER BY Mod_Pos";
         //===================================================
         DataSet ds = UpdateData.UpdateBySql(sql);
@@ -461,7 +462,7 @@ public partial class _Default : Page
         string sql = "SELECT m.Mod_ID, m.Mod_Name,m.Mod_Code FROM tbl_Mod m LEFT JOIN ";
         sql += " tbl_ModBox mb on m.Mod_ID = mb.Mod_ID LEFT JOIN  ";
         sql += " tbl_Box b on mb.Box_ID = b.Box_ID";
-        sql += " WHERE m.lang=" + Session["vlang"] + " AND m.Mod_Status=1 AND b.Box_Code='Menufooter'";
+        sql += " WHERE m.lang=" + HttpContext.Current.Session["vlang"] + " AND m.Mod_Status=1 AND b.Box_Code='Menufooter'";
         sql += " ORDER BY m.Mod_Pos";
         //===================================================
         DataSet ds = UpdateData.UpdateBySql(sql);
@@ -483,11 +484,11 @@ public partial class _Default : Page
     }
     protected string GetSiteLink()
     {
-        //string sql = "SELECT top 5 Mod_ID,Mod_Name,Mod_Code FROM tbl_Mod WHERE Mod_Level=1 AND lang=" + Session["vlang"] + " AND Mod_Status=1 AND Mod_Hot=1 ORDER BY Mod_Pos";
+        //string sql = "SELECT top 5 Mod_ID,Mod_Name,Mod_Code FROM tbl_Mod WHERE Mod_Level=1 AND lang=" + HttpContext.Current.Session["vlang"] + " AND Mod_Status=1 AND Mod_Hot=1 ORDER BY Mod_Pos";
         string sql = "SELECT m.Mod_ID, m.Mod_Name,m.Mod_Code FROM tbl_Mod m LEFT JOIN ";
         sql += " tbl_ModBox mb on m.Mod_ID = mb.Mod_ID LEFT JOIN  ";
         sql += " tbl_Box b on mb.Box_ID = b.Box_ID";
-        sql += " WHERE m.lang=" + Session["vlang"] + " AND m.Mod_Status=1 AND b.Box_Code='SiteLink'";
+        sql += " WHERE m.lang=" + HttpContext.Current.Session["vlang"] + " AND m.Mod_Status=1 AND b.Box_Code='SiteLink'";
         sql += " ORDER BY m.Mod_Pos";
         DataSet ds = UpdateData.UpdateBySql(sql);
         StringBuilder str = new StringBuilder();
@@ -499,7 +500,7 @@ public partial class _Default : Page
             string url = ResolveUrl("~/" + cL1 + "/" + idL1 + ".htm");
             str.Append("<div class=\"col-xs-12 col-sm-6 col-md-2 itemFooter\">");
             str.Append("    <h5><a href=\"" + url + "\" title=\"" + nL1 + "\">" + nL1 + "</a></h5>");
-            string sql1 = "SELECT top 10 Mod_ID,Mod_Name,Mod_Code FROM tbl_Mod WHERE Mod_Parent=" + idL1 + " AND lang=" + Session["vlang"] + " AND Mod_Status=1 ORDER BY Mod_Pos";
+            string sql1 = "SELECT top 10 Mod_ID,Mod_Name,Mod_Code FROM tbl_Mod WHERE Mod_Parent=" + idL1 + " AND lang=" + HttpContext.Current.Session["vlang"] + " AND Mod_Status=1 ORDER BY Mod_Pos";
             DataSet ds1 = UpdateData.UpdateBySql(sql1);
             DataRowCollection rows1 = ds1.Tables[0].Rows;
             if (rows1.Count > 0)
@@ -522,7 +523,7 @@ public partial class _Default : Page
     public string LoadPartner()
     {
         StringBuilder str = new StringBuilder();
-        DataSet ds = UpdateData.UpdateBySql("SELECT Content_Name,Content_Img,Content_URL FROM tbl_Content WHERE lang=" + Session["vlang"] + " AND Content_Status=1 AND Mod_ID in(SELECT Mod_ID FROM tbl_Mod WHERE Mod_Code='GiaiThuong') ORDER BY Content_Pos DESC");
+        DataSet ds = UpdateData.UpdateBySql("SELECT Content_Name,Content_Img,Content_URL FROM tbl_Content WHERE lang=" + HttpContext.Current.Session["vlang"] + " AND Content_Status=1 AND Mod_ID in(SELECT Mod_ID FROM tbl_Mod WHERE Mod_Code='GiaiThuong') ORDER BY Content_Pos DESC");
         DataRowCollection rows = ds.Tables[0].Rows;
         str.Append("<ul class=\"bodySliderBottom\">");
         for (int i = 0; i < rows.Count; i++)
@@ -547,20 +548,20 @@ public partial class _Default : Page
     #endregion
     public string MenuNoiBo(int p)
     {
-        string sql = "SELECT Mod_Name,Mod_ID,Mod_Code, Mod_Img FROM tbl_Mod WHERE lang=" + Session["vlang"] + " AND Mod_Status=1";
+        string sql = "SELECT Mod_Name,Mod_ID,Mod_Code, Mod_Img FROM tbl_Mod WHERE lang=" + HttpContext.Current.Session["vlang"] + " AND Mod_Status=1";
         sql += " AND Mod_Level=1 AND Mod_ID in (SELECT Mod_ID FROM tbl_ModBox WHERE ";
-        sql += " Box_ID in(SELECT Box_ID FROM tbl_Box WHERE Box_ID='9' AND lang=" + Session["vlang"] + "))";
+        sql += " Box_ID in(SELECT Box_ID FROM tbl_Box WHERE Box_ID='9' AND lang=" + HttpContext.Current.Session["vlang"] + "))";
         sql += " ORDER BY Mod_Pos";
         DataSet ds = UpdateData.UpdateBySql(sql);
         DataRowCollection rows = ds.Tables[0].Rows;
         StringBuilder str = new StringBuilder();
-        if (Session["UserID"] == null)
+        if (HttpContext.Current.Session["UserID"] == null)
         {
             return "";
         }
         for (int i = 0; i < rows.Count; i++)
         {
-            if (AuthenticationMenu.CheckPermission(int.Parse(rows[i]["Mod_ID"].ToString()), int.Parse(Session["UserID"].ToString())))
+            if (AuthenticationMenu.CheckPermission(int.Parse(rows[i]["Mod_ID"].ToString()), int.Parse(HttpContext.Current.Session["UserID"].ToString())))
             {
                 string cL1 = rows[i]["Mod_Code"].ToString();
                 string nL1 = rows[i]["Mod_Name"].ToString();
@@ -584,7 +585,7 @@ public partial class _Default : Page
         StringBuilder str = new StringBuilder();
         if (ModID == 232)
         {
-            string sql = "select * from Shop_Category where TypeLevel=1 and lang=" + Session["vlang"];
+            string sql = "select * from Shop_Category where TypeLevel=1 and lang=" + HttpContext.Current.Session["vlang"];
             DataSet ds = UpdateData.UpdateBySql(sql);
             DataRowCollection rows = ds.Tables[0].Rows;
             if (rows.Count > 0)
@@ -638,7 +639,7 @@ public partial class _Default : Page
 
     public string LoadContact()
     {
-        string sql = "select * from tbl_Other where Other_Mod='contact' and lang=" + Session["vlang"];
+        string sql = "select * from tbl_Other where Other_Mod='contact' and lang=" + HttpContext.Current.Session["vlang"];
         sql += "and Other_Status=1";
         DataSet ds = UpdateData.UpdateBySql(sql);
         DataRowCollection rows = ds.Tables[0].Rows;
@@ -652,7 +653,7 @@ public partial class _Default : Page
     }
     //public string LoadAboutUs()
     //{
-    //    string sql = "select * from tbl_Other where Other_Mod='aboutus' AND lang=" + Session["vlang"];
+    //    string sql = "select * from tbl_Other where Other_Mod='aboutus' AND lang=" + HttpContext.Current.Session["vlang"];
     //    sql += "and Other_Status=1";
     //    DataSet ds = UpdateData.UpdateBySql(sql);
     //    DataRowCollection rows = ds.Tables[0].Rows;
@@ -700,8 +701,18 @@ public partial class _Default : Page
     public static List<TinhThanh> GetAllProvince()
     {
         ProvinceRepository proRepo = new ProvinceRepository();
-        return proRepo.All().ToList();
+        var pros=proRepo.All().ToList();
+        foreach (var item in pros)
+        {
+            item.QuanHuyens = null;
+        }
+        return pros;
     }
+    [WebMethod]
+    public static string ExecProc(string proc, string param)
+    {
+        return JsonConvert.SerializeObject(UpdateData.ExecStore(proc, param).Tables[0]);
+    } 
     [WebMethod]
     public static List<ChuyenXeViewModel> SearchTravel(string Ngaydi, string Giodi, string Diemdi, string Diemden)
     {
@@ -841,7 +852,7 @@ public partial class _Default : Page
         return res;
     }
     [WebMethod]
-    public static Result<OrderStatus> ThanhToan(int method, int vip, int thuong, int machuyenxe, double khuyenmai, double giatridoive, string diachinhanve, double tongtien)
+    public static Result<OrderStatus> ThanhToan(int method, int vip, int thuong, int machuyenxe, double khuyenmai, double giatridoive, string diachinhanve, double tongtien, int tinh, int huyen)
     {
         Result<OrderStatus> res = new Result<OrderStatus>();
         var MemberID = HttpContext.Current.Session["MemberID"];
@@ -849,6 +860,7 @@ public partial class _Default : Page
         {
             string ticketCode = "VX" + Value.GetTimestamp(DateTime.Now) + "-" + machuyenxe + "-" + HttpContext.Current.Session["MemberID"].ToString();
             #region Input
+            QuanHuyen dist = new DistrictRepository().Find(huyen);
             Hashtable tbIn = new Hashtable();
             tbIn.Add("Order_CheckOutMethod", method.ToString());
             tbIn.Add("Order_Vip", vip.ToString());
@@ -861,7 +873,10 @@ public partial class _Default : Page
             tbIn.Add("Order_Code", ticketCode);
             tbIn.Add("Order_ShipAddress", diachinhanve);
             tbIn.Add("Order_TongTien", tongtien.ToString());
-            tbIn.Add("Order_TongThanhToan", (tongtien-giatridoive-khuyenmai).ToString());
+            tbIn.Add("Order_ShipValue", dist.GiaShip.ToString());
+            tbIn.Add("Order_DistrictAddress", huyen.ToString());
+            tbIn.Add("Order_ProvinceAddress", tinh.ToString());
+            tbIn.Add("Order_TongThanhToan", (tongtien-giatridoive-khuyenmai+ dist.GiaShip).ToString());
             #endregion
             #region Check GiaoDich
             //string gdQuery = "SELECT * FROM GiaoDich Where TrangThaiGiaoDich=1 AND MemberID=" + int.Parse(MemberID.ToString());
@@ -1409,7 +1424,7 @@ public partial class _Default : Page
         return res;
     }
     [WebMethod]
-    public static string GetSessionMave()
+    public static string SessionMave()
     {
         return SessionUtil.GetValue("OrderID").ToString();
     }
@@ -1465,14 +1480,16 @@ public partial class _Default : Page
     {
         Result<bool> res= new Result<bool>();
         Hashtable tbRequest = new Hashtable();
+        DateTime date = DateTime.Parse(startdate);
+        DateTime time = DateTime.Parse(starttime);
         tbRequest.Add("[From]", from);
         tbRequest.Add("[To]", to);
-        tbRequest.Add("StartDate", startdate);
-        tbRequest.Add("starttime", starttime);
+        tbRequest.Add("StartDate", date.ToString("MM/dd/yyyy"));
+        tbRequest.Add("starttime", time.ToString("hh:mm:ss"));
         tbRequest.Add("more", more);
         tbRequest.Add("sdt", sdt);
         tbRequest.Add("isCancel", "0");
-        tbRequest.Add("CreateDate", DateTime.Now.ToString());
+        tbRequest.Add("CreateDate", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
         tbRequest.Add("Createby", SessionUtil.GetValue("MemberID"));
         bool _insert = UpdateData.Insert("RequestTravel", tbRequest);
         if (_insert)
@@ -1508,6 +1525,51 @@ public partial class _Default : Page
             res.data = false;
             res.errcode = ErrorCode.FAIL;
             res.message = "Hủy yêu không thành công, xin thử lại.";
+        }
+        return res;
+    }
+    [WebMethod]
+    public static Result<bool> doLogin(string username, string password)
+    {
+        Result<bool> res = new Result<bool>();
+        string pass = ApplicationUtil.PasswordEncrypt(Value._Replate(password));
+        string sql = "SELECT * FROM tbl_Member WHERE Member_Username='" + Value._Replate(username) + "' OR Member_Phone='" + Value._Replate(username) + "' OR Member_Email='" + Value._Replate(username) + "'";
+        DataSet dsUser = UpdateData.UpdateBySql(sql);
+        DataRowCollection rows = dsUser.Tables[0].Rows;
+        if (rows.Count >= 1)
+        {
+            if (rows[0]["Member_Password"].ToString() == pass)
+            {
+                if (Convert.ToBoolean(rows[0]["Member_Status"]) == false)
+                {
+                    res.data = false;
+                    res.message = ErrorMessage.AccountLocked;
+                    res.errcode = ErrorCode.UNAUTHORIZED;
+                }
+                else
+                {
+                    HttpContext.Current.Session["MemberID"] = rows[0]["Member_ID"].ToString();
+                    HttpContext.Current.Session["Member_Username"] = rows[0]["Member_Username"].ToString();
+                    HttpContext.Current.Session["Member_Email"] = rows[0]["Member_Email"].ToString();
+                    HttpContext.Current.Session["Member_Avarta"] = rows[0]["Member_Avarta"].ToString();
+                    HttpContext.Current.Session["Member_Name"] = rows[0]["Member_Name"].ToString();
+                    res.data = false;
+                    res.message = string.Format(ErrorMessage.Success, "Đăng nhập");
+                    res.errcode = ErrorCode.SUCCESS;
+                }
+            }
+            else
+            {
+                res.data = false;
+                res.message = ErrorMessage.LoginFail;
+                res.errcode = ErrorCode.FAIL;
+            }
+        }
+        else
+        {
+            res.data = false;
+            res.message = string.Format(ErrorMessage.Fail, "Đăng nhập");
+            res.errcode = ErrorCode.FAIL;
         }
         return res;
     }

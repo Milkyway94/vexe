@@ -41,7 +41,7 @@ public partial class ucontrols_include_Search : System.Web.UI.UserControl
         {
             foreach (DataRow item in result.Tables[0].Rows)
             {
-                adStr.Append("<a href=\"" + item["Skin_Link"] + "\"><img class=\"img-responsive\" src=\"" + item["Skin_Url"] + "\" alt=\"" + item["Skin_Link"] + "\"></a>");
+                adStr.Append("<a class='skin' href=\"" + item["Skin_Link"] + "\"><img class=\"img-responsive\" src=\"" + item["Skin_Url"] + "\" alt=\"" + item["Skin_Link"] + "\"></a>");
             }
         }
         return adStr.ToString();

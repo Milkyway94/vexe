@@ -59,7 +59,7 @@
                     <h3 class="color-white">THÔNG TIN ĐẶT VÉ</h3>
                 </div>
                 <div class="pull-right">
-                    <h5>Mã vé: VX1234545</h5>
+                    <h5>Mã đơn hàng: <%=order.Order_Code %></h5>
                 </div>
             </div>
             <div class="col-sm-6" id="col-1">

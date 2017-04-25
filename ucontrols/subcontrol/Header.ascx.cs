@@ -23,6 +23,10 @@ public partial class ucontrols_subcontrol_Header : System.Web.UI.UserControl
         foreach (var item in repo.GetModByBoxCode("MenuTop"))
         {
             str.Append("<li><a href=\"/"+item.Mod_Url+ ".htm\">" + item.Mod_Name+"</a></li>");
+            if(repo.GetModByBoxCode("MenuTop").IndexOf(item)!= repo.GetModByBoxCode("MenuTop").Count-1)
+            {
+                str.Append("<li><i>|</i><li>");
+            }
         }
         return str.ToString();
     }

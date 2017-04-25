@@ -139,6 +139,7 @@ public enum ErrorCode
 }
 public static class ErrorMessage
 {
+    public static string Required = "Bạn phải nhập {0}.";
     public static string Unauthorized = "Bạn chưa đăng nhập.";
     public static string NotFound = "{0} không tồn tại.";
     public static string NoData = "Không có dữ liệu nào được trả về.";
@@ -153,6 +154,7 @@ public static class ErrorMessage
     public static string HaveTransaction = "Đã phát sinh giao dịch, chưa xác nhận!";
     public static string NoTransaction = "Chưa phát sinh giao dịch!";
     public static string ExTimeOut = "Đã quá thời gian cho phép đổi vé!";
+    public static string TimeOut = "{0} đã hết hạn sử dụng.";
     public static string OutOfBound = "{0} không nằm trong khoảng {1}!";
     public static string CanApply = "{0} có thể áp dụng.";
 }

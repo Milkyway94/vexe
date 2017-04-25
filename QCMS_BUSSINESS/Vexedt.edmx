@@ -115,6 +115,8 @@
           <Property Name="Sodienthoai" Type="varchar" MaxLength="50" />
           <Property Name="Gioithieungan" Type="ntext" />
           <Property Name="Gioithieuchitiet" Type="ntext" />
+          <Property Name="Anh" Type="nvarchar" MaxLength="550" />
+          <Property Name="Tinh" Type="int" />
         </EntityType>
         <EntityType Name="QuanHuyen">
           <Key>
@@ -426,6 +428,9 @@
           <Property Name="Order_CheckOutMethod" Type="int" />
           <Property Name="Order_ShipAddress" Type="ntext" />
           <Property Name="Order_TongThanhToan" Type="float" />
+          <Property Name="Order_ShipValue" Type="float" />
+          <Property Name="Order_ProvinceAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Order_DistrictAddress" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="tbl_OrderDetail">
           <Key>
@@ -437,6 +442,7 @@
           <Property Name="UnitPrice" Type="float" />
           <Property Name="Type" Type="varchar" MaxLength="10" />
           <Property Name="isTimeOut" Type="int" />
+          <Property Name="isDone" Type="int" />
         </EntityType>
         <EntityType Name="tbl_Other">
           <Key>
@@ -647,8 +653,8 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="From" Type="ntext" />
-          <Property Name="To" Type="ntext" />
+          <Property Name="From" Type="nvarchar" MaxLength="550" />
+          <Property Name="To" Type="nvarchar" MaxLength="550" />
           <Property Name="StartDate" Type="date" />
           <Property Name="StartTime" Type="datetime" />
           <Property Name="More" Type="ntext" />
@@ -1000,6 +1006,9 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
         <Function Name="DELHANGXE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetCmtOfNhaxe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
+          <Parameter Name="nhaxe" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_CCB_Huyen_FROM_Tinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="matinh" Type="int" Mode="In" />
         </Function>
@@ -1009,6 +1018,10 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
         <Function Name="SP_CCB_Tinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt" />
         <Function Name="SP_CCB_XE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="sessionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_CHECKINTICKET" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
+          <Parameter Name="sessionId" Type="int" Mode="In" />
+          <Parameter Name="mave" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="SP_DELTINH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="MaTinh" Type="int" Mode="In" />
@@ -1026,6 +1039,9 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
         </Function>
         <Function Name="SP_GETCHUYENXEFROMDITINH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="matinh" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GETNHAXEBYID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
+          <Parameter Name="nhaxe" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_GetOrderByNhaxe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vexedt">
           <Parameter Name="sessionId" Type="int" Mode="In" />
@@ -1607,9 +1623,19 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Parameter Name="sessionId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GETCHUYENXEFROMDITINH" ReturnType="Collection(lggvn_vexedtModel.SP_GETCHUYENXEFROMDITINH_Result)">
-            <Parameter Name="matinh" Mode="In" Type="Int32" />
+          <Parameter Name="matinh" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_TUYENNOIBAT" ReturnType="Collection(lggvn_vexedtModel.SP_TUYENNOIBAT_Result)" />
+          <FunctionImport Name="GetCmtOfNhaxe" ReturnType="Collection(lggvn_vexedtModel.GetCmtOfNhaxe_Result)">
+            <Parameter Name="nhaxe" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CHECKINTICKET" ReturnType="Collection(lggvn_vexedtModel.SP_CHECKINTICKET_Result)">
+            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+            <Parameter Name="mave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GETNHAXEBYID" ReturnType="Collection(lggvn_vexedtModel.SP_GETNHAXEBYID_Result)">
+            <Parameter Name="nhaxe" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SP_GETALLHANGXE_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1855,6 +1881,8 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Name="Gioithieuchitiet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Xes" Relationship="lggvn_vexedtModel.FK_Xe_NhaXe" FromRole="NhaXe" ToRole="Xe" />
           <NavigationProperty Name="tbl_User" Relationship="lggvn_vexedtModel.User_NhaXe" FromRole="NhaXe" ToRole="tbl_User" />
+          <Property Name="Anh" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Tinh" Type="Int32" />
         </EntityType>
         <EntityType Name="QuanHuyen">
           <Key>
@@ -2153,6 +2181,9 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Name="Order_TongThanhToan" Type="Double" />
           <NavigationProperty Name="tbl_Member" Relationship="lggvn_vexedtModel.FK__tbl_Order__Order__1B9317B3" FromRole="tbl_Order" ToRole="tbl_Member" />
           <NavigationProperty Name="tbl_Member1" Relationship="lggvn_vexedtModel.FK__tbl_Order__Order__55F4C372" FromRole="tbl_Order" ToRole="tbl_Member" />
+          <Property Name="Order_ShipValue" Type="Double" />
+          <Property Name="Order_ProvinceAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Order_DistrictAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_OrderDetail">
           <Key>
@@ -2164,6 +2195,7 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Name="UnitPrice" Type="Double" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="isTimeOut" Type="Int32" />
+          <Property Name="isDone" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_Other">
           <Key>
@@ -2383,8 +2415,8 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="From" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="To" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="From" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
           <Property Name="StartTime" Type="DateTime" Precision="3" />
           <Property Name="More" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -2829,6 +2861,139 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Type="String" Name="TenTinh" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="SoChuyen" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetCmtOfNhaxe_Result">
+          <Property Type="Int32" Name="Mã" Nullable="false" />
+          <Property Type="String" Name="Nội_dung" Nullable="false" MaxLength="33" />
+          <Property Type="String" Name="Tên_người_BL" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="SĐT" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="Ngày_bình_luận" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Vote_Tổng_quan" Nullable="true" />
+          <Property Type="Int32" Name="Vote_Chất_lượng" Nullable="true" />
+          <Property Type="Int32" Name="Vote_Đúng_giờ" Nullable="true" />
+          <Property Type="Int32" Name="Trung_bình" Nullable="true" />
+          <Property Type="String" Name="Trạng_thái" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="SP_CHECKINTICKET_Result">
+          <Property Type="Int32" Name="Order_ID" Nullable="false" />
+          <Property Type="String" Name="MaVe" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="UnitPrice" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="isTimeOut" Nullable="true" />
+          <Property Type="Int32" Name="isDone" Nullable="true" />
+          <Property Type="Int32" Name="Order_ID1" Nullable="false" />
+          <Property Type="String" Name="Order_Ten" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="Order_sex" Nullable="true" />
+          <Property Type="String" Name="Order_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Order_Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Order_Contact" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Order_Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Order_Tel" Nullable="true" MaxLength="20" />
+          <Property Type="Double" Name="Order_Tongtien" Nullable="true" />
+          <Property Type="Int32" Name="Order_Account" Nullable="true" />
+          <Property Type="DateTime" Name="Order_CompleteDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Order_isRead" Nullable="true" />
+          <Property Type="DateTime" Name="Order_CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Order_Content" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Order_File" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Order_Type" Nullable="true" />
+          <Property Type="Int32" Name="Order_Status" Nullable="true" />
+          <Property Type="Boolean" Name="Order_isComplete" Nullable="true" />
+          <Property Type="Double" Name="Order_Promote" Nullable="true" />
+          <Property Type="Int32" Name="MaChuyenXe" Nullable="true" />
+          <Property Type="Int32" Name="Order_Thuong" Nullable="true" />
+          <Property Type="Int32" Name="Order_Vip" Nullable="true" />
+          <Property Type="Double" Name="Order_Giatrivedoi" Nullable="true" />
+          <Property Type="Int32" Name="Order_CheckOutMethod" Nullable="true" />
+          <Property Type="String" Name="Order_ShipAddress" Nullable="true" MaxLength="Max" />
+          <Property Type="Double" Name="Order_TongThanhToan" Nullable="true" />
+          <Property Type="Double" Name="Order_ShipValue" Nullable="true" />
+          <Property Type="String" Name="Order_ProvinceAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Order_DistrictAddress" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Member_ID" Nullable="false" />
+          <Property Type="String" Name="Member_Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Member_Email" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="Member_Password" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="Member_Name" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Member_SurName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Member_LastName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Member_Sex" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Member_Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Member_Phone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Member_Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Member_Company" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Member_Status" Nullable="true" />
+          <Property Type="DateTime" Name="Member_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Member_Avarta" Nullable="true" MaxLength="550" />
+          <Property Type="Int64" Name="Member_Vola" Nullable="true" />
+          <Property Type="Int32" Name="Member_Role" Nullable="true" />
+          <Property Type="Int32" Name="NhaXe" Nullable="true" />
+          <Property Type="Int32" Name="MaChuyenXe1" Nullable="false" />
+          <Property Type="DateTime" Name="Ngaydi" Nullable="true" />
+          <Property Type="DateTime" Name="Giokhoihanh" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Thoigiandukien" Nullable="true" />
+          <Property Type="Int32" Name="MaXe" Nullable="true" />
+          <Property Type="String" Name="Mota" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Chitiet" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="TuyenDuong" Nullable="true" />
+          <Property Type="String" Name="Diemdi" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Diemden" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="TrangThai" Nullable="true" />
+          <Property Type="Double" Name="GiaVIP" Nullable="true" />
+          <Property Type="Double" Name="GiaThuong" Nullable="true" />
+          <Property Type="Int32" Name="TongVe" Nullable="true" />
+          <Property Type="Int32" Name="VeThuongConLai" Nullable="true" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="KhuyenMai" Nullable="true" />
+          <Property Type="String" Name="LoTrinh" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="url" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="TongSoVeVIP" Nullable="true" />
+          <Property Type="Int32" Name="TongSoVeThuong" Nullable="true" />
+          <Property Type="Int32" Name="VeVipConLai" Nullable="true" />
+          <Property Type="Int32" Name="DenHuyen" Nullable="true" />
+          <Property Type="Int32" Name="DenTinh" Nullable="true" />
+          <Property Type="Int32" Name="DiHuyen" Nullable="true" />
+          <Property Type="Int32" Name="DiTinh" Nullable="true" />
+          <Property Type="Int32" Name="MaXe1" Nullable="false" />
+          <Property Type="String" Name="Bienso" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Tenxe" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Nhaxe1" Nullable="true" />
+          <Property Type="String" Name="Gioithieungan" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Gioithieuchitiet" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Nguoitao" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Ngaytao" Nullable="true" />
+          <Property Type="DateTime" Name="Ngaysuacuoi" Nullable="true" />
+          <Property Type="String" Name="Nguoisuacuoi" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Daxoa" Nullable="true" />
+          <Property Type="Int32" Name="TongSoGhe" Nullable="true" />
+          <Property Type="Int32" Name="Hangxe" Nullable="true" />
+          <Property Type="String" Name="Avartar" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tennhaxe" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="Soluongxe" Nullable="true" />
+          <Property Type="String" Name="Trusochinh" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Nguoidaidien" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Sodienthoai" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gioithieungan1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Gioithieuchitiet1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Anh" Nullable="true" MaxLength="550" />
+          <Property Type="Int32" Name="Tinh" Nullable="true" />
+          <Property Type="Int32" Name="NhaxeId" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="ID1" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_GETNHAXEBYID_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tennhaxe" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="Soluongxe" Nullable="true" />
+          <Property Type="String" Name="Trusochinh" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Nguoidaidien" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Sodienthoai" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gioithieungan" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Gioithieuchitiet" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Anh" Nullable="true" MaxLength="550" />
+          <Property Type="Int32" Name="Tinh" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2944,6 +3109,8 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <EntitySetMapping Name="NhaXes">
             <EntityTypeMapping TypeName="lggvn_vexedtModel.NhaXe">
               <MappingFragment StoreEntitySet="NhaXe">
+                <ScalarProperty Name="Tinh" ColumnName="Tinh" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
                 <ScalarProperty Name="Gioithieuchitiet" ColumnName="Gioithieuchitiet" />
                 <ScalarProperty Name="Gioithieungan" ColumnName="Gioithieungan" />
                 <ScalarProperty Name="Sodienthoai" ColumnName="Sodienthoai" />
@@ -3222,6 +3389,9 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <EntitySetMapping Name="tbl_Order">
             <EntityTypeMapping TypeName="lggvn_vexedtModel.tbl_Order">
               <MappingFragment StoreEntitySet="tbl_Order">
+                <ScalarProperty Name="Order_DistrictAddress" ColumnName="Order_DistrictAddress" />
+                <ScalarProperty Name="Order_ProvinceAddress" ColumnName="Order_ProvinceAddress" />
+                <ScalarProperty Name="Order_ShipValue" ColumnName="Order_ShipValue" />
                 <ScalarProperty Name="Order_TongThanhToan" ColumnName="Order_TongThanhToan" />
                 <ScalarProperty Name="Order_ShipAddress" ColumnName="Order_ShipAddress" />
                 <ScalarProperty Name="Order_CheckOutMethod" ColumnName="Order_CheckOutMethod" />
@@ -3254,6 +3424,7 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <EntitySetMapping Name="tbl_OrderDetail">
             <EntityTypeMapping TypeName="lggvn_vexedtModel.tbl_OrderDetail">
               <MappingFragment StoreEntitySet="tbl_OrderDetail">
+                <ScalarProperty Name="isDone" ColumnName="isDone" />
                 <ScalarProperty Name="isTimeOut" ColumnName="isTimeOut" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -3847,6 +4018,151 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
                 <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
                 <ScalarProperty Name="TenTinh" ColumnName="TenTinh" />
                 <ScalarProperty Name="SoChuyen" ColumnName="SoChuyen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCmtOfNhaxe" FunctionName="lggvn_vexedtModel.Store.GetCmtOfNhaxe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="lggvn_vexedtModel.GetCmtOfNhaxe_Result">
+                <ScalarProperty Name="Mã" ColumnName="Mã" />
+                <ScalarProperty Name="Nội_dung" ColumnName="Nội dung" />
+                <ScalarProperty Name="Tên_người_BL" ColumnName="Tên người BL" />
+                <ScalarProperty Name="SĐT" ColumnName="SĐT" />
+                <ScalarProperty Name="Ngày_bình_luận" ColumnName="Ngày bình luận" />
+                <ScalarProperty Name="Vote_Tổng_quan" ColumnName="Vote Tổng quan" />
+                <ScalarProperty Name="Vote_Chất_lượng" ColumnName="Vote Chất lượng" />
+                <ScalarProperty Name="Vote_Đúng_giờ" ColumnName="Vote Đúng giờ" />
+                <ScalarProperty Name="Trung_bình" ColumnName="Trung bình" />
+                <ScalarProperty Name="Trạng_thái" ColumnName="Trạng thái" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CHECKINTICKET" FunctionName="lggvn_vexedtModel.Store.SP_CHECKINTICKET">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="lggvn_vexedtModel.SP_CHECKINTICKET_Result">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="MaVe" ColumnName="MaVe" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="isTimeOut" ColumnName="isTimeOut" />
+                <ScalarProperty Name="isDone" ColumnName="isDone" />
+                <ScalarProperty Name="Order_ID1" ColumnName="Order_ID1" />
+                <ScalarProperty Name="Order_Ten" ColumnName="Order_Ten" />
+                <ScalarProperty Name="Order_sex" ColumnName="Order_sex" />
+                <ScalarProperty Name="Order_Code" ColumnName="Order_Code" />
+                <ScalarProperty Name="Order_Email" ColumnName="Order_Email" />
+                <ScalarProperty Name="Order_Contact" ColumnName="Order_Contact" />
+                <ScalarProperty Name="Order_Address" ColumnName="Order_Address" />
+                <ScalarProperty Name="Order_Tel" ColumnName="Order_Tel" />
+                <ScalarProperty Name="Order_Tongtien" ColumnName="Order_Tongtien" />
+                <ScalarProperty Name="Order_Account" ColumnName="Order_Account" />
+                <ScalarProperty Name="Order_CompleteDate" ColumnName="Order_CompleteDate" />
+                <ScalarProperty Name="Order_isRead" ColumnName="Order_isRead" />
+                <ScalarProperty Name="Order_CreatedDate" ColumnName="Order_CreatedDate" />
+                <ScalarProperty Name="Order_Content" ColumnName="Order_Content" />
+                <ScalarProperty Name="Order_File" ColumnName="Order_File" />
+                <ScalarProperty Name="Order_Type" ColumnName="Order_Type" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Order_isComplete" ColumnName="Order_isComplete" />
+                <ScalarProperty Name="Order_Promote" ColumnName="Order_Promote" />
+                <ScalarProperty Name="MaChuyenXe" ColumnName="MaChuyenXe" />
+                <ScalarProperty Name="Order_Thuong" ColumnName="Order_Thuong" />
+                <ScalarProperty Name="Order_Vip" ColumnName="Order_Vip" />
+                <ScalarProperty Name="Order_Giatrivedoi" ColumnName="Order_Giatrivedoi" />
+                <ScalarProperty Name="Order_CheckOutMethod" ColumnName="Order_CheckOutMethod" />
+                <ScalarProperty Name="Order_ShipAddress" ColumnName="Order_ShipAddress" />
+                <ScalarProperty Name="Order_TongThanhToan" ColumnName="Order_TongThanhToan" />
+                <ScalarProperty Name="Order_ShipValue" ColumnName="Order_ShipValue" />
+                <ScalarProperty Name="Order_ProvinceAddress" ColumnName="Order_ProvinceAddress" />
+                <ScalarProperty Name="Order_DistrictAddress" ColumnName="Order_DistrictAddress" />
+                <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+                <ScalarProperty Name="Member_Username" ColumnName="Member_Username" />
+                <ScalarProperty Name="Member_Email" ColumnName="Member_Email" />
+                <ScalarProperty Name="Member_Password" ColumnName="Member_Password" />
+                <ScalarProperty Name="Member_Name" ColumnName="Member_Name" />
+                <ScalarProperty Name="Member_SurName" ColumnName="Member_SurName" />
+                <ScalarProperty Name="Member_LastName" ColumnName="Member_LastName" />
+                <ScalarProperty Name="Member_Sex" ColumnName="Member_Sex" />
+                <ScalarProperty Name="Member_Address" ColumnName="Member_Address" />
+                <ScalarProperty Name="Member_Phone" ColumnName="Member_Phone" />
+                <ScalarProperty Name="Member_Mobile" ColumnName="Member_Mobile" />
+                <ScalarProperty Name="Member_Company" ColumnName="Member_Company" />
+                <ScalarProperty Name="Member_Status" ColumnName="Member_Status" />
+                <ScalarProperty Name="Member_Date" ColumnName="Member_Date" />
+                <ScalarProperty Name="Member_Avarta" ColumnName="Member_Avarta" />
+                <ScalarProperty Name="Member_Vola" ColumnName="Member_Vola" />
+                <ScalarProperty Name="Member_Role" ColumnName="Member_Role" />
+                <ScalarProperty Name="NhaXe" ColumnName="NhaXe" />
+                <ScalarProperty Name="MaChuyenXe1" ColumnName="MaChuyenXe1" />
+                <ScalarProperty Name="Ngaydi" ColumnName="Ngaydi" />
+                <ScalarProperty Name="Giokhoihanh" ColumnName="Giokhoihanh" />
+                <ScalarProperty Name="Thoigiandukien" ColumnName="Thoigiandukien" />
+                <ScalarProperty Name="MaXe" ColumnName="MaXe" />
+                <ScalarProperty Name="Mota" ColumnName="Mota" />
+                <ScalarProperty Name="Chitiet" ColumnName="Chitiet" />
+                <ScalarProperty Name="TuyenDuong" ColumnName="TuyenDuong" />
+                <ScalarProperty Name="Diemdi" ColumnName="Diemdi" />
+                <ScalarProperty Name="Diemden" ColumnName="Diemden" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="GiaVIP" ColumnName="GiaVIP" />
+                <ScalarProperty Name="GiaThuong" ColumnName="GiaThuong" />
+                <ScalarProperty Name="TongVe" ColumnName="TongVe" />
+                <ScalarProperty Name="VeThuongConLai" ColumnName="VeThuongConLai" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="KhuyenMai" ColumnName="KhuyenMai" />
+                <ScalarProperty Name="LoTrinh" ColumnName="LoTrinh" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="TongSoVeVIP" ColumnName="TongSoVeVIP" />
+                <ScalarProperty Name="TongSoVeThuong" ColumnName="TongSoVeThuong" />
+                <ScalarProperty Name="VeVipConLai" ColumnName="VeVipConLai" />
+                <ScalarProperty Name="DenHuyen" ColumnName="DenHuyen" />
+                <ScalarProperty Name="DenTinh" ColumnName="DenTinh" />
+                <ScalarProperty Name="DiHuyen" ColumnName="DiHuyen" />
+                <ScalarProperty Name="DiTinh" ColumnName="DiTinh" />
+                <ScalarProperty Name="MaXe1" ColumnName="MaXe1" />
+                <ScalarProperty Name="Bienso" ColumnName="Bienso" />
+                <ScalarProperty Name="Tenxe" ColumnName="Tenxe" />
+                <ScalarProperty Name="Nhaxe1" ColumnName="Nhaxe1" />
+                <ScalarProperty Name="Gioithieungan" ColumnName="Gioithieungan" />
+                <ScalarProperty Name="Gioithieuchitiet" ColumnName="Gioithieuchitiet" />
+                <ScalarProperty Name="Nguoitao" ColumnName="Nguoitao" />
+                <ScalarProperty Name="Ngaytao" ColumnName="Ngaytao" />
+                <ScalarProperty Name="Ngaysuacuoi" ColumnName="Ngaysuacuoi" />
+                <ScalarProperty Name="Nguoisuacuoi" ColumnName="Nguoisuacuoi" />
+                <ScalarProperty Name="Daxoa" ColumnName="Daxoa" />
+                <ScalarProperty Name="TongSoGhe" ColumnName="TongSoGhe" />
+                <ScalarProperty Name="Hangxe" ColumnName="Hangxe" />
+                <ScalarProperty Name="Avartar" ColumnName="Avartar" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tennhaxe" ColumnName="Tennhaxe" />
+                <ScalarProperty Name="Soluongxe" ColumnName="Soluongxe" />
+                <ScalarProperty Name="Trusochinh" ColumnName="Trusochinh" />
+                <ScalarProperty Name="Nguoidaidien" ColumnName="Nguoidaidien" />
+                <ScalarProperty Name="Sodienthoai" ColumnName="Sodienthoai" />
+                <ScalarProperty Name="Gioithieungan1" ColumnName="Gioithieungan1" />
+                <ScalarProperty Name="Gioithieuchitiet1" ColumnName="Gioithieuchitiet1" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+                <ScalarProperty Name="Tinh" ColumnName="Tinh" />
+                <ScalarProperty Name="NhaxeId" ColumnName="NhaxeId" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID1" ColumnName="ID1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GETNHAXEBYID" FunctionName="lggvn_vexedtModel.Store.SP_GETNHAXEBYID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="lggvn_vexedtModel.SP_GETNHAXEBYID_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tennhaxe" ColumnName="Tennhaxe" />
+                <ScalarProperty Name="Soluongxe" ColumnName="Soluongxe" />
+                <ScalarProperty Name="Trusochinh" ColumnName="Trusochinh" />
+                <ScalarProperty Name="Nguoidaidien" ColumnName="Nguoidaidien" />
+                <ScalarProperty Name="Sodienthoai" ColumnName="Sodienthoai" />
+                <ScalarProperty Name="Gioithieungan" ColumnName="Gioithieungan" />
+                <ScalarProperty Name="Gioithieuchitiet" ColumnName="Gioithieuchitiet" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+                <ScalarProperty Name="Tinh" ColumnName="Tinh" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

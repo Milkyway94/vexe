@@ -13,7 +13,8 @@
                 </div>
                 <div class="tv2">01</div>
                 <div class="tv3">
-                    <span class="b1">Bước 1</span><br />
+                    <span class="b1"></span>
+                    <br />
                     <span class="b1tv">TÌM VÉ</span>
                 </div>
                 <img src="../../resources/img/icon/bg-next.png" class="tv4" />
@@ -24,7 +25,7 @@
                 </div>
                 <div class="tv2">02</div>
                 <div class="tv3">
-                    <span class="b1">Bước 2</span>
+                    <span class="b1">&nbsp;</span>
                     <div class="b1tv">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
                 </div>
                 <img src="../../resources/img/icon/bg-next.png" class="tv4" />
@@ -35,7 +36,8 @@
                 </div>
                 <div class="tv2">03</div>
                 <div class="tv3">
-                    <span class="b1">Bước 3</span><br />
+                    <span class="b1"></span>
+                    <br />
                     <span class="b1tv">NHẬN VÉ</span>
                 </div>
             </div>
@@ -131,66 +133,15 @@
     </div>
     <div class="container content-xe">
         <ul class="uk-grid-small uk-child-width-1-2 uk-child-width-1-5@s uk-text-center" uk-grid>
+            <% foreach (var item in lstNhaxe())
+                {%>
             <li class="xe">
-                <a href="#">
+                <a href="/nha-xe/<%=item.ID %>.htm">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
+                    <span class="tenxe"><%=item.Tennhaxe %></span>
                 </a>
             </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-            <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
+            <%} %>
         </ul>
     </div>
 </div>

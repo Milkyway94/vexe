@@ -26,8 +26,8 @@
 }
 
     .navbar-inverse .navbar-nav > li > a:hover {
-        color: #ffc809;
-        Background: #eeeeee;
+        color: #007000;
+        border-bottom: 2px #007000 solid;
     }
 
 .navbar {
@@ -143,7 +143,7 @@ h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 }
 
 .content {
-    padding-top: 30px;
+    padding-top: 24px;
     padding-bottom: 30px;
     background: #fffcf4;
 }
@@ -153,6 +153,7 @@ h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 .kiemtrave {
     background: #FFFCF4;
     padding-bottom: 20px;
+    padding-top: 30px;
 }
 
 .wrapper {
@@ -186,7 +187,8 @@ h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
     .sidebar h3 {
         text-transform: uppercase;
         font-weight: bold;
-        text-align: center;
+        text-align: left;
+        padding: 5px;
     }
 
     .sidebar ul.lstSidebar {
@@ -196,6 +198,8 @@ h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 
 ul.lstSidebar li {
     list-style: none;
+    padding-bottom: 10px;
+    padding-top: 10px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -210,8 +214,8 @@ ul.lstSidebar li a {
     text-decoration: none;
     color: #5e5e5e;
     text-transform: none;
-    font:normal 14px/35px Roboto;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .lst-tdn ul.lstSidebar li a {
@@ -226,15 +230,13 @@ ul.lstSidebar li a {
 .lst-tdn ul.lstSidebar {
     padding-left: 20px;
 }
-
 ul.lstSidebar li a.active, ul.lstSidebar li a:hover {
-    background: url('../img/icon_act.png') no-repeat left 5px;
     color: #007000;
+    font-weight: 500;
 }
 
 .hi-padding {
-    padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 23px;
 }
 
 .lst-tdn ul.lstSidebar li a.active, .lst-tdn ul.lstSidebar li a:hover {
@@ -281,15 +283,12 @@ ul.lstSidebar li a.active, ul.lstSidebar li a:hover {
     -webkit-transition: opacity .24s ease-in-out;
     -moz-transition: opacity .24s ease-in-out;
     transition: opacity .24s ease-in-out;
-    padding-top: 30px;
-    padding-bottom: 30px;
 }
 }
 .ftmenutitle {
     color: #fff;
 }
-
-footer {
+ footer{
     float: left;
     width: 100%;
 }
@@ -299,7 +298,6 @@ footer {
 }
 
     .navbar-brand > img {
-        max-height: 70px;
         width: auto;
     }
 
@@ -441,6 +439,8 @@ ul#hi-checked li.uk-active > a {
     .lstNhaXe img {
         padding: 5px;
         border: 1px solid #ddd;
+        width: 269px;
+        height: 200px;
     }
 
 .lst-tdn ul li {
@@ -449,6 +449,8 @@ ul#hi-checked li.uk-active > a {
 }
 
 .lst-tdn {
+    height: 270px;
+    overflow-y: auto;
     border: none;
     padding-top: 0;
     background: transparent;
@@ -575,4 +577,7 @@ ul.uk-pagination li.uk-active span {
 }
 p {
     margin: 0 0 10px !important;
+}
+#ticket {
+    margin: 20px 0 0 0 !important;
 }

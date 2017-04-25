@@ -13,6 +13,8 @@ using SMAC;
 using System.Collections.Generic;
 using System.Drawing;
 using QCMS_BUSSINESS.Repositories;
+using QCMS_BUSSINESS;
+using System.Linq;
 
 public partial class ucontrols_include_Home : System.Web.UI.UserControl
 {
@@ -118,7 +120,7 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
     protected string LoadPopularTravel()
     {
         StringBuilder str = new StringBuilder();
-        DataTable dtfrom = UpdateData.ExecStore("SP_TUYENNOIBAT", "").Tables[0];
+        DataTable dtfrom = UpdateData.ExecStore("SP_TUYENNOIBA6T", "").Tables[0];
         DataRowCollection rows = dtfrom.Rows;
         if (rows.Count > 0)
         {
@@ -130,4 +132,8 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
         }
         return str.ToString();
     }
+    protected List<NhaXe> lstNhaxe()
+    {
+        return new NhaxeRepository().All().ToList();
+    } 
 }

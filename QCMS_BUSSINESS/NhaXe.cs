@@ -29,6 +29,8 @@ namespace QCMS_BUSSINESS
         public string Sodienthoai { get; set; }
         public string Gioithieungan { get; set; }
         public string Gioithieuchitiet { get; set; }
+        public string Anh { get; set; }
+        public Nullable<int> Tinh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Xe> Xes { get; set; }

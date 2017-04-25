@@ -1,4 +1,9 @@
-﻿$(".select2").select2();
+﻿$(".select2").select2({
+    allowClear: true,
+    placeholder: function () {
+        $(this).data('placeholder');
+    }
+});
 $(".timepicker").timepicker();
 $(".datepicker").datepicker({
     closeText: "Đóng",
@@ -28,7 +33,9 @@ function Login() {
     var path = window.location.pathname;
     window.location.href = "/login.htm?returnUrl=" + encodeURIComponent(path);
 }
-
+function locdau(n) {
+    return n = n.toString().toLowerCase(), n = n.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a"), n = n.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e"), n = n.replace(/ì|í|ị|ỉ|ĩ/g, "i"), n = n.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o"), n = n.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u"), n = n.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y"), n = n.replace(/đ/g, "d"), n = n.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g, "-"), n = n.replace(/-+-/g, "-"), n.replace(/^\-+|\-+$/g, "")
+}
 //begin
 
 

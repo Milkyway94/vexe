@@ -19,5 +19,6 @@ namespace QCMS_BUSSINESS
         public Nullable<double> UnitPrice { get; set; }
         public string Type { get; set; }
         public Nullable<int> isTimeOut { get; set; }
+        public Nullable<int> isDone { get; set; }
     }
 }

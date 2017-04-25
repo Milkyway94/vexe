@@ -35,7 +35,6 @@
                  <div class="left-col">
                     <div class="nhaxe clearfix">
                        <p>Nhà xe :<b> <asp:label runat="server" id="namenhaxe"></asp:label> </b> </p>
-                       
                     </div>
                     <div class="form-nhaxe clearfix">
                        <div class="clearfix"></div>

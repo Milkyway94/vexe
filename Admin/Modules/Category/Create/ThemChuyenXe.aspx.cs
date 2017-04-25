@@ -23,6 +23,9 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
             string machuyenxe = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(machuyenxe))
             {
+                ddlNhaxe.Visible = false;
+                lbNhaxe.Visible = false;
+                lbTitle.Text = "Cập nhật thông tin chuyến xe";
                 DataTable dtXe = UpdateData.ExecStore("SP_CCB_XE", SessionUtil.GetValue("UserID")).Tables[0];
                 DataTable dtNhaXe = UpdateData.ExecStore("SP_CCB_NHAXE", SessionUtil.GetValue("UserID")).Tables[0];
                 DataTable dtTinh = UpdateData.ExecStore("SP_CCB_Tinh", "").Tables[0];
@@ -49,11 +52,14 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
                         ddlDiTinh.Items[i].Selected = true;
                         DataTable dtDiHuyen = UpdateData.ExecStore("SP_CCB_Huyen_FROM_Tinh", cx.DiTinh.ToString()).Tables[0];
                         Value.BindToDropdown(ddlDiHuyen, dtDiHuyen);
-                        for (int j = 0; j < ddlDiHuyen.Items.Count; j++)
+                        if (ddlDiHuyen.Items.Count > 0)
                         {
-                            if (cx.DiHuyen.ToString() == ddlDiHuyen.Items[j].Value)
+                            for (int j = 0; j < ddlDiHuyen.Items.Count; j++)
                             {
-                                ddlDiHuyen.Items[i].Selected = true;
+                                if (cx.DiHuyen.ToString() == ddlDiHuyen.Items[j].Value)
+                                {
+                                    ddlDiHuyen.Items[j].Selected = true;
+                                }
                             }
                         }
                     }
@@ -86,6 +92,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
             }
             else
             {
+                lbTitle.Text = "Thêm mới chuyến xe";
                 DataTable dtXe = UpdateData.ExecStore("SP_CCB_XE", SessionUtil.GetValue("UserID")).Tables[0];
                 DataTable dtTinh = UpdateData.ExecStore("SP_CCB_Tinh", "").Tables[0];
                 DataTable dtNhaXe = UpdateData.ExecStore("SP_CCB_NHAXE", SessionUtil.GetValue("UserID")).Tables[0];
@@ -115,7 +122,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         int DenHuyen = int.Parse(ddlDenHuyen.SelectedValue);
         int TongSoVeThuong = int.Parse(txtVethuong.Text);
         int TongVe = int.Parse(txtTongsove.Text);
-        int TongSoVeVIP = int.Parse(txtVethuong.Text);
+        int TongSoVeVIP = int.Parse(txtVeVip.Text);
         double GiaThuong = double.Parse(txtGiaThuong.Text);
         double GiaVIP = double.Parse(txtGiaVip.Text);
         string LoTrinh = txtLotrinh.Text;

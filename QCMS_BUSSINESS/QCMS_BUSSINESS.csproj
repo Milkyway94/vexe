@@ -64,6 +64,9 @@
     <Compile Include="DiemDon.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetCmtOfNhaxe_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ghe.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
@@ -137,6 +140,9 @@
     <Compile Include="SP_CCB_XE_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_CHECKINTICKET_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_GETALLHANGXE1_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
@@ -162,6 +168,9 @@
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GETCHUYENXEFROMDITINH_Result.cs">
+      <DependentUpon>Vexedt.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GETNHAXEBYID_Result.cs">
       <DependentUpon>Vexedt.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GetOrderByNhaxe_Result.cs">

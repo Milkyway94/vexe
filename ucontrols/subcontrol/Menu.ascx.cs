@@ -11,8 +11,12 @@ using System.Web.UI.WebControls;
 
 public partial class ucontrols_subcontrol_Menu : System.Web.UI.UserControl
 {
+    public int modid;
     public void Page_Load(object sender, EventArgs e)
     {
+        string url = String.IsNullOrEmpty(Request.QueryString["url"]) ? "Home" : Request["url"].ToString();
+        string nUrl = String.IsNullOrEmpty(Request["nUrl"]) ? "" : Request["nUrl"].ToString();
+        modid = ModControl.GetP_From_Code(url);
         Logo.Text = LoadLogo();
         MainMenu.Text = LoadMainMenu();
     }
@@ -28,7 +32,8 @@ public partial class ucontrols_subcontrol_Menu : System.Web.UI.UserControl
         StringBuilder str = new StringBuilder();
         foreach (var item in modRepo.GetModByBoxCode("MainMenu"))
         {
-            str.Append("<li><a href=\"/"+item.Mod_Url+".htm\">"+item.Mod_Name+"</a></li>");
+            string active = item.Mod_ID == modid ? "active" : "";
+            str.Append("<li><a class=\""+active+"\" href=\"/"+item.Mod_Url+".htm\">"+item.Mod_Name+"</a></li>");
         }
         return str.ToString();
     }

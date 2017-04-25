@@ -122,6 +122,9 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
                 $scope.showError = true;
                 $scope.message = data.d.message;
             })
+            .error(function (err) {
+                console.log(err);
+            })
     }
     $scope.HuyYC = function () {
         $service.Post(url + "/HuyYC", {})
@@ -201,6 +204,17 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
         $scope.TongTien = ($scope.selectedTicket.VIP * $scope.Chuyenxe.GiaVIP + $scope.selectedTicket.THUONG * $scope.Chuyenxe.GiaThuong);
         console.log($scope.Chuyenxe);
     })
+    $service.Post(url + "/ExecProc", { proc: "SP_CCB_Tinh", param: "" }).success(function (data) {
+        console.log(data.d);
+        $scope.Tinhs = JSON.parse(data.d);
+    })
+    $scope.SelectDistrict = function () {
+        console.log($scope.Province);
+        $service.Post(url + "/ExecProc", { proc: "SP_CCB_Huyen_FROM_Tinh", param: $scope.Province ? $scope.Province.id :"" }).success(function (data) {
+            console.log(data.d);
+            $scope.Huyens = JSON.parse(data.d);
+        })
+    }
     //So luong ve da chon
     $scope.selectedTicket = {
         VIP: 1,
@@ -269,6 +283,15 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
     $scope.Login = function () {
         $("#LoginModal").modal({ backdrop: 'static' });
     }
+    $scope.doLogin = function () {
+        $scope.loadding = true;
+        $service.Post(url + "/doLogin", $scope.login)
+            .success(function (data) {
+                $scope.loginMsg = data.d.message;
+                $scope.loadding = false;
+                $("#LoginModal").modal('hide');
+            })
+    }
     //Thanh toán
     $scope.ThanhToan = function () {
         $scope.loadding = true;
@@ -281,6 +304,8 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
                     machuyenxe: $scope.Chuyenxe.MaChuyenXe,
                     khuyenmai: $scope.KhuyenMai,
                     giatridoive: $scope.GiaTriVeCu,
+                    tinh: $scope.Province.id,
+                    huyen: $scope.District.id,
                     diachinhanve: $scope.Address,
                     tongtien: $scope.TongTien
                 };
@@ -293,6 +318,14 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
         }
         if (!$scope.Address) {
             $("#address").focus();
+            $scope.loadding = false;
+        }
+        if (!$scope.Province) {
+            $("#province").focus();
+            $scope.loadding = false;
+        }
+        if (!$scope.District) {
+            $("#district").focus();
             $scope.loadding = false;
         }
         else {
