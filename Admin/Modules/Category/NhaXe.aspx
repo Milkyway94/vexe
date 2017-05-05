@@ -65,10 +65,6 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Mã</label>
-                                <asp:TextBox runat="server" ReadOnly="true" ng-model="ID" ID="ID" CssClass="form-control" required="required" />
-                            </div>
-                            <div class="form-group">
                                 <label>Tên nhà xe</label>
                                 <asp:TextBox runat="server" ng-model="Tennhaxe" ID="Tennhaxe" CssClass="form-control" required="required" />
                             </div>

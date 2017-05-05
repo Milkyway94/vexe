@@ -12,7 +12,7 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Tiêu đề</label>
             <div class="col-sm-9">
-                <asp:TextBox type="text" ID="txtName" runat="server" CssClass="w100 form-control"></asp:TextBox>
+                <asp:TextBox type="text" ID="txtName" runat="server" CssClass="w100 form-control" required></asp:TextBox>
             </div>
         </div>
         <div class="form-group row">
@@ -30,13 +30,13 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Đường dẫn</label>
             <div class="col-sm-9">
-                <asp:TextBox ID="txtCode" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtCode" CssClass="form-control" runat="server" required></asp:TextBox>
             </div>
         </div>
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Ảnh</label>
             <div class="col-sm-7">
-                <asp:TextBox ID="txtImg" CssClass="form-control" ClientIDMode="Static" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtImg" CssClass="form-control" ClientIDMode="Static" runat="server" required></asp:TextBox>
             </div>
             <div class="col-sm-2">
                 <input id="browseServer" class="btn btn-warning" onclick="BrowseServer('txtImg');" type="button" value="Tải ảnh" />
@@ -50,7 +50,10 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-3 col-form-label">Vị trí</label>
             <div class="col-sm-9">
-                <asp:TextBox ID="txtPos" Width="200" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPos" Width="200" TextMode="Number"  CssClass="form-control" runat="server"></asp:TextBox>
+                 <asp:RangeValidator runat="server" Type="Integer"
+                    MinimumValue="1" MaximumValue="999999" ControlToValidate="txtPos"
+                    ErrorMessage="Số chỗ chỉ từ 1-999999" />
             </div>
         </div>
         <div class="form-group row">

@@ -114,9 +114,9 @@ namespace SMAC
 				sqlCommand.ExecuteNonQuery();
 				result = true;
 			}
-            catch
+            catch(Exception ex)
             {
-                result = false;
+                throw new Exception(ex.ToString());
             }
 			finally
 			{

@@ -115,7 +115,7 @@ public partial class Admin_Modules_Content_Controls_NewsFrm : System.Web.UI.User
             txtKey.Text         = rows[0]["Content_Key"].ToString();
             txtTitle.Text       = rows[0]["Content_Title"].ToString();
             txtMeta.Text        = rows[0]["Content_Des"].ToString();
-            txtDate .Text       = rows[0]["Content_Date"].ToString();
+            txtDate .Text       = DateTime.Parse(rows[0]["Content_Date"].ToString()).ToString("MM/dd/yyyy");
             //txtTag.Text         = rows[0]["Content_Tag"].ToString();
             //string sql1 = "SELECT Tag_Name FROM tbl_Tag WHERE Content_ID=" + id;
             //DataSet ds1 = UpdateData.UpdateBySql(sql1);
@@ -186,7 +186,7 @@ public partial class Admin_Modules_Content_Controls_NewsFrm : System.Web.UI.User
         //}
         //string url = txtURL.Text.Trim() == "" ? ApplicationUtil.GetTitle(txtName.Text.ToString()).ToLower() : txtURL.Text.Trim().ToLower();
         string title = txtTitle.Text.Trim() == "" ? txtName.Text.ToString().ToLower() : txtTitle.Text.Trim();
-        string date = txtDate.Text == "" ? DateTime.Now.ToString() : txtDate.Text;
+        string date = txtDate.Text == "" ? DateTime.Now.ToString("MM/dd/yyyy") : txtDate.Text;
         //string urlTag = txtTag.Text.Trim() == "" ? ApplicationUtil.GetTitle(txtKey.Text.ToString()).ToLower() : ApplicationUtil.GetTitle(txtTag.Text.Trim()).ToLower();
         Hashtable tbIn = new Hashtable();
         
@@ -199,7 +199,7 @@ public partial class Admin_Modules_Content_Controls_NewsFrm : System.Web.UI.User
         tbIn.Add("Content_Code", txtCode.Text);
         tbIn.Add("Content_Intro", CKTeaser.Text);
         tbIn.Add("Content_Text", CKContent.Text);
-        tbIn.Add("Content_Img", txtImg.Text.Replace("/upload", "upload"));
+        tbIn.Add("Content_Img", txtImg.Text);
         //tbIn.Add("Content_Avata", txtAvata.Text.Replace("/upload", "upload"));
         tbIn.Add("Content_Date", date);
         tbIn.Add("Content_URL", "");
@@ -230,11 +230,16 @@ public partial class Admin_Modules_Content_Controls_NewsFrm : System.Web.UI.User
         }
         if (act == "edit")
         {
+            tbIn.Add("Content_Editdate", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"));
             //UpdateData.UpdateOrder("UPDATE tbl_Content SET Content_Editdate=getdate() WHERE Content_ID=" + id);
             bool _update = UpdateData.Update("tbl_Content", tbIn, "Content_ID=" + id);
             if (_update)
             {
                 FunctionDB.AddLog(Session["DepartID"].ToString(), Session["Username"].ToString(), "Sửa", "Bài: " + txtName.Text);
+            }
+            else
+            {
+                Response.Write("Lỗi");
             }
         }      
         Response.Write(sScritp);

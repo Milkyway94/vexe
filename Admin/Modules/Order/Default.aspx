@@ -11,24 +11,24 @@
                 <div class="row">
                     <div class="col-sm-6" style="padding-bottom: 0px; padding-left: 15px;">
                         <div class="w20">
-                            <input type="text" class="form-control input-sm" placeholder="Lọc theo Nhà Xe" ng-model="tenNhaXe" required />
+                            <input type="text" class="form-control input-sm" ng-change="Loc()" placeholder="Lọc theo Nhà Xe" ng-model="tenNhaXe" required />
                         </div>
                         <div class="w20">
-                            <input type="datetime" class="form-control input-sm datepicker" placeholder="Lọc Từ ngày" ng-model="startDate" required />
+                            <input type="datetime" ng-change="Loc()" class="form-control input-sm datepicker" placeholder="Lọc Từ ngày" ng-model="startDate" required />
                         </div>
                         <div class="w20">
-                            <input type="datetime" class="form-control input-sm datepicker" placeholder="Lọc Đến ngày" ng-model="endDate" required />
+                            <input type="datetime" ng-change="Loc()" class="form-control input-sm datepicker" placeholder="Lọc Đến ngày" ng-model="endDate" required />
                         </div>
-                        <button class="btn btn-flat btn-danger btn-sm" ng-click="Loc()" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;Lọc <i class="fa fa-spinner fa-spin" ng-show="loading"></i></button>
+                        <button class="btn btn-flat btn-danger btn-sm" ng-disabled="loading" ng-click="Loc()" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;Lọc <i class="fa fa-spinner fa-spin" ng-show="loading"></i></button>
                         <button class="btn btn-success btn-flat btn-sm" ng-click="exportData()" type="button">
                             <span class="glyphicon glyphicon-share"></span>
                             Export to Excel</button>
                     </div>
-                    <div class="col-sm-4 col-sm-offset-2" style="padding-right: 15px; padding-bottom: 0px; padding-left: 0;">
+                    <%--<div class="col-sm-4 col-sm-offset-2" style="padding-right: 15px; padding-bottom: 0px; padding-left: 0;">
                         <div class="w100">
                             <input type="text" class="form-control input-sm" ng-model="SearchKey" placeholder="Nhập từ khóa tìm kiếm" />
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
                 <div class="fw">
                     <div id="exportable">
@@ -65,6 +65,9 @@
                                 </tr>
                             </tbody>
                             <tfoot>
+                                <tr  ng-show="orders.length==0">
+                                    <td colspan="9" style="color: red">Không có dữ liệu phù hợp</td>
+                                </tr>
                                 <tr>
                                     <td colspan="7" class="text-right text-current"><b>Tổng doanh thu {{ forDate }}</b></td>
                                     <td colspan="2" class="text-left text-bold">{{ TongTienThanhToan | number }} đ</td>

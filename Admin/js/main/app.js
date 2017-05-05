@@ -443,7 +443,7 @@ app.controller("XeController", ['$scope', '$http', '$filter', 'Service', functio
         switch (act) {
             case "add":
                 $("#add-modal").modal({ backdrop: false });
-                $scope.updateFormTitle = "Thêm mới "+$scope.Mod.ModAdmin_Name;
+                $scope.updateFormTitle = "Thêm mới " + $scope.Mod.ModAdmin_Name;
                 $scope.formdata = {};
                 $scope.action = "add";
                 break;
@@ -798,132 +798,132 @@ app.controller("QLXeController", ['$scope', '$http', 'Service', '$timeout', '$in
     }
     LoadData();
 }])
-app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', '$interval', 'uiGridConstants', 'uiGridGroupingConstants',function ($scope, $http, $Service, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
-        var today = new Date();
-        var url = "/Admin/Modules/Category/Vehicle.aspx";
-        var rootUrl = "/Admin/Default.aspx";
-        var nextWeek = new Date();
-        nextWeek.setDate(nextWeek.getDate() + 7);
-        $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
-            if (col.filters[0].term) {
-                return 'header-filtered';
-            } else {
-                return '';
-            }
-        };
-        $scope.edit = function (row) {
-            console.log(row.entity.MaChuyenXe);
-            $("#updateframe").prop("src", "Create/ThemChuyenXe.aspx?id=" + row.entity.MaChuyenXe);
-            $("#add-modal").modal({ backdrop: 'static' });
-        };
-        $scope.delete = function (row) {
-            swal({
-                title: 'Bạn có chắc chắn?',
-                text: "Xóa chuyến xe này!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Có, tôi muốn!',
-                cancelButtonText: 'Không, hủy!',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false
-            }).then(function () {
-                $Service.Post(rootUrl + "/DELCHUYENXE", { machuyenxe: row.entity.MaChuyenXe })
-                    .success(function (data) {
-                        LoadData();
-                        swal(
-                            'Đã xóa!',
-                            'Chuyến xe bạn chọn đã bị xóa khỏi hệ thống.',
-                            'success'
-                        )
-                    })
-            }, function (dismiss) {
-                // dismiss can be 'cancel', 'overlay',
-                // 'close', and 'timer'
-                if (dismiss === 'cancel') {
+app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', '$interval', 'uiGridConstants', 'uiGridGroupingConstants', function ($scope, $http, $Service, $timeout, $interval, uiGridConstants, uiGridGroupingConstants) {
+    var today = new Date();
+    var url = "/Admin/Modules/Category/Vehicle.aspx";
+    var rootUrl = "/Admin/Default.aspx";
+    var nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 7);
+    $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
+        if (col.filters[0].term) {
+            return 'header-filtered';
+        } else {
+            return '';
+        }
+    };
+    $scope.edit = function (row) {
+        console.log(row.entity.MaChuyenXe);
+        $("#updateframe").prop("src", "Create/ThemChuyenXe.aspx?id=" + row.entity.MaChuyenXe);
+        $("#add-modal").modal({ backdrop: 'static' });
+    };
+    $scope.delete = function (row) {
+        swal({
+            title: 'Bạn có chắc chắn?',
+            text: "Xóa chuyến xe này!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có, tôi muốn!',
+            cancelButtonText: 'Không, hủy!',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false
+        }).then(function () {
+            $Service.Post(rootUrl + "/DELCHUYENXE", { machuyenxe: row.entity.MaChuyenXe })
+                .success(function (data) {
+                    LoadData();
                     swal(
-                        'Hủy bỏ',
-                        'Chuyến xe của bạn vẫn chưa bị xóa',
-                        'error'
+                        'Đã xóa!',
+                        'Chuyến xe bạn chọn đã bị xóa khỏi hệ thống.',
+                        'success'
                     )
-                }
-            })
-        };
-
-        $scope.gridOptions = {
-            enableFiltering: true,
-            paginationPageSizes: [25, 50, 75],
-            paginationPageSize: 25,
-            columnDefs: [
-                {
-                    name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
-                    cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
-                },
-                { name: 'Tennhaxe', displayName: "Nhà xe", type: 'text' },
-                { name: 'Tenxe', displayName: "Tên xe", type: 'text' },
-                { name: 'Ngaydi', displayName: "Ngày đi", type: 'date'},
-                { field: 'Giokhoihanh' },
-                { field: 'Thoigiandukien' },
-                { name: 'TongSoVeThuong', displayName: "Tổng Vé Thường", type: 'number' },
-                { name: 'TongSoVeVIP', displayName: "Tổng Vé VIP", type: 'number' },
-                { name: 'VeVipConLai', displayName: "Vé VIP còn lại", type: 'number' },
-                { name: 'VeThuongConLai', displayName: "Vé thường còn lại", type: 'number' }
-            ],
-            enableGridMenu: true,
-            enableSelectAll: true,
-            enableColumnResizing: true,
-            enableGridMenu: true,
-            rowIdentity: function (row) {
-                return row.MaChuyenXe;
-            },
-            getRowIdentity: function (row) {
-                return row.MaChuyenXe;
-            },
-            exporterOlderExcelCompatibility: true,
-            exporterCsvFilename: 'chuyenxe.csv',
-            exporterPdfDefaultStyle: { fontSize: 9 },
-            exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
-            exporterPdfTableHeaderStyle: { fontSize: 10, bold: true, italics: true, color: 'red' },
-            exporterPdfHeader: { text: "Danh sách chuyến xe", style: 'headerStyle' },
-            exporterPdfFooter: function (currentPage, pageCount) {
-                return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
-            },
-            exporterPdfCustomFormatter: function (docDefinition) {
-                docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
-                docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
-                return docDefinition;
-            },
-            exporterPdfOrientation: 'landscape',
-            exporterPdfPageSize: 'A4',
-            exporterPdfMaxGridWidth: 600,
-            exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
-            onRegisterApi: function (gridApi) {
-                $scope.gridApi = gridApi;
+                })
+        }, function (dismiss) {
+            // dismiss can be 'cancel', 'overlay',
+            // 'close', and 'timer'
+            if (dismiss === 'cancel') {
+                swal(
+                    'Hủy bỏ',
+                    'Chuyến xe của bạn vẫn chưa bị xóa',
+                    'error'
+                )
             }
-        };
-        $scope.toggleFiltering = function () {
-            $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
-            $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-        };
-        var LoadData = function () {
-            $Service.Post(rootUrl + "/SELECTALLCHUYENXE", {})
-                .success(function (data) {
-                    $scope.gridOptions.data = JSON.parse(data.d);
-                    console.log($scope.gridOptions.data);
-                });
+        })
+    };
+
+    $scope.gridOptions = {
+        enableFiltering: true,
+        paginationPageSizes: [25, 50, 75],
+        paginationPageSize: 25,
+        columnDefs: [
+            {
+                name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
+                cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
+            },
+            { name: 'Tennhaxe', displayName: "Nhà xe", type: 'text' },
+            { name: 'Tenxe', displayName: "Tên xe", type: 'text' },
+            { name: 'Ngaydi', displayName: "Ngày đi", type: 'date' },
+            { field: 'Giokhoihanh' },
+            { field: 'Thoigiandukien' },
+            { name: 'TongSoVeThuong', displayName: "Tổng Vé Thường", type: 'number' },
+            { name: 'TongSoVeVIP', displayName: "Tổng Vé VIP", type: 'number' },
+            { name: 'VeVipConLai', displayName: "Vé VIP còn lại", type: 'number' },
+            { name: 'VeThuongConLai', displayName: "Vé thường còn lại", type: 'number' }
+        ],
+        enableGridMenu: true,
+        enableSelectAll: true,
+        enableColumnResizing: true,
+        enableGridMenu: true,
+        rowIdentity: function (row) {
+            return row.MaChuyenXe;
+        },
+        getRowIdentity: function (row) {
+            return row.MaChuyenXe;
+        },
+        exporterOlderExcelCompatibility: true,
+        exporterCsvFilename: 'chuyenxe.csv',
+        exporterPdfDefaultStyle: { fontSize: 9 },
+        exporterPdfTableStyle: { margin: [30, 30, 30, 30] },
+        exporterPdfTableHeaderStyle: { fontSize: 10, bold: true, italics: true, color: 'red' },
+        exporterPdfHeader: { text: "Danh sách chuyến xe", style: 'headerStyle' },
+        exporterPdfFooter: function (currentPage, pageCount) {
+            return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+        },
+        exporterPdfCustomFormatter: function (docDefinition) {
+            docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+            docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+            return docDefinition;
+        },
+        exporterPdfOrientation: 'landscape',
+        exporterPdfPageSize: 'A4',
+        exporterPdfMaxGridWidth: 600,
+        exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+        onRegisterApi: function (gridApi) {
+            $scope.gridApi = gridApi;
         }
-        $scope.LoadData = function () {
-            $Service.Post(rootUrl + "/SELECTALLCHUYENXE", {})
-                .success(function (data) {
-                    $scope.gridOptions.data = JSON.parse(data.d);
-                    console.log($scope.gridOptions.data);
-                    return true;
-                });
-        }
-        LoadData();
-    }])
+    };
+    $scope.toggleFiltering = function () {
+        $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+    };
+    var LoadData = function () {
+        $Service.Post(rootUrl + "/SELECTALLCHUYENXE", {})
+            .success(function (data) {
+                $scope.gridOptions.data = JSON.parse(data.d);
+                console.log($scope.gridOptions.data);
+            });
+    }
+    $scope.LoadData = function () {
+        $Service.Post(rootUrl + "/SELECTALLCHUYENXE", {})
+            .success(function (data) {
+                $scope.gridOptions.data = JSON.parse(data.d);
+                console.log($scope.gridOptions.data);
+                return true;
+            });
+    }
+    LoadData();
+}])
 app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', function ($scope, $filter, $http, $Service) {
     //Export Excel
     $scope.exportData = function () {
@@ -960,25 +960,28 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
     $scope.loading = false;
     $scope.nodata = false;
     $scope.Loc = function (o) {
-        if ($scope.startDate != null && $scope.endDate != null && $scope.tenNhaXe != null) {
-            $scope.loading = true;
-            $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderByDate", "json", { tenNhaXe: $scope.tenNhaXe, startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
-                $scope.orders = JSON.parse(data.d);
-                angular.forEach($scope.orders, function (item) {
-                    $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
-                        item.tbl_Member = JSON.parse(data.d);
-                    })
+        //if ($scope.startDate != null && $scope.endDate != null && $scope.tenNhaXe != null) {
+        $scope.loading = true;
+        if (!$scope.startDate) $scope.startDate = "";
+        if (!$scope.endDate) $scope.endDate = "";
+        if (!$scope.tenNhaXe) $scope.tenNhaXe = "";
+        $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getOrderByDate", "json", { tenNhaXe: $scope.tenNhaXe, startDate: $scope.startDate, endDate: $scope.endDate }).success(function (data) {
+            $scope.orders = JSON.parse(data.d);
+            angular.forEach($scope.orders, function (item) {
+                $Service.Api("POST", "/Admin/Modules/Order/Default.aspx/getMemberByOrderAcc", "json", { accId: item.Order_Account }).success(function (data) {
+                    item.tbl_Member = JSON.parse(data.d);
                 })
-                $scope.forDate = "Từ ngày " + $scope.startDate + " Đến ngày" + $scope.endDate + "";
-                $scope.loading = false;
-                $scope.totalItems = $scope.orders.length;
-                //-	Báo cáo doanh thu theo khoảng thời gian
-                $scope.TongTienThanhToan = getTotal($scope.orders);
             })
-        }
-        else {
-            alert("Bạn chưa nhập đủ thông tin tìm kiếm");
-        }
+            $scope.forDate = "Từ ngày " + $scope.startDate + " Đến ngày" + $scope.endDate + "";
+            $scope.loading = false;
+            $scope.totalItems = $scope.orders.length;
+            //-	Báo cáo doanh thu theo khoảng thời gian
+            $scope.TongTienThanhToan = getTotal($scope.orders);
+        })
+        //}
+        //else {
+        //    alert("Bạn chưa nhập đủ thông tin tìm kiếm");
+        //}
     }
     $scope.view = function (o) {
         console.log(o.Order_ID);
@@ -995,12 +998,13 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
         $scope.DiaChi = o.Order_ShipAddress;
         $scope.NgayTao = o.Order_CreatedDate;
         $scope.NhaXe = o.Tennhaxe;
-        $scope.TongTien = o.Order_Tongtien ? o.Order_Tongtien:0 ;
-        $scope.GiamGia = o.Order_KhuyenMai ? o.Order_KhuyenMai: 0;
-        $scope.PhiVanChuyen = o.Order_ShipValue ? o.Order_ShipValue:0;
+        $scope.TongTien = o.Order_Tongtien ? o.Order_Tongtien : 0;
+        $scope.GiamGia = o.Order_KhuyenMai ? o.Order_KhuyenMai : 0;
+        $scope.PhiVanChuyen = o.Order_ShipValue ? o.Order_ShipValue : 0;
         $scope.Phone = o.Order_Account == null ? o.Sodienthoai : o.tbl_Member[0].Member_Phone;
-        $scope.TongThanhToan = o.Order_TongThanhToan ? o.Order_TongThanhToan:0;
+        $scope.TongThanhToan = o.Order_TongThanhToan ? o.Order_TongThanhToan : 0;
         $scope.MaDonHang = o.Order_Code;
+        $scope.TongTienThanhToan = getTotal($scope.orders);
     }
     $scope.Delete = function (o) {
         if (confirm('Are you sure?')) {
@@ -1028,8 +1032,8 @@ app.controller("BaoCaoController", ['$scope', '$http', '$filter', 'Service', fun
     $scope.getSortClass = function (column) {
         if ($scope.sortColumn == column) {
             return $scope.reverseSort
-              ? 'arrow-down'
-              : 'arrow-up';
+                ? 'arrow-down'
+                : 'arrow-up';
         }
         return;
     }
@@ -1087,7 +1091,7 @@ app.controller("CommentController", ['$scope', '$http', '$filter', 'Service', fu
             $scope.fields = Object.keys($scope.orders[0]);
         })
     }
-    $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp:"SP_GETNHAXEBYID", param: getParameterByName("nx", window.location.href) }).success(function (data) {
+    $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp: "SP_GETNHAXEBYID", param: getParameterByName("nx", window.location.href) }).success(function (data) {
         $scope.Nhaxe = JSON.parse(data.d);
         console.log($scope.Nhaxe);
     })
@@ -1186,17 +1190,17 @@ app.controller("CommentController", ['$scope', '$http', '$filter', 'Service', fu
         $scope.currentPage = 1; //reset to first paghe
     }
 }])
-.filter('mapGender', function () {
-    var genderHash = {
-        1: 'male',
-        2: 'female'
-    };
+    .filter('mapGender', function () {
+        var genderHash = {
+            1: 'male',
+            2: 'female'
+        };
 
-    return function (input) {
-        if (!input) {
-            return '';
-        } else {
-            return genderHash[input];
-        }
-    };
-});
+        return function (input) {
+            if (!input) {
+                return '';
+            } else {
+                return genderHash[input];
+            }
+        };
+    });
