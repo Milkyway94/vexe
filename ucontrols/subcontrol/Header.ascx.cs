@@ -1,13 +1,5 @@
-﻿using QCMS_BUSSINESS;
-using SMAC;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using QCMS_BUSSINESS.Repositories;
 public partial class ucontrols_subcontrol_Header : System.Web.UI.UserControl
 {

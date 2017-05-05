@@ -3,7 +3,8 @@
 }
 .hot-doc-header>h3{
 	color: #007000;
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 30px;
 }
 #OperationCell{
 	background-color: #fffcf4;

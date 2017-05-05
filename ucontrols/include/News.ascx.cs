@@ -6,7 +6,7 @@ using SMAC;
 using System.Linq;
 public partial class ucontrols_include_News : System.Web.UI.UserControl
 {
-    protected int p, o;
+    protected int p;
     protected static string m;
     protected int pageSize = 5;
     public string display = "";

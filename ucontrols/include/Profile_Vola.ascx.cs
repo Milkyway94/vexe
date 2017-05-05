@@ -15,13 +15,7 @@ public partial class ucontrols_include_Profile_Vola : System.Web.UI.UserControl
         string url = String.IsNullOrEmpty(Request["url"]) ? "Home" : Request["url"].ToString();
         this.url = url;
         nurl = Request.QueryString["nUrl"];
-        if (nurl != null)
-        {
-            lbnav.Text = "<li><a href=\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li> <li>" + ModControl.GetName_From_Code(nurl) + "</li>";
-        }
-        else
-        {
-            lbnav.Text = "<li><a href =\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li><li>  " + ModControl.GetName_From_Code(url) + "</li>";
-        }
+        Control _objControl = LoadControl("/ucontrols/subcontrol/ProfileSidebar.ascx");
+        sidebar.Controls.Add(_objControl);
     }
 }

@@ -27,6 +27,8 @@ public partial class ucontrols_include_Checkin : System.Web.UI.UserControl
         {
             lbnav.Text = "<li><a href =\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li><li>  " + ModControl.GetName_From_Code(url) + "</li>";
         }
+        Control _objControl = LoadControl("/ucontrols/subcontrol/ProfileSidebar.ascx");
+        sidebar.Controls.Add(_objControl);
     }
 
     protected void Unnamed_Click(object sender, EventArgs e)

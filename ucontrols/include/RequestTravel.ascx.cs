@@ -67,6 +67,7 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
     }
     protected string LoadRequestTravel()
     {
+        if (SessionUtil.GetValue("UserID") == "") return "";
         StringBuilder str = new StringBuilder();
         int memID = int.Parse(SessionUtil.GetValue("UserID"));
         string sql = "SELECT Diemdi, Diemden FROM tbl_User m join User_NhaXe un on m.User_ID=un.UserID join Nhaxe nx on nx.ID=un.NhaxeId join Xe xe on xe.Nhaxe=nx.ID join ChuyenXe cx on cx.MaXe=xe.MaXe WHERE m.User_ID="+memID;
@@ -80,12 +81,15 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
             var i = 1;
             foreach (var item2 in rq)
             {
-
+                str.Append("<tr>");
                 str.Append("<td>" +i+ "</td>");
+                str.Append("<td>" + diemdi + "</td>");
+                str.Append("<td>" + diemden + "</td>");
                 str.Append("<td>" + item2.Sdt + "</td>");
                 str.Append("<td>" + item2.StartDate.Value.ToString("dd/MM/yyyy") + "</td>");
                 str.Append("<td>" + item2.StartTime.Value.ToString("hh:mm") + "</td>");
                 str.Append("<td>" + item2.More + "</td>");
+                str.Append("</tr>");
                 i++;
             }
         }

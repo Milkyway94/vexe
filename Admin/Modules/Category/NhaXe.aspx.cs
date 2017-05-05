@@ -12,13 +12,15 @@ using System.Data;
 using System.ComponentModel;
 using System.IO;
 using SMAC;
+using System.Drawing;
 
 public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
 {
     private static NhaxeRepository nhaxeRepo = new NhaxeRepository();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        string sql = "SELECT matinh as id, tentinh as text from TinhThanh";
+        Value.BindToDropdown(Tinh, UpdateData.UpdateBySql(sql).Tables[0]);
     }
     protected static void ExportTableToExcel(object dt)
     {
@@ -75,7 +77,7 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
         }
         return table;
     }
-    
+
     [WebMethod]
     public static string GetAllNhaXe()
     {
@@ -94,8 +96,8 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
             Nguoidaidien = Nguoidaidien,
             Gioithieuchitiet = Gioithieuchitiet,
             Gioithieungan = Gioithieungan,
-            Anh= Anh,
-            Tinh=Tinh
+            Anh = Anh,
+            Tinh = Tinh
         });
         nhaxeRepo.Save();
         return nx;
@@ -134,5 +136,65 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
         var obj = JsonConvert.DeserializeObject(nhaxes);
         ExportTableToExcel(obj);
         return nhaxes;
+    }
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        vexedtEntities context = new vexedtEntities();
+        try
+        {
+            var nx = nhaxeRepo.Add(new NhaXe
+            {
+                Tennhaxe = Tennhaxe.Text,
+                Sodienthoai = Sodienthoai.Text,
+                Trusochinh = Trusochinh.Text,
+                Soluongxe = int.Parse(Soluongxe.Text),
+                Nguoidaidien = Nguoidaidien.Text,
+                Gioithieuchitiet = Gioithieuchitiet.Text,
+                Gioithieungan = Gioithieungan.Text,
+                Anh = txtImg.Text,
+                Tinh = int.Parse(Tinh.SelectedValue)
+            });
+            nhaxeRepo.Save();
+            Tennhaxe.Text = "";
+            Sodienthoai.Text = "";
+            Trusochinh.Text = "";
+            Soluongxe.Text = "";
+            Nguoidaidien.Text = "";
+            Gioithieuchitiet.Text = "";
+            Gioithieungan.Text = "";
+            txtImg.Text = "";
+            catimg.Visible = false;
+            Tinh.Items[0].Selected = true;
+            MSG.Text = string.Format(ErrorMessage.Success, "Thêm nhà xe " + Tennhaxe.Text);
+            MSG.ForeColor = Color.Green;
+        }
+        catch (Exception ex)
+        {
+            MSG.ForeColor = Color.Green;
+            MSG.Text = string.Format(ErrorMessage.Fail, "Thêm nhà xe");
+            throw new Exception(ErrorMessage.UnknowError + ":" + ex.Message);
+        }
+    }
+
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        var nx = nhaxeRepo.Find(int.Parse(ID.Text));
+        vexedtEntities context = new vexedtEntities();
+        if (nx != null)
+        {
+            nx.Tennhaxe = Tennhaxe.Text;
+            nx.Sodienthoai = Sodienthoai.Text;
+            nx.Trusochinh = Trusochinh.Text;
+            nx.Soluongxe = int.Parse(Soluongxe.Text);
+            nx.Nguoidaidien = Nguoidaidien.Text;
+            nx.Gioithieuchitiet = Gioithieuchitiet.Text;
+            nx.Gioithieungan = Gioithieungan.Text;
+            nx.Anh = txtImg.Text;
+            nx.Tinh = int.Parse(Tinh.SelectedValue);
+        }
+        nhaxeRepo.Save();
+        MSG.Text = string.Format(ErrorMessage.Success, "Sửa nhà xe " + Tennhaxe.Text);
+        MSG.ForeColor = Color.Green;
     }
 }

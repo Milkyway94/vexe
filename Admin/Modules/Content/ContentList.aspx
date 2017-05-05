@@ -101,7 +101,7 @@
 							CommandName="Order01"><i class="fa fa-save"></i>Vị trí</asp:LinkButton>
 					</HeaderTemplate>
 					<ItemTemplate>
-						<asp:TextBox id="txtOrder01" runat="server" Width="34px"></asp:TextBox>
+						<asp:TextBox id="txtOrder01" TextMode="Number" runat="server" Width="34px"></asp:TextBox>
                         &nbsp;
 					</ItemTemplate>
 				</asp:TemplateField>

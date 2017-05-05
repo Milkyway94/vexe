@@ -1,23 +1,20 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Profile_Info.ascx.cs" Inherits="ucontrols_include_Profile_Info" %>
 <%@ Register Src="~/ucontrols/subcontrol/ProfileSidebar.ascx" TagPrefix="uc1" TagName="ProfileSidebar" %>
+<%@ Register Src="~/ucontrols/subcontrol/Breadcrumb.ascx" TagPrefix="uc1" TagName="Breadcrumb" %>
 
-<div class="container content">
-    <div class="row">
-        <ul class="uk-breadcrumb hi-padding">
-            <asp:Literal ID="lbnav" runat="server" Text=""></asp:Literal>
-        </ul>
-    </div>
+<div class="container">
+    <uc1:Breadcrumb runat="server" ID="Breadcrumb" />
     <div class="row">
         <div class="col-sm-9 profile-main">
-            <h1 class="heading-title">Thông tin tài khoản</h1>
-            <div class="dvinfo">
-                <asp:Literal Text="" ID="ltrError" runat="server" />
+            <h3 class="title-page">Thông tin tài khoản</h3>
+            <asp:Literal Text="" ID="ltrError" runat="server" />
+            <div class="dvinfo" runat="server" id="mainarea">
                 <div class="row">
                     <div class="col-sm-2">
                         <img src="<%=string.IsNullOrEmpty(member.Member_Avarta)?"/resources/img/icon/images.jpg":member.Member_Avarta %>" alt="<%=member.Member_Name %>" />
                     </div>
                     <div class="col-sm-10">
-                        <div class="row">
+                        <div class="row" id="row-profile">
                             <div class="col-sm-12">
                                 <h3 class="t-title"><%=member.Member_Email %></h3>
                             </div>
@@ -61,6 +58,20 @@
                                         <%=member.Member_Phone %>
                                     </td>
                                 </tr>
+                                 <tr>
+                                    <td>Tỉnh
+                                    </td>
+                                    <td class="text-bold">
+                                        <%=member.Member_Tinh.HasValue? new QCMS_BUSSINESS.Repositories.ProvinceRepository().Find(member.Member_Tinh.Value).TenTinh:"" %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Quận/Huyện
+                                    </td>
+                                    <td class="text-bold">
+                                        <%=member.Member_QuanHuyen.HasValue? new QCMS_BUSSINESS.Repositories.DistrictRepository().Find(member.Member_QuanHuyen.Value).TenHuyen: ""%>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>Địa chỉ
                                     </td>
@@ -75,8 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <uc1:ProfileSidebar runat="server" ID="ProfileSidebar" />
+        <div class="col-sm-3" runat="server" id="sidebar">
         </div>
     </div>
 </div>

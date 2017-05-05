@@ -25,11 +25,20 @@
             </div>
             <div class="form-group">
                 <label>Biển số</label>
-                <asp:TextBox runat="server" ID="txtBienSo" CssClass="form-control" placeholder="Nhập biển số" required></asp:TextBox>
+                <asp:TextBox runat="server" ClientIDMode="Static" ID="txtBienSo" CssClass="form-control" placeholder="Nhập biển số" required></asp:TextBox>
+                <asp:RegularExpressionValidator runat="server"
+                    ControlToValidate="txtBienSo"
+                    ErrorMessage="Biển số không hợp lệ."
+                    ValidationExpression="[a-zA-Z0-9 -]{1,20}"
+                    SetFocusOnError="true" />
             </div>
             <div class="form-group">
                 <label>Tên hiển thị</label>
-                <asp:TextBox runat="server" ID="txtTenXe" CssClass="form-control" placeholder="Nhập tên hiển thị" required></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtTenXe" CssClass="form-control" MaxLength="50" placeholder="Nhập tên hiển thị" required></asp:TextBox>
+                <asp:RegularExpressionValidator runat="server" Display="Dynamic"
+                    ControlToValidate="txtTenXe"
+                    ErrorMessage="Tên hiển thị chỉ tử 3-50 ký tự."
+                    ValidationExpression="[\s\S]{3,50}" />
             </div>
             <div class="form-group">
                 <label>Nhà xe</label>
@@ -41,20 +50,21 @@
             </div>
             <div class="form-group">
                 <label>Số chỗ</label>
-                <asp:TextBox runat="server" ID="txtSoGhe" CssClass="form-control" TextMode="Number" MaxLength="3" />
+                <asp:TextBox runat="server" ID="txtSoGhe" Text="0" CssClass="form-control" TextMode="Number" MaxLength="3" />
+                <asp:RangeValidator runat="server" Type="Integer"
+                    MinimumValue="1" MaximumValue="999" ControlToValidate="txtSoGhe"
+                    ErrorMessage="Số chỗ chỉ từ 1-999" />
             </div>
             <div class="form-group">
-                <label>Ảnh</label>
-                <div class="row">
-                    <div class="col-sm-10 col-md-10 col-xs-10">
-                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control" ID="txtAvartar" MaxLength="512" />
-                    </div>
-                    <div class="col-sm-2 col-md-2 col-xs-2">
-                        <div class="input-group">
-                            <button class="btn btn-success btn-flat" onclick="BrowseServer('txtAvartar');">Chọn ảnh</button>
-                        </div>
-                    </div>
-                </div>
+                <label>Ảnh(*)</label>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <asp:TextBox runat="server" ClientIDMode="Static" ID="txtAvartar" class="form-control" required /></td>
+                        <td>
+                            <input id="browseServer" class="btn btn-warning" onclick="BrowseServer('txtAvartar');" type="button" value="Tải ảnh" /></td>
+                    </tr>
+                </table>
             </div>
             <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-3">

@@ -1,4 +1,6 @@
-﻿using SMAC;
+﻿using QCMS_BUSSINESS;
+using QCMS_BUSSINESS.Repositories;
+using SMAC;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,48 +36,30 @@ public partial class ucontrols_include_LoginMember : System.Web.UI.UserControl
         }
     }
 
-    protected string _Replate(string str)
-    {
-        str = str.Replace("'", "");
-        str = str.Replace("*", "");
-        str = str.Replace(";", "");
-        str = str.Replace("-", "");
-        str = str.Replace("~", "");
-        str = str.Replace(")", "");
-        str = str.Replace("(", "");
-        str = str.Replace("]", "");
-        str = str.Replace("[", "");
-        str = str.Replace("@", "");
-        str = str.Replace("%", "");
-        str = str.Replace("<", "");
-        str = str.Replace(">", "");
-        return str.ToString();
-    }
     protected void btLogin_Click(object sender, EventArgs e)
     {
         string returnUrl = HttpUtility.UrlDecode(Request.QueryString["returnUrl"]);
 
-        string pass = ApplicationUtil.PasswordEncrypt(_Replate(txtPassword.Text));
-        string sql = "SELECT * FROM tbl_Member WHERE Member_Username='" + _Replate(txtUsername.Text) + "' OR Member_Phone='" + _Replate(txtUsername.Text) + "' OR Member_Email='" + _Replate(txtUsername.Text) + "'";
-        DataSet dsUser = UpdateData.UpdateBySql(sql);
-        DataRowCollection rows = dsUser.Tables[0].Rows;
-        if (rows.Count >= 1)
+        string pass = ApplicationUtil.PasswordEncrypt(txtPassword.Text);
+        var members = new MemberRepository().SearchFor(o => o.Member_Username == txtUsername.Text || o.Member_Email == txtUsername.Text || o.Member_Phone == txtUsername.Text);
+        if (members.Count() > 0)
         {
-            if (rows[0]["Member_Password"].ToString() == pass)
+            tbl_Member member = members.SingleOrDefault();
+            if (member.Member_Password == pass)
             {
-                if (Convert.ToBoolean(rows[0]["Member_Status"]) == false)
+                if (member.Member_Status == false)
                 {
                     Value.ShowMessage(ltrLoginMessage, ErrorMessage.AccountLocked, AlertType.ERROR);
                     txtUsername.Focus();
                 }
                 else
                 {
-                    Session["MemberID"] = rows[0]["Member_ID"].ToString();
-                    Session["Member_Role"] = rows[0]["Member_Role"].ToString();
-                    Session["Member_Username"] = rows[0]["Member_Username"].ToString();
-                    Session["Member_Email"] = rows[0]["Member_Email"].ToString();
-                    Session["Member_Avarta"] = rows[0]["Member_Avarta"].ToString();
-                    Session["Member_Name"] = rows[0]["Member_Name"].ToString();
+                    Session["MemberID"] = member.Member_ID;
+                    Session["Member_Role"] = member.Member_Role;
+                    Session["Member_Username"] = member.Member_Username;
+                    Session["Member_Email"] = member.Member_Email;
+                    Session["Member_Avarta"] = member.Member_Avarta;
+                    Session["Member_Name"] = member.Member_Name;
                     if (ckRemember.Checked)
                     {
                         Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(30);

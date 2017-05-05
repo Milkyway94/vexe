@@ -16,10 +16,9 @@
                 <asp:Literal Text="" ID="ltrSupportMenu" runat="server" />
             </div>
             <div class="col-sm-3 col-xs-12 menu-title">
-                <h2>ĐẶT VÉ NGAY ĐỂ NHẬN ƯU ĐÃI</h2>
-                <br />
+                <h2>ĐẶT VÉ NGAY ĐỂ NHẬN ƯU ĐÃI</h2> 
                 <a href="#" class="btn btn-datve btn-block btn-muave">ĐẶT VÉ</a>
-                <h2>Tìm chúng tôi trên mạng xã hội</h2>
+                <p class="find-title">Tìm chúng tôi trên mạng xã hội</p>
                 <asp:Literal Text="" ID="ltrSocialIcon" runat="server" />
             </div>
         </div>

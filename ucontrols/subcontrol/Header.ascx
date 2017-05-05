@@ -18,10 +18,10 @@
                     <%if (Session["MemberID"] != null)
                         {%>
                     <li>
-                        <img src="<%=string.IsNullOrEmpty(Session["Member_Avarta"].ToString()) ? "../../resources/img/icon/images.jpg" : Session["Member_Avarta"] %>" class="img-responsive img-circle avartar" />
+                        <img src="<% string str1 = string.IsNullOrEmpty(SMAC.SessionUtil.GetValue("Member_Avarta")) ? "../../resources/img/icon/images.jpg" : SMAC.SessionUtil.GetValue("Member_Avarta"); Response.Write(str1); %>" class="img-responsive img-circle avartar" />
                     </li>
                     <li>
-                        <span class="color-white pull-left"><%=!string.IsNullOrEmpty(Session["Member_Name"].ToString()) ? Session["Member_Name"] : Session["Member_Email"] %></span>
+                        <span class="color-white pull-left"><%string ss=!string.IsNullOrEmpty(SMAC.SessionUtil.GetValue("Member_Name")) ? SMAC.SessionUtil.GetValue("Member_Name") : SMAC.SessionUtil.GetValue("Member_Email"); Response.Write(ss); %></span>
                     </li>
                     <li>
                         <div class="pull-right dropdown">
@@ -29,7 +29,7 @@
                                 <span class="fa fa-bars"></span>
                             </a>
                             <ul class="dropdown-menu dr-menu">
-                                <%=LoadKhachMenu() %>
+                                <% Response.Write(LoadKhachMenu()); %>
                                 <li><a href="/login.htm?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
                             </ul>
                         </div>

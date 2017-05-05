@@ -117,20 +117,25 @@
 </div>
 <div class="popular">
     <div class="container content-popular">
-        <h1 class="heading-title">Danh sách khách hàng tạo yêu cầu đi tuyến </h1>
+        <h1 class="heading-title">Danh sách khách hàng tạo yêu cầu đi tuyến mà bạn có</h1>
         <p class="text-danger text-center text-18 text-bold text-italic">Lái xe lưu ý khách hàng đồng ý lên xe hãy báo khách hàng  đăng nhập lại hệ thống để Hủy yêu cầu</p>
-        <table class="tbYeucau">
-            <tr>
-                <th>STT</th>
-                <th>Số điện thoại</th>
-                 <th>Ngày/tháng</th>
-                <th>Giờ</th>
-                <th>Yêu cầu khác</th>
-            </tr>
-            <tr>
-                <asp:Literal Text="" ID="ltrListRequest" runat="server" />
-            </tr>
-        </table>
+        <div class="table-responsive">
+            <table class="tbYeucau">
+                <tr>
+                    <th>STT</th>
+                    <th>Đi từ</th>
+                    <th>Đến</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày/tháng</th>
+                    <th>Giờ</th>
+                    <th>Yêu cầu khác</th>
+                </tr>
+                <tr>
+                    <asp:Literal Text="" ID="ltrListRequest" runat="server" />
+                </tr>
+            </table>
+        </div>
+
     </div>
     <div class="container content-thanhtoan">
         <div class="thanhtoan">
@@ -155,7 +160,7 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>
@@ -167,13 +172,7 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
-                <a href="#">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe">Hà Nội</span>
-                </a>
-            </li>
-           <li class="xe">
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>
@@ -185,7 +184,7 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>
@@ -197,7 +196,13 @@
                     <span class="tenxe">Hà Nội</span>
                 </a>
             </li>
-           <li class="xe">
+            <li class="xe">
+                <a href="#">
+                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
+                    <span class="tenxe">Hà Nội</span>
+                </a>
+            </li>
+            <li class="xe">
                 <a href="#">
                     <img src="/resources/img/oto.png" alt="Tuyến đường" />
                     <span class="tenxe">Hà Nội</span>

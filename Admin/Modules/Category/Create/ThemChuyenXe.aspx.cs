@@ -42,7 +42,6 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
                 txtNgaydi.Text = cx.Ngaydi.Value.ToString("yyyy-MM-dd");
                 txtThoigiandiG.Text = cx.Thoigiandukien.Value.ToString("hh");
                 txtThoigiandiP.Text = cx.Thoigiandukien.Value.ToString("mm");
-                txtTongsove.Text = cx.TongVe.ToString();
                 txtVethuong.Text = cx.TongSoVeThuong.ToString();
                 txtVeVip.Text = cx.TongSoVeVIP.ToString();
                 for (int i = 0; i < ddlDiTinh.Items.Count; i++)
@@ -121,8 +120,8 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         int DenTinh = int.Parse(ddlDenTinh.SelectedValue);
         int DenHuyen = int.Parse(ddlDenHuyen.SelectedValue);
         int TongSoVeThuong = int.Parse(txtVethuong.Text);
-        int TongVe = int.Parse(txtTongsove.Text);
         int TongSoVeVIP = int.Parse(txtVeVip.Text);
+        int TongVe = TongSoVeThuong+TongSoVeVIP;
         double GiaThuong = double.Parse(txtGiaThuong.Text);
         double GiaVIP = double.Parse(txtGiaVip.Text);
         string LoTrinh = txtLotrinh.Text;

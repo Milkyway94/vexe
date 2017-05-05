@@ -17,7 +17,8 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
         <div class="modal-header">
-            <h2 class="modal-title text-bold"><asp:Label runat="server" ID="lbTitle"></asp:Label></h2>
+            <h2 class="modal-title text-bold">
+                <asp:Label runat="server" ID="lbTitle"></asp:Label></h2>
         </div>
         <div class="modal-body">
             <div class="form-group">
@@ -41,7 +42,7 @@
                     <asp:TextBox runat="server" ID="txtNgaydi" ClientIDMode="Static" TextMode="Date" CssClass="form-control" placeholder="Chọn ngày đi" required></asp:TextBox>
                     <span class="input-group-addon" onclick="$('#txtNgaydi').focus().click()"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
-                <asp:RequiredFieldValidator ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtNgaydi" runat="server" />
+                <asp:RequiredFieldValidator SetFocusOnError="true" ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtNgaydi" runat="server" />
             </div>
             <div class="form-group">
                 <label>Chọn giờ đi</label>
@@ -49,7 +50,7 @@
                     <asp:TextBox runat="server" TextMode="Time" ID="txtGiodi" ClientIDMode="Static" CssClass="form-control input-small" placeholder="Chọn giờ đi" required></asp:TextBox>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                 </div>
-                <asp:RequiredFieldValidator ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtGiodi" runat="server" />
+                <asp:RequiredFieldValidator SetFocusOnError="true" ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtGiodi" runat="server" />
             </div>
             <div class="form-group">
                 <label>Nhập thời gian đi</label>
@@ -59,18 +60,20 @@
                             <asp:TextBox runat="server" ID="txtThoigiandiG" TextMode="Number" MaxLength="3" CssClass="form-control" placeholder="Nhập số Giờ" required></asp:TextBox>
                             <span class="input-group-addon">Giờ</span>
                         </div>
-                        <asp:RequiredFieldValidator ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtThoigiandiG" runat="server" />
+                        <asp:RequiredFieldValidator SetFocusOnError="true" ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtThoigiandiG" runat="server" />
                         <br />
-                        <asp:RangeValidator ForeColor="Red" ErrorMessage="Giá trị chỉ nhận từ 00 đến 999 giờ" ControlToValidate="txtThoigiandiG" MaximumValue="999" MinimumValue="0" runat="server" />
+                        <asp:RangeValidator ForeColor="Red" SetFocusOnError="true" ErrorMessage="Giá trị chỉ nhận từ 00 đến 999 giờ" ControlToValidate="txtThoigiandiG" MaximumValue="999" MinimumValue="0" runat="server" />
                     </div>
                     <div class="col-sm-6 col-md-6 col-xs-6">
                         <div class="input-group">
                             <asp:TextBox runat="server" ID="txtThoigiandiP" TextMode="Number" MaxLength="2" CssClass="form-control" placeholder="Nhập số phút" required></asp:TextBox>
                             <span class="input-group-addon">Phút</span>
                         </div>
-                        <asp:RequiredFieldValidator ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtThoigiandiP" runat="server" />
+                        <asp:RequiredFieldValidator SetFocusOnError="true" ErrorMessage="Bạn phải nhập trường này" ControlToValidate="txtThoigiandiP" runat="server" />
                         <br />
-                        <asp:RangeValidator ErrorMessage="Giá trị chỉ nhận từ 0 đến 59 phút" MinimumValue="0" MaximumValue="59" ControlToValidate="txtThoigiandiP" runat="server" />
+                        <asp:RangeValidator runat="server" Type="Integer"
+                            MinimumValue="1" MaximumValue="59" ControlToValidate="txtThoigiandiP"
+                            ErrorMessage="Số chỗ chỉ từ 1-59" SetFocusOnError="true" />
                     </div>
                 </div>
 
@@ -116,29 +119,45 @@
                             </div>
 
                         </div>
-                        <div class="form-group">
+                        <%--<div class="form-group">
                             <label>Tổng số vé</label>
                             <asp:TextBox runat="server" ID="txtTongsove" TextMode="Number" CssClass="form-control" placeholder="Nhập tổng số vé" required></asp:TextBox>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label>Số vé thường</label>
                             <asp:TextBox runat="server" ID="txtVethuong" TextMode="Number" CssClass="form-control" placeholder="Nhập số vé thường" required></asp:TextBox>
+                            <asp:RangeValidator runat="server" Type="Integer"
+                                MinimumValue="1" MaximumValue="999" ControlToValidate="txtVethuong"
+                                ErrorMessage="Chỉ được nhập từ 1-999" SetFocusOnError="true" />
+
                         </div>
                         <div class="form-group">
                             <label>Số vé VIP</label>
                             <asp:TextBox runat="server" ID="txtVeVip" TextMode="Number" CssClass="form-control" placeholder="Nhập số vé Vip" required></asp:TextBox>
+                            <asp:RangeValidator runat="server" Type="Integer"
+                                MinimumValue="1" MaximumValue="999" ControlToValidate="txtVeVip"
+                                ErrorMessage="Chỉ được nhập từ 1-999" SetFocusOnError="true" />
                         </div>
                         <div class="form-group">
                             <label>Giá vé VIP</label>
                             <asp:TextBox runat="server" ID="txtGiaVip" TextMode="Number" CssClass="form-control" placeholder="Nhập giá vé Vip" required></asp:TextBox>
+                            <asp:RangeValidator runat="server" Type="Double"
+                                MinimumValue="1" MaximumValue="999999999999" ControlToValidate="txtVeVip"
+                                ErrorMessage="Chỉ được nhập từ 1-999999999999" SetFocusOnError="true" />
                         </div>
                         <div class="form-group">
                             <label>Giá vé Thường</label>
                             <asp:TextBox runat="server" ID="txtGiaThuong" TextMode="Number" CssClass="form-control" placeholder="Nhập giá vé thường" required></asp:TextBox>
+                            <asp:RangeValidator runat="server" Type="Double"
+                                MinimumValue="1" MaximumValue="999999999999" ControlToValidate="txtGiaThuong"
+                                ErrorMessage="Chỉ được nhập từ 1-999999999999" SetFocusOnError="true" />
                         </div>
                         <div class="form-group">
                             <label>Khuyến Mãi(%)</label>
                             <asp:TextBox runat="server" ID="txtKhuyenMai" TextMode="Number" CssClass="form-control" placeholder="Nhập giá khuyến mãi"></asp:TextBox>
+                            <asp:RangeValidator runat="server" Type="Double"
+                                MinimumValue="0" MaximumValue="100" ControlToValidate="txtKhuyenMai"
+                                ErrorMessage="Chỉ được nhập từ 0-100" SetFocusOnError="true" />
                         </div>
                         <div class="form-group">
                             <label>Lộ trình chuyến</label>

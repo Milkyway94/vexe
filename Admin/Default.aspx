@@ -43,14 +43,14 @@
                     <div style="padding: 5px;">
                         <a href="tel:0988945306" class="as"><i class="fa fa-question-circle-o fa-lg"></i>Bạn muốn hỗ trợ?</a>
                     </div>
-                    <div class="version">
+                   <%-- <div class="version">
                         <p class="text">
                             ©2016 GoMAC Software Solutions<br />
                             Website: <a class="as" style="color: Green;" href="http://www.Gosmac.vn" target="_blank">http://www.Gosmac.vn</a><br />
                             Email: info@gosmac.vn<br />
                             HotLine: <a href="tel:0988945306" class="as"><i class="fa fa-phone fa-lg"></i>0988945306</a>
                         </p>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>

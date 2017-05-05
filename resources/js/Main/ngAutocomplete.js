@@ -13,6 +13,7 @@ app.directive('autocomplete', function () {
             autocompleteRequired: '@',
             noAutoSort: '=noAutoSort',
             name: '@',
+            required: '@',
             placeholder: '@',
             inputclass: '@',
         },
@@ -81,7 +82,7 @@ app.directive('autocomplete', function () {
             };
 
             $scope.preSelectOff = this.preSelectOff;
-
+            $scope.Err = "Không có kết quả nào phù hợp";
             // selecting a suggestion with RIGHT ARROW or ENTER
             $scope.select = function (suggestion) {
                 if (suggestion) {
@@ -266,8 +267,9 @@ app.directive('autocomplete', function () {
             tabindex="{{ attrs.tabindex }}"\
             id="{{ attrs.inputid }}"\
             name="{{name}}"\
-            ng-required="{{ autocompleteRequired }}"\
-            required="{{ autocompleteRequired }}"/>\
+            ng-required="true"\
+            required="required" />\
+            <i class="glyphicon glyphicon-menu-down"></i>\
           <ul ng-show="completing">\
             <li class="md-title">{{suggestions[0].text}}</li>\
             <li\
@@ -279,6 +281,7 @@ app.directive('autocomplete', function () {
               ng-click="select(suggestion)"\
               ng-bind-html="suggestion | highlight:searchParam"></li>\
             <li class="md-title">{{suggestions[1].text}}</li>\
+            <li class="md-title ng-binding">{{Err}}</li>\
             <li\
               suggestion\
               ng-repeat="suggestion in suggestions[1].data | filter:searchParam | orderBy:\'toString()\' track by $index"\
@@ -290,6 +293,7 @@ app.directive('autocomplete', function () {
           </ul>\
           <ul ng-show="completing">\
             <li class="md-title" ng-show="suggestions[0].data.length>0">{{suggestions[0].text}}</li>\
+            <li class="text-danger" ng-show="suggestions[0].data.length==0">{{Err}}</li>\
             <li\
               suggestion\
               ng-repeat="suggestion in suggestions[0].data | filter:searchFilter track by $index"\
@@ -299,6 +303,7 @@ app.directive('autocomplete', function () {
               ng-click="select(suggestion)"\
               ng-bind-html="suggestion | highlight:searchParam"></li>\
             <li class="md-title" ng-show="suggestions[1].data.length>0">{{suggestions[1].text}}</li>\
+            <li class="text-danger" ng-show="suggestions[1].data.length==0">{{Err}}</li>\
             <li\
               suggestion\
               ng-repeat="suggestion in suggestions[1].data | filter:searchFilter track by $index"\
@@ -317,8 +322,8 @@ app.filter('highlight', ['$sce', function ($sce) {
         if (typeof input === 'function') return '';
         if (searchParam) {
             var words = '(' +
-                  searchParam.split(/\ /).join(' |') + '|' +
-                  searchParam.split(/\ /).join('|') +
+                searchParam.split(/\ /).join(' |') + '|' +
+                searchParam.split(/\ /).join('|') +
                 ')',
                 exp = new RegExp(words, 'ui');
             if (words.length) {

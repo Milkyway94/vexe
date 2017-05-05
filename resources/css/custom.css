@@ -21,7 +21,7 @@
 .navbar-inverse .navbar-nav > li > a {
     color: #62615f;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -66,7 +66,6 @@
 
     .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 40px;
-        text-align: center;
         border: none;
     }
 
@@ -162,9 +161,11 @@ h1, .uk-h1, h2, .uk-h2, h3, .uk-h3, h4, .uk-h4, h5, .uk-h5, h6, .uk-h6 {
 }
 
 .kiemtrave h3, .dsnhaxe h3 {
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
     color: #007000;
+    font-size: 28px;
+    margin-bottom: 0px;
 }
 
 .tbl-info tr td:first-child {
@@ -237,9 +238,24 @@ ul.lstSidebar li a.active, ul.lstSidebar li a:hover {
 
 .hi-padding {
     margin-bottom: 23px;
+    margin-top: 25px;
 }
-
-.lst-tdn ul.lstSidebar li a.active, .lst-tdn ul.lstSidebar li a:hover {
+.btnarea {
+    padding-top: 35px;
+}
+.pb100 {
+    margin-bottom: 100px;
+}.btn-dk {
+    padding-left: 100px;
+    padding-right: 100px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.txtdk {
+    background: #f7f7f7 !important;
+    height: 42px;
+}.lst-tdn ul.lstSidebar li a.active, .lst-tdn ul.lstSidebar li a:hover {
     background: none;
 }
 
@@ -580,4 +596,50 @@ p {
 }
 #ticket {
     margin: 20px 0 0 0 !important;
+}
+.uk-breadcrumb > :nth-child(n+2):not(.uk-first-column)::before {
+    content: ">";
+    display: inline-block;
+    margin: 0 10px;
+    color: #999;
+}
+.txtnx{
+    padding-top: 15px;
+}
+.slGiodi .select2-container--default .select2-selection--single{
+    background: none !important;
+    border: 1px solid #cdcdcd;
+    border-radius: 0 !important;
+    height: 34px;
+}
+    .slGiodi .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 34px;
+    }
+.ui-autocomplete-category{
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    padding-left: 15px;
+}
+.ui-autocomplete{
+   height: 300px;
+   width: 382px !important;
+   overflow-y: auto;
+   overflow-x: hidden;
+}
+.ui-widget-content a{
+    padding-left: 25px;
+}
+ul.ui-autocomplete{
+    z-index: 999999;
+}
+#row-1 .datve {
+    padding-top: 15px;
+    padding-bottom: 8px;
+}
+.diadiem{
+    margin-right: 5px;
+}
+.select2-selection__arrow{
+    display: none;
 }

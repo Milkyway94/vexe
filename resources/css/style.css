@@ -35,9 +35,9 @@ body {
         border-top: none !important;
     }
 
-    .tbl-detail > tbody > tr > td:first-child {
-       font-weight: bold !important;
-    }
+        .tbl-detail > tbody > tr > td:first-child {
+            font-weight: bold !important;
+        }
 
 .pt20 {
     margin-top: 20px;
@@ -108,6 +108,14 @@ h1.heading-title {
     font-weight: bold !important;
 }
 
+.profile-main {
+    margin-bottom: 100px;
+}
+
+#row-profile .col-sm-12 {
+    padding-bottom: 10px;
+}
+
 .profile-info {
     margin-top: 60px;
     background: #f2f2f2;
@@ -132,8 +140,11 @@ h1.heading-title {
             border-bottom: 1px solid #cdcdcd;
             padding-bottom: 10px;
             font-size: 16px;
+            margin-left: 15px;
         }
-
+            .profile-info ul > li.active > a, .profile-info ul > li.active > i{
+                color: #007000;
+            }
             .profile-info ul > li:last-child {
                 list-style: none;
                 border-bottom: none;
@@ -190,12 +201,17 @@ h1.heading-title {
     margin-top: 30px;
 }
 
-    #frmUpdateInfo input[type=text], #frmUpdateInfo textarea {
+    #frmUpdateInfo input[type=text], #frmUpdateInfo textarea, #frmUpdateInfo span {
         background: #f7f7f7 !important;
         font-weight: bold;
     }
 
-#tbl_info tr {
+        span.select2-selection {
+            border: 1px solid #ccc !important;
+        }
+#frmUpdateInfo .select2-selection__rendered{
+    height: 32px;
+} #tbl_info tr {
     padding: 15px;
 }
 
@@ -231,7 +247,7 @@ h1.heading-title {
 }
 
 #r1 {
-    padding-top: 25px;
+    padding-top: 0px;
 }
 
 .disabled {
@@ -271,10 +287,12 @@ header {
 
     .top-menu ul li a {
         color: white;
+        font-size: 13px;
     }
 
-    .top-menu ul li>i {
+    .top-menu ul li > i {
         color: white;
+        font-size: 13px;
     }
 
     .top-menu ul li:last-child a {
@@ -534,11 +552,25 @@ header {
     padding: 0px 25px;
 }
 
-#frmSearch1 h2 {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin: 0 !important;
+#frmSearch1 {
+    padding: 10px 10px 0 10px;
 }
+
+    #frmSearch1 h2 {
+        padding-top: 15px;
+        padding-bottom: 20px;
+        margin: 0 !important;
+    }
+
+.autocomplete {
+    position: relative;
+}
+
+    .autocomplete  .icon-input {
+        position: absolute;
+        right: 5%;
+        top: 30%;
+    }
 
 .message {
     padding-bottom: 50px;
@@ -549,6 +581,7 @@ header {
 .ipt-search input {
     text-align: left;
     padding-left: 25px;
+    padding-right: 25px;
     background: #fff !important;
     width: 190px !important;
 }
@@ -600,17 +633,28 @@ p.credit {
     padding-top: 30px;
 }
 
+.col-3 .input-icon {
+    position: absolute;
+    top: 25%;
+    right: 25%;
+}
+
 .input-icon {
     position: absolute;
     top: 25%;
-    right: 10%;
+    right: 6%;
 }
-
+    .icon-giodi {
+        position: absolute;
+        top: 25%;
+        right:10%;
+    }
 .btn-search {
     background: #007000;
-    color: #fff;
+    color: #FFD700;
     font-size: 16px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
     .btn-search:hover {
@@ -620,6 +664,10 @@ p.credit {
 
 .button-group {
     padding-top: 15px;
+}
+
+.col-1 span {
+    padding-top: 10px;
 }
 
 .wleft {
@@ -663,8 +711,8 @@ p.credit {
 .content-popular > h1 {
     color: #007000;
     text-transform: uppercase;
-    font-size: 24px;
-    margin-top: 30px
+    font-size: 28px;
+    margin-top: 20px
 }
 
 .carousel-control > span {
@@ -687,8 +735,13 @@ p.credit {
 }
 
 .popular {
+    padding: 10px 0px 10px 0px !important;
     border-bottom: 2px solid #f6f5f0;
-    padding: 10px 10px 10px 0px !important;
+}
+
+.popular {
+    padding: 10px 0px 10px 0px !important;
+    border-bottom: 2px solid #f6f5f0;
 }
 
 .gia {
@@ -717,7 +770,7 @@ p.credit {
 }
 
 .content-thanhtoan {
-    padding: 10px 10px 10px 0px;
+    padding: 30px 10px 0px 0px;
 }
 
 .thanhtoan > h3 {
@@ -758,7 +811,7 @@ p.credit {
 }
 
 .content-xe {
-    padding-top: 15px;
+    padding-top: 0px;
     padding-bottom: 30px;
 }
 
@@ -820,10 +873,6 @@ footer > .t2 {
             color: #cdcdcd;
             padding-left: 0 !important;
         }
-
-.ftmenutitle {
-    padding-left: 30px !important;
-}
 
 .btn-muave {
     background: #f9af00;
@@ -1076,6 +1125,11 @@ footer > .t2 {
 .ycdx-sm {
     color: #fff;
     font-style: italic;
+    padding-bottom: 25px;
+}
+
+.desc {
+    margin-bottom: 25px;
 }
 
 .sb-right > h3 {
@@ -1093,28 +1147,33 @@ footer > .t2 {
 }
 
 .sb-right {
-    padding: 10px;
+    padding: 20px;
     text-align: center;
     border: #f27522 1px solid;
 }
 
 #YCModal .modal-dialog {
-    top: 15%;
+    top: 5%;
 }
 
 #YCModal .modal-content {
-    background: #007000;
-    border-radius: 0 !important;
+    background: #dedede;
+    border-radius: 5px !important;
+    border: none !important;
+    padding-bottom: 1px;
 }
 
 #YCModal .modal-header {
     background: #007000;
     border: none !important;
-    padding: 10px;
+}
+
+#YCModal .modal-yc {
+    width: 70%;
 }
 
 #YCModal .modal-title {
-    color: #ffc809;
+    color: #fff;
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
@@ -1123,14 +1182,16 @@ footer > .t2 {
 #YCModal .modal-body {
     background: #fff;
     border: none !important;
-    margin: 3px;
+    margin: 0 5px 5px 5px;
 }
 
 .txtdi {
     width: 100%;
-    border: 1px solid #000;
-    padding-left: 3px;
-    height: 30px;
+    border: 1px solid #cdcdcd;
+    padding-left: 5px;
+    height: 34px;
+    border-radius: 0 !important;
+    background: #fff !important;
 }
 
 #frmYcdx table {
@@ -1144,7 +1205,7 @@ footer > .t2 {
 
         #frmYcdx table tr td:first-child {
             font-weight: bold;
-            font-size: 18px;
+            font-size: 14px;
         }
 
 .tx {
@@ -1157,13 +1218,18 @@ footer > .t2 {
 }
 
     .dsYc > li {
-        font-style: italic;
-        font-size: 16px;
+        font-size: 14px;
         margin-left: 30px;
+        padding-bottom: 10px;
     }
 
 .top-right ul li:first-child a {
     text-decoration: none !important;
+}
+
+.btn-yc {
+    padding: 15px 25px 15px 25px;
+    font-size: 20px;
 }
 
 #ticket {
@@ -1171,15 +1237,26 @@ footer > .t2 {
 }
 
 .lstNhaXe ul li a {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
-    color: black;
+    color: #2e2e2e;
 }
 
-    .lstNhaXe ul li a:hover {
+    .lstNhaXe ul li a > p {
+        padding-top: 15px;
+        color: #2e2e2e;
+    }
+
+    .lstNhaXe ul li a:hover > p {
         color: #007000;
         text-decoration: none !important;
+    }
+
+    .lstNhaXe ul li a:hover > img {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
     }
 
 .navbar-inverse .navbar-nav > li > a {
@@ -1206,12 +1283,51 @@ footer > .t2 {
 .skin img {
     padding-bottom: 30px;
 }
+
 .xe-icon {
     width: 5%;
 }
+
 .ten-xe {
     width: 95%;
-}@media(max-width: 768px) {
+}
+
+.col {
+    float: left;
+    position: relative;
+}
+
+.find-title {
+    font-size: 16px;
+    padding-top: 23px;
+}
+
+.title-page {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #007000;
+}
+
+.uploadfile {
+    opacity: 0;
+    z-index: 99999;
+    position: absolute;
+    top: 3%;
+    left: 2%;
+    height: 34px;
+}
+
+.ck label {
+    padding-left: 5px;
+}
+
+@media(max-width: 768px) {
+    .col-3 .input-icon {
+        position: absolute;
+        top: 25%;
+        right: 6%;
+    }
+
     #YCModal .modal-dialog {
         width: 800px;
     }
@@ -1253,9 +1369,35 @@ footer > .t2 {
     .p15 {
         padding: 15px;
     }
+
+    .col {
+        width: 100%;
+    }
 }
 
 @media (min-width: 768px) {
+    .col-1 {
+        width: 35%;
+    }
+
+    .col-2 {
+        width: 6%;
+    }
+
+    .col-3 {
+        width: 20%;
+        padding-right: 50px;
+    }
+
+    .col-4 {
+        width: 20%;
+        padding-right: 55px;
+    }
+
+    .col-5 {
+        padding-right: 55px;
+    }
+
     .modal-dialog {
         width: 800px;
         margin: 30px auto;

@@ -296,6 +296,8 @@
           <Property Name="Member_Vola" Type="bigint" />
           <Property Name="Member_Role" Type="int" />
           <Property Name="NhaXe" Type="int" />
+          <Property Name="Member_Tinh" Type="int" />
+          <Property Name="Member_QuanHuyen" Type="int" />
         </EntityType>
         <EntityType Name="tbl_Mess">
           <Key>
@@ -1627,14 +1629,14 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           </FunctionImport>
           <FunctionImport Name="SP_TUYENNOIBAT" ReturnType="Collection(lggvn_vexedtModel.SP_TUYENNOIBAT_Result)" />
           <FunctionImport Name="GetCmtOfNhaxe" ReturnType="Collection(lggvn_vexedtModel.GetCmtOfNhaxe_Result)">
-            <Parameter Name="nhaxe" Mode="In" Type="Int32" />
+          <Parameter Name="nhaxe" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_CHECKINTICKET" ReturnType="Collection(lggvn_vexedtModel.SP_CHECKINTICKET_Result)">
             <Parameter Name="sessionId" Mode="In" Type="Int32" />
             <Parameter Name="mave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GETNHAXEBYID" ReturnType="Collection(lggvn_vexedtModel.SP_GETNHAXEBYID_Result)">
-            <Parameter Name="nhaxe" Mode="In" Type="Int32" />
+          <Parameter Name="nhaxe" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SP_GETALLHANGXE_Result">
@@ -2071,6 +2073,8 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <Property Name="NhaXe" Type="Int32" />
           <NavigationProperty Name="tbl_Order" Relationship="lggvn_vexedtModel.FK__tbl_Order__Order__1B9317B3" FromRole="tbl_Member" ToRole="tbl_Order" />
           <NavigationProperty Name="tbl_Order1" Relationship="lggvn_vexedtModel.FK__tbl_Order__Order__55F4C372" FromRole="tbl_Member" ToRole="tbl_Order" />
+          <Property Name="Member_Tinh" Type="Int32" />
+          <Property Name="Member_QuanHuyen" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_Mess">
           <Key>
@@ -3292,6 +3296,8 @@ warning 6013: The table/view 'admin_vexedt.dbo.UtilValue' does not have a primar
           <EntitySetMapping Name="tbl_Member">
             <EntityTypeMapping TypeName="lggvn_vexedtModel.tbl_Member">
               <MappingFragment StoreEntitySet="tbl_Member">
+                <ScalarProperty Name="Member_QuanHuyen" ColumnName="Member_QuanHuyen" />
+                <ScalarProperty Name="Member_Tinh" ColumnName="Member_Tinh" />
                 <ScalarProperty Name="NhaXe" ColumnName="NhaXe" />
                 <ScalarProperty Name="Member_Role" ColumnName="Member_Role" />
                 <ScalarProperty Name="Member_Vola" ColumnName="Member_Vola" />

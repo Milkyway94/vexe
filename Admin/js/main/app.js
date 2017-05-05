@@ -21,11 +21,13 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
         console.log($scope.nhaxes);
     })
     $scope.action = "";
+    $scope.required = true;
     $scope.loading = false;
     $scope.selected = {};
     $scope.OpenUpdateForm = function (act) {
         switch (act) {
             case "add":
+                $scope.act = act;
                 $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp: "SP_GETALLTINH", param: "" }).success(function (data) {
                     $scope.Tinhs = JSON.parse(data.d);
                 })
@@ -39,19 +41,8 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
                 $scope.action = "add";
                 break;
             case "edit":
-                $Service.Api("POST", "/Admin/Default.aspx/Execute", "json", { sp: "SP_GETALLTINH", param: "" }).success(function (data) {
-                    $scope.Tinhs = JSON.parse(data.d);
-                })
-                $("#add-modal").modal({ backdrop: false });
-                $scope.Tennhaxe = $scope.selected.Tennhaxe;
-                $scope.Soluongxe = $scope.selected.Soluongxe;
-                $scope.Trusochinh = $scope.selected.Trusochinh;
-                $scope.Sodienthoai = $scope.selected.Sodienthoai;
-                $scope.Nguoidaidien = $scope.selected.Nguoidaidien;
-                $scope.Gioithieungan = $scope.selected.Gioithieungan;
-                $scope.Gioithieuchitiet = $scope.selected.Gioithieuchitiet;
-                $scope.Anh = $scope.selected.Anh;
-                $scope.action = "edit";
+                $("#edit-frm").prop("src", "/Admin/Modules/Category/Create/Themnhaxe.aspx?id=" + $scope.selected.ID);
+                $("#edit-modal").modal({ backdrop: false });
                 break;
             default:
                 break;
@@ -65,61 +56,68 @@ app.controller("NhaXeController", ['$scope', '$http', '$filter', 'svNhaXe', 'Ser
         $scope.selected = item;
     }
     $scope.Save = function () {
-        $scope.loading = true;
-        if ($scope.action == "add") {
-            console.log($scope.Anh);
-            $Service.Api(
-                "POST",
-                "/Admin/Modules/Category/NhaXe.aspx/CreateNhaXe",
-                "json",
-                { Tennhaxe: $scope.Tennhaxe, Anh: $scope.Anh, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet, Tinh: $scope.Tinh }
-            ).success(function (data) {
-                var rs = data.d;
-                $scope.nhaxes.push({
-                    Tennhaxe: rs.Tennhaxe,
-                    Soluongxe: rs.Soluongxe,
-                    Trusochinh: rs.Trusochinh,
-                    Sodienthoai: rs.Sodienthoai,
-                    Nguoidaidien: $scope.Nguoidaidien,
-                    Gioithieungan: rs.Gioithieungan,
-                    Gioithieuchitiet: rs.Gioithieuchitiet
-                });
-                $("#add-modal").modal('hide');
-                swal(
-                    'Thêm nhà xe thành công!',
-                    '',
-                    'success'
-                )
-                $scope.Tennhaxe = "";
-                $scope.Soluongxe = "";
-                $scope.Trusochinh = "";
-                $scope.Sodienthoai = "";
-                $scope.Nguoidaidien = "";
-                $scope.Gioithieunga = "";
-                $scope.Gioithieuchitiet = "";
-            })
-        }
-        if ($scope.action == "edit") {
-            console.log($scope.Anh);
-            $Service.Api(
-                "POST",
-                "/Admin/Modules/Category/NhaXe.aspx/UpdateNhaXe",
-                "json",
-                { Id: $scope.selected.ID, Anh: $scope.Anh, Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet, Tinh: $scope.Tinh }
-            ).success(function (data) {
-                console.log(data.d);
-                var index = $scope.nhaxes.indexOf($scope.selected);
-                $scope.nhaxes.splice(index, 1);
-                $scope.nhaxes.push(data.d);
-                swal(
-                    'Thành công!',
-                    'Nhà xe bạn sửa đã được lưu lại.',
-                    'success'
-                )
-                $("#add-modal").modal('hide');
-            })
-        }
 
+        $scope.loading = true;
+        if (!($scope.Tennhaxe && $scope.Soluongxe && $scope.Trusochinh && $scope.Nguoidaidien && $scope.Sodienthoai && $scope.Gioithieungan && $scope.Gioithieuchitiet && $scope.Tinh)) {
+            $scope.required = false;
+        }
+        else {
+            if ($scope.action == "add") {
+                console.log($scope.Anh);
+                $Service.Api(
+                    "POST",
+                    "/Admin/Modules/Category/NhaXe.aspx/CreateNhaXe",
+                    "json",
+                    { Tennhaxe: $scope.Tennhaxe, Anh: $scope.Anh, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet, Tinh: $scope.Tinh }
+                ).success(function (data) {
+                    var rs = data.d;
+                    $scope.nhaxes.push({
+                        Tennhaxe: rs.Tennhaxe,
+                        Soluongxe: rs.Soluongxe,
+                        Trusochinh: rs.Trusochinh,
+                        Sodienthoai: rs.Sodienthoai,
+                        Nguoidaidien: rs.Nguoidaidien,
+                        Gioithieungan: rs.Gioithieungan,
+                        Gioithieuchitiet: rs.Gioithieuchitiet
+                    });
+                    $("#add-modal").modal('hide');
+                    swal(
+                        'Thêm nhà xe thành công!',
+                        '',
+                        'success'
+                    )
+                    $scope.Tinh = "";
+                    $scope.Tennhaxe = "";
+                    $scope.Anh = "";
+                    $scope.Soluongxe = "";
+                    $scope.Trusochinh = "";
+                    $scope.Sodienthoai = "";
+                    $scope.Nguoidaidien = "";
+                    $scope.Gioithieunga = "";
+                    $scope.Gioithieuchitiet = "";
+                })
+            }
+            if ($scope.action == "edit") {
+                console.log($scope.Anh);
+                $Service.Api(
+                    "POST",
+                    "/Admin/Modules/Category/NhaXe.aspx/UpdateNhaXe",
+                    "json",
+                    { Id: $scope.selected.ID, Anh: $scope.Anh, Tennhaxe: $scope.Tennhaxe, Soluongxe: $scope.Soluongxe, Trusochinh: $scope.Trusochinh, Nguoidaidien: $scope.Nguoidaidien, Sodienthoai: $scope.Sodienthoai, Gioithieungan: $scope.Gioithieungan, Gioithieuchitiet: $scope.Gioithieuchitiet, Tinh: $scope.Tinh }
+                ).success(function (data) {
+                    console.log(data.d);
+                    var index = $scope.nhaxes.indexOf($scope.selected);
+                    $scope.nhaxes.splice(index, 1);
+                    $scope.nhaxes.push(data.d);
+                    swal(
+                        'Thành công!',
+                        'Nhà xe bạn sửa đã được lưu lại.',
+                        'success'
+                    )
+                    $("#add-modal").modal('hide');
+                })
+            }
+        }
     }
     $scope.Delete = function (item) {
         swal({

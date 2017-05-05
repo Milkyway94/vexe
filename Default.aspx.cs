@@ -206,8 +206,12 @@ public partial class _Default : Page
                 _objControl = LoadControl("ucontrols/include/Registers.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
-            case "tim-kiem":
-                _objControl = LoadControl("ucontrols/include/Search.ascx");
+            case "DoSearch":
+                _objControl = LoadControl("ucontrols/include/DoSearch.ascx");
+                OperationCell.Controls.Add(_objControl);
+                break;
+            case "SearchResult":
+                _objControl = LoadControl("ucontrols/include/SearchResult.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
             case "kiem-tra-ve":
@@ -216,6 +220,10 @@ public partial class _Default : Page
                 break;
             case "NhaXe":
                 _objControl = LoadControl("ucontrols/include/NhaXe.ascx");
+                OperationCell.Controls.Add(_objControl);
+                break;
+            case "ForgotPassword":
+                _objControl = LoadControl("ucontrols/include/ForgotPassword.ascx");
                 OperationCell.Controls.Add(_objControl);
                 break;
         }
@@ -748,30 +756,29 @@ public partial class _Default : Page
     {
         StringBuilder str = new StringBuilder();
         ProvinceRepository proRepo = new ProvinceRepository();
+        //var data = [
+        //    { label: "annhhx10", category: "Products" },
+        //    { label: "annk K12", category: "Products" },
+        //    { label: "annttop C13", category: "Products" },
+        //    { label: "anders andersson", category: "People" },
+        //    { label: "andreas andersson", category: "People" },
+        //    { label: "andreas johnson", category: "People" }
+        //];
         DistrictRepository distRepo = new DistrictRepository();
         str.Append("[");
-        str.Append("{\"text\": \"Tỉnh/Thành Phố\",");
-        str.Append("\"data\": [");
         foreach (var item in proRepo.All().ToList())
         {
-            str.Append("\"" + item.TenTinh + "\"");
-            if (proRepo.All().ToList().IndexOf(item) < proRepo.All().ToList().Count - 1)
-            {
-                str.Append(",");
-            }
+            str.Append("{ \"label\": \""+item.TenTinh+"\", \"category\": \"Tỉnh\" },");
         }
-        str.Append("]},{\"text\": \"Quận/Huyện/Bến xe\",");
-        str.Append("\"data\": [");
         foreach (var item in distRepo.All().ToList())
         {
             item.TinhThanh = proRepo.Find(item.MaTinh.Value);
-            str.Append("\"" + item.TenHuyen + "-" + item.TinhThanh.TenTinh + "\"");
+            str.Append("{ \"label\": \"" + item.TenHuyen + "-" + item.TinhThanh.TenTinh + "\", \"category\": \"Quận/Huyện/Bến Xe\" }");
             if (distRepo.All().ToList().IndexOf(item) < distRepo.All().ToList().Count - 1)
             {
                 str.Append(",");
             }
         }
-        str.Append("]}");
         str.Append("]");
         return str.ToString();
     }

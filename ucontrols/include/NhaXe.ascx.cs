@@ -20,7 +20,6 @@ public partial class ucontrols_include_NhaXe : System.Web.UI.UserControl
         nurl = Request.QueryString["nUrl"];
         if (string.IsNullOrEmpty(nurl))
         {
-            lbnav.Text = "<li><a href=\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li> <li>" + ModControl.GetName_From_Code(nurl) + "</li>";
             lst.Visible = true;
             detail.Visible = false;
 
@@ -29,7 +28,6 @@ public partial class ucontrols_include_NhaXe : System.Web.UI.UserControl
         {
             detail.Visible = true;
             lst.Visible = false;
-            lbnav.Text = "<li><a href =\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li><li>  " + ModControl.GetName_From_Code(url) + "</li>";
             nx = new NhaxeRepository().Find(int.Parse(nurl));
         }
     }

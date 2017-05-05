@@ -127,13 +127,13 @@
                                         <asp:ImageButton ID="imgSent" CommandName="isSent" runat="server" CommandArgument='<%# Eval("User_ID") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Option">
+                                <asp:TemplateField HeaderText="Sửa">
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" Width="60px" />
                                     <ItemTemplate>
                                         <asp:Image ID="imgEdit" CssClass="Img" runat="server" ImageUrl="../../Themes/edit.gif" />
-                                        &nbsp;&nbsp;&nbsp;
-                        <asp:ImageButton ID="imgDel" CommandName="del" runat="server" CommandArgument='<%# Eval("User_ID") %>' ImageUrl="../../Themes/delete.gif" />
+                                       <%-- &nbsp;&nbsp;&nbsp;
+                        <asp:ImageButton ID="imgDel" CommandName="del" runat="server" CommandArgument='<%# Eval("User_ID") %>' ImageUrl="../../Themes/delete.gif" />--%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

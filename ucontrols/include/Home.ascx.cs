@@ -95,15 +95,15 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
                     {
                         strFr.Append("<div class=\"col-sm-6 popular\">");
                         strFr.Append("  <div class=\"col-sm-5 name\">");
-                        strFr.Append("      <span class=\"diemdi\">" + rowcx[i]["TinhDi"] + "</span>");
+                        strFr.Append("      <span class=\"diemdi\">" + rowcx[j]["TinhDi"] + "</span>");
                         strFr.Append("      <span class=\"fa fa-long-arrow-right muiten\"></span>");
-                        strFr.Append("      <span class=\"diemden\">" + rowcx[i]["TinhDen"] + "</span>");
+                        strFr.Append("      <span class=\"diemden\">" + rowcx[j]["TinhDen"] + "</span>");
                         strFr.Append("  </div>");
                         strFr.Append("  <div class=\"col-sm-4 name\">");
-                        strFr.Append("      <span class=\"gia\">" + double.Parse(rowcx[i]["Gia"].ToString()).ToString("N0") + " đ/vé</span>");
+                        strFr.Append("      <span class=\"gia\">" + double.Parse(rowcx[j]["Gia"].ToString()).ToString("N0") + " đ/vé</span>");
                         strFr.Append("  </div>");
                         strFr.Append("  <div class=\"col-sm-3 btn-area\">");
-                        strFr.Append("      <a href = \"/tim-ve-xe.htm?Diemdi="+ rowcx[i]["TinhDi"] + "&Diemden="+ rowcx[i]["TinhDen"] + "&Giodi=\" class=\"btn btn-flat btn-datve\">Đặt vé</a>");
+                        strFr.Append("      <a href = \"/ket-qua-tim-kiem-ve-xe.htm?di-tu="+ rowcx[j]["TinhDi"] + "&den="+ rowcx[j]["TinhDen"] + "\" class=\"btn btn-flat btn-datve\">Đặt vé</a>");
                         strFr.Append("  </div>");
                         strFr.Append("</div>");
                         
@@ -120,7 +120,7 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
     protected string LoadPopularTravel()
     {
         StringBuilder str = new StringBuilder();
-        DataTable dtfrom = UpdateData.ExecStore("SP_TUYENNOIBA6T", "").Tables[0];
+        DataTable dtfrom = UpdateData.ExecStore("SP_TUYENNOIBAT", "").Tables[0];
         DataRowCollection rows = dtfrom.Rows;
         if (rows.Count > 0)
         {

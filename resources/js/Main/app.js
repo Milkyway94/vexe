@@ -1,4 +1,4 @@
-﻿var app = angular.module("App", ['autocomplete', 'angular.filter']);
+﻿var app = angular.module("App", ['angular.filter']);
 app.controller("SearchController", ['$scope', '$http', '$location', 'service', function ($scope, $http, $location, $service) {
     var url = "/Default.aspx";
     $scope.alltinh = {};
@@ -9,15 +9,21 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     $scope.Selected = {};
     $scope.sSelected = [];
     $scope.AllResult = [];
-
+    $scope.YcGiodi = {};
     $service.Post(url + "/LayTatCaDiaDiem", {})
         .success(function (data) {
             $scope.Diemdies = JSON.parse(data.d);
+            $(function () {
+                $(".diadiem").catcomplete({
+                    delay: 0,
+                    source: $scope.Diemdies
+                });
+            });
         })
-    $scope.Diemdi = getQueryString("Diemdi");
-    $scope.Diemden = getQueryString("Diemden");
-    $scope.Ngaydi = getQueryString("Ngaydi");
-    $scope.Giodi = getQueryString("Thoigiandi");
+    $scope.Diemdi = getQueryString("di-tu");
+    $scope.Diemden = getQueryString("den");
+    $scope.Ngaydi = getQueryString("ngay");
+    $scope.Giodi = getQueryString("luc");
     if ($scope.Diemdi && $scope.Diemden) {
         $scope.showResult = true;
         $scope.showSearch = false;
@@ -60,6 +66,18 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     $scope.Search = function () {
         $scope.loading = true;
         $scope.showSearch = true;
+        if ($scope.frmSearch.Ngaydi) {
+            var ngaydi = convertToDateTime('#ngaydi');
+            if (isPastDate(ngaydi)) {
+                alert("Bạn không thể chọn ngày quá khứ.");
+                $scope.loading = false;
+                $('#ngaydi').focus();
+                $('#ngaydi').css("border", "1px solid red");
+            }
+            else {
+                window.location.href = "/ket-qua-tim-kiem-ve-xe.htm?di-tu=" + $scope.frmSearch.Diemdi + "&den=" + $scope.frmSearch.Diemden + "&ngay=" + $scope.frmSearch.Ngaydi;
+            }
+        }
     }
     $scope.Detail = function (item) {
         console.log(item);
@@ -106,25 +124,42 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     $scope.items = $scope.SearchResult;
     $scope.SaveYC = function () {
         $scope.loading = true;
-        var dataRequest = {
-            from: setNotNull($scope.YcDiemDi),
-            to: setNotNull($scope.YcDiemDen),
-            startdate: setNotNull($scope.YcNgaydi),
-            starttime: setNotNull($scope.YcGiodi),
-            more: setNotNull($scope.More),
-            sdt: setNotNull($scope.YcSdt)
-        }
-        console.log(dataRequest);
-        $service.Post(url + "/SaveYc", dataRequest)
-            .success(function (data) {
-                console.log(data.d);
+        if ($scope.YcNgaydi) {
+            var ngaydi = convertToDateTime('#ycNgaydi');
+            if (isPastDate(ngaydi)) {
+                alert("Bạn không thể chọn ngày quá khứ.");
                 $scope.loading = false;
+            }
+            else if (!validatePhone($scope.YcSdt)) {
                 $scope.showError = true;
-                $scope.message = data.d.message;
-            })
-            .error(function (err) {
-                console.log(err);
-            })
+                $scope.sdtError = "Sai định dạng số điện thoại";
+                $scope.loading = false; 
+            }
+            else {
+                $scope.showError = false;
+                $scope.sdtError = "";
+                var dataRequest = {
+                    from: setNotNull($scope.YcDiemDi),
+                    to: setNotNull($scope.YcDiemDen),
+                    startdate: setNotNull($scope.YcNgaydi),
+                    starttime: setNotNull($scope.YcGiodi),
+                    more: setNotNull($scope.YcMore),
+                    sdt: setNotNull($scope.YcSdt)
+                }
+                console.log(dataRequest);
+                $service.Post(url + "/SaveYc", dataRequest)
+                    .success(function (data) {
+                        console.log(data.d);
+                        $scope.loading = false;
+                        $scope.showError = true;
+                        $scope.message = data.d.message;
+                    })
+                    .error(function (err) {
+                        console.log(err);
+                    })
+            }
+        }
+
     }
     $scope.HuyYC = function () {
         $service.Post(url + "/HuyYC", {})
@@ -173,8 +208,27 @@ app.controller("HomeController", ['$scope', '$http', 'service', function ($scope
         .success(function (data) {
             console.log(data.d);
             $scope.Diemdies = JSON.parse(data.d);
-        })
+            $(function () {
 
+                $(".diadiem").catcomplete({
+                    delay: 0,
+                    source: $scope.Diemdies
+                });
+            });
+        })
+    $scope.TimVeXe = function () {
+        $scope.loadding = true;
+        if ($scope.frmSearch.Ngaydi) {
+            var ngaydi = convertToDateTime('.datepicker');
+            if (isPastDate(ngaydi)) {
+                alert("Bạn không thể chọn ngày quá khứ.");
+                $scope.loadding = false;
+            }
+            else {
+                window.location.href = "/ket-qua-tim-kiem-ve-xe.htm?di-tu=" + $scope.frmSearch.Diemdi + "&den=" + $scope.frmSearch.Diemden + "&ngay=" + $scope.frmSearch.Ngaydi + "&luc=" + $scope.frmSearch.Giodi;
+            }
+        }
+    }
     //$scope.updateDiemdi = function (typed) {
     //    $service.Post(url + "/Timxe", { key: type })
     //    .success(function (data) {
@@ -210,7 +264,7 @@ app.controller("CheckOutController", ['$scope', '$http', 'service', function ($s
     })
     $scope.SelectDistrict = function () {
         console.log($scope.Province);
-        $service.Post(url + "/ExecProc", { proc: "SP_CCB_Huyen_FROM_Tinh", param: $scope.Province ? $scope.Province.id :"" }).success(function (data) {
+        $service.Post(url + "/ExecProc", { proc: "SP_CCB_Huyen_FROM_Tinh", param: $scope.Province ? $scope.Province.id : "" }).success(function (data) {
             console.log(data.d);
             $scope.Huyens = JSON.parse(data.d);
         })
@@ -451,3 +505,206 @@ app.controller("CheckTicketController", ['$scope', '$http', 'service', function 
         }
     }
 }])
+app.controller("DoSearchController", ['$scope', '$http', '$location', 'service', function ($scope, $http, $location, $service) {
+    var url = "/Default.aspx";
+    $scope.alltinh = {};
+    $scope.loading = false;
+    $scope.tinh = {};
+    $scope.showResult = false;
+    $scope.showSearch = false;
+    $scope.Selected = {};
+    $scope.sSelected = [];
+    $scope.AllResult = [];
+    $scope.YcGiodi = {};
+    $service.Post(url + "/LayTatCaDiaDiem", {})
+        .success(function (data) {
+            $scope.Diemdies = JSON.parse(data.d);
+            $(function () {
+                $(".diadiem").catcomplete({
+                    delay: 0,
+                    source: $scope.Diemdies
+                });
+            });
+        })
+    $scope.Diemdi = getQueryString("di-tu");
+    $scope.Diemden = getQueryString("den");
+    $scope.Ngaydi = getQueryString("ngay");
+    $scope.Giodi = getQueryString("luc");
+    if ($scope.Diemdi && $scope.Diemden) {
+        $scope.showResult = true;
+        $scope.showSearch = false;
+    }
+    else {
+        $scope.showResult = false;
+        $scope.showSearch = true;
+    }
+    $scope.DaoTuyen = function () {
+        var tg = $scope.Diemdi;
+        $scope.Diemdi = $scope.Diemden;
+        $scope.Diemden = tg;
+    }
+    var Code = [];
+    $scope.SearchResult = [];
+    $scope.options2 = {
+        country: 'vn',
+        types: 'geocode'
+    };
+    $scope.details2 = '';
+    $service.Post(url + "/SearchTravel", { Diemdi: $scope.Diemdi, Diemden: $scope.Diemden, Ngaydi: $scope.Ngaydi, Giodi: $scope.Giodi }).success(function (data) {
+        $scope.loading = false;
+        $scope.Nhaxes = []; $scope.Giodi = []; $scope.Hangxes = [];
+        $scope.SearchResult = data.d;
+        $scope.AllResult = data.d;
+        angular.forEach($scope.SearchResult, function (item) {
+            if (item.Xe.NhaXe1)
+                $scope.Nhaxes.push(item.Xe.NhaXe1);
+            if (item.Xe.NhaXe1)
+                $scope.Hangxes.push(item.Xe.Hangxe);
+        });
+        $scope.Nhaxes = Unique($scope.Nhaxes, "Tennhaxe");
+        $scope.Giodies = Unique($scope.SearchResult, "Giokhoihanh");
+        $scope.Hangxes = Unique($scope.Hangxes, "Hangxe");
+        console.log($scope.SearchResult);
+    })
+        .error(function (data) {
+            console.log("Error: ", data);
+        });
+    $scope.Search = function () {
+        $scope.loading = true;
+        $scope.showSearch = true;
+        if ($scope.frmSearch.Ngaydi) {
+            var ngaydi = convertToDateTime('#ngaydi');
+            if (isPastDate(ngaydi)) {
+                alert("Bạn không thể chọn ngày quá khứ.");
+                $scope.loading = false;
+                $('#ngaydi').focus();
+                $('#ngaydi').css("border", "1px solid red");
+            }
+            else {
+                window.location.href = "/ket-qua-tim-kiem-ve-xe.htm?di-tu=" + $scope.frmSearch.Diemdi + "&den=" + $scope.frmSearch.Diemden + "&ngay=" + $scope.frmSearch.Ngaydi;
+            }
+        }
+    }
+    $scope.Detail = function (item) {
+        console.log(item);
+        $scope.Selected = item;
+        $("#row-" + item.MaChuyenXe).toggle(200);
+        $(".tp").attr('tabindex', 1);
+        $(".tp").focus();
+    }
+    $scope.DatVe = function (item) {
+        $scope.Selected = item;
+
+        window.location.href = "/thanh-toan/" + item.url + ".htm";
+    }
+    $scope.SortByNhaXe = function (item) {
+        if (item != 0) {
+            $("#btnNhaxe").html(item.Tennhaxe);
+
+        }
+        else
+            $("#btnNhaxe").html("Tất cả nhà xe");
+        $scope.sSelected.Nhaxe = item.Tennhaxe;
+    }
+    $scope.SortByHangXe = function (item) {
+        if (item != 0) {
+            $("#btnHangxe").html(item);
+            $scope.sSelected.Hangxe = item;
+        }
+        else {
+            $("#btnHangxe").html("Tất cả loại xe");
+        }
+
+    }
+    $scope.SortByGiodi = function (item) {
+        if (item != 0) {
+            $("#btnGiodi").html(item.Giokhoihanh);
+
+        }
+        else
+            $("#btnGiodi").html("Tất cả các giờ");
+        $scope.sSelected.Giodi = item.Giokhoihanh;
+    }
+    $scope.lower_price_bound = 0;
+    $scope.upper_price_bound = 50;
+    $scope.items = $scope.SearchResult;
+    $scope.SaveYC = function () {
+        $scope.loading = true;
+        if ($scope.YcNgaydi) {
+            var ngaydi = convertToDateTime('#ycNgaydi');
+            if (isPastDate(ngaydi)) {
+                alert("Bạn không thể chọn ngày quá khứ.");
+                $scope.loading = false;
+            }
+            else if (!validatePhone($scope.YcSdt)) {
+                $scope.showError = true;
+                $scope.sdtError = "Sai định dạng số điện thoại";
+                $scope.loading = false;
+            }
+            else {
+                $scope.showError = false;
+                $scope.sdtError = "";
+                var dataRequest = {
+                    from: setNotNull($scope.YcDiemDi),
+                    to: setNotNull($scope.YcDiemDen),
+                    startdate: setNotNull($scope.YcNgaydi),
+                    starttime: setNotNull($scope.YcGiodi),
+                    more: setNotNull($scope.YcMore),
+                    sdt: setNotNull($scope.YcSdt)
+                }
+                console.log(dataRequest);
+                $service.Post(url + "/SaveYc", dataRequest)
+                    .success(function (data) {
+                        console.log(data.d);
+                        $scope.loading = false;
+                        $scope.showError = true;
+                        $scope.message = data.d.message;
+                    })
+                    .error(function (err) {
+                        console.log(err);
+                    })
+            }
+        }
+
+    }
+    $scope.HuyYC = function () {
+        $service.Post(url + "/HuyYC", {})
+            .success(function (data) {
+                console.log(data.d);
+                alert(data.d.message);
+                window.location.reload();
+            })
+    }
+    //function
+    function Unique(collection, keyname) {
+        var output = [],
+            keys = [];
+
+        angular.forEach(collection, function (item) {
+            var key = item[keyname];
+            if (keys.indexOf(key) === -1) {
+                keys.push(key);
+                output.push(item);
+            }
+        });
+
+        return output;
+    }
+    function getQueryString(name) {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    function setNotNull(str) {
+        if (str) {
+            return str;
+        }
+        else {
+            return "";
+        }
+    }
+}]);

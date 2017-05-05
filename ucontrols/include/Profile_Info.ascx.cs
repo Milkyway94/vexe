@@ -18,14 +18,6 @@ public partial class ucontrols_include_Profile_Info : System.Web.UI.UserControl
         string url = String.IsNullOrEmpty(Request["url"]) ? "Home" : Request["url"].ToString();
         this.url = url;
         nurl = Request.QueryString["nUrl"];
-        if (nurl != null)
-        {
-            lbnav.Text = "<li><a href=\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li> <li>" + ModControl.GetName_From_Code(nurl) + "</li>";
-        }
-        else
-        {
-            lbnav.Text = "<li><a href =\"/\"><i class=\"fa fa-home fa-lg\"></i></a></li><li>  " + ModControl.GetName_From_Code(url) + "</li>";
-        }
         if (Session["MemberID"] != null)
         {
             this.member = new MemberRepository().Find(int.Parse(Session["MemberID"].ToString()));
@@ -33,6 +25,9 @@ public partial class ucontrols_include_Profile_Info : System.Web.UI.UserControl
         else
         {
             Value.ShowMessage(ltrError, ErrorMessage.Unauthorized, AlertType.ERROR);
+            mainarea.Visible = false;
         }
+        Control _objControl = LoadControl("/ucontrols/subcontrol/ProfileSidebar.ascx");
+        sidebar.Controls.Add(_objControl);
     }
 }

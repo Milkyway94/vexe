@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-5 col-xs-12 col-sm-6 bg-position">
                 <div class="tv1">
-                    <img src="../../resources/img/icon/icon-nhanve.png" class="img-responsive" alt="Vé thanh toán" />
+                    <img src="../../resources/img/icon/icon-vethanhtoan.png" class="img-responsive" alt="Đặt vé và thanh toán" />
                 </div>
                 <div class="tv2">02</div>
                 <div class="tv3">
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-3 col-xs-12 col-sm-3 bg-position">
                 <div class="tv1">
-                    <img src="../../resources/img/icon/icon-vethanhtoan.png" class="img-responsive" alt="nhận vé" />
+                    <img src="../../resources/img/icon/icon-nhanve.png" class="img-responsive" alt="NHận vé" />
                 </div>
                 <div class="tv2">03</div>
                 <div class="tv3">
@@ -45,46 +45,36 @@
         <div class="row" id="r2">
             <div class="col-sm-12 col-md-5 col-xs-12">
                 <div class="search-form">
-                    <form id="frmSearch1" action="/tim-ve-xe.htm" method="get" onsubmit="TimVeXe()">
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <h2 class="form-title">Tìm kiếm vé xe</h2>
-                            </div>
+                    <form id="frmSearch1" method="get" ng-submit="TimVeXe()">
+                        <div class="col-sm-12">
+                            <h2 class="form-title">Tìm kiếm vé xe</h2>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12">
-                                <autocomplete ng-model="Diemdi" inputclass="form-control" placeholder="Chọn điểm xuất phát" name="Diemdi" data="Diemdies"></autocomplete>
-                                <%--<input type="text" id="Autocomplete" name="Diemdi" placeholder="Nhập điểm đi" class="form-control" ng-autocomplete ng-model="Diemdi" details="details2" options="options2"/>--%>
+                            <div class="col-sm-12 autocomplete">
+                                <input ng-model="frmSearch.Diemdi" id="Diemdi" placeholder="Chọn điểm đi" class="form-control diadiem" required />
+                                <i class="icon-input glyphicon glyphicon-menu-down"></i>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <autocomplete ng-model="Diemden" inputclass="form-control" placeholder="Chọn điểm đến" name="Diemden" data="Diemdies"></autocomplete>
+                        <div class="form-group row ">
+                            <div class="col-sm-12 autocomplete">
+                                <input ng-model="frmSearch.Diemden" id="Diemden" placeholder="Chọn điểm đến" class="form-control diadiem" required />
+                                <i class="icon-input glyphicon glyphicon-menu-down"></i>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-6 col-xs-12 wleft">
-                                <input type="text" class="form-control datepicker" name="Ngaydi" placeholder="Chọn ngày đi" />
+                                <input type="text" class="form-control datepicker" required="required" ng-model="frmSearch.Ngaydi" name="Ngaydi" placeholder="Chọn ngày đi" />
                                 <span class="input-icon"><i class="fa fa-calendar"></i></span>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-xs-12 wright">
-                                <select class="form-control select2" name="Thoigiandi">
-                                    <option value="">Thời gian đi</option>
-                                    <option value="5:00">5:00</option>
-                                    <option value="5:00">6:00</option>
-                                    <option value="5:00">7:00</option>
-                                    <option value="5:00">8:00</option>
-                                    <option value="5:00">9:00</option>
-                                    <option value="5:00">10:00</option>
-                                    <option value="5:00">11:00</option>
-                                    <option value="5:00">12:00</option>
-                                </select>
+                            <div class="col-sm-12 col-md-6 col-xs-12 wright autocomplete">
+                                <input type="text" class="form-control timepicker" data-provide="timepicker" required="required" ng-model="frmSearch.Giodi" placeholder="Chọn thời gian đi" />
+                                <span class="input-icon icon-giodi"><i class="glyphicon glyphicon-menu-down"></i></span>
                             </div>
                         </div>
                         <div class="form-group row row-margin">
                             <div class="col-sm-12">
                                 <button class="btn btn-block btn-search" id="btnSearch" type="submit">
-                                    Tìm vé <i class="fa fa-spinner" style="display: none;" aria-hidden="true"></i>
+                                    Tìm vé <i class="fa fa-spinner fa-pulse fa-fw" ng-if="loadding" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
@@ -132,16 +122,18 @@
         </div>
     </div>
     <div class="container content-xe">
-        <ul class="uk-grid-small uk-child-width-1-2 uk-child-width-1-5@s uk-text-center" uk-grid>
-            <% foreach (var item in lstNhaxe())
-                {%>
-            <li class="xe">
-                <a href="/nha-xe/<%=item.ID %>.htm">
-                    <img src="/resources/img/oto.png" alt="Tuyến đường" />
-                    <span class="tenxe"><%=item.Tennhaxe %></span>
-                </a>
-            </li>
-            <%} %>
-        </ul>
+        <div class="row">
+            <ul class="uk-grid-small uk-child-width-1-2 uk-child-width-1-5@s uk-text-center" uk-grid>
+                <% foreach (var item in lstNhaxe())
+                    {%>
+                <li class="xe">
+                    <a href="/nha-xe/<%=item.ID %>.htm">
+                        <img src="/resources/img/oto.png" alt="Tuyến đường" />
+                        <span class="tenxe"><%=item.Tennhaxe %></span>
+                    </a>
+                </li>
+                <%} %>
+            </ul>
+        </div>
     </div>
 </div>

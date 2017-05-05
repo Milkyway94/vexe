@@ -39,6 +39,8 @@ namespace QCMS_BUSSINESS
         public Nullable<long> Member_Vola { get; set; }
         public Nullable<int> Member_Role { get; set; }
         public Nullable<int> NhaXe { get; set; }
+        public Nullable<int> Member_Tinh { get; set; }
+        public Nullable<int> Member_QuanHuyen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Order> tbl_Order { get; set; }

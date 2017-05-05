@@ -18,6 +18,7 @@
     <!-- Bootstrap -->
     <link rel="shortcut icon" href="<%=uRoot%>resources/favicon.ico" />
     <link href="<%=uRoot%>resources/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css" rel="stylesheet" />
     <link href="<%=uRoot%>resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="<%=uRoot%>resources/plugins/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
     <link href="<%=uRoot%>resources/plugins/jquery-ui-1.11.4/jquery-ui.theme.min.css" rel="stylesheet" />
@@ -27,6 +28,8 @@
     <link href="<%=uRoot%>resources/css/style.css" rel="stylesheet" type="text/css" />
     <link href="<%=uRoot%>resources/css/uikit.css" rel="stylesheet" type="text/css" />
     <link href="<%=uRoot%>resources/css/custom.css" rel="stylesheet" type="text/css" />
+    <script src="<%=uRoot%>resources/js/jquery-2.2.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 </head>
 <body ng-app="App">
     <!--
@@ -41,11 +44,11 @@
         <div id="OperationCell" runat="server"></div>
     </section>
     <uc:footer runat="server" ID="Footer" />
-    <script src="<%=uRoot%>resources/js/jquery-2.2.4.min.js"></script>
+    <script src="<%=uRoot%>resources/js/moment.js"></script>
     <script src="<%=uRoot%>resources/js/bootstrap.min.js"></script>
     <script src="<%=uRoot%>resources/plugins/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-    <script src="<%=uRoot%>resources/plugins/select2/dist/js/select2.min.js"></script>
-     <script src="<%=uRoot%>resources/js/uikit.min.js"></script>
+    <script src="<%=uRoot%>resources/plugins/select2/dist/js/select2.full.min.js"></script>
+    <script src="<%=uRoot%>resources/js/uikit.min.js"></script>
     <script src="<%=uRoot%>bower_components/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
     <script src="<%=uRoot%>resources/js/script.js"></script>
     <script src="<%=uRoot%>resources/js/AngularJs.js"></script>

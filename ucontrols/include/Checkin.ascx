@@ -1,7 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="Checkin.ascx.cs" Inherits="ucontrols_include_Checkin" %>
-<%@ Register Src="~/ucontrols/subcontrol/NhaXeProfileSidebar.ascx" TagPrefix="uc1" TagName="NhaXeProfileSidebar" %>
-
-
 <div class="container content">
     <div class="row">
         <ul class="uk-breadcrumb hi-padding">
@@ -88,9 +85,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <uc1:NhaXeProfileSidebar runat="server" ID="NhaXeProfileSidebar" />
-        </div>
+        <div class="col-sm-3" runat="server" id="sidebar"></div>
     </div>
-
 </div>

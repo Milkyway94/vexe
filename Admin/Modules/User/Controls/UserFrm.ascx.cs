@@ -97,8 +97,8 @@ public partial class Administrator_Modules_User_Controls_UserFrm : System.Web.UI
                 DataTable dtnx = UpdateData.UpdateBySql(sqlnx).Tables[0];
                 if (dtnx.Rows.Count > 0)
                 {
-                    if (dllRole.Items[i].Value == dtnx.Rows[0]["NhaxeID"].ToString())
-                        dllRole.Items[i].Selected = true;
+                    if (ddlNhaXe.Items[i].Value == dtnx.Rows[0]["NhaxeID"].ToString())
+                        ddlNhaXe.Items[i].Selected = true;
                 }
             }
             bool sex = Convert.ToBoolean(rows[0]["User_Sex"]);

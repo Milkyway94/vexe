@@ -71,7 +71,8 @@ public partial class Admin_Modules_Category_Create_ThemXe : System.Web.UI.Page
             bool _insertXe = UpdateData.Insert("Xe", tbXe);
             if (_insertXe)
             {
-                ltrScript.Text = ("<script>parent.HideModal('#add-modal'); parent.window.location.reload();</script>");
+                SessionUtil.SetKey("Message", string.Format(ErrorMessage.Success, "Thêm xe mới"));
+                ltrScript.Text = ("<script>parent.window.location.reload();</script>");
             }
             else
             {

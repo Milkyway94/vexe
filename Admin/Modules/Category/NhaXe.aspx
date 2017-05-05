@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NhaXe.aspx.cs" MasterPageFile="~/Admin/AdminMasterPage.master" Inherits="Admin_Modules_Category_NhaXe" %>
+﻿<%@ Page Language="C#" EnableEventValidation="true" AutoEventWireup="true" CodeFile="NhaXe.aspx.cs" MasterPageFile="~/Admin/AdminMasterPage.master" Inherits="Admin_Modules_Category_NhaXe" %>
 
 <asp:Content ContentPlaceHolderID="main" runat="server">
     <div class="box box-primary container box-solid" ng-controller="NhaXeController">
@@ -11,6 +11,9 @@
                 <div class="pull-right">
                     <input type="text" class="form-control" ng-model="SearchKey" placeholder="Nhập từ khóa tìm kiếm" />
                 </div>
+            </div>
+            <div>
+                <asp:Label Text="" ID="MSG" ClientIDMode="Static" runat="server" />
             </div>
             <table class="table table-bordered table-stripped table-hover" id="ungtuyen">
                 <thead>
@@ -55,68 +58,71 @@
             <div class="modal fade modal-primary" id="add-modal" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form ng-submit="Save()">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span></button>
-                                <h2 class="modal-title text-bold">Thêm mới nhà xe</h2>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h2 class="modal-title text-bold">Thêm mới nhà xe</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Mã</label>
+                                <asp:TextBox runat="server" ReadOnly="true" ng-model="ID" ID="ID" CssClass="form-control" required="required" />
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Tên nhà xe(*)</label>
-                                    <input type="text" ng-model="Tennhaxe" class="form-control" required />
-                                    <span ng-show="Tennhaxe.$touched && Tennhaxe.$invalid" class="alert alert-danger">Bạn phải nhập tên nhà xe.</span>
-                                </div>
-                                 <div class="form-group">
-                                    <label>Địa chỉ ở tỉnh?</label>
-                                    <select ng-model="Tinh" class="form-control select2">
-                                        <option ng-repeat="tinh in Tinhs" ng-value="tinh.MaTinh">{{tinh.TenTinh}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Địa chỉ trụ sở chính</label>
-                                    <textarea ng-model="Trusochinh" class="form-control"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Ảnh</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" id="txtImg" ng-model="Anh" class="form-control" required />
+                            <div class="form-group">
+                                <label>Tên nhà xe</label>
+                                <asp:TextBox runat="server" ng-model="Tennhaxe" ID="Tennhaxe" CssClass="form-control" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ ở tỉnh?</label>
+                                <asp:DropDownList runat="server" ng-model="Tinh" ID="Tinh" CssClass="select2">
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ trụ sở</label>
+                                <asp:TextBox runat="server" ID="Trusochinh" ng-model="Trusochinh" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-12">Ảnh(*) </label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <asp:TextBox runat="server" ClientIDMode="Static" ng-model="Anh" ID="txtImg" class="form-control" required />
                                     </div>
-                                    <div class="col-sm-2">
-                                        <input id="browseServer" class="btn btn-warning" onclick="BrowseServer('txtImg');" type="button" value="Tải ảnh" />
-                                    </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <br />
-                                    <img class="img-responsive" id="catimg" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Số điện thoại (*)</label>
-                                    <input type="text" ng-model="Sodienthoai" class="form-control" required />
-                                    <span ng-show="Tennhaxe.$touched && Tennhaxe.$invalid" class="alert alert-danger">Bạn phải nhập số điện thoại.</span>
-                                </div>
-                                <div class="form-group">
-                                    <label>Số lượng xe</label>
-                                    <input type="number" ng-model="Soluongxe" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Tên Người đại diện</label>
-                                    <input type="text" ng-model="Nguoidaidien" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <h3>Giới thiệu ngắn</h3>
-                                    <textarea class="form-control" ng-model="Gioithieungan"></textarea>
-                                </div>
-                                <div class="form-group" id="tab_2">
-                                    <label>Giới thiệu chi tiết</label>
-                                    <textarea ui-tinymce="tinymceOptions" class="form-control" ng-model="Gioithieuchitiet"></textarea>
+                                <div class="col-sm-2">
+                                    <input id="browseServer" class="btn btn-warning" onclick="BrowseServer('txtImg');" type="button" value="Tải ảnh" />
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="reset" class="btn btn-flat btn-warning pull-left" data-dismiss="modal">Hủy</button>
-                                <button type="button" class="btn btn-flat btn-success" ng-click="Save()"><i class="fa fa-spin" ng-show="loading"></i><i class="fa fa-save"></i>&nbsp;Lưu</button>
+                            <div class="form-group">
+                                <br />
+                                <img class="img-responsive" id="catimg" runat="server" />
                             </div>
-                        </form>
+                            <div class="form-group">
+                                <label>Số điện thoại (*)</label>
+                                <asp:TextBox runat="server" ID="Sodienthoai" ng-model="Sodienthoai" TextMode="Number" MaxLength="12" CssClass="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng xe(*) </label>
+                                <asp:TextBox runat="server" ID="Soluongxe" ng-model="Soluongxe" CssClass="form-control" TextMode="Number" MaxLength="3" Text="0" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Tên Người đại diện (*)</label>
+                                <asp:TextBox runat="server" ID="Nguoidaidien" ng-model="Nguoidaidien" CssClass="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Giới thiệu ngắn(*)</label>
+                                <asp:TextBox runat="server" ng-model="Gioithieungan" TextMode="MultiLine" ID="Gioithieungan" CssClass="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Giới thiệu chi tiết(*)</label>
+                                <asp:TextBox runat="server" TextMode="MultiLine" ng-model="Gioithieuchitiet" ID="Gioithieuchitiet" CssClass="form-control editor" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-flat btn-warning pull-left" data-dismiss="modal">Hủy</button>
+                            <asp:Button Text="Lưu lại" ID="btnSave" OnClick="btnSave_Click" ng-show="act=='add'" CssClass="btn btn-flat btn-success" runat="server" />
+                            <asp:Button Text="Lưu lại" ID="btnUpdate" OnClick="btnUpdate_Click" ng-show="act=='edit'" CssClass="btn btn-flat btn-success" runat="server" />
+                        </div>
                     </div>
                     <!-- /.modal-content -->
                 </div>
@@ -177,8 +183,29 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
+            <div class="modal fade modal-primary" id="edit-modal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h2 class="modal-title text-bold">Thêm mới nhà xe</h2>
+                        </div>
+                        <div class="modal-body" style="height: 500px;">
+                            <iframe id="edit-frm" src="Create/ThemNhaxe.aspx" style="width: 100%; height: 100%; border: none !important;"></iframe>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
             <!-- /.modal -->
         </div>
     </div>
+    <script>
+        function showMsg(msg) {
+            $("#MSG").html(msg);
+        }
+    </script>
 </asp:Content>
 

@@ -78,8 +78,7 @@
 </tr>
 </table>
 
-<script type="text/javascript">
-    <script src="/resources/js/jquery-2.2.4.min.js"></script>
+<script src="/resources/js/jquery-2.2.4.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/Admin/Assets/admin-lte/js/app.min.js"></script>
 <script src="/Admin/js/tinymce/jquery.tinymce.min.js"></script>

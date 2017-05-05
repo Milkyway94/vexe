@@ -32,15 +32,18 @@ public partial class Admin_Modules_User_UserList : DefaultAdmin
     public void BindData()
     {
         string act = Request["act"];
-        string sql = "SELECT * FROM tbl_User";
+        string sql = "SELECT * FROM tbl_User WHERE 1=1 ";
+        if (SessionUtil.GetValue("RoleID")!= "WebAdmin,")
+            sql += " AND User_ID=" + SessionUtil.GetValue("UserID");
         if (pbID != 0)
-            sql += " WHERE User_ID in (Select User_ID from tbl_User where User_Role=" + pbID + ")";
+            sql += " AND User_ID in (Select User_ID from tbl_User where User_Role=" + pbID + ")";
         if (act == "search")
         {
             string key = Request["key"];
-            sql += " WHERE User_Name LIKE N'%" + key + "%' OR Username LIKE N'%" + key + "%'";
+            sql += " AND User_Name LIKE N'%" + key + "%' OR Username LIKE N'%" + key + "%'";
         }
         sql += " ORDER BY User_Date DESC";
+        //Response.Write(SessionUtil.GetValue("RoleID")+sql);
         DataSet dsData = UpdateData.UpdateBySql(sql);
         Session["dsData"] = dsData;
         gvData.DataSource = dsData;
@@ -84,21 +87,35 @@ public partial class Admin_Modules_User_UserList : DefaultAdmin
             ImageButton imgSent = (ImageButton)e.Row.FindControl("imgSent");
             imgSent.ImageUrl = (isSent == true) ? tp + "yes.gif" : tp + "no.gif";
             //=================================================================
-            ImageButton imgDel = (ImageButton)e.Row.FindControl("imgDel");
-            imgDel.Attributes.Add("onclick", "javascript:return confirm('Bạn có chắc chắn xoá tin này không ?');");
+            //ImageButton imgDel = (ImageButton)e.Row.FindControl("imgDel");
+            //imgDel.Attributes.Add("onclick", "javascript:return confirm('Bạn có chắc chắn xoá tin này không ?');");
         }
     }
     protected void gvData_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string sSc = "<script>\n";
-        sSc += "alert('Đang tồn tại module khác bên trong hoặc đã bài viết của module này!');\n";
+        sSc += "alert('Đang tồn tại các dữ liệu liên quan đến user này!');\n";
         sSc += "</script>\n";
         switch (e.CommandName)
         {
             case "del":
                 string id = e.CommandArgument.ToString();
-                UpdateData.Delete("tbl_User", "User_ID=" + id);
-                BindData();
+                try
+                {
+                    if (UpdateData.Delete("tbl_User", "User_ID=" + id))
+                    {
+                        BindData();
+                    }
+                    else
+                    {
+                        Response.Write(sSc);
+                    }
+                }
+                catch (Exception)
+                {
+                    Response.Write(sSc);
+                }
+               
                 break;
             case "isUse":
                 string id01 = e.CommandArgument.ToString();
@@ -113,6 +130,7 @@ public partial class Admin_Modules_User_UserList : DefaultAdmin
                 BindData();
                 break;
         }
+
     }
     protected void lbtSearch_Click(object sender, EventArgs e)
     {
@@ -127,13 +145,24 @@ public partial class Admin_Modules_User_UserList : DefaultAdmin
             if (cbItem.Checked)
             {
                 int id = Convert.ToInt32(gvData.DataKeys[item.RowIndex].Value.ToString());
-                if(UpdateData.Delete("tbl_ModsiteUser", "User_ID=" + id))
+                try
                 {
-                    if(UpdateData.Delete("tbl_ModUser", "UserID=" + id))
+                    if (UpdateData.Delete("tbl_ModsiteUser", "User_ID=" + id))
                     {
-                        UpdateData.Delete("tbl_User", "User_ID=" + id);
+                        if (UpdateData.Delete("tbl_ModUser", "UserID=" + id))
+                        {
+                            UpdateData.Delete("tbl_User", "User_ID=" + id);
+                        }
                     }
                 }
+                catch (Exception)
+                {
+                    string sSc = "<script>\n";
+                    sSc += "alert('Đang tồn tại các dữ liệu liên quan đến user này!');\n";
+                    sSc += "</script>\n";
+                    Response.Write(sSc);
+                }
+
             }
         }
         BindData();
