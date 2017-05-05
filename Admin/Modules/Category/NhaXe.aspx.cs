@@ -176,25 +176,4 @@ public partial class Admin_Modules_Category_NhaXe : System.Web.UI.Page
             throw new Exception(ErrorMessage.UnknowError + ":" + ex.Message);
         }
     }
-
-    protected void btnUpdate_Click(object sender, EventArgs e)
-    {
-        var nx = nhaxeRepo.Find(int.Parse(ID.Text));
-        vexedtEntities context = new vexedtEntities();
-        if (nx != null)
-        {
-            nx.Tennhaxe = Tennhaxe.Text;
-            nx.Sodienthoai = Sodienthoai.Text;
-            nx.Trusochinh = Trusochinh.Text;
-            nx.Soluongxe = int.Parse(Soluongxe.Text);
-            nx.Nguoidaidien = Nguoidaidien.Text;
-            nx.Gioithieuchitiet = Gioithieuchitiet.Text;
-            nx.Gioithieungan = Gioithieungan.Text;
-            nx.Anh = txtImg.Text;
-            nx.Tinh = int.Parse(Tinh.SelectedValue);
-        }
-        nhaxeRepo.Save();
-        MSG.Text = string.Format(ErrorMessage.Success, "Sửa nhà xe " + Tennhaxe.Text);
-        MSG.ForeColor = Color.Green;
-    }
 }

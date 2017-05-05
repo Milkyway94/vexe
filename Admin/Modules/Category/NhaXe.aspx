@@ -117,7 +117,6 @@
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-flat btn-warning pull-left" data-dismiss="modal">Hủy</button>
                             <asp:Button Text="Lưu lại" ID="btnSave" OnClick="btnSave_Click" ng-show="act=='add'" CssClass="btn btn-flat btn-success" runat="server" />
-                            <asp:Button Text="Lưu lại" ID="btnUpdate" OnClick="btnUpdate_Click" ng-show="act=='edit'" CssClass="btn btn-flat btn-success" runat="server" />
                         </div>
                     </div>
                     <!-- /.modal-content -->
