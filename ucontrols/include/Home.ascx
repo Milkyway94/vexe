@@ -50,25 +50,33 @@
                             <h2 class="form-title">Tìm kiếm vé xe</h2>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12 autocomplete">
+                            <div class="col-sm-12">
+                                 <div class="autocomplete">
                                 <input ng-model="frmSearch.Diemdi" id="Diemdi" placeholder="Chọn điểm đi" class="form-control diadiem" required />
                                 <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                                     </div>
                             </div>
                         </div>
                         <div class="form-group row ">
-                            <div class="col-sm-12 autocomplete">
+                            <div class="col-sm-12">
+                                 <div class="autocomplete">
                                 <input ng-model="frmSearch.Diemden" id="Diemden" placeholder="Chọn điểm đến" class="form-control diadiem" required />
                                 <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                                     </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-6 col-xs-12 wleft">
+                                 <div class="autocomplete">
                                 <input type="text" class="form-control datepicker" required="required" ng-model="frmSearch.Ngaydi" name="Ngaydi" placeholder="Chọn ngày đi" />
-                                <span class="input-icon"><i class="fa fa-calendar"></i></span>
+                                <span class="icon-input"><i class="fa fa-calendar"></i></span>
+                                     </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-xs-12 wright autocomplete">
-                                <input type="text" class="form-control timepicker" data-provide="timepicker" required="required" ng-model="frmSearch.Giodi" placeholder="Chọn thời gian đi" />
-                                <span class="input-icon icon-giodi"><i class="glyphicon glyphicon-menu-down"></i></span>
+                            <div class="col-sm-12 col-md-6 col-xs-12 wright">
+                                <div class="autocomplete">
+                                    <input type="text" class="form-control timepicker" data-provide="timepicker" required="required" ng-model="frmSearch.Giodi" placeholder="Chọn thời gian đi" />
+                                    <span class="icon-input"><i class="glyphicon glyphicon-menu-down"></i></span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row row-margin">

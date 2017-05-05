@@ -10,6 +10,9 @@
       <a class="navbar-brand hidden-xs" href="/">
           <asp:Literal runat="server" ID="Logo"/>
       </a>
+        <a class="navbar-brand hidden-lage" href="/">
+          <img class="custom-logo" src="/upload/logo_mobile.png" alt="logo" />
+      </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">

@@ -142,9 +142,11 @@ h1.heading-title {
             font-size: 16px;
             margin-left: 15px;
         }
-            .profile-info ul > li.active > a, .profile-info ul > li.active > i{
+
+            .profile-info ul > li.active > a, .profile-info ul > li.active > i {
                 color: #007000;
             }
+
             .profile-info ul > li:last-child {
                 list-style: none;
                 border-bottom: none;
@@ -206,12 +208,15 @@ h1.heading-title {
         font-weight: bold;
     }
 
-        span.select2-selection {
-            border: 1px solid #ccc !important;
-        }
-#frmUpdateInfo .select2-selection__rendered{
+span.select2-selection {
+    border: 1px solid #ccc !important;
+}
+
+#frmUpdateInfo .select2-selection__rendered {
     height: 32px;
-} #tbl_info tr {
+}
+
+#tbl_info tr {
     padding: 15px;
 }
 
@@ -566,16 +571,16 @@ header {
     position: relative;
 }
 
-    .autocomplete  .icon-input {
-        position: absolute;
-        right: 5%;
-        top: 30%;
-    }
-
 .message {
     padding-bottom: 50px;
     padding-top: 50px;
     background: #fffcf4;
+}
+
+.autocomplete .icon-input {
+    position: absolute;
+    right: 12px;
+    top: 13px;
 }
 
 .ipt-search input {
@@ -633,22 +638,12 @@ p.credit {
     padding-top: 30px;
 }
 
-.col-3 .input-icon {
+.icon-giodi {
     position: absolute;
     top: 25%;
-    right: 25%;
+    right: 10%;
 }
 
-.input-icon {
-    position: absolute;
-    top: 25%;
-    right: 6%;
-}
-    .icon-giodi {
-        position: absolute;
-        top: 25%;
-        right:10%;
-    }
 .btn-search {
     background: #007000;
     color: #FFD700;
@@ -712,7 +707,7 @@ p.credit {
     color: #007000;
     text-transform: uppercase;
     font-size: 28px;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 .carousel-control > span {
@@ -1449,5 +1444,75 @@ footer > .t2 {
     .article_image img {
         width: 214px;
         height: 131px;
+    }
+}
+/* Customize By NHT 5/5/2017*/
+.navbar {
+    min-height: 65px;
+    line-height: 65px;
+}
+
+.navbar-toggle {
+    margin-top: 16px;
+}
+
+@media(min-width:768px) {
+    .hidden-lage {
+        display: none;
+    }
+}
+
+@media(max-width:768px) {
+    .custom-logo {
+        height: 50px;
+        width: auto !important;
+        margin-top: 10px;
+        margin-left: 15px;
+    }
+
+    .navbar {
+        background-color: #fff;
+    }
+    .navbar-nav{
+        margin-bottom:0px;
+    }
+    .header-right {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .navbar-toggle {
+        border: 2px solid #12b512 !important;
+    }
+
+    .navbar-inverse .navbar-toggle .icon-bar {
+        background-color: #12b512;
+    }
+
+    .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+        background-color: #fefe00;
+    }
+
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+        border-color: transparent;
+    }
+
+    ul.navbar-right {
+        background: #007000;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: gold !important;
+        font-size:12px !important;
+        border-bottom: 1px solid #509e44;
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            background: #509e44;
+        }
+
+    .navbar-inverse .navbar-nav > li > a {
+        font-size: 12px;
+        color: #fff;
     }
 }
