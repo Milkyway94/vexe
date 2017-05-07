@@ -61,7 +61,7 @@
                             </a>
                             <ul class="dropdown-menu dr-menu">
                                 <%=LoadNhaXeMenu() %>
-                                <li><a href="Admin/login.aspx?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
+                                <li><a href="/Admin/login.aspx?act=logout"><i class="fa fa-sign-out"></i>&nbsp;Đăng xuất</a></li>
                             </ul>
                         </div>
                     </li>

@@ -858,7 +858,7 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
         paginationPageSize: 25,
         columnDefs: [
             {
-                name: 'E', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
+                name: 'Option', enableFiltering: false, width: 50, enableCellEdit: false, allowCellFocus: false,
                 cellTemplate: '<div class="dropdown tbl-option" style="position: absolute;top: 15 %;left: 1 %;"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret" ></span></button> <ul class="dropdown-menu"><li><a href="#" ng-click="grid.appScope.edit(row)"><i class="glyphicon glyphicon-edit"></i> Sửa</a></li><li><a href="#" ng-click="grid.appScope.delete(row)"><i class="glyphicon glyphicon-trash"></i> Xóa</a></li></u></div>'
             },
             { name: 'Tennhaxe', displayName: "Nhà xe", type: 'text' },
@@ -869,7 +869,8 @@ app.controller('ChuyenXeController', ['$scope', '$http', 'Service', '$timeout', 
             { name: 'TongSoVeThuong', displayName: "Tổng Vé Thường", type: 'number' },
             { name: 'TongSoVeVIP', displayName: "Tổng Vé VIP", type: 'number' },
             { name: 'VeVipConLai', displayName: "Vé VIP còn lại", type: 'number' },
-            { name: 'VeThuongConLai', displayName: "Vé thường còn lại", type: 'number' }
+            { name: 'VeThuongConLai', displayName: "Vé thường còn lại", type: 'number' },
+            { name: 'TrangThai', displayName: "Trạng thái", type: 'text' }
         ],
         enableGridMenu: true,
         enableSelectAll: true,

@@ -15,7 +15,7 @@
                     <form class="form-horizontal" runat="server" method="post" role="form">
                         <asp:Literal Text="" ID="ltrLoginMessage" runat="server" />
                         <div class="form-group">
-                            <asp:TextBox runat="server" MaxLength="256" ID="txtUsername" CssClass="form-control txtdk" placeholde="Nhập Email hoặc số điện thoại" />
+                            <asp:TextBox runat="server" MaxLength="14" ID="txtUsername" TextMode="Number" CssClass="form-control txtdk" placeholde="Nhập số điện thoại để đăng nhập" />
                         </div>
 
                         <div class="form-group">

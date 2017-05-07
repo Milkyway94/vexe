@@ -13,12 +13,7 @@ app.controller("SearchController", ['$scope', '$http', '$location', 'service', f
     $service.Post(url + "/LayTatCaDiaDiem", {})
         .success(function (data) {
             $scope.Diemdies = JSON.parse(data.d);
-            $(function () {
-                $(".diadiem").catcomplete({
-                    delay: 0,
-                    source: $scope.Diemdies
-                });
-            });
+            autocomplete($scope.Diemdies);
         })
     $scope.Diemdi = getQueryString("di-tu");
     $scope.Diemden = getQueryString("den");
@@ -208,13 +203,7 @@ app.controller("HomeController", ['$scope', '$http', 'service', function ($scope
         .success(function (data) {
             console.log(data.d);
             $scope.Diemdies = JSON.parse(data.d);
-            $(function () {
-
-                $(".diadiem").catcomplete({
-                    delay: 0,
-                    source: $scope.Diemdies
-                });
-            });
+            autocomplete($scope.Diemdies);
         })
     $scope.TimVeXe = function () {
         $scope.loadding = true;
@@ -519,12 +508,7 @@ app.controller("DoSearchController", ['$scope', '$http', '$location', 'service',
     $service.Post(url + "/LayTatCaDiaDiem", {})
         .success(function (data) {
             $scope.Diemdies = JSON.parse(data.d);
-            $(function () {
-                $(".diadiem").catcomplete({
-                    delay: 0,
-                    source: $scope.Diemdies
-                });
-            });
+            autocomplete($scope.Diemdies);
         })
     $scope.Diemdi = getQueryString("di-tu");
     $scope.Diemden = getQueryString("den");

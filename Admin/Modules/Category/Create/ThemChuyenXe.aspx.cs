@@ -71,6 +71,13 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
                         ddlXe.Items[i].Selected = true;
                     }
                 }
+                for (int i = 0; i < status.Items.Count; i++)
+                {
+                    if (cx.TrangThai.ToString() == status.Items[i].Value)
+                    {
+                        status.Items[i].Selected = true;
+                    }
+                }
                 for (int i = 0; i < ddlDenTinh.Items.Count; i++)
                 {
                     if (cx.DenTinh.ToString() == ddlDenTinh.Items[i].Value)
@@ -147,7 +154,7 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
         tbCx.Add("DenHuyen", DenHuyen.ToString());
         tbCx.Add("Lotrinh", LoTrinh);
         tbCx.Add("KhuyenMai", KhuyenMai.ToString());
-        tbCx.Add("Trangthai", "1");
+        tbCx.Add("Trangthai", status.SelectedValue);
 
         if (string.IsNullOrEmpty(machuyenxe))
         {

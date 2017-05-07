@@ -163,6 +163,13 @@
                             <label>Lộ trình chuyến</label>
                             <asp:TextBox runat="server" ID="txtLotrinh" CssClass="form-control" placeholder="Nhập giá lộ trình" required></asp:TextBox>
                         </div>
+                        <div class="form-group">
+                            <label class="text-danger">Trạng thái</label>
+                            <asp:DropDownList ID="status" runat="server">
+                                <asp:ListItem Value="1" Text="Chạy" />
+                                <asp:ListItem Value="0" Text="Nghỉ" />
+                            </asp:DropDownList>
+                        </div>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>

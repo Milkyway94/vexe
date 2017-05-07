@@ -29,7 +29,6 @@
     <link href="<%=uRoot%>resources/css/uikit.css" rel="stylesheet" type="text/css" />
     <link href="<%=uRoot%>resources/css/custom.css" rel="stylesheet" type="text/css" />
     <script src="<%=uRoot%>resources/js/jquery-2.2.4.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 </head>
 <body ng-app="App">
     <!--
