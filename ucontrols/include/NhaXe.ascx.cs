@@ -38,7 +38,7 @@ public partial class ucontrols_include_NhaXe : System.Web.UI.UserControl
         foreach (var item in lst)
         {
             str += "<li><a href='/nha-xe/"+item.ID+".htm'>";
-            str += "<img src=\""+item.Anh+"\" alt=\"Nhà xe "+item.Tennhaxe+"\" />";
+            str += "<div class=\"overlay\"><img src=\""+item.Anh+"\" alt=\"Nhà xe "+item.Tennhaxe+"\" /></div>";
             str += "<p>"+item.Tennhaxe+"</p>";
             str += "</a></li>";
         }
