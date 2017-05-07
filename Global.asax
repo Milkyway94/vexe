@@ -56,6 +56,7 @@
             file.Write(0 + "\n"+ visitors);
         }
         //Application["ComponentArtWebUI_AppKey"] = "cd2e15e4-92e7-444c-99fe-cecb54320597";
+        //BundleConfig.RegisterBundles(BundleTable.Bundles);
 
     }
 

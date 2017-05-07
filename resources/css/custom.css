@@ -27,7 +27,7 @@
 
     .navbar-inverse .navbar-nav > li > a:hover {
         color: #007000;
-        border-bottom: 2px #007000 solid;
+        /*border-bottom: 2px #007000 solid;*/
     }
 
 .navbar {

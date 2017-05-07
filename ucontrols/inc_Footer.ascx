@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="inc_Footer.ascx.cs" Inherits="ucontrols_inc_Footer" %>
 <footer>
+    <div id="goTop" class="go-to-top" style="display: block;"><a title="Go to Top"><i class="fa fa-angle-double-up"></i></a></div>
     <div class="t1">
         <div class="container">
             <div class="col-sm-3 col-xs-12">

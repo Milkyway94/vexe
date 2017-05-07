@@ -64,7 +64,7 @@ public partial class ucontrols_inc_Footer : System.Web.UI.UserControl
         ModRepository modRepo = new ModRepository();
         StringBuilder str = new StringBuilder();
         str.Append("<ul>");
-        foreach (var item in modRepo.GetModByBoxCode("AboutFooterMenu"))
+        foreach (var item in modRepo.GetModByBoxCode("ve-cong-ty-2"))
         {
             str.Append("<li><a href=\"/" + item.Mod_Url + ".htm\">" + item.Mod_Name + "</a></li>");
         }
