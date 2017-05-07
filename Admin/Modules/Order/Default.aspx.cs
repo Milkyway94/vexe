@@ -43,6 +43,8 @@ public partial class Admin_Modules_Order_Default : System.Web.UI.Page
     public static string getOrderByDate(string tenNhaXe, string startDate, string endDate)
     {
         string sql = "";
+        if (string.IsNullOrEmpty(startDate)) startDate = "1900-01-01";
+        if (string.IsNullOrEmpty(endDate)) endDate = "2999-01-01";
         //DateTime startDate, DateTime endDate
         sql = "select * from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and nx.Tennhaxe like N'%"+ tenNhaXe + "%' and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "');";
         //sql = "select * from tbl_Order where Order_ID in (select o.Order_ID from tbl_Order o, ChuyenXe cx, Xe x, NhaXe nx where o.MaChuyenXe=cx.MaChuyenXe and cx.MaXe=x.MaXe and x.Nhaxe=nx.ID and (o.Order_CreatedDate BETWEEN '" + startDate + "' and '" + endDate + "'));";

@@ -50,9 +50,11 @@
                 <div class="container">
                     <div class="col col-sm-2">
                         <div class="row ipt-search autocomplete">
-                            <i class="fa fa-map-marker pre-icon-input"></i>
-                            <input type="text" class="form-control diadiem" placeholder="Chọn điểm đi" ng-model="frmSearch.Diemdi" />
-                            <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                            <div class="smac">
+                                <i class="fa fa-map-marker pre-icon-input"></i>
+                                <input type="text" class="form-control diadiem" placeholder="Chọn điểm đi" ng-model="frmSearch.Diemdi" />
+                                <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="col col-sm-1">
@@ -60,21 +62,27 @@
                     </div>
                     <div class="col col-sm-2">
                         <div class="row ipt-search autocomplete">
-                            <i class="fa fa-map-marker pre-icon-input"></i>
-                            <input type="text" class="form-control diadiem" placeholder="Chọn điểm đến" ng-model="frmSearch.Diemden" />
-                            <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                            <div class="smac">
+                                <i class="fa fa-map-marker pre-icon-input"></i>
+                                <input type="text" class="form-control diadiem" placeholder="Chọn điểm đến" ng-model="frmSearch.Diemden" />
+                                <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="col col-sm-2 pl30">
                         <div class="row">
-                            <input type="Text" ng-model="frmSearch.Ngaydi" placeholder="Chọn ngày đi" required="required" tabindex="3" name="Ngaydi" id="ngaydi" class="btn form-control ngaydi datepicker" />
-                            <i class="input-icon fa fa-calendar"></i>
+                            <div class="smac">
+                                <input type="Text" ng-model="frmSearch.Ngaydi" placeholder="Chọn ngày đi" required="required" tabindex="3" name="Ngaydi" id="ngaydi" class="btn form-control ngaydi datepicker" />
+                                <i class="input-icon fa fa-calendar"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="col col-sm-2 pl30 ipt-search">
                         <div class="row autocomplete">
-                            <input type="text" class="form-control timepicker" required="required" ng-model="frmSearch.Giodi" placeholder="Chọn thời gian đi" />
-                            <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                            <div class="smac">
+                                <input type="text" class="form-control timepicker" required="required" ng-model="frmSearch.Giodi" placeholder="Chọn thời gian đi" />
+                                <i class="icon-input glyphicon glyphicon-menu-down"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="col col-sm-2 pl30">

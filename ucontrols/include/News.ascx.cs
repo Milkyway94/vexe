@@ -76,6 +76,10 @@ public partial class ucontrols_include_News : System.Web.UI.UserControl
                 string quote = rows[i]["Content_Intro"].ToString().Length > 200 ? rows[i]["Content_Intro"].ToString().Substring(0, 200) : rows[i]["Content_Intro"].ToString();
                 string title = rows[i]["Content_name"].ToString();
                 string datetime = rows[i]["Content_Date"].ToString();
+                if (!string.IsNullOrEmpty(datetime))
+                {
+                    datetime = DateTime.Parse(datetime).ToString("dd/MM/yyyy");
+                }
                 str.Append("<div class=\"item_article\">");
                 str.Append("<div class=\"article_content\">");
                 str.Append("<div class=\"article_image\">");

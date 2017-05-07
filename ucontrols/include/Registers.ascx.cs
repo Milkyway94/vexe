@@ -92,12 +92,12 @@ public partial class ucontrols_include_Document : System.Web.UI.UserControl
             {
                 var member1 = new MemberRepository().SearchFor(o => o.Member_Phone == phone.Text);
                 var member2 = new MemberRepository().SearchFor(o => o.Member_Email == email.Text);
-                if (member1!=null || member1.Count() > 0)
+                if (member1.Count() > 0)
                 {
                     ErrorSDT.Text = "Số điện thoại đã được đăng ký";
                     b = false;
                 }
-                else if(member2 != null || member2.Count() > 0)
+                else if(member2.Count() > 0)
                 {
                     ErrorEmail.Text = "Email đã được đăng ký";
                     b = false;
@@ -121,6 +121,25 @@ public partial class ucontrols_include_Document : System.Web.UI.UserControl
             {
                 dvsuccess.Visible = true;
                 lbError.Text = "Đăng ký thành công! Bạn có thể <a href='/login.htm' class='text-bold'>Đăng nhập.</a>";
+                string fromEmail =email.Text;
+                string toEmail = email.Text;
+                string Name = CMSfunc._GetConst("_Name");
+
+                string Subject = "ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG TẠI " + CMSfunc._GetConst("_Domain");
+                string Host = CMSfunc._GetConst("_Hostmail");
+                string EmailClient = CMSfunc._GetConst("_EmailClient");
+                string PassEmailClient = CMSfunc._GetConst("_PassEmailClient");
+                int Port = Convert.ToInt32(CMSfunc._GetConst("_Port"));
+                string strBody = "<html><body><p><b>Quý khách đăng ký thành công tài khoản tại website "+CMSfunc._GetConst("_Domain")+ "</b></p><p><b>Thông tin tài khoản: </b></p><p>&nbsp;&nbsp;&nbsp;+ Số điện thoại: "+phone.Text+ "</p><p>&nbsp;&nbsp;&nbsp;+ Mật khẩu: " + password.Text + "</p><p>Quý khách vui lòng truy cập "+CMSfunc._GetConst("_Domain")+" chọn Đăng nhập để đặt vé xe điện tử. <br>Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi.</p></body></html>";
+                try
+                {
+                    bool _isSend = SendMailClient.SendGMail(toEmail, fromEmail, Name, "", Subject, Host, Port, EmailClient, PassEmailClient, "Xác thực thành công", strBody);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                
             }
         }
     }

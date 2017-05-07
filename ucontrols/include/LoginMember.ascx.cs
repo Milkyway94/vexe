@@ -24,7 +24,7 @@ public partial class ucontrols_include_LoginMember : System.Web.UI.UserControl
                 SessionUtil.RemoveKey("Image");
                 SessionUtil.RemoveKey("Name");
             }
-            txtUsername.Attributes["placeholder"] = "Nhập Email hoặc số điện thoại";
+            txtUsername.Attributes["placeholder"] = "Nhập số điện thoại để đăng nhập";
             txtPassword.Attributes["placeholder"] = "Nhập mật khẩu của bạn";
             txtUsername.Attributes["required"] = "required";
             txtPassword.Attributes["required"] = "required";
