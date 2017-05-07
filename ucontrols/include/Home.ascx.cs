@@ -132,8 +132,16 @@ public partial class ucontrols_include_Home : System.Web.UI.UserControl
         }
         return str.ToString();
     }
-    protected List<NhaXe> lstNhaxe()
+    protected List<TinhThanh> lstNhaxe()
     {
-        return new NhaxeRepository().All().ToList();
+        var lst = new List<TinhThanh>();
+        string sql = "select top 10 MaTinh, TenTinh from nhaxe nx join TinhThanh tt on nx.Tinh=tt.MaTinh group by MaTinh, TenTinh";
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        DataRowCollection rows = dt.Rows;
+        foreach (DataRow item in rows)
+        {
+            lst.Add(new TinhThanh { MaTinh = int.Parse(item["MaTinh"].ToString()), TenTinh = item["TenTinh"].ToString() });
+        }
+        return lst;
     } 
 }
