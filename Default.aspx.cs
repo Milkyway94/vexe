@@ -726,7 +726,7 @@ public partial class _Default : Page
     {
         List<ChuyenXeViewModel> lstCx = new List<ChuyenXeViewModel>();
         ChuyenXeRepository cxRepo = new ChuyenXeRepository();
-        var td = cxRepo.SearchFor(o => (o.Diemdi.Contains(Diemdi) || Diemdi.Contains(o.Diemdi)) && (o.Diemden.Contains(Diemden) || Diemden.Contains(o.Diemden)) && o.TrangThai != 0&& o.Ngaydi> DateTime.Now.AddDays(-1));
+        var td = cxRepo.SearchFor(o => (o.Diemdi.Contains(Diemdi) || Diemdi.Contains(o.Diemdi)) && (o.Diemden.Contains(Diemden) || Diemden.Contains(o.Diemden)) && o.TrangThai != 0);
         foreach (var item in td)
         {
             ChuyenXeViewModel cx = new ChuyenXeViewModel(item);

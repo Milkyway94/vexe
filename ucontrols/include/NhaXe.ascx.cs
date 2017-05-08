@@ -3,6 +3,7 @@ using QCMS_BUSSINESS.Repositories;
 using SMAC;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -30,10 +31,27 @@ public partial class ucontrols_include_NhaXe : System.Web.UI.UserControl
             lst.Visible = false;
             nx = new NhaxeRepository().Find(int.Parse(nurl));
         }
+        if (!IsPostBack)
+        {
+            foreach (var item in getTinhHaveNhaxe())
+            {
+                ddlTinh.Items.Add(new ListItem(item.TenTinh, item.MaTinh.ToString()));
+            }
+            ddlTinh.DataBind();
+        }
     }
     protected string lstNhaxe()
     {
-        var lst= new NhaxeRepository().All().ToList();
+        var lst=new List<NhaXe>();
+        if (ddlTinh.SelectedIndex == 0)
+        {
+            lst=new NhaxeRepository().All().ToList();
+        }
+        else
+        {
+            int matinh = Convert.ToInt32(ddlTinh.SelectedValue);
+            lst = new NhaxeRepository().SearchFor(o=>o.Tinh==matinh).ToList();
+        }
         string str = "";
         foreach (var item in lst)
         {
@@ -43,5 +61,17 @@ public partial class ucontrols_include_NhaXe : System.Web.UI.UserControl
             str += "</a></li>";
         }
         return str;
+    }
+    protected List<TinhThanh> getTinhHaveNhaxe()
+    {
+        var lst = new List<TinhThanh>();
+        string sql = "select top 10 MaTinh, TenTinh from nhaxe nx join TinhThanh tt on nx.Tinh=tt.MaTinh group by MaTinh, TenTinh";
+        DataTable dt = UpdateData.UpdateBySql(sql).Tables[0];
+        DataRowCollection rows = dt.Rows;
+        foreach (DataRow item in rows)
+        {
+            lst.Add(new TinhThanh { MaTinh = int.Parse(item["MaTinh"].ToString()), TenTinh = item["TenTinh"].ToString() });
+        }
+        return lst;
     }
 }

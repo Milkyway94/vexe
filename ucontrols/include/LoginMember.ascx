@@ -7,7 +7,7 @@
     </div>
     <div class="row pb100">
         <div class="con-sm-12">
-            <div class="col-sm-5 col-sm-offset-3">
+            <div class="col-sm-6 col-sm-offset-3">
                 <div class="hot-doc-header">
                     <h3>ĐĂNG NHẬP</h3>
                 </div>

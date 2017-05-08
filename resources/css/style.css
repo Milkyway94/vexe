@@ -257,13 +257,13 @@ span.select2-selection {
 
 .datve #r1 {
     padding-top: 15px;
+    padding-bottom: 10px;
 }
 
-.datve .p0 {
-    color: #007000;
+.step-active {
+    color: #007000 !important;
 }
-
-.disabled {
+ .disabled {
     color: #eee;
 }
 
@@ -1522,9 +1522,9 @@ footer > .t2 {
         background-color: #f48020 !important;
     }
 
-    .navbar-nav>li>a.active:after, .navbar-nav > li > a:hover:after {
+    .navbar-nav > li > a.active:after, .navbar-nav > li > a:hover:after {
         width: 100%;
-        background-color: #333;
+        background-color: #007000;
     }
 }
 

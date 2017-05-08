@@ -19,12 +19,12 @@
                 </div>
                 <div class="col-md-5 col-xs-12 col-sm-6 p0">
                     <div class="tv1">
-                        <img src="../../resources/img/icon/icon-vethanhtoan.png" class="img-responsive" alt="Đặt vé và thanh toán" />
+                        <img src="../../resources/img/icon/dat-ve-enable.png" class="img-responsive" alt="Đặt vé và thanh toán" />
                     </div>
-                    <div class="tv2">02</div>
+                    <div class="tv2 step-active">02</div>
                     <div class="tv3">
                         <span class="b1">&nbsp;</span>
-                        <div class="b1tv">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
+                        <div class="b1tv step-active">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
                     </div>
                     <div class="tv4">
                         <img src="../../resources/img/icon/icon-next.png" />
@@ -393,7 +393,7 @@
                                     <td><b>380</b></td>
                                 </tr>
                             </table>
-                            <button class="btn btn-success btn-accept" type="submit" ng-disabled="loadding && !Address" ng-click="ThanhToan()"><span ng-hide="loadding">Thanh toán</span><span ng-show="loadding">Đang thực hiện... <i class="fa fa-spinner fa-pulse fa-fw"></i></span></button>
+                            <button class="btn btn-success btn-yc btn-dk btn-accept" type="submit" ng-disabled="loadding && !Address" ng-click="ThanhToan()"><i class="fa fa-credit-card"></i>&nbsp;<span ng-hide="loadding">Thanh toán</span><span ng-show="loadding">Đang thực hiện... <i class="fa fa-spinner fa-pulse fa-fw"></i></span></button>
                         </form>
                     </div>
                 </div>

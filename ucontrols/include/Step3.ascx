@@ -10,7 +10,7 @@
                     <div class="tv2">01</div>
                     <div class="tv3">
                         <span class="b1">&nbsp;</span><br />
-                        <span class="b1tv disable">TÌM VÉ</span>
+                        <span class="b1tv">TÌM VÉ</span>
                     </div>
                     <div class="tv4">
                         <img src="../../resources/img/icon/icon-next.png" />
@@ -33,10 +33,10 @@
                     <div class="tv1">
                         <img src="../../resources/img/icon/icon_nhanve_enable.png" class="img-responsive" alt="Nhận vé" />
                     </div>
-                    <div class="tv2">03</div>
-                    <div class="tv3">
+                    <div class="tv2 step-active">03</div>
+                    <div class="tv3  step-active">
                         <span class="b1">&nbsp;</span><br />
-                        <span class="b1tv disable">NHẬN VÉ</span>
+                        <span class="b1tv">NHẬN VÉ</span>
                     </div>
                 </div>
             </div>

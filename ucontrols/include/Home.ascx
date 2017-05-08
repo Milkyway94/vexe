@@ -135,7 +135,7 @@
                 <% foreach (var item in lstNhaxe())
                     {%>
                 <li class="xe">
-                    <a href="/nha-xe/<%=item.TenTinh %>.htm">
+                    <a href="/nha-xe.htm?nha-xe-o-tinh=<%=item.TenTinh %>">
                         <img src="/resources/img/oto.png" alt="Tuyến đường" />
                         <span class="tenxe"><%=item.TenTinh %></span>
                     </a>

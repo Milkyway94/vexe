@@ -6,12 +6,12 @@
                 <div class="row" id="r1">
                     <div class="col-md-4 col-xs-12 col-sm-3 p0">
                         <div class="tv1">
-                            <img src="../../resources/img/icon/icon-timve.png" class="img-responsive" alt="Tìm vé" />
+                            <img src="../../resources/img/icon/icon-timve-enable.png" class="img-responsive" alt="Tìm vé" />
                         </div>
-                        <div class="tv2">01</div>
+                        <div class="tv2 step-active">01</div>
                         <div class="tv3">
                             <span class="b1">&nbsp;</span><br />
-                            <span class="b1tv disable">TÌM VÉ</span>
+                            <span class="b1tv step-active">TÌM VÉ</span>
                         </div>
                         <div class="tv4">
                             <img src="../../resources/img/icon/icon-next.png" />
@@ -24,7 +24,7 @@
                         <div class="tv2">02</div>
                         <div class="tv3">
                             <span class="b1">&nbsp;</span>
-                            <div class="b1tv">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
+                            <div class="b1tv disable">ĐẶT VÉ<span class="b1tv tt"> & THANH TOÁN</span></div>
                         </div>
                         <div class="tv4">
                             <img src="../../resources/img/icon/icon-next.png" />
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-3 col-xs-12 col-sm-3 p0">
                         <div class="tv1">
-                            <img src="../../resources/img/icon/icon_nhanve_enable.png" class="img-responsive" alt="Nhận vé" />
+                            <img src="../../resources/img/icon/icon-nhanve.png" class="img-responsive" alt="Nhận vé" />
                         </div>
                         <div class="tv2">03</div>
                         <div class="tv3">

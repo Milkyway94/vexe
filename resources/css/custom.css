@@ -63,11 +63,13 @@
     height: 40px;
     color: black;
 }
-
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 40px;
-        border: none;
-    }
+.txtnx .select2-container--default .select2-selection--single {
+    background: #f7f7f7 !important;
+} 
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 40px;
+    border: none;
+}
 
 .select2-container--default .select2-selection--single {
     border: none;
@@ -633,10 +635,7 @@ p {
 ul.ui-autocomplete{
     z-index: 999999;
 }
-#row-1 .datve {
-    padding-top: 15px;
-    padding-bottom: 8px;
-}
+
 .diadiem{
     margin-right: 5px;
 }

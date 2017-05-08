@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12">
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
+                <div class="col-sm-8 col-sm-offset-2">
                     <div class="hot-doc-header">
                         <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
                     </div>

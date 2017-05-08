@@ -17,9 +17,13 @@ public partial class Admin_Modules_Category_Create_ThemChuyenXe : System.Web.UI.
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserID"] == null)
+        {
+            Response.Write("<b style='color: red'>Bạn chưa đăng nhập</b>");
+            return;
+        }
         if (!IsPostBack)
         {
-
             string machuyenxe = Request.QueryString["id"];
             if (!string.IsNullOrEmpty(machuyenxe))
             {

@@ -90,33 +90,39 @@ $.widget("custom.catcomplete", $.ui.autocomplete, {
     }
 });
 function autocomplete(source) {
-    $(".diadiem")
-    .blur(function () {
-        var keyEvent = $.Event("keydown");
-        keyEvent.keyCode = $.ui.keyCode.TAB;
-        $(this).trigger(keyEvent);
-        // Stop event propagation if needed
-        return false;
-    })
-    .catcomplete({
-        autoFocus: true,
-        source: function (request, response) {
-            var results = [];
-            //var results = $.ui.autocomplete.filter($scope.Diemdies, locdau(request.term));
-            angular.forEach(source, function (item) {
-                if (locdau(item.label).indexOf(locdau(request.term)) != -1) {
-                    results.push(item);
+    $(document).ready(function () {
+        $(".diadiem")
+            .blur(function () {
+                var keyEvent = $.Event("keydown");
+                keyEvent.keyCode = $.ui.keyCode.TAB;
+                $(this).trigger(keyEvent);
+                // Stop event propagation if needed
+                return false;
+            })
+            .catcomplete({
+                autoFocus: true,
+                minLength: 0,
+                source: function (request, response) {
+                    var results = [];
+                    //var results = $.ui.autocomplete.filter($scope.Diemdies, locdau(request.term));
+                    angular.forEach(source, function (item) {
+                        if (locdau(item.label).indexOf(locdau(request.term)) != -1) {
+                            results.push(item);
+                        }
+                    })
+                    if (!results.length) {
+                        results.push({ category: "Không tìm thấy Tỉnh/Thành phố, Quận huyện, Bến xe nào phù hợp" });
+                    } else {
+                        $("#no-results").empty();
+                    }
+                    response(results);
                 }
             })
-            if (!results.length) {
-                results.push({ category: "Không tìm thấy Tỉnh/Thành phố, Quận huyện, Bến xe nào phù hợp" });
-            } else {
-                $("#no-results").empty();
-            }
-
-            response(results);
-        }
-        })
+            .focus(function () {
+                $(this).keydown();
+            })
+    });
+    
 }
 //begin
 $(function () {

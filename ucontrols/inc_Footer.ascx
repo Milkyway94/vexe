@@ -18,7 +18,7 @@
             </div>
             <div class="col-sm-3 col-xs-12 menu-title">
                 <h2>ĐẶT VÉ NGAY ĐỂ NHẬN ƯU ĐÃI</h2> 
-                <a href="#" class="btn btn-datve btn-block btn-muave">ĐẶT VÉ</a>
+                <a href="/tim-ve-xe.htm" class="btn btn-datve btn-block btn-muave">ĐẶT VÉ</a>
                 <p class="find-title">Tìm chúng tôi trên mạng xã hội</p>
                 <asp:Literal Text="" ID="ltrSocialIcon" runat="server" />
             </div>
